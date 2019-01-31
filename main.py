@@ -5,7 +5,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 
 option = Options()
-# option.headless = True
+option.headless = True
 browser = Firefox(options=option)
 browser.get('http://scholar.google.com')
 
@@ -16,4 +16,4 @@ search.send_keys(Keys.RETURN)
 
 print(browser.title)
 
-# browser.quit()
+browser.quit()
