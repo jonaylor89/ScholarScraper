@@ -6,7 +6,7 @@ from selenium.webdriver.firefox.options import Options
 option = Options()
 option.headless = True
 browser = Firefox(options=option)
-browser.get('http://seleniumhq.org/')
+browser.get('http://scholar.google.com')
 
 print(browser.title)
 
