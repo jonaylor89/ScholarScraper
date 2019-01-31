@@ -2,12 +2,18 @@
 
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.keys import Keys
 
 option = Options()
-option.headless = True
+# option.headless = True
 browser = Firefox(options=option)
 browser.get('http://scholar.google.com')
 
+search = browser.find_element_by_name('q')
+
+search.send_keys("Alberto Cano")
+search.send_keys(Keys.RETURN)
+
 print(browser.title)
 
-browser.quit()
+# browser.quit()
