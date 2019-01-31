@@ -1,7 +1,10 @@
 
-from selenium import webdriver
+from selenium.webdriver import Firefox
+from selenium.webdriver.firefox.options import Options
 
-browser = webdriver.Firefox()
+option = Options()
+option.headless = True
+browser = Firefox(options=option)
 browser.get('http://seleniumhq.org/')
 
 print(browser.title)
