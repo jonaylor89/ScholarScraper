@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
-from selenium.webdriver import Firefox
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.options import Options
+from time import sleep
 
-option = Options()
-option.headless = True
-browser = Firefox(options=option)
+from selenium.webdriver import Chrome
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver import ChromeOptions
+
+options = ChromeOptions()
+# options.add_argument('headless')
+browser = Chrome(options=options)
 browser.get("http://scholar.google.com")
 
 search = browser.find_element_by_name("q")
@@ -17,6 +19,7 @@ search.send_keys(Keys.RETURN)
 
 # TODO: Go through and print the titles of all of the articles on the page
 
-print(browser.page_source)
+
+sleep(5)
 
 browser.quit()
