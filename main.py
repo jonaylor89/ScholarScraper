@@ -14,6 +14,9 @@ search = browser.find_element_by_name("q")
 search.send_keys("Alberto Cano")
 search.send_keys(Keys.RETURN)
 
-print(browser.title)
+
+# TODO: Go through and print the titles of all of the articles on the page
+
+print(browser.page_source)
 
 browser.quit()
