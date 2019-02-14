@@ -24,7 +24,13 @@ search.send_keys(Keys.RETURN)
 link = browser.find_element_by_link_text(PROFESSOR)
 link.click()
 
+titles = browser.find_elements_by_class_name("gsc_a_at")
 
-sleep(5)
+for title in titles:
+    print("Article:", title.text)
+    print()
+
+
+sleep(2)
 
 browser.quit()
