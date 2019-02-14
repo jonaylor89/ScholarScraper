@@ -18,9 +18,6 @@ search = browser.find_element_by_name("q")
 search.send_keys(PROFESSOR)
 search.send_keys(Keys.RETURN)
 
-
-# TODO: Go through and print the titles of all of the articles on the page
-
 link = browser.find_element_by_link_text(PROFESSOR)
 link.click()
 
@@ -31,6 +28,8 @@ for title in titles:
     print()
 
 
-sleep(2)
+# TODO: Click on the links and print Author, Date, Journal, Decriptions, and Total Citations
+
+sleep(1)
 
 browser.quit()
