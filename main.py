@@ -10,10 +10,11 @@ from selenium.webdriver import ChromeOptions
 
 PROFESSOR = "Alberto Cano"
 
-if len(sys.argv) >= 2:
-    PROFESSOR = ' '.join(sys.argv[1:])
 
 if __name__ == '__main__':
+    if len(sys.argv) >= 2:
+        PROFESSOR = ' '.join(sys.argv[1:])
+
     options = ChromeOptions()
     # options.add_argument('headless')
     browser = Chrome(options=options)
@@ -27,10 +28,19 @@ if __name__ == '__main__':
     link = browser.find_element_by_link_text(PROFESSOR)
     link.click()
 
-    titles = browser.find_elements_by_class_name("gsc_a_at")
+    show_more = browser.find_element_by_id("gsc_bpf_more")
+    show_more.click()
 
-    for title in titles:
+    sleep(5)
+
+    titles = browser.find_elements_by_class_name("gsc_a_at")
+    authors = browser.find_elements_by_class_name("gs_grey")
+    cited_by = browser.find_elements_by_class_name("gsc_a_ac gs_ibl")
+
+    for title, author, cited in zip(titles, authors, cited_by):
         print("Article:", title.text)
+        print("Author(s):", author)
+        print("Cited By:", cited)
         print()
 
 
