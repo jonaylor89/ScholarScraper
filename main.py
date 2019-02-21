@@ -1,35 +1,41 @@
 #!/usr/bin/env python3
 
+import sys
 from time import sleep
 
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ChromeOptions
 
+
 PROFESSOR = "Alberto Cano"
 
-options = ChromeOptions()
-# options.add_argument('headless')
-browser = Chrome(options=options)
-browser.get("http://scholar.google.com")
+if len(sys.argv) >= 2:
+    PROFESSOR = ' '.join(sys.argv[1:])
 
-search = browser.find_element_by_name("q")
+if __name__ == '__main__':
+    options = ChromeOptions()
+    # options.add_argument('headless')
+    browser = Chrome(options=options)
+    browser.get("http://scholar.google.com")
 
-search.send_keys(PROFESSOR)
-search.send_keys(Keys.RETURN)
+    search = browser.find_element_by_name("q")
 
-link = browser.find_element_by_link_text(PROFESSOR)
-link.click()
+    search.send_keys(PROFESSOR)
+    search.send_keys(Keys.RETURN)
 
-titles = browser.find_elements_by_class_name("gsc_a_at")
+    link = browser.find_element_by_link_text(PROFESSOR)
+    link.click()
 
-for title in titles:
-    print("Article:", title.text)
-    print()
+    titles = browser.find_elements_by_class_name("gsc_a_at")
+
+    for title in titles:
+        print("Article:", title.text)
+        print()
 
 
-# TODO: Click on the links and print Author, Date, Journal, Decriptions, and Total Citations
+    # TODO: Click on the links and print Author, Date, Journal, Decriptions, and Total Citations
 
-sleep(1)
+    sleep(1)
 
-browser.quit()
+    browser.quit()
