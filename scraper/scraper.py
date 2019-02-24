@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys
+import json
 from time import sleep
 
 from selenium.webdriver import Chrome
@@ -9,10 +9,9 @@ from selenium.webdriver import ChromeOptions
 
 # TODO: Use logging library instead of printing
 
+def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
-
-
-def main(professor="Alberto Cano"):
+    temp_dict = {}
 
     options = ChromeOptions()
     # options.add_argument('headless')
@@ -37,6 +36,7 @@ def main(professor="Alberto Cano"):
     print("[DEBUG] ", len(titles))
 
     for title in titles:
+        temp_dict[title.text] = {}
         title.click()
 
         print("[INFO] Entering article ({0})".format(title.text))
@@ -49,12 +49,17 @@ def main(professor="Alberto Cano"):
         print("[DEBUG] There are {0} fields to parse".format(len(fields)))
 
         for k, v in zip(fields, values):
-            print("[INFO] {0} : {1}".format(k.text, v.text))
+
+            temp_dict[title.text][k.text] = v.text
+            print("[INFO] parsed : {0} : {1}".format(k.text, v.text))
 
         print("-----------------------")
         browser.back()
         sleep(1)
 
+    
+    with open(filename, "w+") as f:
+        f.write(json.dumps(temp_dict))
     sleep(1)
 
     browser.quit()
