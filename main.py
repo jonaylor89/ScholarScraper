@@ -7,6 +7,8 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ChromeOptions
 
+# TODO: Use logging library instead of printing
+
 
 PROFESSOR = "Alberto Cano"
 
@@ -31,20 +33,30 @@ if __name__ == '__main__':
     show_more = browser.find_element_by_id("gsc_bpf_more")
     show_more.click()
 
-    sleep(5)
+    sleep(3)
 
     titles = browser.find_elements_by_class_name("gsc_a_at")
-    authors = browser.find_elements_by_class_name("gs_grey")
-    cited_by = browser.find_elements_by_class_name("gsc_a_ac gs_ibl")
 
-    for title, author, cited in zip(titles, authors, cited_by):
-        print("Article:", title.text)
-        print("Author(s):", author)
-        print("Cited By:", cited)
-        print()
+    print("[DEBUG] ", len(titles))
 
+    for title in titles:
+        title.click()
 
-    # TODO: Click on the links and print Author, Date, Journal, Decriptions, and Total Citations
+        print("[INFO] Entering article ({0})".format(title.text))
+
+        sleep(1)
+        
+        fields = browser.find_elements_by_class_name("gsc_vcd_field")
+        values = browser.find_elements_by_class_name("gsc_vcd_value")
+
+        print("[DEBUG] There are {0} fields to parse".format(len(fields)))
+
+        for k, v in zip(fields, values):
+            print("[INFO] {0} : {1}".format(k.text, v.text))
+
+        print("-----------------------")
+        browser.back()
+        sleep(1)
 
     sleep(1)
 
