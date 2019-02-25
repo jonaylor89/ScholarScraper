@@ -11,7 +11,7 @@ from selenium.webdriver import ChromeOptions
 
 def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
-    temp_dict = {}
+    temp_dict = {professor : {}}
 
     options = ChromeOptions()
     # options.add_argument('headless')
@@ -36,7 +36,7 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
     print("[DEBUG] ", len(titles))
 
     for title in titles:
-        temp_dict[title.text] = {}
+        temp_dict[professor][title.text] = {}
         title.click()
 
         print("[INFO] Entering article ({0})".format(title.text))
@@ -50,9 +50,9 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
         for k, v in zip(fields, values):
             if k.text == "Authors":
-                temp_dict[title.text][k.text] = v.text.split(', ')
+                temp_dict[professor][title.text][k.text] = v.text.split(', ')
             else:
-                temp_dict[title.text][k.text] = v.text
+                temp_dict[professor][title.text][k.text] = v.text
             print("[INFO] parsed : {0} : {1}".format(k.text, v.text))
 
         print("-----------------------")
