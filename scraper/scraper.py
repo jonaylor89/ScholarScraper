@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 
 import json
+import logging
 from time import sleep
 
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ChromeOptions
 
-# TODO: Use logging library instead of printing
-
 def parse_by_name(professor="Alberto Cano", filename="data.json"):
+
+    logger = logging.getLogger(__name__)
 
     temp_dict = {professor : {}}
 
@@ -33,31 +34,31 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
     titles = browser.find_elements_by_class_name("gsc_a_at")
 
-    print("[DEBUG] ", len(titles))
+    logger.debug("titles for author: {0}".format(len(titles)))
 
     for title in titles:
         temp_dict[professor][title.text] = {}
         title.click()
 
-        print("[INFO] Entering article ({0})".format(title.text))
+        logger.debug("entering article ({0})".format(title.text))
 
         sleep(1)
         
         fields = browser.find_elements_by_class_name("gsc_vcd_field")
         values = browser.find_elements_by_class_name("gsc_vcd_value")
 
-        print("[DEBUG] There are {0} fields to parse".format(len(fields)))
+        logger.debug("there are {0} fields to parse".format(len(fields)))
 
         for k, v in zip(fields, values):
             if k.text == "Authors":
                 temp_dict[professor][title.text][k.text] = v.text.split(', ')
             elif k.text == "Total citations":
+                # This is hacky parsing, it can be done better for sure
                 temp_dict[professor][title.text][k.text] = int(v.text.split('\n')[0].split(' ')[2])
             else:
                 temp_dict[professor][title.text][k.text] = v.text
-            print("[INFO] parsed : {0} : {1}".format(k.text, v.text))
+            logger.info("parsed : {0} : {1}".format(k.text, v.text))
 
-        print("-----------------------")
         browser.back()
         sleep(1)
 
