@@ -51,6 +51,8 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
         for k, v in zip(fields, values):
             if k.text == "Authors":
                 temp_dict[professor][title.text][k.text] = v.text.split(', ')
+            elif k.text == "Total citations":
+                temp_dict[professor][title.text][k.text] = int(v.text.split('\n')[0].split(' ')[2])
             else:
                 temp_dict[professor][title.text][k.text] = v.text
             print("[INFO] parsed : {0} : {1}".format(k.text, v.text))
