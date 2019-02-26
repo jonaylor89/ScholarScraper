@@ -9,6 +9,7 @@ verify_ssl = true
 selenium = "*"
 flask = "*"
 sqlalchemy = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
