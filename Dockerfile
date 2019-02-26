@@ -14,6 +14,6 @@ COPY . .
 
 EXPOSE 8000
 
-CMD [ "gunicorn", "-b0.0.0.0:8000", "ScholarScraper:app" ]
+CMD [ "gunicorn", "-b0.0.0.0:8000", "main:app" ]
 
 
