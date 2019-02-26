@@ -8,11 +8,12 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ChromeOptions
 
+
 def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
     logger = logging.getLogger(__name__)
 
-    temp_dict = {professor : {}}
+    temp_dict = {professor: {}}
 
     options = ChromeOptions()
     # options.add_argument('headless')
@@ -43,7 +44,7 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
         logger.debug("entering article ({0})".format(title.text))
 
         sleep(1)
-        
+
         fields = browser.find_elements_by_class_name("gsc_vcd_field")
         values = browser.find_elements_by_class_name("gsc_vcd_value")
 
@@ -51,10 +52,12 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
         for k, v in zip(fields, values):
             if k.text == "Authors":
-                temp_dict[professor][title.text][k.text] = v.text.split(', ')
+                temp_dict[professor][title.text][k.text] = v.text.split(", ")
             elif k.text == "Total citations":
                 # This is hacky parsing, it can be done better for sure
-                temp_dict[professor][title.text][k.text] = int(v.text.split('\n')[0].split(' ')[2])
+                temp_dict[professor][title.text][k.text] = int(
+                    v.text.split("\n")[0].split(" ")[2]
+                )
             else:
                 temp_dict[professor][title.text][k.text] = v.text
             logger.info("parsed : {0} : {1}".format(k.text, v.text))
@@ -62,7 +65,6 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
         browser.back()
         sleep(1)
 
-    
     with open(filename, "w+") as f:
         f.write(json.dumps(temp_dict))
     sleep(1)
