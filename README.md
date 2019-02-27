@@ -15,7 +15,7 @@ The plan is to add some more routes with extra features and functionality once m
 has been given about the project.
 
 
-### Environment
+## Environment
 
 I use `pipenv` to store the python dependencies.It works like npm to manage dependencies and installing.
 Install pipenv and run:
@@ -23,7 +23,7 @@ Install pipenv and run:
 ~$ pipenv install
 ```
 
-### Execution
+## Execution
 
 To execute the app for testing and development, use the `run.sh` script
 
