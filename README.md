@@ -15,19 +15,21 @@ Install pipenv and run:
 
 # Execution
 
-- To execute the app for testing and development, use the `run.sh` script
+To execute the app for testing and development, use the `run.sh` script
 
 ```sh
 ~$ ./run.sh
 ```
+This will just run flask in the virtual environment, starting the server on port 8000
 
 
-- To execute on a server or in a production environment, build and run the docker image.
+To execute on a server or in a production environment, build and run the docker image.
 
  *This requires docker obviously*
 
 ```sh
-~$ docker build --tag=scholarscraper .
+~$ docker build --tag=scholarscraper . 
 ~$ docker run -p 8000:8000 scholarscraper
 ```
+
 
