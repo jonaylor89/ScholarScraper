@@ -21,7 +21,11 @@ Install pipenv and run:
 ~$ ./run.sh
 ```
 
-- To execute on a server or in a production environment, build and run the docker image
+
+- To execute on a server or in a production environment, build and run the docker image.
+
+ *This requires docker obviously*
+
 ```sh
 ~$ docker build --tag=scholarscraper .
 ~$ docker run -p 8000:8000 scholarscraper
