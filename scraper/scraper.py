@@ -70,3 +70,8 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
     sleep(1)
 
     browser.quit()
+
+
+if __name__ == '__main__':
+    parse_by_name()
+
