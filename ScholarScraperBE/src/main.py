@@ -2,7 +2,7 @@
 
 import json
 import logging
-from scraper import scraper
+from .scraper import scraper
 from flask import Flask
 
 app = Flask(__name__)
