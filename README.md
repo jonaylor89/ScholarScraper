@@ -1,11 +1,21 @@
 # ScholarScraper
 508 Database theory project
 
-For all things database the best library to use would be SqlAlchemy.
-It's good stuff so that's the plan. For a front-end I'll let Russia handle that because of her experience with Angular. 
+
+# Frontend
+
+For a front-end I'll let Russia handle that because of her experience with Angular. 
 It shouldn't be a hard front-end so nothing crazy beautiful. 
 
-# Environment
+# Backend
+
+The backend is a flask application that, as of now, just runs a web scraper for google scholar.
+For all things database the best library to use would be SqlAlchemy. It's good stuff.
+The plan is to add some more routes with extra features and functionality once more detail
+has been given about the project.
+
+
+### Environment
 
 I use `pipenv` to store the python dependencies.It works like npm to manage dependencies and installing.
 Install pipenv and run:
@@ -13,7 +23,7 @@ Install pipenv and run:
 ~$ pipenv install
 ```
 
-# Execution
+### Execution
 
 To execute the app for testing and development, use the `run.sh` script
 
