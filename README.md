@@ -26,7 +26,7 @@ with citations among them. As well as something to work with backend and front e
 
 With homebrew
 ```
-~$ brew install docker npm node
+~$ brew install docker node npm
 ~$ npm install -g @angular/cli
 ```
 
