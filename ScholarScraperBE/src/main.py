@@ -22,7 +22,7 @@ def parse_by_name(name: str):
     with open("data.json", "r") as f:
         json_data = json.loads(f.read())
 
-    if name in json_data.keys():
+    if name not in json_data.keys():
         scraper.parse_by_name(name)
 
         with open("data.json", "r") as f:

@@ -12,6 +12,7 @@ from selenium.webdriver import ChromeOptions
 def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
     logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
 
     temp_dict = {professor: {}}
 

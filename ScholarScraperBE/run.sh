@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
-export FLASK_APP=src/main.py
-pipenv run flask run
+pipenv run gunicorn -b0.0.0.0:8000 src.main:app
