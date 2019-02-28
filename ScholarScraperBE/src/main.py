@@ -14,14 +14,18 @@ def hello():
     return "WELCOME TO SCHOLAR SCRAPER!"
 
 
-@app.route("/<name>", methods=["GET"])
+@app.route("/name/<name>", methods=["GET"])
 def parse_by_name(name: str):
-
-    # scraper.parse_by_name(name)
 
     json_data = ""
 
     with open("data.json", "r") as f:
         json_data = json.loads(f.read())
+
+    if name in json_data.keys():
+        scraper.parse_by_name(name)
+
+        with open("data.json", "r") as f:
+            json_data = json.loads(f.read())
 
     return json.dumps(json_data[name], indent=2)
