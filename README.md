@@ -23,6 +23,12 @@ with citations among them. As well as something to work with backend and front e
 # Execution 
 
 To execute both the frontend and backend on your local machine for development, 
-just run the `quickstart.sh` script. It does require docker and the angular cli
+just run:
+
+```
+~$ ./quickstart.sh
+``` 
+
+It does require docker and the angular cli
 to run things but otherwise that's it. To run either the frontend or backend individually
 check the *README.md* in their repective directory. 
