@@ -4,7 +4,7 @@
 
 # Frontend
 
-**So far the only thing I've done to the frontend is bootstrap the angular app and see the api url to point to the backend**
+**So far the only thing I've done to the frontend is bootstrap the angular app and set the api url to point to the backend**
 
 - Typescript
 - Angular
