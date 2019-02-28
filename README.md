@@ -22,6 +22,14 @@ with citations among them. As well as something to work with backend and front e
 
 # Execution 
 
+## Requirements
+
+With homebrew
+```
+~$ brew install docker npm node
+~$ npm install -g @angular/cli
+```
+
 To execute both the frontend and backend on your local machine for development, 
 just run:
 
@@ -29,6 +37,5 @@ just run:
 ~$ ./quickstart.sh
 ``` 
 
-It does require docker and the angular cli
-to run things but otherwise that's it. To run either the frontend or backend individually
+To run either the frontend or backend individually
 check the *README.md* in their repective directory. 
