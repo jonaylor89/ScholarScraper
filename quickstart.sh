@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 # Change directory to backend
 cd ScholarScraperBE/
@@ -6,7 +7,7 @@ cd ScholarScraperBE/
 docker build --tag=scholarscraperbe .
 
 # Create backend container and run in the background on port 8000
-docker run -p 8000:8000 scholarscraperbe -b
+docker run -d -p 8000:8000 scholarscraperbe 
 
 # Change directory to the frontend
 cd ../ScholarScraperFE
