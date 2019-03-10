@@ -12,6 +12,9 @@ docker run -d -p 8000:8000 scholarscraperbe
 # Change directory to the frontend
 cd ../ScholarScraperFE
 
+# Install npm dependencies
+npm install
+
 # Build frontend
 ng build
 
