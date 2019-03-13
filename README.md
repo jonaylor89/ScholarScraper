@@ -6,6 +6,7 @@
 # Frontend
 
 **So far the only thing I've done to the frontend is bootstrap the angular app and set the api url to point to the backend**
+**Dockerization in progress**
 
 - Typescript
 - Angular
