@@ -46,3 +46,10 @@ just run:
 
 To run either the frontend or backend individually
 check the *README.md* in their repective directory. 
+
+-------------
+
+-> # TODO <-
+
+- Finish frontend dockerfile
+- Use docker compose to make things nice
