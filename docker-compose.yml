@@ -1,0 +1,9 @@
+
+version: '1.0'
+
+services:
+  scholarscraperbe:
+    container_name: scholarscraperbe
+
+  scholarscraperfe:
+    container_name: scholarscraperfe
