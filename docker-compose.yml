@@ -19,5 +19,5 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_DB=scholarscraper
+      - POSTGRES_DB=scholarscraperdb
       - POSTGRES_PASSWORD=ouiouibonjour
