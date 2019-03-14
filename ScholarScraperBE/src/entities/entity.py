@@ -4,12 +4,12 @@ from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-db_url = ""
-db_name = ""
-db_user = ""
-db_pass = ""
+db_url = "localhost:5432"
+db_name = "scholarscraperdb"
+db_user = "postgres"
+db_pass = "ouiouibonjour"
 
-engine = create_engine()
+engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_url}/{db_name}')
 
 Session = sessionmaker(bind=engine)
 Base = declarative_base()

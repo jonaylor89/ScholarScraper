@@ -13,3 +13,13 @@ services:
       context: ./ScholarScraperFE
     ports:
       - "4200:4200"
+
+  db:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=scholarscraper
+      - POSTGRES_PASSWORD=ouiouibonjour
