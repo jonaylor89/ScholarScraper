@@ -3,13 +3,13 @@ version: '3'
 
 services:
   api:
-    container_name: scholarscraperbe
-    build: ./ScholarScraperBE
+    build:
+      context: ./ScholarScraperBE
     ports:
       - "8000:8000"
 
   frontend:
-    container_name: scholarscraperfe
-    build: ./ScholarScraperFE
+    build:
+      context: ./ScholarScraperFE
     ports:
       - "4200:4200"
