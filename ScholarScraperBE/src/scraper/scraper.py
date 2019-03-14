@@ -4,7 +4,8 @@ import json
 import logging
 from time import sleep
 
-from selenium.webdriver import Chrome
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver import Remote
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ChromeOptions
 
@@ -18,8 +19,14 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
     options = ChromeOptions()
     # options.add_argument('headless')
-    browser = Chrome(options=options)
+    browser = Remote(
+                command_executor='http://localhost:4444/wd/hub',
+                desired_capabilities=DesiredCapabilities.CHROME)
+
+    logger.info("connected to selenium server")
+
     browser.get("http://scholar.google.com")
+    logger.info("retrieving website")
 
     search = browser.find_element_by_name("q")
 
@@ -36,20 +43,21 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
     titles = browser.find_elements_by_class_name("gsc_a_at")
 
-    logger.debug("titles for author: {0}".format(len(titles)))
+    logger.info("titles for author: {0}".format(len(titles)))
 
     for title in titles:
         temp_dict[professor][title.text] = {}
         title.click()
 
-        logger.debug("entering article ({0})".format(title.text))
+        logger.info("entering article ({0})".format(title.text))
+        print("entering article ({0})".format(title.text))
 
         sleep(1)
 
         fields = browser.find_elements_by_class_name("gsc_vcd_field")
         values = browser.find_elements_by_class_name("gsc_vcd_value")
 
-        logger.debug("there are {0} fields to parse".format(len(fields)))
+        logger.info("there are {0} fields to parse".format(len(fields)))
 
         for k, v in zip(fields, values):
             if k.text == "Authors":
