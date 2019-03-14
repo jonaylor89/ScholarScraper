@@ -6,7 +6,6 @@
 # Frontend
 
 **So far the only thing I've done to the frontend is bootstrap the angular app and set the api url to point to the backend**
-**Dockerization in progress**
 
 - Typescript
 - Angular
@@ -20,9 +19,15 @@ with citations among them. As well as something to work with backend and front e
 
 # Backend
 
+**The api package is in the process of setting up and building the database**
+
 - Flask
 - SQL
 - Docker
+
+The api as of now is really just a glorified web scraper than can scrape google scholar for information on reserachers and publications.
+Storing results, serializing and deserializing, fancy routing is still in the process of being developed. Slowly but surely.
+I've been carried away with making deployment beautiful. (It is for anyone asking)
 
 --------------
 
@@ -47,12 +52,6 @@ On Arch
 
 To execute both the frontend and backend on your local machine for development, 
 just run:
-
-```
-~$ ./quickstart.sh
-``` 
-
-or 
 
 ```
 ~$ docker-compose up
