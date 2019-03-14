@@ -1,9 +1,15 @@
 
-version: '1.0'
+version: '3'
 
 services:
-  scholarscraperbe:
+  api:
     container_name: scholarscraperbe
+    build: ./ScholarScraperBE
+    ports:
+      - "8000:8000"
 
-  scholarscraperfe:
+  frontend:
     container_name: scholarscraperfe
+    build: ./ScholarScraperFE
+    ports:
+      - "4200:4200"

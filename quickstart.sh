@@ -12,12 +12,12 @@ docker run -d -p 8000:8000 scholarscraperbe
 # Change directory to the frontend
 cd ../ScholarScraperFE
 
-# Install npm dependencies
-npm install
-
-# Build frontend
-ng build
+# Build frontend image
+docker build --tag=scholarscraperfe .
 
 # Serve dev frontend on port 4200
-ng serve
+docker run -d -p 4200:4200 scholarscraperfe
+
+# Change directory back to root of project
+cd ..
 
