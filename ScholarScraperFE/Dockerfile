@@ -20,6 +20,9 @@ COPY . /usr/src/app
 
 EXPOSE 4200
 
+# ng build
+RUN ng build
+
 # start app
 CMD ng serve --host 0.0.0.0
 
