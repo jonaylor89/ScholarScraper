@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
@@ -9,12 +8,13 @@ db_name = "scholarscraperdb"
 db_user = "postgres"
 db_pass = "ouiouibonjour"
 
-engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_url}/{db_name}')
+engine = create_engine(f"postgresql://{db_user}:{db_password}@{db_url}/{db_name}")
 
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
-class Entity():
+
+class Entity:
 
     id = Column(Integer, primary_key=True)
     created_at = Column(DateTime)
@@ -25,5 +25,3 @@ class Entity():
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         self.last_updated_by = created_by
-
-

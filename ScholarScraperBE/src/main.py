@@ -9,6 +9,7 @@ from flask import Flask, redirect
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route("/")
 def hello():
     """
@@ -35,6 +36,7 @@ def parse_by_name(name: str):
             json_data = json.loads(f.read())
 
     return json.dumps(json_data[name], indent=2)
+
 
 @app.route("/secret", methods=["GET", "POST"])
 def secret():
