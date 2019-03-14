@@ -30,11 +30,19 @@ with citations among them. As well as something to work with backend and front e
 
 ## Requirements
 
-With homebrew
+On macOS with Homebrew
 ```
 ~$ brew cask install docker
-~$ brew install node npm
-~$ npm install -g @angular/cli
+```
+
+On Ubuntu
+```
+~$ sudo apt install docker
+```
+
+On Arch
+```
+~$ sudo pacman -S docker
 ```
 
 To execute both the frontend and backend on your local machine for development, 
@@ -43,6 +51,12 @@ just run:
 ```
 ~$ ./quickstart.sh
 ``` 
+
+or 
+
+```
+~$ docker-compose up
+```
 
 To run either the frontend or backend individually
 check the *README.md* in their repective directory. 
