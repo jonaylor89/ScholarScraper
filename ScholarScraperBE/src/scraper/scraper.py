@@ -18,7 +18,7 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
     temp_dict = {professor: {}}
 
     options = ChromeOptions()
-    # options.add_argument('headless')
+    options.add_argument('headless')
     browser = Remote(
                 command_executor='http://localhost:4444/wd/hub',
                 desired_capabilities=DesiredCapabilities.CHROME)

@@ -35,6 +35,7 @@ services:
     depends_on:
       - selenium-hub
     environment:
+      - START_XVFB=false
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
 
@@ -45,6 +46,7 @@ services:
     depends_on:
       - selenium-hub
     environment:
+      - START_XVFB=false
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
 
