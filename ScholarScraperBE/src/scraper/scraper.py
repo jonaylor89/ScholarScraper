@@ -10,6 +10,7 @@ from selenium.webdriver import Remote
 from selenium.webdriver import ChromeOptions
 
 # TODO: Make scraper a class
+# TODO: And not shit
 
 def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
@@ -22,7 +23,7 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
     options.add_argument("headless")
     browser = Remote(
         command_executor="http://localhost:4444/wd/hub",
-        desired_capabilities=DesiredCapabilities.CHROME,
+        desired_capabilities=DesiredCapabilities.FIREFOX,
     )
 
     logger.info("connected to selenium server")

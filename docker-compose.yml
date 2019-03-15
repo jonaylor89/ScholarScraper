@@ -23,13 +23,12 @@ services:
       - POSTGRES_PASSWORD=ouiouibonjour
 
   selenium-hub:
-    image: selenium/hub:3.141.59-krypton
-    container_name: selenium-hub
+    image: selenium/hub
     ports:
       - "4444:4444"
 
   chrome:
-    image: selenium/node-chrome:3.141.59-krypton
+    image: selenium/node-chrome
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -40,7 +39,7 @@ services:
       - HUB_PORT=4444
 
   firefox:
-    image: selenium/node-firefox:3.141.59-krypton
+    image: selenium/node-firefox
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
