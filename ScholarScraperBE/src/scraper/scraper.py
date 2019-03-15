@@ -12,6 +12,12 @@ from selenium.webdriver import ChromeOptions
 # TODO: Make scraper a class
 # TODO: And not shit
 
+class ScholarScraper(object):
+    
+    def __init__(self):
+        pass
+
+
 def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
     logger = logging.getLogger(__name__)
@@ -23,7 +29,7 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
     options.add_argument("headless")
     browser = Remote(
         command_executor="http://localhost:4444/wd/hub",
-        desired_capabilities=DesiredCapabilities.FIREFOX,
+        desired_capabilities=options.to_capabilities(),
     )
 
     logger.info("connected to selenium server")
