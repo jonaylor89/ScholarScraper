@@ -19,7 +19,7 @@ def hello():
 
 
 @app.route("/name/<name>", methods=["GET"])
-def parse_by_name(name: str):
+def show_by_name(name: str):
     """
     The main meat and potatoes right now
     """
@@ -36,6 +36,16 @@ def parse_by_name(name: str):
             json_data = json.loads(f.read())
 
     return json.dumps(json_data[name], indent=2)
+
+@app.route("/parse/<name>", methods=["GET", "POST"])
+def parse_by_name(name: str):
+    """
+    Parse people
+    """
+    
+    scraper.parse_by_name(name)
+
+    return redirect(f"/name/{name}")
 
 
 @app.route("/secret", methods=["GET", "POST"])

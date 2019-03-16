@@ -32,10 +32,14 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
         desired_capabilities=options.to_capabilities(),
     )
 
+    print("[DEBUG] connected to remote")
+
     logger.info("connected to selenium server")
 
     browser.get("http://scholar.google.com")
     logger.info("retrieving website")
+    print("[DEUBG] on website")
+
 
     search = browser.find_element_by_name("q")
 
