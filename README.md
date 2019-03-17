@@ -29,6 +29,9 @@ The api as of now is really just a glorified web scraper than can scrape google 
 Storing results, serializing and deserializing, fancy routing is still in the process of being developed. Slowly but surely.
 I've been carried away with making deployment beautiful. (It is for anyone asking)
 
+The web scraper is on and off. Because of the importance of the reliability of this component of the application, I'll be doing
+major restructuring and refactoring to make it cleaning and then improve the reliability of it all.
+
 --------------
 
 # Execution 
