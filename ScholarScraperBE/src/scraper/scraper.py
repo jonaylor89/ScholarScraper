@@ -6,7 +6,7 @@ from time import sleep
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver import Remote
+from selenium.webdriver import Chrome
 from selenium.webdriver import ChromeOptions
 
 # TODO: Make scraper a class
@@ -26,11 +26,10 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
     temp_dict = {professor: {}}
 
     options = ChromeOptions()
-    options.add_argument("headless")
-    browser = Remote(
-        command_executor="http://localhost:4444/wd/hub",
-        desired_capabilities=options.to_capabilities(),
-    )
+    options.add_argument("--headless")
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    browser = Chrome(chrome_options=options)
 
     print("[DEBUG] connected to remote")
 
