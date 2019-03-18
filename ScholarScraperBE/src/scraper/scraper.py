@@ -3,22 +3,58 @@
 import json
 import logging
 from time import sleep
+from typing import List
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Chrome
 from selenium.webdriver import ChromeOptions
 
-# TODO: Make scraper a class
-# TODO: And not shit
+# TODO: Make this not shit
+
+CS_DEPARTMENT_RESEARCHERS: List[str] = [
+    "Irfan Ahmed",
+    "Tomasz Arodz",
+    "Caroline Budwell",
+    "Eyuphan Bulut",
+    "Alberto Cano",
+    "Krzysztof Cios",
+    "Robert Dahlberg",
+    "Kostadin Damevski",
+    "Thang Dinh",
+    # "Debra Duke",
+    "Carol Fung",
+    "Preetam Ghosh",
+    "Vojislav Kecman",
+    "Bartosz Krawczyk",
+    "Lukasz Kurgan",
+    "John D. Leonard II",
+    "Changqing Luo",
+    "Milos Manic",
+    "Bridget McInnes",
+    "Tamer Nadeem",
+    # "Zachary Whitten",
+    "Tarynn Witten",
+    "Cang Ye",
+    "Hong-Sheng Zhou",
+]
+
 
 class ScholarScraper(object):
-    
     def __init__(self):
+        """
+        Initialize logging and start the browser
+        """
+
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
 
         self.temp_dict = {}
+
+    def __enter__(self):
+        """
+        Returns browser on google scholar for Context Manager
+        """
 
         options = ChromeOptions()
         options.add_argument("--headless")
@@ -31,85 +67,85 @@ class ScholarScraper(object):
         self.browser.get("https://scholar.google.com")
         self.logger.info("retrieving website")
 
-    def parse_by_name(self, name):
-        self.temp_dict[name] = {}
+        return self.browser()
 
+    def __exit__(self):
+        """
+        Used by Context Manager to exit the browser
+        """
+
+        self.quit()
 
     def quit(self):
+        """
+        Seperate method in case we don't want to use the Context Manager
+        """
+
         self.browser.quit()
 
-def parse_by_name(professor="Alberto Cano", filename="data.json"):
+    def parse_by_name(self, name):
+        """
+        Parse information about a single researcher by their name
+        """
 
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
+        self.temp_dict[name] = {}
 
-    temp_dict = {professor: {}}
+        search = self.browser.find_element_by_name("q")
 
-    options = ChromeOptions()
-    options.add_argument("--headless")
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    browser = Chrome(chrome_options=options)
+        search.send_keys(name)
+        search.send_keys(Keys.RETURN)
 
-    logger.info("connected to selenium server")
+        link = self.browser.find_element_by_link_text(name)
+        link.click()
 
-    browser.get("http://scholar.google.com")
+        show_more = self.browser.find_element_by_id("gsc_bpf_more")
+        show_more.click()
 
-    logger.info("retrieving website")
+        sleep(3)
 
+        titles = self.browser.find_elements_by_class_name("gsc_a_at")
 
-    search = browser.find_element_by_name("q")
+        self.logger.info(f"titles for author: {len(titles)}")
 
-    search.send_keys(professor)
-    search.send_keys(Keys.RETURN)
+        for title in titles:
+            self.temp_dict[name][title.text] = {}
+            title.click()
 
-    link = browser.find_element_by_link_text(professor)
-    link.click()
+            self.logger.info(f"entering article ({title.text})")
 
-    show_more = browser.find_element_by_id("gsc_bpf_more")
-    show_more.click()
+            sleep(1)
 
-    sleep(3)
+            fields = self.browser.find_elements_by_class_name("gsc_vcd_field")
+            values = self.rowser.find_elements_by_class_name("gsc_vcd_value")
 
-    titles = browser.find_elements_by_class_name("gsc_a_at")
+            self.logger.info(f"there are {len(fields)} fields to parse")
 
-    logger.info("titles for author: {0}".format(len(titles)))
+            for k, v in zip(fields, values):
+                if k.text == "Authors":
+                    self.temp_dict[name][title.text][k.text] = v.text.split(", ")
+                elif k.text == "Total citations":
+                    # This is hacky parsing, it can be done better for sure
+                    self.temp_dict[name][title.text][k.text] = int(
+                        v.text.split("\n")[0].split(" ")[2]
+                    )
+                else:
+                    self.temp_dict[name][title.text][k.text] = v.text
+                self.logger.info(f"parsed : {k.text} : {v.text}")
 
-    for title in titles:
-        temp_dict[professor][title.text] = {}
-        title.click()
+            self.browser.back()
+            sleep(1)
 
-        logger.info("entering article ({0})".format(title.text))
-        print("entering article ({0})".format(title.text))
-
-        sleep(1)
-
-        fields = browser.find_elements_by_class_name("gsc_vcd_field")
-        values = browser.find_elements_by_class_name("gsc_vcd_value")
-
-        logger.info("there are {0} fields to parse".format(len(fields)))
-
-        for k, v in zip(fields, values):
-            if k.text == "Authors":
-                temp_dict[professor][title.text][k.text] = v.text.split(", ")
-            elif k.text == "Total citations":
-                # This is hacky parsing, it can be done better for sure
-                temp_dict[professor][title.text][k.text] = int(
-                    v.text.split("\n")[0].split(" ")[2]
-                )
-            else:
-                temp_dict[professor][title.text][k.text] = v.text
-            logger.info("parsed : {0} : {1}".format(k.text, v.text))
-
-        browser.back()
-        sleep(1)
-
-    with open(filename, "w+") as f:
-        f.write(json.dumps(temp_dict))
-    sleep(1)
-
-    browser.quit()
+        self.logger.info("parsing complete")
 
 
 if __name__ == "__main__":
-    parse_by_name()
+
+    scraper: ScholarScraper = ScholarScraper()
+    with scraper:
+        """
+        Context manager to handle opening and closing of browser
+        """
+
+        for name in CS_DEPARTMENT_RESEARCHERS:
+            scraper.parse_by_name(name)
+

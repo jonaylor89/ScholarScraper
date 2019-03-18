@@ -1,3 +1,4 @@
+
 from datetime import datetime
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
@@ -14,7 +15,7 @@ Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
 
-class Entity:
+class Entity(object):
 
     id = Column(Integer, primary_key=True)
     created_at = Column(DateTime)
