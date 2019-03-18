@@ -3,11 +3,15 @@
 import json
 import logging
 from .scraper import scraper
+from .entities.entity import Session, engine, Base
+from .entities.scholar import Scholar
 from flask_cors import CORS
 from flask import Flask, redirect
 
 app = Flask(__name__)
 CORS(app)
+
+Base.metadaa.create_all(engine)
 
 
 @app.route("/")
@@ -37,12 +41,13 @@ def show_by_name(name: str):
 
     return json.dumps(json_data[name], indent=2)
 
+
 @app.route("/parse/<name>", methods=["GET", "POST"])
 def parse_by_name(name: str):
     """
     Parse people
     """
-    
+
     scraper.parse_by_name(name)
 
     return redirect(f"/name/{name}")
