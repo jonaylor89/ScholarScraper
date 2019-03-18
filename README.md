@@ -10,7 +10,7 @@
 - Typescript
 - Angular
 
-For a front-end I'll let Russia handle that because of her experience with Angular. 
+For a front-end I'll let Russia handle that because of her experience with Angular.
 It shouldn't be a hard front-end so nothing crazy beautiful. If we do have time and
 want to go extra than we can have a page that displays a graph of the names of papers
 with citations among them. As well as something to work with backend and front end routes.
@@ -34,7 +34,7 @@ major restructuring and refactoring to make it cleaning and then improve the rel
 
 --------------
 
-# Execution 
+# Execution
 
 ## Requirements
 
@@ -53,7 +53,7 @@ On Arch
 ~$ sudo pacman -S docker
 ```
 
-To execute both the frontend and backend on your local machine for development, 
+To execute both the frontend and backend on your local machine for development,
 just run:
 
 ```
@@ -61,5 +61,15 @@ just run:
 ```
 
 To run either the frontend or backend individually
-check the *README.md* in their repective directory. 
+check the *README.md* in their repective directory.
+
+--------------
+
+# TODO
+
+1. Count and log the number of citations and by which publications to a specific publication.
+2. Reorganize the database to be more accurate and correct. (ASAP)
+3. Make the web scraping a CRON job on the CMSC 508 server. (ASAP)
+
+
 

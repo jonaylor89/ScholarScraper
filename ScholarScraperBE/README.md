@@ -30,8 +30,7 @@ To execute on a server or in a production environment, build and run the docker 
  *This requires docker obviously*
 
 ```sh
-~$ docker build --tag=scholarscraper . 
-~$ docker run -p 8000:8000 scholarscraper
+~$ docker build --tag=scholarscraper_api . 
+~$ docker run -p 8000:8000 scholarscraper_api
 ```
-
 
