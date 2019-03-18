@@ -23,7 +23,7 @@ with citations among them. As well as something to work with backend and front e
 
 - Flask
 - SQL
-- Docker
+- Selenium
 
 The api as of now is really just a glorified web scraper than can scrape google scholar for information on reserachers and publications.
 Storing results, serializing and deserializing, fancy routing is still in the process of being developed. Slowly but surely.
