@@ -105,3 +105,6 @@ venv.bak/
 
 # Temperary project database
 data.json
+
+# Text editor
+.vscode/

@@ -15,8 +15,28 @@ from selenium.webdriver import ChromeOptions
 class ScholarScraper(object):
     
     def __init__(self):
-        pass
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.INFO)
 
+        self.temp_dict = {}
+
+        options = ChromeOptions()
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+
+        self.browser = Chrome(chrome_options=options)
+        self.logger.info("connect to selenium server")
+
+        self.browser.get("https://scholar.google.com")
+        self.logger.info("retrieving website")
+
+    def parse_by_name(self, name):
+        self.temp_dict[name] = {}
+
+
+    def quit(self):
+        self.browser.quit()
 
 def parse_by_name(professor="Alberto Cano", filename="data.json"):
 
@@ -31,13 +51,11 @@ def parse_by_name(professor="Alberto Cano", filename="data.json"):
     options.add_argument('--disable-dev-shm-usage')
     browser = Chrome(chrome_options=options)
 
-    print("[DEBUG] connected to remote")
-
     logger.info("connected to selenium server")
 
     browser.get("http://scholar.google.com")
+
     logger.info("retrieving website")
-    print("[DEUBG] on website")
 
 
     search = browser.find_element_by_name("q")
