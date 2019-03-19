@@ -1,7 +1,7 @@
 
 # Selenium Web Scraper
 
-Python && Selenium scrapping google scholar
+Python and Selenium scrapping google scholar
 
 -----------------------
 
@@ -36,3 +36,8 @@ Python && Selenium scrapping google scholar
 # TODO
 - Click on citations and scrape the citations for a publication of a VCU CS researcher
 - Error handling for all aspects
+- Break things into functions
+
+# Possible Optimizations
+- Download the html for a publication and parse that to allow for parallelization without the browser thinkings we're DOSing it
+    - BeautifulSoup does stuff for that

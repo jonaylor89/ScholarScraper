@@ -38,17 +38,17 @@ major restructuring and refactoring to make it cleaning and then improve the rel
 
 ## Requirements
 
-On macOS with Homebrew
+**On macOS with Homebrew**
 ```
 ~$ brew cask install docker
 ```
 
-On Ubuntu
+**On Ubuntu**
 ```
 ~$ sudo apt install docker
 ```
 
-On Arch
+**On Arch**
 ```
 ~$ sudo pacman -S docker
 ```
@@ -63,7 +63,34 @@ just run:
 To run either the frontend or backend individually
 check the *README.md* in their repective directory.
 
---------------
+------------------------
+
+## CRON job
+
+Our script for scraping google scholar is set up as a CRON job to run at noon everyday.
+
+To edit CRON jobs
+```sh
+~$ crontab -e
+```
+
+CRON is formatted like so
+```
++---------------- minute (0 - 59)
+ |  +------------- hour (0 - 23)
+ |  |  +---------- day of month (1 - 31)
+ |  |  |  +------- month (1 - 12)
+ |  |  |  |  +---- day of week (0 - 6) (Sunday=0 or 7)
+ |  |  |  |  |
+ *  *  *  *  *  command to be executed
+ ```
+
+ Our CRON job is:
+ ```
+* 12 * * * /usr/bin/python3.7 /home/V00837208/Repos/ScholarScraper/ScholarScraperBE/src/scraper/scraper.py
+ ```
+
+ ---------------------------
 
 # TODO
 

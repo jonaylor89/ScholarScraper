@@ -67,7 +67,7 @@ class ScholarScraper(object):
         self.browser.get("https://scholar.google.com")
         self.logger.info("retrieving website")
 
-        return self.browser()
+        return self.browser
 
     def __exit__(self):
         """
@@ -90,8 +90,10 @@ class ScholarScraper(object):
 
         self.temp_dict[name] = {}
 
+        # Grab the search bar
         search = self.browser.find_element_by_name("q")
 
+        # Enter the researcher's nam and hit `ENTER/RETURN`
         search.send_keys(name)
         search.send_keys(Keys.RETURN)
 
@@ -100,33 +102,45 @@ class ScholarScraper(object):
         # If a name can't be found or is formatted differently in the html 
         # Then the program shouldn't crash
         ############################################################################
+
+        # Find the researcher's name out of the search results
         link = self.browser.find_element_by_link_text(name)
         link.click()
 
+        # Click the `SHOW MORE` button at the bottom of the page
         show_more = self.browser.find_element_by_id("gsc_bpf_more")
         show_more.click()
 
-        sleep(3)
+        sleep(2) # Sleep to allow everything to load
 
+        # Grab all articles from researcher
         titles = self.browser.find_elements_by_class_name("gsc_a_at")
 
         self.logger.info(f"titles for author: {len(titles)}")
 
+        # Loop through all articles for the researcher
         for title in titles:
+
+            # Add the publication as a key to the dictionary
             self.temp_dict[name][title.text] = {}
+
+            # Click the title to get the information about the publication
             title.click()
 
             self.logger.info(f"entering article ({title.text})")
 
-            sleep(1)
+            sleep(1) # Sleep to give google scholar some space to breath
 
+            # Grab all fields about the publication
             fields = self.browser.find_elements_by_class_name("gsc_vcd_field")
             values = self.rowser.find_elements_by_class_name("gsc_vcd_value")
 
             self.logger.info(f"there are {len(fields)} fields to parse")
 
+            # Zip fields and values to add them to the dictionary
             for k, v in zip(fields, values):
                 if k.text == "Authors":
+                    # Serialize string of names to list
                     self.temp_dict[name][title.text][k.text] = v.text.split(", ")
                 elif k.text == "Total citations":
                     # This is hacky parsing, it can be done better for sure
@@ -137,8 +151,11 @@ class ScholarScraper(object):
                     self.temp_dict[name][title.text][k.text] = v.text
                 self.logger.info(f"parsed : {k.text} : {v.text}")
 
+            # Go back to grab the next article
             self.browser.back()
             sleep(1)
+
+        # End of publication parsing
 
         self.logger.info("parsing complete")
 
@@ -151,6 +168,7 @@ if __name__ == "__main__":
         Context manager to handle opening and closing of browser
         """
 
+        # I would love to parallelize this but I really don't want google scholar to block me out
         for name in CS_DEPARTMENT_RESEARCHERS:
             scraper.parse_by_name(name)
 
