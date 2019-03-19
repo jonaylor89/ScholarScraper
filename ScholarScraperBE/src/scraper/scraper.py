@@ -95,6 +95,11 @@ class ScholarScraper(object):
         search.send_keys(name)
         search.send_keys(Keys.RETURN)
 
+        ############################################################################
+        # Error handling here would be awesome
+        # If a name can't be found or is formatted differently in the html 
+        # Then the program shouldn't crash
+        ############################################################################
         link = self.browser.find_element_by_link_text(name)
         link.click()
 

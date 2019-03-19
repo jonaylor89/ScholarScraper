@@ -33,4 +33,6 @@ Python && Selenium scrapping google scholar
 
 ---------------------
 
-There should be a graph of publications and citations between researchers
+# TODO
+- Click on citations and scrape the citations for a publication of a VCU CS researcher
+- Error handling for all aspects
