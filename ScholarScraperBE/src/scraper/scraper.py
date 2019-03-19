@@ -83,7 +83,7 @@ class ScholarScraper(object):
 
         self.browser.quit()
 
-    def parse_by_name(self, name):
+    def parse_by_name(self, name: str):
         """
         Parse information about a single researcher by their name
         """
@@ -159,6 +159,13 @@ class ScholarScraper(object):
 
         self.logger.info("parsing complete")
 
+    def parse_article(self, article_link):
+        """
+        Grab the fields and values from a publication 
+        It might be possible to have the html for the article inputed instead of the link
+        This would allow things to be parallelized without being kicked out by google
+        """
+        pass
 
 if __name__ == "__main__":
 
