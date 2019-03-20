@@ -24,7 +24,7 @@ CS_DEPARTMENT_RESEARCHERS: List[str] = [
     "Thang Dinh",
     # "Debra Duke",
     "Carol Fung",
-    "Preetam Ghosh"
+    "Preetam Ghosh",
     "Vojislav Kecman",
     "Bartosz Krawczyk",
     "Lukasz Kurgan",
@@ -47,7 +47,11 @@ class ScholarScraper(object):
         """
 
         self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.DEBUG)
+        logging.basicConfig(filename='scraper.log',
+                            filemode='a',
+                            format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                            datefmt='%H:%M:%S',
+                            level=logging.INFO)
 
         self.temp_dict = {}
 
@@ -117,7 +121,7 @@ class ScholarScraper(object):
             # Grab all articles from researcher
             titles = self.browser.find_elements_by_class_name("gsc_a_at")
 
-            self.logger.info(f"titles for author: {len(titles)}")
+            self.logger.debug(f"titles for author: {len(titles)}")
 
             # Loop through all articles for the researcher
             for title in titles:
@@ -157,7 +161,7 @@ class ScholarScraper(object):
         fields = self.browser.find_elements_by_class_name("gsc_vcd_field")
         values = self.browser.find_elements_by_class_name("gsc_vcd_value")
 
-        self.logger.info(f"there are {len(fields)} fields to parse")
+        self.logger.debug(f"there are {len(fields)} fields to parse")
 
         # Zip fields and values to add them to the dictionary
         for k, v in zip(fields, values):
@@ -173,7 +177,7 @@ class ScholarScraper(object):
 
             else:
                 article_dict[k.text] = v.text
-            self.logger.info(f"parsed : {k.text} : {v.text}")
+            self.logger.debug(f"parsed : {k.text} : {v.text}")
 
         return article_dict
 
@@ -203,5 +207,5 @@ if __name__ == "__main__":
         for name in CS_DEPARTMENT_RESEARCHERS:
             scraper.parse_by_name(name)
 
-        with open("data.json", "w") as f:
-            f.write(json.dumps(scraper.temp_dict))
+        with open("data.json", "w+") as f:
+            f.write(json.dumps(scraper.temp_dict, indent=2))
