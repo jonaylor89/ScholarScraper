@@ -1,0 +1,2 @@
+
+0 12 * * * /usr/local/bin/python3.7 /usr/src/app/src/scraper/scraper.py

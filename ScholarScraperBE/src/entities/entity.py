@@ -8,7 +8,7 @@ db_name = "scholarscraperdb"
 db_user = "postgres"
 db_pass = "ouiouibonjour"
 
-engine = create_engine(f"postgresql://{db_user}:{db_password}@{db_url}/{db_name}")
+engine = create_engine(f"postgresql://{db_user}:{db_pass}@{db_url}/{db_name}")
 
 Session = sessionmaker(bind=engine)
 Base = declarative_base()

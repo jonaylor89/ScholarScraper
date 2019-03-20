@@ -89,6 +89,8 @@ class ScholarScraper(object):
         """
         Parse information about a single researcher by their name
         """
+
+        # Go to the google scholar home page
         self.browser.get("https://scholar.google.com")
         self.logger.info("retrieving website")
 
@@ -186,7 +188,7 @@ class ScholarScraper(object):
         Go through every article on the page and grab the necessary information
         """
 
-        return "Nothing yet"
+        return ["Nothing yet"]
 
     def parse_article(self):
         """

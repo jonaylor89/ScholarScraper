@@ -87,7 +87,7 @@ CRON is formatted like so
 
  Our CRON job is:
  ```
-0 12 * * * /usr/bin/python3.7 /home/V00837208/Repos/ScholarScraper/ScholarScraperBE/src/scraper/scraper.py
+0 12 * * * /usr/local/bin/python3.7 /usr/src/app/src/scraper/scraper.py
  ```
 
  ---------------------------
