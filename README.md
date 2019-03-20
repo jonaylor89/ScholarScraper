@@ -76,7 +76,7 @@ To edit CRON jobs
 
 CRON is formatted like so
 ```
-+---------------- minute (0 - 59)
+ +---------------- minute (0 - 59)
  |  +------------- hour (0 - 23)
  |  |  +---------- day of month (1 - 31)
  |  |  |  +------- month (1 - 12)
@@ -87,7 +87,7 @@ CRON is formatted like so
 
  Our CRON job is:
  ```
-* 12 * * * /usr/bin/python3.7 /home/V00837208/Repos/ScholarScraper/ScholarScraperBE/src/scraper/scraper.py
+0 12 * * * /usr/bin/python3.7 /home/V00837208/Repos/ScholarScraper/ScholarScraperBE/src/scraper/scraper.py
  ```
 
  ---------------------------
