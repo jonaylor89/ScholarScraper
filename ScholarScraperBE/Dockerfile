@@ -44,7 +44,6 @@ RUN crontab /etc/cron.d/scraper-cron
 # Start cron service
 RUN service cron start
 
-# CMD [ "gunicorn", "-b0.0.0.0:8000", "src.main:app" ]
-CMD [ "python3", "src/scraper/scraper.py"]
-
+# I'll start the server later
+CMD [ "gunicorn", "-b0.0.0.0:8000", "src.main:app" ]
 
