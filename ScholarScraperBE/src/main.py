@@ -11,7 +11,8 @@ from flask import Flask, redirect
 app = Flask(__name__)
 CORS(app)
 
-Base.metada.create_all(engine)
+# I'll add the database in a bit
+# Base.metadata.create_all(engine)
 
 
 @app.route("/")
