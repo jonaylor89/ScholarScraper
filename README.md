@@ -94,10 +94,11 @@ CRON is formatted like so
 
 # TODO
 
-1. Count and log the number of citations and by which publications to a specific publication.
-2. Reorganize the database to be more accurate and correct. (ASAP)
-3. Make the web scraping a CRON job on the CMSC 508 server. (ASAP)
-4. Design upgraded web scraper
+1. Design upgraded web scraper
+    - Create new tables
+    - Scrape specified attributes for scholars and publications
+    - Get first batch of data in for Russia to display
+    - Sleep for random periods of time
 
 
 

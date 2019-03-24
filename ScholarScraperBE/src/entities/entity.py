@@ -3,11 +3,13 @@ from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+# These will change depending on the database
 db_url = "localhost:5432"
 db_name = "scholarscraperdb"
 db_user = "postgres"
 db_pass = "ouiouibonjour"
 
+# This will change depending on the database we have 
 engine = create_engine(f"postgresql://{db_user}:{db_pass}@{db_url}/{db_name}")
 
 Session = sessionmaker(bind=engine)
