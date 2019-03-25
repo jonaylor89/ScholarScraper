@@ -2,6 +2,7 @@
 
 import json
 import logging
+import re
 from time import sleep
 from typing import List, Dict
 from random import randint
@@ -130,9 +131,11 @@ class ScholarScraper(object):
 
         sleep(randint(1, 3))
 
+        # Get the scholar ID
+        temp_dict["id"] = self.parse_id()
+
         # Get the total number of citations for a researcher
-        cit_count = self.citation_count()
-        temp_dict["citation count"] = cit_count
+        temp_dict["citation count"] = self.citation_count()
 
         # Click the `SHOW MORE` button at the bottom of the page
         show_more = self.browser.find_element_by_id("gsc_bpf_more")
@@ -149,7 +152,6 @@ class ScholarScraper(object):
 
         # Grab all articles from researcher
         titles = self.browser.find_elements_by_class_name("gsc_a_at")
-
         self.logger.debug(f"titles for author: {len(titles)}")
 
         # Create article section
@@ -168,6 +170,19 @@ class ScholarScraper(object):
 
         return temp_dict
 
+    def parse_id(self):
+        url = self.browser.current_url
+        parameters = url[url.find("?") + 1:].replace("&", "=").split("=")
+        if 'user' in parameters:
+            scholar_id = parameters[parameters.index("user") + 1]
+            self.logger.debug(f"scholar id is {scholar_id}")
+            return scholar_id
+
+        else:
+            self.logger.error("`user` not in parameters")
+            return ""
+
+
     def parse_article(self, article_link) -> Dict:
         """
         Grab the fields and values from a publication 
@@ -178,15 +193,19 @@ class ScholarScraper(object):
         # Add the publication as a key to the dictionary
         article_dict = {}
 
+        sleep(randint(2, 4))
+
         try:
             # Click the title to get the information about the publication
             article_link.click()
             self.logger.info(f"entering article ({article_link.text})")
-        except:
+        except Exception as e:
             self.logger.error(f"article `{article_link.text}` could not be clicked on")
+            self.browser.back()
+            sleep(randint(1, 3))
             return {}
 
-        sleep(1 + randint(1, 3))  # Sleep to give google scholar some space to breath
+        sleep(randint(1, 3))  # Sleep to give google scholar some space to breath
 
         try:
             # Grab all fields about the publication
@@ -195,6 +214,8 @@ class ScholarScraper(object):
 
         except:
             self.logger.error(f"couldn't grab field tags for {article_link.text}")
+            self.browser.back()
+            sleep(1)
             return {}
 
         self.logger.debug(f"there are {len(fields)} fields to parse")
@@ -203,11 +224,9 @@ class ScholarScraper(object):
         for k, v in zip(fields, values):
             try:
 
-                if k.text == "Authors":
-                    # Serialize string of names to list
-                    article_dict[k.text] = v.text.split(", ")
-                elif k.text == "Total citations":
+                if k.text == "Total citations":
 
+                    # Getting the xpath for the cited by link
                     cited_by_link = self.browser.find_elements_by_xpath("/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]")
 
                     # This is hacky parsing, it can be done better for sure
@@ -215,12 +234,16 @@ class ScholarScraper(object):
 
                     # Click on the link for total citations to parse the citations
                     # article_dict["Citation Titles"] = self.parse_citations()
+    
+                    sleep(randint(3, 5))
 
-                else:
+                elif k.text == "Publication date":
                     article_dict[k.text] = v.text
 
             except:
                 self.logger.error(f"field parsing error on {k.text}")
+                self.browser.back()
+                sleep(1)
                 article_dict[k.text] = {}
 
             self.logger.debug(f"parsed : {k.text} : {v.text}")
@@ -231,17 +254,50 @@ class ScholarScraper(object):
 
         return article_dict
 
-    def parse_citations(self, citation_link):
+    def parse_citations(self) -> List[str]:
+        """
+        Grab the titles of citations of a specific article from google scholar
+        """
 
-        sleep(1)
+        sleep(randint(1, 3))
+
+        try:
+            citation_link = self.browser.find_element_by_xpath("/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]/div[1]/a")
+        except:
+            self.logger.error("couldn't grab citation link")
+            self.browser.back()
+            return []
 
         try:
             citation_link.click()
-            # self.browser.back()
+
         except:
             self.logger.error("citations could not be clicked")
+            self.browser.back()
+            return []
 
-        return []
+        sleep(randint(1, 3))
+
+        try:
+            citation_list = self.browser.execute_script("""
+                            let list= document.getElementsByClassName("gs_rt"); 
+                            let arr = [];
+                            for (var i = 0; i < list.length; i++) {
+                                arr.push(list[i].lastChild.firstChild.data);
+                            }   
+
+                            return arr;
+                        """)
+        except:
+            self.logger.error("couldn't get citation titles")
+            self.browser.back()
+            return []
+
+        sleep(1)
+
+        self.browser.back()
+
+        return citation_list
 
     def citation_count(self) -> int:
         """
@@ -286,8 +342,7 @@ if __name__ == "__main__":
                 scraper.researcher_dict["Bartosz Krawczyk"] = scraper.parse_researcher("Bartosz Krawczyk")
                 break
             except Exception as e:
-                print(e)
-                print(f"Failed to parse researcher, {n} attempt(s) left")
+                scraper.logger.error(f"Failed to parse researcher, {n} attempt(s) left")
 
             sleep(2)
 

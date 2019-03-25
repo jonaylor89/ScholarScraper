@@ -55,7 +55,6 @@
 
 ## Build Database
 
-(Saturday)
 Grab the total citations for each researcher
 for each of their publications then
     Grab name, date of publishing, id
@@ -67,7 +66,6 @@ end
 
 ## Event loop
 
-(Sunday)
 Check the total citations
 if there is a change then
     Go through the publications looking for the number of changes
