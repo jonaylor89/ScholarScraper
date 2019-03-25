@@ -334,28 +334,26 @@ if __name__ == "__main__":
         Context manager to handle opening and closing of browser
         """
 
-        # Five attempts to parse the page because it can be janky
-        n = 5
-        while n > 0:
-            n -= 1
-            try:
-                scraper.researcher_dict["Bartosz Krawczyk"] = scraper.parse_researcher("Bartosz Krawczyk")
-                break
-            except Exception as e:
-                scraper.logger.error(f"Failed to parse researcher, {n} attempt(s) left")
-
-            sleep(2)
-
-        if n == 0:
-            print("scraping failed") 
-            exit(1)
-        
-        """
-        # I would love to parallelize this but I really don't want google scholar to block me out
+        # Go through all names
         for name in CS_DEPARTMENT_RESEARCHERS:
-            scraper.researcher_dict[name] = scraper.parse_researcher(name)
-            sleep(2 + randint(-1, 3))
-        """
+
+            # Five attempts to parse the page because it can be janky
+            n = 5
+            while n > 0:
+                n -= 1
+                try:
+                    scraper.researcher_dict[name] = scraper.parse_researcher(name)
+                    break
+                except Exception as e:
+                    scraper.logger.error(f"Failed to parse researcher, {n} attempt(s) left")
+
+                sleep(2)
+
+            if n == 0:
+                print("scraping failed") 
+                exit(1)
+
+            sleep(randint(1, 3))
 
         with open("data.json", "w+") as f:
             f.write(json.dumps(scraper.researcher_dict, indent=2))
