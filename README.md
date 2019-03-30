@@ -85,9 +85,9 @@ CRON is formatted like so
  *  *  *  *  *  command to be executed
  ```
 
- Our CRON job is:
+ Our CRON job to run at 1pm everyday is:
  ```
-0 12 * * * /usr/local/bin/python3.7 /usr/src/app/src/scraper/scraper.py
+0 13 * * * /usr/local/bin/python3.7 /usr/src/app/src/scraper/scraper.py
  ```
 
  ---------------------------

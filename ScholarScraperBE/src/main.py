@@ -32,7 +32,7 @@ def show_by_name(name: str):
     json_data = ""
 
     with open("scraper/data.json", "r") as f:
-        json_data = json.loads(f.read())
+        json_data = json.load(f)
 
     if name not in json_data.keys():
         return "Not today"
