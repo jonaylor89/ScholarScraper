@@ -35,19 +35,22 @@
 
 # Possible Optimizations
 * Download the html for a publication and parse that to allow for parallelization without the browser thinkings we're DOSing it
-    * BeautifulSoup does stuff for that
+    * Using ScraPY
 * Switch drivers sometimes to confuse google's algorithms
+* Send an email of any change that occurs (python smtp library)
+* Argparse for quick command line configuring
 
 -------------------------------------
 
 # To Parse
 - **FROM SCHOLAR**
-    - Total Citations
-    - Publications IDs
+    [x] Total Citations
+    [x] Publications IDs (I have name but I still need to make IDs)
 - **FROM PUBLICATIONS**
-    - Publication ID
-    - date of publications
-    - Publication ID of citations
+    [] Publication ID
+    [x] Date of publications
+    [x] Number of citations
+    [] Publication ID of citations
 
 ----------------------------------
 

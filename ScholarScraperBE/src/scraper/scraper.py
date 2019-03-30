@@ -2,7 +2,6 @@
 
 import json
 import logging
-import re
 from time import sleep
 from typing import List, Dict
 from random import randint
@@ -101,23 +100,19 @@ class ScholarScraper(object):
         self.browser.get(HOME_URL)
         sleep(1)
 
-
-    def parse_researcher(self, name: str) -> Dict:
+    def check_researcher(self, name: str, prev: int, auto_update: bool = True):
         """
-        Parse information about a single researcher by their name
+        Used to check if a researcher needs undating and automatically does so if needed
         """
-
         # Go to google scholar start screen
         self.goto_start()
-
-        temp_dict = {}
 
         # Grab the search bar
         search = self.browser.find_element_by_name("q")
 
         # Profession error handling that just catches everything
         try:
-            # Enter the researcher's nam and hit `ENTER/RETURN`
+            # Enter the researcher's name and hit `ENTER/RETURN`
             search.send_keys(name)
             search.send_keys(Keys.RETURN)
 
@@ -131,11 +126,26 @@ class ScholarScraper(object):
 
         sleep(randint(1, 3))
 
-        # Get the scholar ID
-        temp_dict["id"] = self.parse_id()
+        cur_citations = self.parse_citations()
 
-        # Get the total number of citations for a researcher
-        temp_dict["citation count"] = self.citation_count()
+        self.logger.info(f"current citation count is {cur_citations} vs the old of {prev}")
+
+        if cur_citations != prev and self.auto_update:
+            self.researcher_dict[name]["id"] = self.parse_id()
+            self.researcher_dict[name]["citations"] = cur_citations
+            self.researcher_dict[name]["articles"] = scraper.parse_articles(name)
+
+    def parse_articles(self) -> Dict:
+        """
+        Parse information about a single researcher by their name
+
+        [!!!] Assumed to already be on the researcher's page
+
+        TODO: Just download the html and use scraPY rather than selenium scraping
+
+        """
+
+
 
         # Click the `SHOW MORE` button at the bottom of the page
         show_more = self.browser.find_element_by_id("gsc_bpf_more")
@@ -171,8 +181,14 @@ class ScholarScraper(object):
         return temp_dict
 
     def parse_id(self):
-        url = self.browser.current_url
-        parameters = url[url.find("?") + 1:].replace("&", "=").split("=")
+        """
+        parse the id for a researcher
+
+        [!!!] Assumed to be on the researcher's page
+        """
+
+        parameters = self.get_url_parameters()
+
         if 'user' in parameters:
             scholar_id = parameters[parameters.index("user") + 1]
             self.logger.debug(f"scholar id is {scholar_id}")
@@ -181,6 +197,13 @@ class ScholarScraper(object):
         else:
             self.logger.error("`user` not in parameters")
             return ""
+
+    def get_url_parameters(self):
+        """
+        parse the keywords in the parameters of the url and put them in a python list
+        """
+        url = self.browser.current_url
+        return url[url.find("?") + 1:].replace("&", "=").split("=")
 
 
     def parse_article(self, article_link) -> Dict:
@@ -326,7 +349,7 @@ class ScholarScraper(object):
 
         return total_citations
 
-if __name__ == "__main__":
+def main():
 
     scraper: ScholarScraper = ScholarScraper()
     with scraper:
@@ -342,8 +365,8 @@ if __name__ == "__main__":
             while n > 0:
                 n -= 1
                 try:
-                    scraper.researcher_dict[name] = scraper.parse_researcher(name)
-                    break
+                    check_researcher(name)
+                    break # Successful attempt
                 except Exception as e:
                     scraper.logger.error(f"Failed to parse researcher, {n} attempt(s) left")
 
@@ -357,3 +380,7 @@ if __name__ == "__main__":
 
         with open("data.json", "w+") as f:
             f.write(json.dumps(scraper.researcher_dict, indent=2))
+
+
+if __name__ == "__main__":
+    main()
