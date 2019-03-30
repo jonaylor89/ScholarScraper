@@ -3,8 +3,8 @@
 import json
 import logging
 from time import sleep
-from typing import List, Dict
 from random import randint
+from typing import List, Dict
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
@@ -18,7 +18,7 @@ HOME_URL = "https://scholar.google.com"
 CS_DEPARTMENT_RESEARCHERS: List[str] = [
     "Irfan Ahmed",
     "Tomasz Arodz",
-    "Caroline Budwell",
+    # "Caroline Budwell",
     "Eyuphan Bulut",
     "Alberto Cano",
     "Krzysztof Cios",
@@ -37,14 +37,14 @@ CS_DEPARTMENT_RESEARCHERS: List[str] = [
     "Bridget McInnes",
     "Tamer Nadeem",
     # "Zachary Whitten",
-    "Tarynn Witten",
+     "Tarynn Witten",
     "Cang Ye",
     "Hong-Sheng Zhou",
 ]
 
 
 class ScholarScraper(object):
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initialize logging and start the browser
         """
@@ -58,7 +58,7 @@ class ScholarScraper(object):
 
         self.researcher_dict = {}
 
-    def __enter__(self):
+    def __enter__(self) -> Chrome:
         """
         Returns browser on google scholar for Context Manager
         """
@@ -76,14 +76,14 @@ class ScholarScraper(object):
 
         return self.browser
 
-    def __exit__(self, type, value, tb):
+    def __exit__(self, type, value, tb) -> None:
         """
         Used by Context Manager to exit the browser
         """
 
         self.quit()
 
-    def quit(self):
+    def quit(self) -> None:
         """
         Seperate method in case we don't want to use the Context Manager
         """
@@ -100,7 +100,46 @@ class ScholarScraper(object):
         self.browser.get(HOME_URL)
         sleep(1)
 
-    def check_researcher(self, name: str, prev: int, auto_update: bool = True):
+    def parse_researcher(self, name: str) -> Dict:
+        """
+        Create new researcher
+        """
+
+        # Go to google scholar start screen
+        self.goto_start()
+
+        # Grab the search bar
+        search = self.browser.find_element_by_name("q")
+
+        # Profession error handling that just catches everything
+        try:
+            # Enter the researcher's name and hit `ENTER/RETURN`
+            search.send_keys(name)
+            search.send_keys(Keys.RETURN)
+
+            # Find the researcher's name out of the search results
+            link = self.browser.find_element_by_link_text(name)
+            link.click()
+
+        except:
+            self.logger.error(f"researcher {name} could not be found")
+            self.researcher_dict[name] = {}
+            return
+
+        sleep(randint(1, 3))
+
+        self.researcher_dict[name] = {}
+
+        try:
+            self.logger.info(f"creating researcher {name} from scratch")
+            self.researcher_dict[name]["id"] = self.parse_id()
+            self.researcher_dict[name]["citation_count"] = self.citation_count()
+            self.researcher_dict[name]["articles"] = self.parse_articles()
+        except Exception as e:
+            self.logger.error(f"could not create researcher {name} from scratch: {e}")
+            self.researcher_dict[name] = {}
+
+    def check_researcher(self, name: str, prev: Dict) -> None:
         """
         Used to check if a researcher needs undating and automatically does so if needed
         """
@@ -121,19 +160,23 @@ class ScholarScraper(object):
             link.click()
 
         except:
-            self.logger.error("researcher could not be found")
-            return {}
+            self.logger.error(f"researcher {name} could not be found")
+            return 
 
         sleep(randint(1, 3))
 
-        cur_citations = self.parse_citations()
+        cur_citations = self.citation_count()
 
-        self.logger.info(f"current citation count is {cur_citations} vs the old of {prev}")
+        self.logger.info(f"current citation count is {cur_citations} vs the old of {prev['citation_count']}")
 
-        if cur_citations != prev and self.auto_update:
-            self.researcher_dict[name]["id"] = self.parse_id()
-            self.researcher_dict[name]["citations"] = cur_citations
-            self.researcher_dict[name]["articles"] = scraper.parse_articles(name)
+        if cur_citations != prev["citation_count"]:
+            self.logger.info(f"change in citation count for {name}, updating researcher")
+            self.researcher_dict[name]["id"] = prev["id"]
+            self.researcher_dict[name]["citations_count"] = cur_citations
+            self.researcher_dict[name]["articles"] = self.parse_articles(name)
+        else:
+            self.logger.info(f"citation count for {name} has remained constant")
+            self.researcher_dict[name] = prev
 
     def parse_articles(self) -> Dict:
         """
@@ -145,7 +188,7 @@ class ScholarScraper(object):
 
         """
 
-
+        sleep(randint(1, 3))
 
         # Click the `SHOW MORE` button at the bottom of the page
         show_more = self.browser.find_element_by_id("gsc_bpf_more")
@@ -165,22 +208,21 @@ class ScholarScraper(object):
         self.logger.debug(f"titles for author: {len(titles)}")
 
         # Create article section
-        temp_dict["articles"] = {}
+        articles_dict = {}
 
         # Loop through all articles for the researcher
         for title in titles:
 
             # Add the publication as a key to the dictionary
-            temp_dict["articles"][title.text] = self.parse_article(title)
-
+            articles_dict[title.text] = self.parse_article(title)
 
         # End of publication parsing
 
         self.logger.info("parsing complete")
 
-        return temp_dict
+        return articles_dict
 
-    def parse_id(self):
+    def parse_id(self) -> int:
         """
         parse the id for a researcher
 
@@ -192,19 +234,25 @@ class ScholarScraper(object):
         if 'user' in parameters:
             scholar_id = parameters[parameters.index("user") + 1]
             self.logger.debug(f"scholar id is {scholar_id}")
+
             return scholar_id
 
         else:
             self.logger.error("`user` not in parameters")
             return ""
 
-    def get_url_parameters(self):
+    def get_url_parameters(self) -> List[str]:
         """
         parse the keywords in the parameters of the url and put them in a python list
         """
         url = self.browser.current_url
         return url[url.find("?") + 1:].replace("&", "=").split("=")
 
+    def check_article(self, article_link) -> None:
+        """
+        Check if an article's citation number has changed and parse it if it has
+        """
+        pass
 
     def parse_article(self, article_link) -> Dict:
         """
@@ -221,7 +269,7 @@ class ScholarScraper(object):
         try:
             # Click the title to get the information about the publication
             article_link.click()
-            self.logger.info(f"entering article ({article_link.text})")
+            self.logger.debug(f"entering article ({article_link.text})")
         except Exception as e:
             self.logger.error(f"article `{article_link.text}` could not be clicked on")
             self.browser.back()
@@ -288,7 +336,6 @@ class ScholarScraper(object):
             citation_link = self.browser.find_element_by_xpath("/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]/div[1]/a")
         except:
             self.logger.error("couldn't grab citation link")
-            self.browser.back()
             return []
 
         try:
@@ -296,7 +343,6 @@ class ScholarScraper(object):
 
         except:
             self.logger.error("citations could not be clicked")
-            self.browser.back()
             return []
 
         sleep(randint(1, 3))
@@ -326,6 +372,9 @@ class ScholarScraper(object):
         """
         identify how many total citations a researcher has 
         """
+
+        sleep(randint(1, 3))
+
         citation_data = None
         total_citations = 0
 
@@ -349,13 +398,24 @@ class ScholarScraper(object):
 
         return total_citations
 
-def main():
+def main() -> None:
 
-    scraper: ScholarScraper = ScholarScraper()
+    scraper = ScholarScraper()
+
     with scraper:
         """
         Context manager to handle opening and closing of browser
         """
+        researcher_data = None
+
+        with open("data.json") as f:
+
+            try:
+                # Get `database`
+                researcher_data = json.load(f)
+            except Exception as e:
+                # Something happened to the `database`
+                scraper.logger.error(f"database is missing? {e}")
 
         # Go through all names
         for name in CS_DEPARTMENT_RESEARCHERS:
@@ -365,10 +425,20 @@ def main():
             while n > 0:
                 n -= 1
                 try:
-                    check_researcher(name)
+
+                    if researcher_data is not None:
+                        try:
+                            researcher = researcher_data[name]
+                            scraper.check_researcher(name, researcher)
+                        except:
+                            researcher = {}
+                            scraper.parse_researcher(name)
+                    else:
+                        scraper.parse_researcher(name)
+
                     break # Successful attempt
                 except Exception as e:
-                    scraper.logger.error(f"Failed to parse researcher, {n} attempt(s) left")
+                    scraper.logger.error(f"failed to parse researcher, {n} attempt(s) left: {e}")
 
                 sleep(2)
 
@@ -380,7 +450,6 @@ def main():
 
         with open("data.json", "w+") as f:
             f.write(json.dumps(scraper.researcher_dict, indent=2))
-
 
 if __name__ == "__main__":
     main()

@@ -67,6 +67,8 @@ for each of their publications then
     end
 end 
 
+I may also be able to just write something to move the data.json file into a MySQL database
+
 ## Event loop
 
 Check the total citations
