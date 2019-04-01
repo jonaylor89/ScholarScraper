@@ -11,9 +11,8 @@ from flask import Flask, redirect
 app = Flask(__name__)
 CORS(app)
 
-# I'll add the database in a bit
-# Base.metadata.create_all(engine)
-
+# Create all tables
+Base.metadata.create_all(engine)
 
 @app.route("/")
 def hello():
@@ -23,7 +22,7 @@ def hello():
     return "WELCOME TO SCHOLAR SCRAPER!"
 
 
-@app.route("/name/<name>", methods=["GET"])
+@app.route("/names/<name>", methods=["GET"])
 def show_by_name(name: str):
     """
     The main meat and potatoes right now
@@ -34,13 +33,6 @@ def show_by_name(name: str):
     with open("scraper/data.json", "r") as f:
         json_data = json.load(f)
 
-    if name not in json_data.keys():
-        return "Not today"
-        # scraper.parse_by_name(name)
-
-        # with open("data.json", "r") as f:
-        #   json_data = json.loads(f.read())
-
     return json.dumps(json_data[name], indent=2)
 
 
@@ -50,7 +42,7 @@ def parse_by_name(name: str):
     Parse people
     """
 
-    # scraper.parse_by_name(name)
+    # scraper.check_researcher(name)
 
     return redirect(f"/name/{name}")
 
