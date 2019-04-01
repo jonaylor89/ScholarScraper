@@ -3,16 +3,16 @@
 import json
 import logging
 from .scraper import scraper
-from .entities.entity import Session, engine, Base
-from .entities.scholar import Scholar
+# from .entities.entity import Session, engine, Base
+# from .entities.scholar import Scholar
 from flask_cors import CORS
-from flask import Flask, redirect
+from flask import Flask, redirect, jsonify
 
 app = Flask(__name__)
 CORS(app)
 
 # Create all tables
-Base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)
 
 
 @app.route("/")
@@ -20,7 +20,7 @@ def hello():
     """
     Hello message mostly used for development error checking
     """
-    return "WELCOME TO SCHOLAR SCRAPER!"
+    return "<h1>WELCOME TO SCHOLAR SCRAPER!</h1>"
 
 
 @app.route("/names/<name>", methods=["GET"])
@@ -29,12 +29,12 @@ def show_by_name(name: str):
     The main meat and potatoes right now
     In construction!!!
     """
-    json_data = ""
+    json_data = {}
 
-    with open("scraper/data.json", "r") as f:
+    with open("src/scraper/data.json", "r") as f:
         json_data = json.load(f)
 
-    return json.dumps(json_data[name], indent=2)
+    return jsonify(json_data[name])
 
 
 @app.route("/parse/<name>", methods=["GET", "POST"])
