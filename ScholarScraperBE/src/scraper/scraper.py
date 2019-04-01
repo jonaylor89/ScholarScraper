@@ -13,35 +13,6 @@ from selenium.webdriver import ChromeOptions
 
 # TODO: Make this not shit
 
-HOME_URL = "https://scholar.google.com"
-
-CS_DEPARTMENT_RESEARCHERS: List[str] = [
-    "Irfan Ahmed",
-    "Tomasz Arodz",
-    # "Caroline Budwell",
-    "Eyuphan Bulut",
-    "Alberto Cano",
-    "Krzysztof Cios",
-    "Robert Dahlberg",
-    "Kostadin Damevski",
-    "Thang Dinh",
-    # "Debra Duke",
-    "Carol Fung",
-    "Preetam Ghosh",
-    "Vojislav Kecman",
-    "Bartosz Krawczyk",
-    "Lukasz Kurgan",
-    "John D. Leonard II",
-    "Changqing Luo",
-    "Milos Manic",
-    "Bridget McInnes",
-    "Tamer Nadeem",
-    # "Zachary Whitten",
-     "Tarynn Witten",
-    "Cang Ye",
-    "Hong-Sheng Zhou",
-]
-
 
 class ScholarScraper(object):
     def __init__(self) -> None:
@@ -50,12 +21,42 @@ class ScholarScraper(object):
         """
 
         self.logger = logging.getLogger(__name__)
-        logging.basicConfig(filename='scraper.log',
-                            filemode='w',
-                            format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
-                            datefmt='%H:%M:%S',
-                            level=logging.INFO)
+        logging.basicConfig(
+            filename="scraper.log",
+            filemode="w",
+            format="%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s",
+            datefmt="%H:%M:%S",
+            level=logging.INFO,
+        )
 
+        self.cs_researchers: List[str] = [
+            "Irfan Ahmed",
+            "Tomasz Arodz",
+            # "Caroline Budwell",
+            "Eyuphan Bulut",
+            "Alberto Cano",
+            "Krzysztof Cios",
+            "Robert Dahlberg",
+            "Kostadin Damevski",
+            "Thang Dinh",
+            # "Debra Duke",
+            "Carol Fung",
+            "Preetam Ghosh",
+            "Vojislav Kecman",
+            "Bartosz Krawczyk",
+            "Lukasz Kurgan",
+            "John D. Leonard II",
+            "Changqing Luo",
+            "Milos Manic",
+            "Bridget McInnes",
+            "Tamer Nadeem",
+            # "Zachary Whitten",
+            "Tarynn Witten",
+            "Cang Ye",
+            "Hong-Sheng Zhou",
+        ]
+
+        self.home_url = "https://scholar.google.com"
         self.researcher_dict = {}
 
     def __enter__(self) -> Chrome:
@@ -64,7 +65,7 @@ class ScholarScraper(object):
         """
 
         options = ChromeOptions()
-        
+
         # Show chrome during for debugging
         options.add_argument("--headless")
         options.add_argument("--no-sandbox")
@@ -72,7 +73,6 @@ class ScholarScraper(object):
 
         self.browser = Chrome(options=options)
         self.logger.info("connect to selenium server")
-
 
         return self.browser
 
@@ -97,7 +97,7 @@ class ScholarScraper(object):
 
         sleep(1)
         self.logger.info("retrieving google scholar website")
-        self.browser.get(HOME_URL)
+        self.browser.get(self.home_url)
         sleep(1)
 
     def parse_researcher(self, name: str) -> Dict:
@@ -161,16 +161,20 @@ class ScholarScraper(object):
 
         except:
             self.logger.error(f"researcher {name} could not be found")
-            return 
+            return
 
         sleep(randint(1, 3))
 
         cur_citations = self.citation_count()
 
-        self.logger.info(f"current citation count is {cur_citations} vs the old of {prev['citation_count']}")
+        self.logger.info(
+            f"current citation count is {cur_citations} vs the old of {prev['citation_count']}"
+        )
 
         if cur_citations != prev["citation_count"]:
-            self.logger.info(f"change in citation count for {name}, updating researcher")
+            self.logger.info(
+                f"change in citation count for {name}, updating researcher"
+            )
             self.researcher_dict[name]["id"] = prev["id"]
             self.researcher_dict[name]["citations_count"] = cur_citations
             self.researcher_dict[name]["articles"] = self.parse_articles(name)
@@ -192,7 +196,7 @@ class ScholarScraper(object):
 
         # Click the `SHOW MORE` button at the bottom of the page
         show_more = self.browser.find_element_by_id("gsc_bpf_more")
-        
+
         # Show more until the button is disabled
         count = 0
         while show_more.is_enabled():
@@ -231,7 +235,7 @@ class ScholarScraper(object):
 
         parameters = self.get_url_parameters()
 
-        if 'user' in parameters:
+        if "user" in parameters:
             scholar_id = parameters[parameters.index("user") + 1]
             self.logger.debug(f"scholar id is {scholar_id}")
 
@@ -246,7 +250,7 @@ class ScholarScraper(object):
         parse the keywords in the parameters of the url and put them in a python list
         """
         url = self.browser.current_url
-        return url[url.find("?") + 1:].replace("&", "=").split("=")
+        return url[url.find("?") + 1 :].replace("&", "=").split("=")
 
     def check_article(self, article_link) -> None:
         """
@@ -298,14 +302,16 @@ class ScholarScraper(object):
                 if k.text == "Total citations":
 
                     # Getting the xpath for the cited by link
-                    cited_by_link = self.browser.find_elements_by_xpath("/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]")
+                    cited_by_link = self.browser.find_elements_by_xpath(
+                        "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]"
+                    )
 
                     # This is hacky parsing, it can be done better for sure
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
 
                     # Click on the link for total citations to parse the citations
                     # article_dict["Citation Titles"] = self.parse_citations()
-    
+
                     sleep(randint(3, 5))
 
                 elif k.text == "Publication date":
@@ -333,7 +339,9 @@ class ScholarScraper(object):
         sleep(randint(1, 3))
 
         try:
-            citation_link = self.browser.find_element_by_xpath("/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]/div[1]/a")
+            citation_link = self.browser.find_element_by_xpath(
+                "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]/div[1]/a"
+            )
         except:
             self.logger.error("couldn't grab citation link")
             return []
@@ -348,7 +356,8 @@ class ScholarScraper(object):
         sleep(randint(1, 3))
 
         try:
-            citation_list = self.browser.execute_script("""
+            citation_list = self.browser.execute_script(
+                """
                             let list= document.getElementsByClassName("gs_rt"); 
                             let arr = [];
                             for (var i = 0; i < list.length; i++) {
@@ -356,7 +365,8 @@ class ScholarScraper(object):
                             }   
 
                             return arr;
-                        """)
+                        """
+            )
         except:
             self.logger.error("couldn't get citation titles")
             self.browser.back()
@@ -380,23 +390,25 @@ class ScholarScraper(object):
 
         try:
             # citation_data = self.browser.find_elements_by_xpath("/html/body/div/div[14]/div[2]/div/div[1]/div[1]/table/tbody/tr[1]/td[2]")
-            citation_data = self.browser.execute_script("""
+            citation_data = self.browser.execute_script(
+                """
                                     function getElementByXpath(path) {
                                         return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
                                     }
 
                                     return getElementByXpath("/html/body/div/div[14]/div[2]/div/div[1]/div[1]/table/tbody/tr[1]/td[2]").lastChild.data
-                                """)
+                                """
+            )
 
         except:
             self.logger.error("couldn't find cited by table")
             return 0
 
-
         total_citations = int(citation_data)
         self.logger.debug(f"{total_citations} citations in total")
 
         return total_citations
+
 
 def main() -> None:
 
@@ -418,7 +430,7 @@ def main() -> None:
                 scraper.logger.error(f"database is missing? {e}")
 
         # Go through all names
-        for name in CS_DEPARTMENT_RESEARCHERS:
+        for name in scraper.cs_researchers:
 
             # Five attempts to parse the page because it can be janky
             n = 5
@@ -436,20 +448,23 @@ def main() -> None:
                     else:
                         scraper.parse_researcher(name)
 
-                    break # Successful attempt
+                    break  # Successful attempt
                 except Exception as e:
-                    scraper.logger.error(f"failed to parse researcher, {n} attempt(s) left: {e}")
+                    scraper.logger.error(
+                        f"failed to parse researcher, {n} attempt(s) left: {e}"
+                    )
 
                 sleep(2)
 
             if n == 0:
-                print("scraping failed") 
+                print("scraping failed")
                 exit(1)
 
             sleep(randint(1, 3))
 
         with open("data.json", "w+") as f:
             f.write(json.dumps(scraper.researcher_dict, indent=2))
+
 
 if __name__ == "__main__":
     main()

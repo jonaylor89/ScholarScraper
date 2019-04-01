@@ -14,6 +14,7 @@ CORS(app)
 # Create all tables
 Base.metadata.create_all(engine)
 
+
 @app.route("/")
 def hello():
     """

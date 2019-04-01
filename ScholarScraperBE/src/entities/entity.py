@@ -9,7 +9,7 @@ db_name = "scholarscraperdb"
 db_user = "postgres"
 db_pass = "ouiouibonjour"
 
-# This will change depending on the database we have 
+# This will change depending on the database we have
 engine = create_engine(f"postgresql://{db_user}:{db_pass}@{db_url}/{db_name}")
 
 Session = sessionmaker(bind=engine)
