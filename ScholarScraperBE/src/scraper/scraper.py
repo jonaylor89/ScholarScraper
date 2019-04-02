@@ -302,12 +302,17 @@ class ScholarScraper(object):
                 if k.text == "Total citations":
 
                     # Getting the xpath for the cited by link
-                    cited_by_link = self.browser.find_elements_by_xpath(
-                        "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]"
-                    )
+                    # cited_by_link = self.browser.find_elements_by_xpath(
+                    #   "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]"
+                    # )
 
                     # This is hacky parsing, it can be done better for sure
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
+
+                    # Get href from link
+                    article_id_url = v.get_attribute('href')
+
+                    article_dict['id'] = self.parse_article_id(article_id_url)
 
                     # Click on the link for total citations to parse the citations
                     # article_dict["Citation Titles"] = self.parse_citations()
@@ -330,6 +335,22 @@ class ScholarScraper(object):
         sleep(randint(1, 3))
 
         return article_dict
+
+    def parse_article_id(self, href: str) -> str:
+        """
+        Parse the article id from the href url
+        """
+        article_id_parameters = self.get_url_parameters(href)
+
+        # The id is in the parameters of the link
+        if "cites" in article_id_parameters:
+            article_id = article_id_parameters[parameters.index("cites") + 1]
+            self.logger.debug(f"article id is {article_id}")
+
+            return article_id
+        else:
+            self.logger.error("`cites` not in parameters")
+            return ""
 
     def parse_citations(self) -> List[str]:
         """
