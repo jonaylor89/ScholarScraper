@@ -35,13 +35,13 @@ class ScholarScraper(object):
             # "Caroline Budwell",
             "Eyuphan Bulut",
             "Alberto Cano",
-            "Krzysztof Cios",
-            "Robert Dahlberg",
+            "Krzysztof J Cios",
+            # "Robert Dahlberg",
             "Kostadin Damevski",
-            "Thang Dinh",
+            "Thang N. Dinh",
             # "Debra Duke",
             "Carol Fung",
-            "Preetam Ghosh",
+            "preetam ghosh",
             "Vojislav Kecman",
             "Bartosz Krawczyk",
             "Lukasz Kurgan",
@@ -161,6 +161,7 @@ class ScholarScraper(object):
 
         except:
             self.logger.error(f"researcher {name} could not be found")
+            researcher_dict[name] = prev
             return
 
         sleep(randint(1, 3))
@@ -379,7 +380,7 @@ class ScholarScraper(object):
 
         try:
             citation_list = self.browser.execute_script(
-                """
+                        """
                             // let list= document.getElementsByClassName("gs_rt"); 
                             // let arr = [];
                             // for (var i = 0; i < list.length; i++) {
@@ -387,7 +388,7 @@ class ScholarScraper(object):
                             // }   
 
                             // return arr;
-                            return [...document.querySelectorAll('.gs_rt')].map(i=>i.lastChild.firstChild.data);
+                            return [...document.querySelectorAll('.gs_rt')].map(i => i.lastChild.firstChild.data);
                         """
             )
         except:
