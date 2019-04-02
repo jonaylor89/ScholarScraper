@@ -188,7 +188,7 @@ class ScholarScraper(object):
 
         [!!!] Assumed to already be on the researcher's page
 
-        TODO: Just download the html and use scraPY rather than selenium scraping
+        TODO: Just download the html and use scraPY rather than selenium scraping (parallel scraping perhaps?)
 
         """
 
@@ -255,6 +255,7 @@ class ScholarScraper(object):
     def check_article(self, article_link) -> None:
         """
         Check if an article's citation number has changed and parse it if it has
+
         """
         pass
 
@@ -379,13 +380,14 @@ class ScholarScraper(object):
         try:
             citation_list = self.browser.execute_script(
                 """
-                            let list= document.getElementsByClassName("gs_rt"); 
-                            let arr = [];
-                            for (var i = 0; i < list.length; i++) {
-                                arr.push(list[i].lastChild.firstChild.data);
-                            }   
+                            // let list= document.getElementsByClassName("gs_rt"); 
+                            // let arr = [];
+                            // for (var i = 0; i < list.length; i++) {
+                            //     arr.push(list[i].lastChild.firstChild.data);
+                            // }   
 
-                            return arr;
+                            // return arr;
+                            return [...document.querySelectorAll('.gs_rt')].map(i=>i.lastChild.firstChild.data);
                         """
             )
         except:
