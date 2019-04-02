@@ -103,9 +103,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# Temperary project database
-data.json
-
 # Text editor
 .vscode/
 .idea/

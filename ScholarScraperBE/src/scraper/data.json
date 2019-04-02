@@ -1,0 +1,4113 @@
+{
+  "Irfan Ahmed": {
+    "id": "JXrXUC4AAAAJ",
+    "citation_count": 423,
+    "articles": {
+      "SCADA systems: Challenges for forensic investigators": {
+        "Publication date": "2012/12",
+        "Total citations": 67
+      },
+      "Fast Content-Based File Type Identification": {
+        "Publication date": "2011",
+        "Total citations": 29
+      },
+      "On Improving the Accuracy and Performance of Content-Based File Type Identification": {
+        "Publication date": "2009",
+        "Total citations": 26
+      },
+      "Fast file-type identification": {
+        "Publication date": "2010/3/22",
+        "Total citations": 24
+      },
+      "Gap analysis of intrusion detection in smart grids": {
+        "Publication date": "2011",
+        "Total citations": 22
+      },
+      "Classification of packet contents for malware detection": {
+        "Publication date": "2011",
+        "Total citations": 21
+      },
+      "Aspectdroid: Android app analysis system": {
+        "Publication date": "2016/3/9",
+        "Total citations": 19
+      },
+      "Content-based File-type Identification Using Cosine Similarity and a Divide-and-Conquer Approach": {
+        "Publication date": "2010/11/1",
+        "Total citations": 18
+      },
+      "User-representative feature selection for keystroke dynamics": {
+        "Publication date": "2011/9/6",
+        "Total citations": 17
+      },
+      "Cloud forensics\u2013Tool development studies & future outlook": {
+        "Publication date": "2016/6/21",
+        "Total citations": 14
+      },
+      "OpSeq: Android Malware Fingerprinting": {
+        "Publication date": "2015/12",
+        "Total citations": 14
+      },
+      "Integrity Checking of Function Pointers in Kernel Pools via Virtual Machine Introspection": {
+        "Publication date": "2013",
+        "Total citations": 13
+      },
+      "ModChecker: Kernel Module Integrity Checking in the Cloud Environment": {
+        "Publication date": "2012/9/10",
+        "Total citations": 13
+      },
+      "A SCADA System Testbed for Cybersecurity and Forensic Research and Pedagogy": {
+        "Publication date": "2016/12",
+        "Total citations": 10
+      },
+      "Forensic acquisition of cloud drives": {
+        "Publication date": "2016/1/26",
+        "Total citations": 10
+      },
+      "SCADA network forensics of the PCCC protocol": {
+        "Publication date": "2017/8/1",
+        "Total citations": 9
+      },
+      "Atomizer: Fast, Scalable and Lightweight Heap Analyzer for Virtual Machines in a Cloud Environment": {
+        "Publication date": "2012/12",
+        "Total citations": 9
+      },
+      "Image-based kernel fingerprinting": {
+        "Publication date": "2014/8/1",
+        "Total citations": 8
+      },
+      "Programmable logic controller forensics": {
+        "Publication date": "2017/11",
+        "Total citations": 7
+      },
+      "Development of Peer Instruction Questions for Cybersecurity Education": {
+        "Publication date": "2016/8",
+        "Total citations": 7
+      },
+      "API-based forensic acquisition of cloud drives": {
+        "Publication date": "2016/1/4",
+        "Total citations": 7
+      },
+      "Robust Fingerprinting for Relocatable Code": {
+        "Publication date": "2015/3",
+        "Total citations": 7
+      },
+      "Denial of Engineering Operations Attacks in Industrial Control Systems": {
+        "Publication date": "2018/3",
+        "Total citations": 6
+      },
+      "Peer Instruction Teaching Methodology for Cybersecurity Education": {
+        "Publication date": "2018/8",
+        "Total citations": 5
+      },
+      "Using Virtual Machine Introspection for Operating Systems Security Education": {
+        "Publication date": "2018/2",
+        "Total citations": 5
+      },
+      "Rule-Based Integrity Checking of Interrupt Descriptor Tables in Cloud Environments": {
+        "Publication date": "2013/1/1",
+        "Total citations": 5
+      },
+      "Detection of malcodes by packet classification": {
+        "Publication date": "2008/3/4",
+        "Total citations": 5
+      },
+      "Automatic mitigation of kernel rootkits in cloud environments": {
+        "Publication date": "2017/8/24",
+        "Total citations": 4
+      },
+      "Automatic Mitigation of Kernel Rootkits in Cloud Environments": {
+        "Publication date": "2017/8"
+      },
+      "Binding Update Authentication Scheme for Mobile IPv6": {
+        "Publication date": "2007/8/29",
+        "Total citations": 4
+      },
+      "Self-reported secure and insecure cyber behaviour: factor structure and associations with personality factors": {
+        "Publication date": "2017/10/1",
+        "Total citations": 3
+      },
+      "Peer Instruction for Digital Forensics": {
+        "Publication date": "2017/8",
+        "Total citations": 3
+      },
+      "Don\u2019t Touch that Column: Portable, Fine-Grained Access Control for Android\u2019s Native Content Providers": {
+        "Publication date": "2016/7",
+        "Total citations": 3
+      },
+      "Leveraging Relocations in ELF-binaries for Linux Kernel Version Identification": {
+        "Publication date": "2018/7",
+        "Total citations": 2
+      },
+      "Distributed Denial of Service Attacks and Defense Mechanisms: Current Landscape and Future Directions": {
+        "Publication date": "2018",
+        "Total citations": 2
+      },
+      "Control Logic Injection Attacks on Industrial Control Systems": {
+        "Publication date": "2019/6",
+        "Total citations": 1
+      },
+      "Evaluation of Peer Instruction for Cybersecurity Education": {
+        "Publication date": "2019/2/22",
+        "Total citations": 1
+      },
+      "CLIK on PLCs! Attacking Control Logic with Decompilation and Virtual PLC": {
+        "Publication date": "2019/2",
+        "Total citations": 1
+      },
+      "Topological Scoring of Concept Maps for Cybersecurity Education": {
+        "Publication date": "2019",
+        "Total citations": 1
+      },
+      "SPICE: A Software Tool for Bridging the Gap Between End-user's Insecure Cyber Behavior and Personality Traits": {
+        "Publication date": "2016/3/9",
+        "Total citations": 1
+      },
+      "Susceptibility and Resilience to Cyber Threat: Findings from a Scenario Decision Program to Measure Secure and Insecure Computing Behavior": {
+        "Publication date": "2019/3"
+      },
+      "Ladder Logic Decompiler for Supervisory Control and Data Acquisition (SCADA) Network Forensics": {
+        "Publication date": "2019/2"
+      },
+      "Susceptibility and resilience to cyber threat: Findings from a scenario decision program to measure secure and insecure computing behavior": {
+        "Publication date": "2018/12/12"
+      },
+      "Analysis of Cloud Digital Evidence": {
+        "Publication date": "2018"
+      },
+      "Supervisory Control and Data Acquisition (SCADA) Forensics: Network Traffic Analysis for Extracting a Programmable Logic Controller (PLC) System and Programming Logic Files": {},
+      "SCADA Testbed for Security and Forensics Research": {},
+      "Memory Forensics: Reliable In-Memory Code Identification Using Relocatable Pointers": {
+        "Publication date": "2015/2"
+      },
+      "Kernel Pool Monitoring to Support Malware Forensics in a Cloud Computing Environment": {
+        "Publication date": "2014/2"
+      },
+      "Compressed RAM and Live Forensics": {
+        "Publication date": "2014/2"
+      },
+      "Live Forensic Analysis of Kernel Code for Malware Detection in Cloud Computing Environments": {
+        "Publication date": "2013/2"
+      },
+      "POSTER: HookLocator: Function Pointer Integrity Checking in Kernel Pools via Virtual Machine Introspection": {
+        "Publication date": "2013"
+      },
+      "Supervisory control and data acquisition (SCADA)": {
+        "Publication date": "2012/8/1"
+      }
+    }
+  },
+  "Tomasz Arodz": {
+    "id": "UXlsAbwAAAAJ",
+    "citation_count": 801,
+    "articles": {
+      "Computational methods in developing quantitative structure-activity relationships (QSAR): a review": {
+        "Publication date": "2006/3/1",
+        "Total citations": 318
+      },
+      "Inferring causal molecular networks: empirical assessment through a community-based effort": {
+        "Publication date": "2016",
+        "Total citations": 101
+      },
+      "Detection of clustered microcalcifications in small field digital mammography": {
+        "Publication date": "2006/1/1",
+        "Total citations": 92
+      },
+      "Pattern recognition techniques for automatic detection of suspicious-looking anomalies in mammograms": {
+        "Publication date": "2005/8/1",
+        "Total citations": 37
+      },
+      "Ensemble of linear models for predicting drug properties": {
+        "Publication date": "2006/1/23",
+        "Total citations": 33
+      },
+      "Systems analysis of the NCI-60 cancer cell lines by alignment of protein pathway activation modules with \u201c-OMIC\u201d data fields and therapeutic response signatures": {
+        "Publication date": "2013/6/1",
+        "Total citations": 28
+      },
+      "Grid environment for on-line application monitoring and performance analysis": {
+        "Publication date": "2004/1/1",
+        "Total citations": 18
+      },
+      "ENNET: inferring large gene regulatory networks from expression data using gradient boosting": {
+        "Publication date": "2013/12",
+        "Total citations": 17
+      },
+      "Exploring complex networks with graph investigator research application": {
+        "Publication date": "2012/1/26",
+        "Total citations": 17
+      },
+      "Support for user-defined metrics in the online performance analysis tool G-PM": {
+        "Publication date": "2004/1/28",
+        "Total citations": 16
+      },
+      "A network approach to wound healing": {
+        "Publication date": "2013/11/1",
+        "Total citations": 15
+      },
+      "Invariant object recognition using radon-based transform": {
+        "Publication date": "2012/3/2",
+        "Total citations": 13
+      },
+      "The G-PM tool for grid-oriented performance analysis": {
+        "Publication date": "2003/2/13",
+        "Total citations": 13
+      },
+      "Performance evaluation and monitoring of interactive grid applications": {
+        "Publication date": "2004/9/19",
+        "Total citations": 11
+      },
+      "Effects of point mutations on protein structure are nonexponentially distributed": {
+        "Publication date": "2012/7",
+        "Total citations": 10
+      },
+      "ADANET: inferring gene regulatory networks using ensemble classifiers": {
+        "Publication date": "2012/10/7",
+        "Total citations": 8
+      },
+      "Identifying influential nodes in a wound healing-related network of biological processes using mean first-passage time": {
+        "Publication date": "2015/2/4",
+        "Total citations": 7
+      },
+      "Clustering organisms using metabolic networks": {
+        "Publication date": "2008/6/23",
+        "Total citations": 6
+      },
+      "Complex-network-based methodology for analysis of biomedical data": {
+        "Publication date": "2006",
+        "Total citations": 6
+      },
+      "Sequence and structure space model of protein divergence driven by point mutations": {
+        "Publication date": "2013/8/7",
+        "Total citations": 5
+      },
+      "Multivariate modeling and analysis in drug discovery": {
+        "Publication date": "2007/12/1",
+        "Total citations": 5
+      },
+      "Margin-based Diversity Measures for Ensemble Classifiers": {
+        "Publication date": "2005",
+        "Total citations": 4
+      },
+      "Boosting the Fisher Linear Discriminant with random feature subsets": {
+        "Publication date": "2005",
+        "Total citations": 4
+      },
+      "Charging skip optimization with peer-to-peer wireless energy sharing in mobile networks": {
+        "Publication date": "2018/5/20",
+        "Total citations": 3
+      },
+      "Visual exploration of multidimensional feature space of biological data": {
+        "Publication date": "2005/10/23",
+        "Total citations": 3
+      },
+      "Detecting Differentially Co-expressed Genes for Drug Target Analysis": {
+        "Publication date": "2013/1/1",
+        "Total citations": 2
+      },
+      "On new Radon-based translation, rotation, and scaling invariant transform for face recognition": {
+        "Publication date": "2004/6/6",
+        "Total citations": 2
+      },
+      "Computer-aid system for the detection of clustered microcalcifications in digital mammography": {
+        "Publication date": "2004",
+        "Total citations": 2
+      },
+      "A 3D Visualization System for Computer-Aided Mammogram Analysis": {
+        "Publication date": "2004",
+        "Total citations": 2
+      },
+      "Conservation of edge essentiality profiles in metabolic networks across species": {
+        "Publication date": "2009/2/23",
+        "Total citations": 1
+      },
+      "Training set size in ensemble feature selection for clinical proteomics": {
+        "Publication date": "2005",
+        "Total citations": 1
+      },
+      "Performance measurement model in the G-PM tool": {
+        "Publication date": "2004/6/6",
+        "Total citations": 1
+      },
+      "Quantum Sparse Support Vector Machines": {
+        "Publication date": "2019/2/5"
+      },
+      "Network proteomics of human dermal wound healing": {
+        "Publication date": "2018/12/7"
+      },
+      "QuaDMutEx: quadratic driver mutation explorer": {
+        "Publication date": "2017"
+      },
+      "TECHNOLOGY ADVANCES": {
+        "Publication date": "2013"
+      },
+      "Komputerowe metody detekcji nowotwor\u00f3w piersi w zdj\u0119ciach mammograficznych": {
+        "Publication date": "2005"
+      },
+      "Support for User-De\ufb01ned Metrics in the Online Performance Analysis Tool G-PM\u22c6": {
+        "Publication date": "2004/10/15"
+      },
+      "Performance Evaluation and Monitoring of Interactive Grid Applications": {
+        "Publication date": "2004"
+      },
+      "Performance analysis of Grid interactive applications with G-PM tool": {
+        "Publication date": "2002"
+      },
+      "TRAINING SET SIZE IN ENSEMBLE FEATURE SELECTION FOR CLINICAL PROTEOMICS ANALIZA ROZMIARU ZBIORU TRENINGOWEGO W ZESPO\u0141OWEJ METODZIE SELEKCJI CECH NA POTRZEBY PROTEOMIKI KLINICZNEJ": {},
+      "A Concept of a Monitoring Infrastructure for Workflow-Based Grid Applications": {},
+      "Face Recognition from Still Camera Images": {}
+    }
+  },
+  "Eyuphan Bulut": {
+    "id": "wvvIyOwAAAAJ",
+    "citation_count": 1462,
+    "articles": {
+      "Exploiting friendship relations for efficient routing in mobile social networks": {
+        "Publication date": "2012/12",
+        "Total citations": 183
+      },
+      "Friendship based routing in delay tolerant mobile social networks": {
+        "Publication date": "2010/12/6",
+        "Total citations": 174
+      },
+      "Energy efficient collision aware multipath routing for wireless sensor networks": {
+        "Publication date": "2009/6/14",
+        "Total citations": 137
+      },
+      "Cost-effective multiperiod spraying for routing in delay-tolerant networks": {
+        "Publication date": "2010/10",
+        "Total citations": 112
+      },
+      "WiFi access point deployment for efficient mobile data offloading": {
+        "Publication date": "2013/7/12",
+        "Total citations": 76
+      },
+      "Distributed energy-efficient target tracking with binary sensor networks": {
+        "Publication date": "2010/7/1",
+        "Total citations": 73
+      },
+      "DSSP: a dynamic sleep scheduling protocol for prolonging the lifetime of wireless sensor networks": {
+        "Publication date": "2007/5/21",
+        "Total citations": 60
+      },
+      "A distributed cooperative target tracking with binary sensor networks": {
+        "Publication date": "2008/5/19",
+        "Total citations": 56
+      },
+      "Impact of social networks on delay tolerant routing": {
+        "Publication date": "2009/11/30",
+        "Total citations": 53
+      },
+      "Sleep scheduling with expected common coverage in wireless sensor networks": {
+        "Publication date": "2011/1/1",
+        "Total citations": 50
+      },
+      "Distributed target tracking with imperfect binary sensor networks": {
+        "Publication date": "2008/11/30",
+        "Total citations": 39
+      },
+      "Conditional shortest path routing in delay tolerant networks": {
+        "Publication date": "2010/6/14",
+        "Total citations": 38
+      },
+      "Cost efficient erasure coding based routing in delay tolerant networks": {
+        "Publication date": "2010/5/23",
+        "Total citations": 36
+      },
+      "Distributed target tracking with directional binary sensor networks": {
+        "Publication date": "2009/11/30",
+        "Total citations": 34
+      },
+      "Key frame extraction from motion capture data by curve saliency": {
+        "Publication date": "2007/6",
+        "Total citations": 33
+      },
+      "Efficient routing in delay tolerant networks with correlated node mobility": {
+        "Publication date": "2010/11/8",
+        "Total citations": 31
+      },
+      "Utilizing correlated node mobility for efficient DTN routing": {
+        "Publication date": "2014/8/1",
+        "Total citations": 23
+      },
+      "Socially-aware market mechanism for participatory sensing": {
+        "Publication date": "2012/8/26",
+        "Total citations": 23
+      },
+      "Constructing limited scale-free topologies over peer-to-peer networks": {
+        "Publication date": "2014/4",
+        "Total citations": 19
+      },
+      "Time dependent message spraying for routing in intermittently connected networks": {
+        "Publication date": "2008/11/30",
+        "Total citations": 19
+      },
+      "Secure multi-copy routing in compromised delay tolerant networks": {
+        "Publication date": "2013/11/1",
+        "Total citations": 15
+      },
+      "PCFG based synthetic mobility trace generation": {
+        "Publication date": "2010/12/6",
+        "Total citations": 13
+      },
+      "Opportunistic routing algorithms in delay tolerant networks": {
+        "Publication date": "2011/2/4",
+        "Total citations": 12
+      },
+      "Understanding user behavior via mobile data analysis": {
+        "Publication date": "2015/6/8",
+        "Total citations": 11
+      },
+      "The effect of neighbor graph connectivity on coverage redundancy in wireless sensor networks": {
+        "Publication date": "2010/5/23",
+        "Total citations": 11
+      },
+      "Trajectory Optimization for Cellular-Connected UAVs with Disconnectivity Constraint": {
+        "Publication date": "2018",
+        "Total citations": 10
+      },
+      "Mitigating range anxiety via vehicle-to-vehicle social charging system": {
+        "Publication date": "2017/6/4",
+        "Total citations": 10
+      },
+      "Grammatical inference for modeling mobility patterns in networks": {
+        "Publication date": "2013/11",
+        "Total citations": 10
+      },
+      "Service discovery for delay tolerant networks": {
+        "Publication date": "2010/12/6",
+        "Total citations": 10
+      },
+      "Energy-efficient location services for mobile ad hoc networks": {
+        "Publication date": "2013/1/1",
+        "Total citations": 9
+      },
+      "On secure multi-copy based routing in compromised delay tolerant networks": {
+        "Publication date": "2011/7/31",
+        "Total citations": 8
+      },
+      "A cost-quality tradeoff in cooperative sensor networking": {
+        "Publication date": "2008/5/19",
+        "Total citations": 7
+      },
+      "An authentication framework for electric vehicle-to-electric vehicle charging applications": {
+        "Publication date": "2017/10/22",
+        "Total citations": 6
+      },
+      "Rethinking offloading wifi access point deployment from user perspective": {
+        "Publication date": "2016/10/17",
+        "Total citations": 6
+      },
+      "Mobile energy sharing through power buddies": {
+        "Publication date": "2017/3/19",
+        "Total citations": 5
+      },
+      "Opportunistic wireless charging for mobile social and sensor networks": {
+        "Publication date": "2014/12/8",
+        "Total citations": 5
+      },
+      "Clustered Crowd GPS for Privacy Valuing Active Localization": {
+        "Publication date": "2018",
+        "Total citations": 4
+      },
+      "Impact of socially based demand on the efficiency of caching strategy": {
+        "Publication date": "2014/3/24",
+        "Total citations": 4
+      },
+      "Charging Skip Optimization with Peer-to-Peer Wireless Energy Sharing in Mobile Networks": {
+        "Publication date": "2018",
+        "Total citations": 3
+      },
+      "Pernem\u201914: the fourth international workshop on pervasive networks for emergency management, 2014-welcome and committees welcome message from the pernem\u201914 co-chairs": {
+        "Publication date": "2014",
+        "Total citations": 3
+      },
+      "Distributed target tracking using binary sensors with imprecise range measurements": {
+        "Publication date": "2008/9",
+        "Total citations": 3
+      },
+      "Analysis of cost-quality tradeoff in cooperative ad hoc sensor networks": {
+        "Publication date": "2008/9",
+        "Total citations": 3
+      },
+      "Is Crowdcharging Possible?": {
+        "Publication date": "2018",
+        "Total citations": 2
+      },
+      "Incentivizing participatory sensing via auction mechanisms": {
+        "Publication date": "2014",
+        "Total citations": 2
+      },
+      "Utilizing PCFGs for modeling and learning service compositions in sensor networks": {
+        "Publication date": "2012/6/24",
+        "Total citations": 2
+      },
+      "On growth of limited scale-free overlay network topologies": {
+        "Publication date": "2012/3/25",
+        "Total citations": 2
+      },
+      "An Energy Efficient Dynamic Location Server Hierarchy for Mobile Ad Hoc Networks": {
+        "Publication date": "2010",
+        "Total citations": 2
+      },
+      "Balancing cost-quality tradeoff in cooperative ad hoc sensor networks": {
+        "Publication date": "2008/11/16",
+        "Total citations": 2
+      },
+      "Minimizing Average Spraying Cost for Routing in Delay Tolerant Networks": {
+        "Publication date": "2008/9",
+        "Total citations": 2
+      },
+      "Connectivity and coverage preserving sleep scheduling mechanism with predictive coverage and multiple mode selections in wireless sensor networks": {
+        "Publication date": "2007",
+        "Total citations": 2
+      },
+      "Trajectory optimization in UAV-Assisted cellular networks under mission duration constraint": {
+        "Publication date": "2019/2/13",
+        "Total citations": 1
+      },
+      "Identifying the space buddies to track lost items": {
+        "Publication date": "2017/4/18",
+        "Total citations": 1
+      },
+      "Mobile Core Network Redimensioning for Efficient Resource Utilization": {
+        "Publication date": "2017",
+        "Total citations": 1
+      },
+      "Timely Information Dissemination with Distributed Storage in Delay Tolerant Mobile Sensor Networks": {
+        "Publication date": "2017",
+        "Total citations": 1
+      },
+      "Towards limited scale-free topology with dynamic peer participation": {
+        "Publication date": "2016/9/4",
+        "Total citations": 1
+      },
+      "Energy-Efficient Location Service Protocols for Mobile Ad Hoc Networks": {
+        "Publication date": "2011/2/27",
+        "Total citations": 1
+      },
+      "Privacy Preserving Distributed Stable Matching of Electric Vehicles and Charge Suppliers": {
+        "Total citations": 1
+      },
+      "Building a Private Bitcoin-based Payment Network among Electric Vehicles and Charging Stations": {
+        "Total citations": 1
+      },
+      "Efficient Mobile Data Offloading Using WiFi Access Points": {
+        "Total citations": 1
+      },
+      "Effects of 3D antenna radiation and two-hop relaying on optimal UAV trajectory in cellular networks": {
+        "Publication date": "2019/3/3"
+      },
+      "Hybrid evolutionary search method for complex function optimisation problems": {
+        "Publication date": "2018/10/18"
+      },
+      "Dynamically Shared Wide-Area Cellular Communication for Hyper-dense IoT Devices": {
+        "Publication date": "2018/10/1"
+      },
+      "Efficient and privacy preserving supplier matching for electric vehicle charging": {
+        "Publication date": "2018/7/29"
+      },
+      "Time Optimal Multi-UAV Path Planning for Gathering ITS Data from Roadside Units": {
+        "Publication date": "2018"
+      },
+      "Delay Tolerant Mobile Sensor Networks: Routing Challenges and Solutions": {
+        "Publication date": "2018"
+      },
+      "2014 Index IEEE Transactions on Parallel and Distributed Systems Vol. 25": {
+        "Publication date": "2015/1"
+      },
+      "Buster O. Holzbauer Rensselaer Polytechnic Institute Troy, New York Boleslaw K. Szymanski Rensselaer Polytechnic Institute": {
+        "Publication date": "2014/8/5"
+      },
+      "Chapter in Opportunistic Mobile Social Networks, Taylor and Francis, CRC Press, 2014, pp. 339-376.": {
+        "Publication date": "2014"
+      },
+      "2013 Index IEEE Transactions on Mobile Computing Vol. 12": {
+        "Publication date": "2014/1"
+      },
+      "Chapter in Opportunistic Mobile Social Networks, Taylor and Francis, CRC Press, 2014, to appear": {
+        "Publication date": "2014"
+      },
+      "2012 Index IEEE Transactions on Parallel and Distributed Systems Vol. 23": {
+        "Publication date": "2013/1"
+      },
+      "Bio-inspired Multi-Period Routing Algorithms in Delay Tolerant Networks": {
+        "Publication date": "2011"
+      },
+      "Program Co-Chair": {},
+      "LCN Program Committee, Demo Board and Additional Reviewers": {},
+      "SocialCom 2016 Technical Program Committee": {},
+      "Annual Conference of ITA": {},
+      "Building Efficient Limited Scale-Free Overlay Topologies for Unstructured P2P Networks": {},
+      "On Alignment of Physical and Logical Network in GaianDB Network": {}
+    }
+  },
+  "Alberto Cano": {},
+  "Kostadin Damevski": {
+    "id": "3f847ugAAAAJ",
+    "citation_count": 809,
+    "articles": {
+      "A component architecture for high-performance scientific computing": {
+        "Publication date": "2006/5",
+        "Total citations": 285
+      },
+      "SCIRun2: A CCA framework for high performance computing": {
+        "Publication date": "2004/4/26",
+        "Total citations": 97
+      },
+      "Data redistribution and remote method invocation in parallel component architectures": {
+        "Publication date": "2005/4/4",
+        "Total citations": 78
+      },
+      "Sando: an extensible local code search framework": {
+        "Publication date": "2012/11/11",
+        "Total citations": 37
+      },
+      "Advanced computational infrastructures for parallel and distributed adaptive applications": {
+        "Publication date": "2010/1/5",
+        "Total citations": 22
+      },
+      "Data redistribution and remote method invocation for coupled components": {
+        "Publication date": "2006/7/1",
+        "Total citations": 22
+      },
+      "Parallel component interaction with an interface definition language compiler": {
+        "Publication date": "2003/5",
+        "Total citations": 21
+      },
+      "Parallel remote method invocation and m-by-n data redistribution": {
+        "Publication date": "2003",
+        "Total citations": 20
+      },
+      "Exploring the use of deep learning for feature location": {
+        "Publication date": "2015/9/29",
+        "Total citations": 19
+      },
+      "Teaching cyber-physical systems to computer scientists via modeling and verification": {
+        "Publication date": "2013/3/6",
+        "Total citations": 19
+      },
+      "A field study of how developers locate features in source code": {
+        "Publication date": "2016/4/1",
+        "Total citations": 18
+      },
+      "How developers use multi-recommendation system in local code search": {
+        "Publication date": "2014/7/28",
+        "Total citations": 14
+      },
+      "Mining sequences of developer interactions in visual studio for usage smells": {
+        "Publication date": "2017/4/1",
+        "Total citations": 12
+      },
+      "Sensor data modeling and validating for wireless soil sensor network": {
+        "Publication date": "2015/3/1",
+        "Total citations": 9
+      },
+      "Imprecise exceptions in distributed parallel components": {
+        "Publication date": "2004/8/31",
+        "Total citations": 9
+      },
+      "What information about code snippets is available in different software-related documents? an exploratory study": {
+        "Publication date": "2017/2/20",
+        "Total citations": 8
+      },
+      "Interactive exploration of developer interaction traces using a hidden markov model": {
+        "Publication date": "2016/5/14",
+        "Total citations": 7
+      },
+      "A teaching model for development of sensor-driven mobile applications": {
+        "Publication date": "2014/6/21",
+        "Total citations": 7
+      },
+      "A refactoring tool to extract GPU kernels": {
+        "Publication date": "2011/5/22",
+        "Total citations": 7
+      },
+      "Expressing measurement units in interfaces for scientific component software": {
+        "Publication date": "2009/11/15",
+        "Total citations": 7
+      },
+      "Automated provenance collection for cca component assemblies": {
+        "Publication date": "2009/5/25",
+        "Total citations": 7
+      },
+      "M\u00d7 N data redistribution through parallel remote method invocation": {
+        "Publication date": "2005/11",
+        "Total citations": 7
+      },
+      "Scalable code clone detection and search based on adaptive prefix filtering": {
+        "Publication date": "2018/3/1",
+        "Total citations": 6
+      },
+      "A practical guide to analyzing ide usage data": {
+        "Publication date": "2015/1/1",
+        "Total citations": 6
+      },
+      "Practical parallel remote method invocation for the Babel compiler": {
+        "Publication date": "2007/10/21",
+        "Total citations": 6
+      },
+      "Integrating component-based scientific computing software": {
+        "Publication date": "2005",
+        "Total citations": 6
+      },
+      "Design and evaluation of a multi-recommendation system for local code search": {
+        "Publication date": "2017/4/1",
+        "Total citations": 5
+      },
+      "The SCIJump Framework for Parallel and Distributed Scientific Computing": {
+        "Publication date": "2010/1/5",
+        "Total citations": 5
+      },
+      "A case study of paired interleaving for evaluating code search techniques": {
+        "Publication date": "2014/2/3",
+        "Total citations": 4
+      },
+      "How the Sando search tool recommends queries": {
+        "Publication date": "2014/2/3",
+        "Total citations": 4
+      },
+      "Scientific Workflows and Components: Together at Last!": {
+        "Publication date": "2008",
+        "Total citations": 4
+      },
+      "Highly Scalable Distributed Component Framework for Scientific Computing": {
+        "Publication date": "2007",
+        "Total citations": 4
+      },
+      "Result reuse in design space exploration: A study in system support for interactive parallel computing": {
+        "Publication date": "2008/4/14",
+        "Total citations": 3
+      },
+      "CCALoop: scalable design of a distributed component framework": {
+        "Publication date": "2007/6/25",
+        "Total citations": 3
+      },
+      "Component model interoperability for scientific computing": {
+        "Publication date": "2006",
+        "Total citations": 3
+      },
+      "Predicting future developer behavior in the IDE using topic models": {
+        "Publication date": "2018/11/1",
+        "Total citations": 2
+      },
+      "Detecting plagiarism based on the creation process": {
+        "Publication date": "2018/7/1",
+        "Total citations": 2
+      },
+      "How and when to transfer software engineering research via extensions": {
+        "Publication date": "2015/5/16",
+        "Total citations": 2
+      },
+      "Model refinement and data filtering in high-tunnel greenhouse sensor network": {
+        "Publication date": "2011/10/31",
+        "Total citations": 2
+      },
+      "Application-aware management of parallel simulation collections": {
+        "Publication date": "2009/2/14",
+        "Total citations": 2
+      },
+      "Changeset-Based Topic Modeling of Software Repositories": {
+        "Publication date": "2018/10/9",
+        "Total citations": 1
+      },
+      "StackInTheFlow: behavior-driven recommendation system for stack overflow posts": {
+        "Publication date": "2018/5/27",
+        "Total citations": 1
+      },
+      "Behavior Metrics for Prioritizing Investigations of Exceptions": {
+        "Publication date": "2017/9/17",
+        "Total citations": 1
+      },
+      "Reconstructing and evolving software architectures using a coordinated clustering framework": {
+        "Publication date": "2017/9/1",
+        "Total citations": 1
+      },
+      "Utilizing and enhancing software modeling environments to teach mobile application design": {
+        "Publication date": "2013/6/1",
+        "Total citations": 1
+      },
+      "Infusing cyber-physical systems concepts into an introductory computer science course": {
+        "Publication date": "2013/6/1",
+        "Total citations": 1
+      },
+      "Reducing component contract overhead by offloading enforcement": {
+        "Publication date": "2009/11/15",
+        "Total citations": 1
+      },
+      "Generating bridges between heterogeneous component models": {
+        "Publication date": "2005",
+        "Total citations": 1
+      },
+      "[Journal First] Predicting Future Developer Behavior in the IDE Using Topic Models": {
+        "Publication date": "2018/5/27"
+      },
+      "Detecting and characterizing developer behavior following opportunistic reuse of code snippets from the web": {
+        "Publication date": "2018/5/27"
+      },
+      "Scaling up evaluation of code search tools through developer usage metrics": {
+        "Publication date": "2015/3/2"
+      },
+      "An Implicit Feedback-based Approach to the Evaluation of Text Analysis Techniques for Software Engineering": {
+        "Publication date": "2012"
+      },
+      "Tool Support for Efficient Programming of Graphics Processing Units": {
+        "Publication date": "2012"
+      },
+      "Offline enforcement of contracts for high\u2010performance computing": {
+        "Publication date": "2011/9/10"
+      },
+      "Mobility-Tolerant, Efficient Multicast in Mobile Cloud Applications": {
+        "Publication date": "2011/6/22"
+      },
+      "Parallel Object Contracts for High Performance Computing": {
+        "Publication date": "2011/5/16"
+      },
+      "Exploring Computer Science Students\u2019 Learning of Sensor-Driven Mobile App Design: A Case Study": {
+        "Publication date": "2009"
+      },
+      "Exploratory Study of Slack Q&A Chats as a Mining Source for Software Engineering Tools": {},
+      "Characterizing Duplicate Code Snippets between Stack Overflow and Tutorials": {},
+      "Cost of API Migration": {},
+      "Interactive Refactoring for GPU Parallelization of Affine Loops": {},
+      "\u201cMxN\u201d Parallel Data Redistribution Research in the Common Component Architecture (CCA)": {}
+    }
+  },
+  "Carol Fung": {
+    "id": "lIYpkGYAAAAJ",
+    "citation_count": 989,
+    "articles": {
+      "Dirichlet-based trust management for effective collaborative intrusion detection networks": {
+        "Publication date": "2011/6",
+        "Total citations": 73
+      },
+      "Robust and scalable trust management for collaborative intrusion detection": {
+        "Publication date": "2009/6/1",
+        "Total citations": 67
+      },
+      "Trust management for host-based collaborative intrusion detection": {
+        "Publication date": "2008/9/22",
+        "Total citations": 65
+      },
+      "FlowRanger: A request prioritizing algorithm for controller DoS attacks in Software Defined Networks": {
+        "Publication date": "2015/6/8",
+        "Total citations": 46
+      },
+      "A Survey of Android Security Threats and Defenses.": {
+        "Publication date": "2015/9",
+        "Total citations": 45
+      },
+      "GUIDEX: A game-theoretic incentive-based mechanism for intrusion detection networks": {
+        "Publication date": "2012/12",
+        "Total citations": 45
+      },
+      "Collaborative Intrusion Detection Networks and Insider Attacks.": {
+        "Publication date": "2011/3",
+        "Total citations": 37
+      },
+      "A game-theoretical approach to incentive design in collaborative intrusion detection networks": {
+        "Publication date": "2009/5/13",
+        "Total citations": 37
+      },
+      "A survey on security in network functions virtualization": {
+        "Publication date": "2016/6/6",
+        "Total citations": 33
+      },
+      "MAC Layer Security of 802.15.4-Compliant Networks": {
+        "Publication date": "2005",
+        "Total citations": 32
+      },
+      "Flowmon: Detecting malicious switches in software-defined networks": {
+        "Publication date": "2015/10/12",
+        "Total citations": 31
+      },
+      "Design and management of collaborative intrusion detection networks": {
+        "Publication date": "2013/5/27",
+        "Total citations": 29
+      },
+      "Bayesian decision aggregation in collaborative intrusion detection networks": {
+        "Publication date": "2010/4/19",
+        "Total citations": 28
+      },
+      "Recdroid: A resource access permission control portal and recommendation service for smartphone users": {
+        "Publication date": "2014/9/11",
+        "Total citations": 26
+      },
+      "Vguard: A distributed denial of service attack mitigation method using network function virtualization": {
+        "Publication date": "2015/11/9",
+        "Total citations": 25
+      },
+      "Vfence: A defense against distributed denial of service attacks using network function virtualization": {
+        "Publication date": "2016/6/10",
+        "Total citations": 24
+      },
+      "The impact of master\u2013slave bridge access mode on the performance of multi-cluster 802.15. 4 network": {
+        "Publication date": "2007/7/11",
+        "Total citations": 24
+      },
+      "Interconnecting 802.15. 4 clusters in master-slave mode: queueing theoretic analysis": {
+        "Publication date": "2005/12/7",
+        "Total citations": 23
+      },
+      "Effective acquaintance management based on bayesian learning for distributed intrusion detection networks": {
+        "Publication date": "2012/9",
+        "Total citations": 21
+      },
+      "Dude, ask the experts!: Android resource access permission recommendation with RecDroid": {
+        "Publication date": "2015/5/11",
+        "Total citations": 20
+      },
+      "Trust management and admission control for host-based collaborative intrusion detection": {
+        "Publication date": "2011/6/1",
+        "Total citations": 20
+      },
+      "Android resource usage risk assessment using hidden Markov model and online learning": {
+        "Publication date": "2017/3/1",
+        "Total citations": 15
+      },
+      "A collaborative DDoS defence framework using network function virtualization": {
+        "Publication date": "2017/10",
+        "Total citations": 14
+      },
+      "Intrusion Detection Networks: A Key to Collaborative Security": {
+        "Publication date": "2013/11/19",
+        "Total citations": 12
+      },
+      "FACID: A trust-based collaborative decision framework for intrusion detection networks": {
+        "Publication date": "2016/12/15",
+        "Total citations": 11
+      },
+      "CoFence: A collaborative DDoS defence using network function virtualization": {
+        "Publication date": "2016/10/31",
+        "Total citations": 11
+      },
+      "Effective acquaintance management for collaborative intrusion detection networks": {
+        "Publication date": "2010/10/25",
+        "Total citations": 10
+      },
+      "On bridge residence times in master-slave connected 802.15. 4 clusters": {
+        "Publication date": "2006/4/18",
+        "Total citations": 9
+      },
+      "Mac layer attacks in 802.15. 4 sensor networks": {
+        "Publication date": "2016/4/19",
+        "Total citations": 8
+      },
+      "Disincentivizing Malicious Users in RecDroid Using Bayesian Game Model.": {
+        "Publication date": "2015/5",
+        "Total citations": 8
+      },
+      "A distributed sequential algorithm for collaborative intrusion detection networks": {
+        "Publication date": "2010/5/23",
+        "Total citations": 8
+      },
+      "WSN05-5: On Node Population in a Multi-Level 802.15. 4 Sensor Network": {
+        "Publication date": "2006/11/27",
+        "Total citations": 8
+      },
+      "Dynamic ddos defense resource allocation using network function virtualization": {
+        "Publication date": "2017/3/24",
+        "Total citations": 7
+      },
+      "A game-theoretic model for defending against malicious users in recdroid": {
+        "Publication date": "2015/5/11",
+        "Total citations": 7
+      },
+      "RevMatch: An Efficient and Robust Decision Model for Collaborative Malware Detection": {
+        "Publication date": "2014/4/12",
+        "Total citations": 7
+      },
+      "A game-theoretic approach to knowledge sharing in distributed collaborative intrusion detection networks: Fairness, incentives and security": {
+        "Publication date": "2011/12",
+        "Total citations": 7
+      },
+      "Design of a simulation framework to evaluate trust models for collaborative intrusion detection": {
+        "Publication date": "2009/6/24",
+        "Total citations": 7
+      },
+      "Enhancing Twitter spam accounts discovery using cross-account pattern mining": {
+        "Publication date": "2015/5/11",
+        "Total citations": 6
+      },
+      "Android user privacy preserving through crowdsourcing": {
+        "Publication date": "2018/3",
+        "Total citations": 5
+      },
+      "Xdroid: An android permission control using hidden markov chain and online learning": {
+        "Publication date": "2016/10/17",
+        "Total citations": 5
+      },
+      "Android fine-grained permission control system with real-time expert recommendations": {
+        "Publication date": "2016/10/1",
+        "Total citations": 5
+      },
+      "Quality of Interaction among Path Computation Elements for Trust-aware Inter-Provider Cooperation": {
+        "Publication date": "2014/4/30",
+        "Total citations": 5
+      },
+      "Poster: SMURFEN: A rule sharing collaborative intrusion detection network": {
+        "Publication date": "2011/10/17",
+        "Total citations": 5
+      },
+      "Lifetime estimation of large IEEE 802.15. 4 compliant wireless sensor networks": {
+        "Publication date": "2008/9/8",
+        "Total citations": 5
+      },
+      "An incentive-compatible and trust-aware multi-provider path computation element (PCE)": {
+        "Publication date": "2016/10/24",
+        "Total citations": 4
+      },
+      "Android permission recommendation using transitive Bayesian inference model": {
+        "Publication date": "2016/9/26",
+        "Total citations": 4
+      },
+      "Recdroid: An android resource access permission recommendation system": {
+        "Publication date": "2015/6/22",
+        "Total citations": 4
+      },
+      "A methodology for root-cause analysis in component based systems": {
+        "Publication date": "2015/6/15",
+        "Total citations": 4
+      },
+      "Android malicious application detection using support vector machine and active learning": {
+        "Publication date": "2017/11/26",
+        "Total citations": 3
+      },
+      "Bottracer: Bot user detection using clustering method in recdroid": {
+        "Publication date": "2016/4/25",
+        "Total citations": 3
+      },
+      "Improving Sybil detection via graph pruning and regularization techniques": {
+        "Publication date": "2016/2/25",
+        "Total citations": 3
+      },
+      "SMURFEN: A system framework for rule sharing collaborative intrusion detection": {
+        "Publication date": "2011/10/24",
+        "Total citations": 3
+      },
+      "Semantics and Encoding of the kell-m Calculus": {
+        "Publication date": "2011/8/4",
+        "Total citations": 3
+      },
+      "Cooperation in Intrusion Detection Networks": {
+        "Publication date": "2011/6/24",
+        "Total citations": 3
+      },
+      "PSOM: Periodic Self-Organizing Maps for unsupervised anomaly detection in periodic time series": {
+        "Publication date": "2017/6/14",
+        "Total citations": 2
+      },
+      "Using recurrent neural networks toward black-box system anomaly prediction": {
+        "Publication date": "2016/6/20",
+        "Total citations": 2
+      },
+      "A decision making model for collaborative malware detection networks": {
+        "Publication date": "2013",
+        "Total citations": 2
+      },
+      "A game-theoretic approach to rule sharing mechanism in networked intrusion detection systems": {
+        "Publication date": "2011",
+        "Total citations": 2
+      },
+      "SMURFEN: A knowledge sharing intrusion detection network": {
+        "Publication date": "2011",
+        "Total citations": 2
+      },
+      "Interconnecting 802.15. 4 clusters in slotted CSMA-CA mode": {
+        "Publication date": "2006/6",
+        "Total citations": 2
+      },
+      "Interconnecting 802.15. 4 clusters in master-slave mode using guaranteed time slots and acknowledged transfers: Queueing theoretic analysis": {
+        "Publication date": "2006/3",
+        "Total citations": 2
+      },
+      "Network lifetime equalization in interconnected 802. 15. 4 clusters": {
+        "Publication date": "2006",
+        "Total citations": 2
+      },
+      "Elastic network service chain with fine-grained vertical scaling": {
+        "Publication date": "2018/12/9",
+        "Total citations": 1
+      },
+      "An efficient fuzzy path selection approach to mitigate selective forwarding attacks in wireless sensor networks": {
+        "Publication date": "2017/7/9",
+        "Total citations": 1
+      },
+      "A game-theoretic approach to rule sharing mechanism in networked intrusion detection systems: Robustness, incentives and security": {
+        "Publication date": "2011/12/12",
+        "Total citations": 1
+      },
+      "ENSC: Multi-Resource Hybrid Scaling for Elastic Network Service Chain in Clouds": {
+        "Publication date": "2018/12/11"
+      },
+      "Outlier Detection for Distributed Services using Multi-Frequency Patterns": {
+        "Publication date": "2018/11/5"
+      },
+      "HoneyV: A virtualized honeynet system based on network softwarization": {
+        "Publication date": "2018/4/23"
+      },
+      "A scalable and flexible DDoS mitigation system using network function virtualization": {
+        "Publication date": "2018/4/23"
+      },
+      "IEEE Access Special Section Editorial: Security and Privacy in Applications and Services for Future Internet of Things": {
+        "Publication date": "2018"
+      },
+      "Special issue on security for emerging open networking technologies": {
+        "Publication date": "2018/1"
+      },
+      "Arena: Adaptive real-time update anomaly prediction in cloud systems": {
+        "Publication date": "2017/11/26"
+      },
+      "Application permission recommendation and control": {
+        "Publication date": "2017/3/2"
+      },
+      "DroidVisor: An Android Secure Application Recommendation System": {
+        "Publication date": "2017"
+      },
+      "SpongeNet+: A Two-Layer Bandwidth Allocation Framework for Cloud Datacenter": {
+        "Publication date": "2016/12/12"
+      },
+      "Revisit network anomaly ranking in datacenter network using re-ranking": {
+        "Publication date": "2015/10/5"
+      },
+      "Guest Editorial: Special issue on Next Generation Networks and Systems Security.": {
+        "Publication date": "2015"
+      },
+      "SU\u2010E\u2010T\u2010125: Dosimetric Comparison of Intensity Modulated Radiation Therapy Using Robotic Versus Traditional Linac Platform in Prostate Cancer": {
+        "Publication date": "2014/6"
+      },
+      "Performance evaluation on IEEE 802.15. 4 scatternet sensor networks": {
+        "Publication date": "2007"
+      },
+      "Faster lanes, longer lifetimes: Activity management in interconnected 802.15. 4 sensor clusters": {
+        "Publication date": "2006/10/1"
+      },
+      "Network lifetime equalization in interconnected 802.15. 4 clusters": {
+        "Publication date": "2006/8/7"
+      },
+      "Intrusion Detection Networks": {},
+      "The impact of master-slave bridge access mode on the performance of multicluster 802.15.4 network": {},
+      "IEEE TRANSACTIONS ON NETWORK AND SERVICE MANAGEMENT": {},
+      "IFIP/IEEE International Symposium on Integrated Network Management Lisbon//Portugal//8-12 May 2017": {},
+      "RecDroid A Resource Access Permission Control Portal and Recommendation Service for Smartphone Users-ACM SPME\u201914, September 11, 2014, Maui, Hawaii": {},
+      "Technical Program Committee Members": {},
+      "Session Paper Title Author list": {},
+      "TPC co-Chairs": {},
+      "Dobrijevic, Ognjen 274": {},
+      "NETWORK AND SERVICE MANAGEMENT": {}
+    }
+  },
+  "Vojislav Kecman": {
+    "id": "2TOvEFoAAAAJ",
+    "citation_count": 5006,
+    "articles": {
+      "Learning and soft computing: support vector machines, neural networks, and fuzzy logic models": {
+        "Publication date": "2001",
+        "Total citations": 1759
+      },
+      "Learning and soft computing: Support vector machines": {
+        "Publication date": "2001/1",
+        "Total citations": 804
+      },
+      "Kernel based algorithms for mining huge data sets": {
+        "Publication date": "2006",
+        "Total citations": 226
+      },
+      "New approach to dynamic modelling of vapour-compression liquid chillers: artificial neural networks": {
+        "Publication date": "2001/6/1",
+        "Total citations": 212
+      },
+      "Support vector machines\u2013an introduction": {
+        "Publication date": "2005",
+        "Total citations": 180
+      },
+      "Multiple regression and neural networks analyses in composites machining": {
+        "Publication date": "2003/2/1",
+        "Total citations": 117
+      },
+      "Combining support vector machine learning with the discrete cosine transform in image compression": {
+        "Publication date": "2003/7",
+        "Total citations": 110
+      },
+      "Modelling of vapour-compression liquid chillers with neural networks": {
+        "Publication date": "2001/2/1",
+        "Total citations": 88
+      },
+      "Gene extraction for cancer diagnosis by support vector machines\u2014an improvement": {
+        "Publication date": "2005/9/1",
+        "Total citations": 86
+      },
+      "Neural networks\u2014a new approach to model vapour\u2010compression heat pumps": {
+        "Publication date": "2001/6/10",
+        "Total citations": 75
+      },
+      "Adaptive local hyperplane classification": {
+        "Publication date": "2008/8/1",
+        "Total citations": 68
+      },
+      "Support vectors selection by linear programming": {
+        "Publication date": "2000",
+        "Total citations": 47
+      },
+      "A data mining approach to financial time series modelling and forecasting": {
+        "Publication date": "2001/12",
+        "Total citations": 46
+      },
+      "Blind multiuser detector for chaos-based CDMA using support vector machine": {
+        "Publication date": "2010/8",
+        "Total citations": 44
+      },
+      "Exploiting the structural equivalence of learning fuzzy systems and radial basis function neural networks": {
+        "Publication date": "1994/9/21",
+        "Total citations": 42
+      },
+      "Margin-based ensemble classifier for protein fold recognition": {
+        "Publication date": "2011/9/15",
+        "Total citations": 41
+      },
+      "A chunking method for euclidean distance matrix calculation on large dataset using multi-gpu": {
+        "Publication date": "2010/12/12",
+        "Total citations": 40
+      },
+      "Iterative single data algorithm for training kernel machines from huge data sets: Theory and performance": {
+        "Publication date": "2005/6/21",
+        "Total citations": 40
+      },
+      "Eigenvector approach for order-reduction of singularly perturbed linear-quadratic optimal control problems": {
+        "Publication date": "1999/1/1",
+        "Total citations": 37
+      },
+      "Parallel multitask cross validation for support vector machine using GPU": {
+        "Publication date": "2013/3/1",
+        "Total citations": 36
+      },
+      "Optimal control: weakly coupled systems and applications": {
+        "Publication date": "2008/12/10",
+        "Total citations": 36
+      },
+      "Hybrid approach for modeling wet weather response in wastewater systems": {
+        "Publication date": "2003/11",
+        "Total citations": 36
+      },
+      "On the equality of kernel AdaTron and sequential minimal optimization in classification and regression tasks and alike algorithms for kernel machines.": {
+        "Publication date": "2003/4",
+        "Total citations": 34
+      },
+      "Active-set methods for support vector machines": {
+        "Publication date": "2005/8",
+        "Total citations": 33
+      },
+      "Support vector machines basics": {
+        "Publication date": "2004/4",
+        "Total citations": 30
+      },
+      "State-space models of lumped and distributed systems": {
+        "Publication date": "1988/9/1",
+        "Total citations": 30
+      },
+      "Sphere support vector machines for large classification tasks": {
+        "Publication date": "2013/2/4",
+        "Total citations": 29
+      },
+      "Support vector machines trained by linear programming: theory and application in image compression and data classification": {
+        "Publication date": "2000",
+        "Total citations": 27
+      },
+      "Multi-target support vector regression via correlation regressor chains": {
+        "Publication date": "2017/11/1",
+        "Total citations": 24
+      },
+      "Protein fold recognition with adaptive local hyperplane algorithm": {
+        "Publication date": "2009/3/30",
+        "Total citations": 22
+      },
+      "Fuzzified neural network based on fuzzy number operations": {
+        "Publication date": "2002/9/16",
+        "Total citations": 21
+      },
+      "GPUSVM: a comprehensive CUDA based support vector machine package": {
+        "Publication date": "2011/12/1",
+        "Total citations": 20
+      },
+      "Face recognition with adaptive local hyperplane algorithm": {
+        "Publication date": "2010/2/1",
+        "Total citations": 20
+      },
+      "LP and QP based learning from empirical data": {
+        "Publication date": "2001",
+        "Total citations": 20
+      },
+      "Control of 3 DOF quadrotor model": {
+        "Publication date": "2007",
+        "Total citations": 19
+      },
+      "Real time supervision of diesel engine injection with RBF-based neural networks": {
+        "Publication date": "1995/6/21",
+        "Total citations": 17
+      },
+      "A disaster-severity assessment DSS comparative analysis": {
+        "Publication date": "2011/7/1",
+        "Total citations": 16
+      },
+      "Locally linear support vector machines and other local models": {
+        "Publication date": "2010/7/18",
+        "Total citations": 16
+      },
+      "Adaptive local hyperplane for regression tasks": {
+        "Publication date": "2009/6/14",
+        "Total citations": 16
+      },
+      "Agent based modeling of blood coagulation system: implementation using a GPU based high speed framework": {
+        "Publication date": "2011/8/30",
+        "Total citations": 15
+      },
+      "Adaptive local hyperplane algorithm for learning small medical data sets": {
+        "Publication date": "2009/9",
+        "Total citations": 15
+      },
+      "Fast k-means algorithm clustering": {
+        "Publication date": "2011/8/5",
+        "Total citations": 14
+      },
+      "An intelligent system for accelerating parallel SVM classification problems on large datasets using GPU": {
+        "Publication date": "2010/11/29",
+        "Total citations": 14
+      },
+      "Optimising operation of a biological wastewater treatment application": {
+        "Publication date": "2009/1/1",
+        "Total citations": 14
+      },
+      "Semi-supervised learning from unbalanced labeled data\u2013an improvement": {
+        "Publication date": "2004/9/20",
+        "Total citations": 14
+      },
+      "Support vector machines: theory and applications": {
+        "Publication date": "2005",
+        "Total citations": 13
+      },
+      "The use of Support Vector Machines in image compression": {
+        "Publication date": "2000/6/27",
+        "Total citations": 13
+      },
+      "Testing adaptive local hyperplane for multi-class classification by double cross-validation": {
+        "Publication date": "2010/7/18",
+        "Total citations": 12
+      },
+      "Analysis of tidal breathing flow volume loops for automated lung-function diagnosis in infants": {
+        "Publication date": "2010/8",
+        "Total citations": 11
+      },
+      "Resolution and uniqueness of estimated parameters of a model of thin filament regulation in solution": {
+        "Publication date": "2010/2/1",
+        "Total citations": 11
+      },
+      "Classification of LIBS protein spectra using support vector machines and adaptive local hyperplanes": {
+        "Publication date": "2010/7/18",
+        "Total citations": 10
+      },
+      "Convolutional decoders based on artificial neural networks": {
+        "Publication date": "2004/7/25",
+        "Total citations": 10
+      },
+      "Optimal control and filtering for nonstandard singularly perturbed linear systems": {
+        "Publication date": "1999/3",
+        "Total citations": 10
+      },
+      "Learning fuzzy rules equals to radial basis function neural network training": {
+        "Publication date": "1994/6",
+        "Total citations": 10
+      },
+      "Speeding up online training of l1 support vector machines": {
+        "Publication date": "2016/3/30",
+        "Total citations": 9
+      },
+      "Blind multi-user detection of a chaos-based CDMA system using support vector machine": {
+        "Publication date": "2008/8/25",
+        "Total citations": 9
+      },
+      "Comparisons of QP and LP based learning from empirical data": {
+        "Publication date": "2001/6/4",
+        "Total citations": 9
+      },
+      "Fuzzy control": {
+        "Publication date": "2001/1/1",
+        "Total citations": 9
+      },
+      "Fast online algorithms for support vector machines": {
+        "Publication date": "2016/3/30",
+        "Total citations": 8
+      },
+      "Automatic classification of laser-induced breakdown spectroscopy (LIBS) data of protein biomarker solutions": {
+        "Publication date": "2014/9",
+        "Total citations": 8
+      },
+      "Eigenvector approach for reduced-order optimal control problems of weakly coupled systems": {
+        "Publication date": "2006/10/1",
+        "Total citations": 8
+      },
+      "Regression as classification": {
+        "Publication date": "2012/3/15",
+        "Total citations": 7
+      },
+      "Two-Stage Clustering with k-Means Algorithm": {
+        "Publication date": "2011/6/26",
+        "Total citations": 7
+      },
+      "Contaminant transport modelling with support vector machine model\u2013an alternative to classical advection-dispersion equation": {
+        "Publication date": "2004",
+        "Total citations": 7
+      },
+      "Speech-background classification by using SVM technique": {
+        "Publication date": "2003",
+        "Total citations": 7
+      },
+      "System identification using modular neural network with improved learning": {
+        "Publication date": "1996/8/21",
+        "Total citations": 7
+      },
+      "OLLAWV: OnLine Learning Algorithm using Worst-Violators.": {
+        "Publication date": "2018/2/25",
+        "Total citations": 6
+      },
+      "Algorithms for direct L2 support vector machines": {
+        "Publication date": "2014/6/23",
+        "Total citations": 6
+      },
+      "Combining support vector machines and the t-statistic for gene selection in DNA microarray data analysis": {
+        "Publication date": "2010/6/21",
+        "Total citations": 6
+      },
+      "High dimensional function approximation (regression, hypersurface fitting) by an active set least squares learning algorithm": {
+        "Publication date": "2006",
+        "Total citations": 6
+      },
+      "Modelling empirical data to support project cost estimating: neural networks versus traditional methods": {
+        "Publication date": "2001/12/1",
+        "Total citations": 6
+      },
+      "Learning in and performance of the new neural network based adaptive backthrough control structure": {
+        "Publication date": "1999/7/1",
+        "Total citations": 6
+      },
+      "Neural Networks and Fuzzy Logic Based Control": {
+        "Publication date": "1997",
+        "Total citations": 6
+      },
+      "Fast neural network algorithm for solving classification tasks: Batch error back-propagation algorithm": {
+        "Publication date": "2013/4/4",
+        "Total citations": 5
+      },
+      "Minimal norm support vector machines for large classification tasks": {
+        "Publication date": "2012/12/12",
+        "Total citations": 5
+      },
+      "New support vector machines algorithm for huge data sets": {
+        "Publication date": "2007",
+        "Total citations": 5
+      },
+      "Support vector machines in classification and regression\u2014an introduction": {
+        "Publication date": "2006",
+        "Total citations": 5
+      },
+      "Data assimilation using recurrent radial basis function neural network model": {
+        "Publication date": "2003/7/29",
+        "Total citations": 5
+      },
+      "Modelling empirical data and decision making with neural networks": {
+        "Publication date": "2002/1/1",
+        "Total citations": 5
+      },
+      "Eigenvector approach for optimal control of singularly perturbed and weakly coupled linear systems": {
+        "Publication date": "1998/6/21",
+        "Total citations": 5
+      },
+      "Exploiting the structural equivalence of learning fuzzy systems and radial basis function networks": {
+        "Total citations": 5
+      },
+      "Erythemato-squamous diseases diagnosis by support vector machines and RBF NN": {
+        "Publication date": "2010/6/13",
+        "Total citations": 4
+      },
+      "Method, apparatus and software for lossy data compression and function estimation": {
+        "Publication date": "2008/12/23",
+        "Total citations": 4
+      },
+      "Adaptive k-local hyperplane (AKLH) classifiers on semantic spaces to determine health consumer webpage metadata": {
+        "Publication date": "2008/6/17",
+        "Total citations": 4
+      },
+      "Semi-supervised learning from unbalanced labeled data: An improvement": {
+        "Publication date": "2006/1/1",
+        "Total citations": 4
+      },
+      "Gene extraction for cancer diagnosis by support vector machines": {
+        "Publication date": "2005/9/11",
+        "Total citations": 4
+      },
+      "Identification of a high efficiency boiler by Support Vector Machines without bias term": {
+        "Publication date": "2003/9/1",
+        "Total citations": 4
+      },
+      "Support vector machines, neural networks, and fuzzy logic models": {
+        "Publication date": "2001",
+        "Total citations": 4
+      },
+      "Feedforward action based on adaptive backthrough control": {
+        "Publication date": "1998",
+        "Total citations": 4
+      },
+      "Fast online algorithm for nonlinear support vector machines and other alike models": {
+        "Publication date": "2016/10/1",
+        "Total citations": 3
+      },
+      "Big Data Mining by L2 SVMs-Geometrical Insights Help": {
+        "Publication date": "2013",
+        "Total citations": 3
+      },
+      "L2 support vector machines revisited-Novel direct learning algorithm and some geometric insights": {
+        "Publication date": "2013",
+        "Total citations": 3
+      },
+      "Feature ranking for pattern recognition: A comparison of filter methods": {
+        "Publication date": "2012/3/15",
+        "Total citations": 3
+      },
+      "Classification by ALH-Fast algorithm": {
+        "Publication date": "2010/6",
+        "Total citations": 3
+      },
+      "Iterative single data algorithm for kernel machines from huge data sets: Theory and performance": {
+        "Publication date": "2006",
+        "Total citations": 3
+      },
+      "Variants and Performances of Novel Direct Learning Algorithms for L2 Support Vector Machines": {
+        "Publication date": "2014/6/1",
+        "Total citations": 2
+      },
+      "Novel features for automated lung function diagnosis in spontaneously breathing infants": {
+        "Publication date": "2007/7/7",
+        "Total citations": 2
+      },
+      "Unsupervised Learning by Principal and Independent Component Analysis": {
+        "Publication date": "2006",
+        "Total citations": 2
+      },
+      "Gene extraction for cancer diagnosis by support vector machines: An improvement and comparison with nearest shrunken centroid method": {
+        "Publication date": "2005",
+        "Total citations": 2
+      },
+      "Learning by Support Vector Machines from Huge Data Sets": {
+        "Publication date": "2004",
+        "Total citations": 2
+      }
+    }
+  },
+  "Bartosz Krawczyk": {
+    "id": "0GrFcZsAAAAJ",
+    "citation_count": 1952,
+    "articles": {
+      "Learning from imbalanced data: open challenges and future directions": {
+        "Publication date": "2016/11/1",
+        "Total citations": 213
+      },
+      "Ensemble learning for data stream analysis: A survey": {
+        "Publication date": "2017/9/1",
+        "Total citations": 185
+      },
+      "Cost-sensitive decision tree ensembles for effective imbalanced classification": {
+        "Publication date": "2014/1/1",
+        "Total citations": 113
+      },
+      "Clustering-based ensembles for one-class classification": {
+        "Publication date": "2014",
+        "Total citations": 90
+      },
+      "A survey on data preprocessing for data stream mining: Current status and future directions": {
+        "Publication date": "2017/5/24",
+        "Total citations": 88
+      },
+      "Diversity measures for one-class classifier ensembles": {
+        "Publication date": "2014/2/27",
+        "Total citations": 65
+      },
+      "Analyzing the oversampling of different classes and types of examples in multi-class imbalanced datasets": {
+        "Publication date": "2016/9/1",
+        "Total citations": 60
+      },
+      "Evolutionary undersampling boosting for imbalanced classification of breast cancer malignancy": {
+        "Publication date": "2016/1/1",
+        "Total citations": 52
+      },
+      "Combined classifier based on feature space partitioning": {
+        "Publication date": "2012",
+        "Total citations": 49
+      },
+      "One-class classifier ensemble pruning and weighting with firefly algorithm": {
+        "Publication date": "2015/2/20",
+        "Total citations": 47
+      },
+      "One-class classifiers with incremental learning and forgetting for data streams with concept drift": {
+        "Publication date": "2015",
+        "Total citations": 45
+      },
+      "Improved adaptive splitting and selection: the hybrid training method of a classifier based on a feature space partitioning": {
+        "Publication date": "2014/5",
+        "Total citations": 45
+      },
+      "On the usefulness of one-class classifier ensembles for decomposition of multi-class problems": {
+        "Publication date": "2015/12/1",
+        "Total citations": 39
+      },
+      "Empowering one-vs-one decomposition with ensemble learning for multi-class imbalanced data": {
+        "Publication date": "2016/8/15",
+        "Total citations": 36
+      },
+      "An ensemble classification approach for melanoma diagnosis": {
+        "Publication date": "2014/12/1",
+        "Total citations": 35
+      },
+      "A hybrid classifier committee for analysing asymmetry features in breast thermograms": {
+        "Publication date": "2014/7/1",
+        "Total citations": 33
+      },
+      "VOCs classification based on the committee of classifiers coupled with single sensor signals": {
+        "Publication date": "2013/3/21",
+        "Total citations": 26
+      },
+      "Combining diverse one-class classifiers": {
+        "Publication date": "2012/3/28",
+        "Total citations": 24
+      },
+      "Cytological image analysis with firefly nuclei detection and hybrid one-class classification decomposition": {
+        "Publication date": "2014/5/1",
+        "Total citations": 23
+      },
+      "Diversity in Ensembles for One-Class Classification": {
+        "Publication date": "2012",
+        "Total citations": 23
+      },
+      "Dynamic classifier selection for one-class classification": {
+        "Publication date": "2016/9/1",
+        "Total citations": 20
+      },
+      "Nearest neighbor classification for high-speed big data streams using spark": {
+        "Publication date": "2017/10",
+        "Total citations": 19
+      },
+      "A hybrid cost-sensitive ensemble for imbalanced breast thermogram classification": {
+        "Publication date": "2015/11/1",
+        "Total citations": 18
+      },
+      "Untrained weighted classifier combination with embedded ensemble pruning": {
+        "Publication date": "2016/7/5",
+        "Total citations": 17
+      },
+      "Data stream classification and big data analytics": {
+        "Publication date": "2015/2/20",
+        "Total citations": 17
+      },
+      "Designing cost-sensitive ensemble\u2013genetic approach": {
+        "Publication date": "2011",
+        "Total citations": 17
+      },
+      "Multidimensional data classification with chordal distance based kernel and Support Vector Machines": {
+        "Publication date": "2015/11/1",
+        "Total citations": 16
+      },
+      "Automatic diagnosis of primary headaches by machine learning methods": {
+        "Publication date": "2013/4/1",
+        "Total citations": 15
+      },
+      "Experiments on distance measures for combining one-class classifiers": {
+        "Publication date": "2012",
+        "Total citations": 15
+      },
+      "An improved ensemble approach for imbalanced classification problems": {
+        "Publication date": "2013/5/23",
+        "Total citations": 14
+      },
+      "Cost-sensitive splitting and selection method for medical decision support system": {
+        "Publication date": "2012/8/29",
+        "Total citations": 14
+      },
+      "Improving minority class prediction using cost-sensitive ensembles": {
+        "Publication date": "2011",
+        "Total citations": 14
+      },
+      "Active and adaptive ensemble learning for online activity recognition from data streams": {
+        "Publication date": "2017/12/15",
+        "Total citations": 13
+      },
+      "Incremental learning and forgetting in one-class classifiers for data streams": {
+        "Publication date": "2013",
+        "Total citations": 13
+      },
+      "Breast Thermogram Analysis using a Cost-Sensitive Multiple Classifier System": {
+        "Publication date": "2012",
+        "Total citations": 13
+      },
+      "Incremental weighted one-class classifier for mining stationary data streams": {
+        "Publication date": "2015/7/1",
+        "Total citations": 12
+      },
+      "Weighted one-class classification for different types of minority class examples in imbalanced data": {
+        "Publication date": "2014/12/9",
+        "Total citations": 12
+      },
+      "Combining one-class classifiers for imbalanced classification of breast thermogram features": {
+        "Publication date": "2013/4/16",
+        "Total citations": 11
+      },
+      "Effective multiple classifier systems for breast thermogram analysis": {
+        "Publication date": "2012/11/11",
+        "Total citations": 11
+      },
+      "Selecting locally specialised classifiers for one-class classification ensembles": {
+        "Publication date": "2017/5/1",
+        "Total citations": 10
+      },
+      "Cost-sensitive neural network with roc-based moving threshold for imbalanced classification": {
+        "Publication date": "2015/10/14",
+        "Total citations": 10
+      },
+      "Classifier Ensemble for an Effective Cytological Image Analysis": {
+        "Publication date": "2013/5/13",
+        "Total citations": 10
+      },
+      "Evolutionary Multiple Classifier System based on Space Partitioning for Breast Thermogram Analysis": {
+        "Publication date": "2011",
+        "Total citations": 10
+      },
+      "Learning from imbalanced data sets": {
+        "Publication date": "2018",
+        "Total citations": 9
+      },
+      "Fault diagnosis of marine 4-stroke diesel engines using a one-vs-one extreme learning ensemble": {
+        "Publication date": "2017/1/1",
+        "Total citations": 9
+      },
+      "Breast Thermogram Analysis Using Classifier Ensembles and Image Symmetry Features": {
+        "Publication date": "2014",
+        "Total citations": 9
+      },
+      "Online ensemble learning with abstaining classifiers for drifting and noisy data streams": {
+        "Publication date": "2018/7/1",
+        "Total citations": 8
+      },
+      "A survey of big data issues in electronic health record analysis": {
+        "Publication date": "2016/7/2",
+        "Total citations": 8
+      },
+      "Wagging for combining weighted one-class support vector machines": {
+        "Publication date": "2015/1/1",
+        "Total citations": 8
+      },
+      "Ensemble fusion methods for medical data classification": {
+        "Publication date": "2012/9/20",
+        "Total citations": 8
+      },
+      "Classifier committee based on feature selection method for obstructive nephropathy diagnosis": {
+        "Publication date": "2011",
+        "Total citations": 8
+      },
+      "Ensemble of Extreme Learning Machines with trained classifier combination and statistical features for hyperspectral data": {
+        "Publication date": "2018/1/3",
+        "Total citations": 7
+      },
+      "Cost-sensitive one-vs-one ensemble for multi-class imbalanced data": {
+        "Publication date": "2016/7/24",
+        "Total citations": 7
+      },
+      "On the influence of class noise in medical data classification: Treatment using noise filtering methods": {
+        "Publication date": "2016/7/2",
+        "Total citations": 7
+      },
+      "Hypertension type classification using hierarchical ensemble of one-class classifiers for imbalanced data": {
+        "Publication date": "2014/9/9",
+        "Total citations": 7
+      },
+      "Combining one-class support vector machines for microarray classification": {
+        "Publication date": "2013/9/8",
+        "Total citations": 7
+      },
+      "A cost-sensitive ensemble classifier for breast cancer classification": {
+        "Publication date": "2013/5/23",
+        "Total citations": 7
+      },
+      "Accuracy and diversity in classifier selection for one-class classification ensembles": {
+        "Publication date": "2013/4/16",
+        "Total citations": 7
+      },
+      "On optimal settings of classification tree ensembles for medical decision support": {
+        "Publication date": "2013/3/1",
+        "Total citations": 7
+      },
+      "Oversampling methods for classification of imbalanced breast cancer malignancy data": {
+        "Publication date": "2012/9/24",
+        "Total citations": 7
+      },
+      "Combined Classifiers with Neural Fuser for Spam Detection": {
+        "Publication date": "2012",
+        "Total citations": 7
+      },
+      "GPU-accelerated extreme learning machines for imbalanced data streams with concept drift": {
+        "Publication date": "2016/1/1",
+        "Total citations": 6
+      },
+      "Reacting to different types of concept drift with adaptive and incremental one-class classifiers": {
+        "Publication date": "2015/6/24",
+        "Total citations": 6
+      },
+      "Breast cancer identification based on thermal analysis and a clustering and selection classification ensemble": {
+        "Publication date": "2013/10/29",
+        "Total citations": 6
+      },
+      "Adaptive splitting and selection algorithm for classification of breast cytology images": {
+        "Publication date": "2012/11/28",
+        "Total citations": 6
+      },
+      "Classification techniques for non-invasive recognition of liver fibrosis stage": {
+        "Publication date": "2012",
+        "Total citations": 6
+      },
+      "Towards highly accurate coral texture images classification using deep convolutional neural networks and data augmentation": {
+        "Publication date": "2019/3/15",
+        "Total citations": 5
+      },
+      "Dynamic ensemble selection for multi-class classification with one-class classifiers": {
+        "Publication date": "2018/11/30",
+        "Total citations": 5
+      },
+      "Sentiment classification from multi-class imbalanced twitter data using binarization": {
+        "Publication date": "2017/6/21",
+        "Total citations": 5
+      },
+      "Immersive browsing in an image sphere": {
+        "Publication date": "2017/1/5",
+        "Total citations": 5
+      },
+      "Weighted naive bayes classifier with forgetting for drifting data streams": {
+        "Publication date": "2015/10/9",
+        "Total citations": 5
+      },
+      "Forming ensembles of soft one-class classifiers with weighted bagging": {
+        "Publication date": "2015/7/1",
+        "Total citations": 5
+      },
+      "A first attempt on evolutionary prototype reduction for nearest neighbor one-class classification": {
+        "Publication date": "2014/7/6",
+        "Total citations": 5
+      },
+      "One-class classification decomposition for imbalanced classification of breast cancer malignancy data": {
+        "Publication date": "2014/6/1",
+        "Total citations": 5
+      },
+      "Melanoma classification using dermoscopy imaging and ensemble learning": {
+        "Publication date": "2013/11/5",
+        "Total citations": 5
+      },
+      "Improved LBP texture classification using ensemble learning": {
+        "Publication date": "2013/7/15",
+        "Total citations": 5
+      },
+      "Scleroderma capillary pattern identification using texture descriptors and ensemble classification": {
+        "Publication date": "2013/7/3",
+        "Total citations": 5
+      },
+      "Pattern recognition approach to classifying CYP 2C19 isoform": {
+        "Publication date": "2012",
+        "Total citations": 5
+      },
+      "Hypertension Diagnosis Using Compound Pattern Recognition Methods": {
+        "Publication date": "2011",
+        "Total citations": 5
+      },
+      "Learning Classification Rules with Differential Evolution for High-Speed Data Stream Mining on GPU s": {
+        "Publication date": "2018/7/8",
+        "Total citations": 4
+      },
+      "Influence of minority class instance types on SMOTE imbalanced data oversampling": {
+        "Publication date": "2017/10/11",
+        "Total citations": 4
+      },
+      "Radial-based approach to imbalanced data oversampling": {
+        "Publication date": "2017/6/21",
+        "Total citations": 4
+      },
+      "Hep-2 cell classification using multi-dimensional local binary patterns and ensemble classification": {
+        "Publication date": "2013/11/5",
+        "Total citations": 4
+      },
+      "A pruned ensemble classifier for effective breast thermogram analysis": {
+        "Publication date": "2013/7/3",
+        "Total citations": 4
+      },
+      "Cost Sensitive Hierarchical Classifiers for Non-invasive Recognition of Liver Fibrosis Stage": {
+        "Publication date": "2013",
+        "Total citations": 4
+      },
+      "Analysis of Diversity Assurance Methods for Combined Classifiers": {
+        "Publication date": "2012",
+        "Total citations": 4
+      },
+      "Privacy Preserving Models of k-NN Algorithm": {
+        "Publication date": "2011",
+        "Total citations": 4
+      },
+      "Cost-sensitive perceptron decision trees for imbalanced drifting data streams": {
+        "Publication date": "2017/9/18",
+        "Total citations": 3
+      },
+      "Online query by committee for active learning from drifting data streams": {
+        "Publication date": "2017/5/14",
+        "Total citations": 3
+      },
+      "Tackling label noise with multi-class decomposition using fuzzy one-class support vector machines": {
+        "Publication date": "2016/7/24",
+        "Total citations": 3
+      },
+      "Melanoma classification based on ensemble classification of dermoscopy image features": {
+        "Publication date": "2014/11/28",
+        "Total citations": 3
+      },
+      "Handling label noise in microarray classification with one-class classifier ensemble": {
+        "Publication date": "2014/9/9",
+        "Total citations": 3
+      },
+      "Designing a compact genetic fuzzy rule-based system for one-class classification": {
+        "Publication date": "2014/7/6",
+        "Total citations": 3
+      },
+      "Hyperspectral image analysis based on color channels and ensemble classifier": {
+        "Publication date": "2014/6/11",
+        "Total citations": 3
+      },
+      "Evolutionary cost-sensitive ensemble for malware detection": {
+        "Publication date": "2014",
+        "Total citations": 3
+      },
+      "Adaptive splitting and selection method for noninvasive recognition of liver fibrosis stage": {
+        "Publication date": "2013/3/18",
+        "Total citations": 3
+      },
+      "Selecting local ensembles for multi-class imbalanced data classification": {
+        "Publication date": "2018/7/8",
+        "Total citations": 2
+      },
+      "Instance reduction for one-class classification": {
+        "Publication date": "2018/5/21",
+        "Total citations": 2
+      },
+      "The deterministic subspace method for constructing classifier ensembles": {
+        "Publication date": "2017/11/1",
+        "Total citations": 2
+      },
+      "Forming classifier ensembles with deterministic feature subspaces": {
+        "Publication date": "2016/9/11",
+        "Total citations": 2
+      }
+    }
+  },
+  "Lukasz Kurgan": {
+    "id": "zXw_54AAAAAJ",
+    "citation_count": 9303,
+    "articles": {
+      "Data Mining: A Knowledge Discovery Approach": {
+        "Publication date": "2007",
+        "Total citations": 825
+      },
+      "CAIM discretization algorithm": {
+        "Publication date": "2004/2",
+        "Total citations": 487
+      },
+      "Genetic learning of fuzzy cognitive maps": {
+        "Publication date": "2005/8/1",
+        "Total citations": 404
+      },
+      "A survey of Knowledge Discovery and Data Mining process models": {
+        "Publication date": "2006/3",
+        "Total citations": 363
+      },
+      "D2P2: database of disordered protein predictions": {
+        "Publication date": "2012/11/29",
+        "Total citations": 253
+      },
+      "Impact of imputation of missing values on classification error for discrete data": {
+        "Publication date": "2008/12/1",
+        "Total citations": 227
+      },
+      "Knowledge discovery approach to automated cardiac SPECT diagnosis": {
+        "Publication date": "2001/10/1",
+        "Total citations": 224
+      },
+      "MoRFpred, a computational tool for sequence-based prediction and characterization of short disorder-to-order transitioning binding regions in proteins": {
+        "Publication date": "2012/6/9",
+        "Total citations": 197
+      },
+      "SPINE X: improving protein secondary structure prediction by multistep learning coupled with prediction of solvent accessible surface area and backbone torsion angles": {
+        "Publication date": "2012/1/30",
+        "Total citations": 181
+      },
+      "Classifier ensembles for protein structural class prediction with varying homology": {
+        "Publication date": "2006/9/29",
+        "Total citations": 175
+      },
+      "Prediction of structural classes for protein sequences and domains\u2014impact of prediction algorithms, sequence representation and homology, and test procedures on accuracy": {
+        "Publication date": "2006/12/1",
+        "Total citations": 164
+      },
+      "A novel framework for imputation of missing values in databases": {
+        "Publication date": "2007/9",
+        "Total citations": 157
+      },
+      "Prediction of protein structural class using novel evolutionary collocation\u2010based sequence representation": {
+        "Publication date": "2008/7/30",
+        "Total citations": 152
+      },
+      "Trends in data mining and knowledge discovery": {
+        "Publication date": "2005",
+        "Total citations": 147
+      },
+      "Improved sequence-based prediction of disordered regions with multilayer fusion of multiple information sources": {
+        "Publication date": "2010/9/4",
+        "Total citations": 134
+      },
+      "SCPRED: accurate prediction of protein structural class for sequences of twilight-zone similarity with predicting sequences": {
+        "Publication date": "2008/12",
+        "Total citations": 130
+      },
+      "Exceptionally abundant exceptions: comprehensive characterization of intrinsic disorder in all domains of life": {
+        "Publication date": "2015/1/1",
+        "Total citations": 127
+      },
+      "PFRES: protein fold classification by using evolutionary information and predicted secondary structure": {
+        "Publication date": "2007/10/17",
+        "Total citations": 122
+      },
+      "Comprehensive comparative assessment of in-silico predictors of disordered regions": {
+        "Publication date": "2012/2/1",
+        "Total citations": 115
+      },
+      "Numerical and linguistic prediction of time series with the use of fuzzy cognitive maps": {
+        "Publication date": "2008/2",
+        "Total citations": 115
+      },
+      "Modular prediction of protein structural classes from sequences of twilight-zone identity with predicting sequences": {
+        "Publication date": "2009/12",
+        "Total citations": 99
+      },
+      "Accurate prediction of disorder in protein chains with a comprehensive and empirically designed consensus": {
+        "Publication date": "2014/3/4",
+        "Total citations": 96
+      },
+      "Prediction of protein structural class for the twilight zone sequences": {
+        "Publication date": "2007/6/1",
+        "Total citations": 86
+      },
+      "A divide and conquer method for learning large fuzzy cognitive maps": {
+        "Publication date": "2010/10/1",
+        "Total citations": 85
+      },
+      "Prediction of protein crystallization using collocation of amino acid pairs": {
+        "Publication date": "2007/4/13",
+        "Total citations": 79
+      },
+      "Structural disorder in viral proteins": {
+        "Publication date": "2014/5/13",
+        "Total citations": 77
+      },
+      "On the relation between residue flexibility and local solvent accessibility in proteins": {
+        "Publication date": "2009/8/15",
+        "Total citations": 77
+      },
+      "Expert-based and computational methods for developing fuzzy cognitive maps": {
+        "Publication date": "2010",
+        "Total citations": 75
+      },
+      "Prediction of flexible/rigid regions from protein sequences using k-spaced amino acid pairs": {
+        "Publication date": "2007/12",
+        "Total citations": 75
+      },
+      "A creature with a hundred waggly tails: intrinsically disordered proteins in the ribosome": {
+        "Publication date": "2014/4/1",
+        "Total citations": 71
+      },
+      "Data-driven nonlinear Hebbian learning method for fuzzy cognitive maps": {
+        "Publication date": "2008/6/1",
+        "Total citations": 71
+      },
+      "Discretization algorithm that uses class-attribute interdependence maximization": {
+        "Publication date": "2001/8",
+        "Total citations": 69
+      },
+      "Disordered proteinaceous machines": {
+        "Publication date": "2014/4/4",
+        "Total citations": 66
+      },
+      "Secondary structure-based assignment of the protein structural classes": {
+        "Publication date": "2008/10/1",
+        "Total citations": 66
+      },
+      "Semantic Mapping of XML Tags Using Inductive Machine Learning.": {
+        "Publication date": "2002/6",
+        "Total citations": 66
+      },
+      "Accurate sequence-based prediction of catalytic residues": {
+        "Publication date": "2008/8/18",
+        "Total citations": 65
+      },
+      "A survey of fuzzy cognitive map learning methods": {
+        "Publication date": "2005",
+        "Total citations": 65
+      },
+      "CRYSTALP2: sequence-based protein crystallization propensity prediction": {
+        "Publication date": "2009/12",
+        "Total citations": 63
+      },
+      "More than just tails: intrinsic disorder in histone proteins": {
+        "Publication date": "2012",
+        "Total citations": 62
+      },
+      "CLIP4: Hybrid inductive machine learning algorithm that generates inequality rules": {
+        "Publication date": "2004/6/14",
+        "Total citations": 62
+      },
+      "Protein intrinsic disorder as a flexible armor and a weapon of HIV-1": {
+        "Publication date": "2012/4/1",
+        "Total citations": 61
+      },
+      "Sequence-based prediction of protein crystallization, purification and production propensity": {
+        "Publication date": "2011/6/14",
+        "Total citations": 61
+      },
+      "A new synaptic plasticity rule for networks of spiking neurons": {
+        "Publication date": "2006/1",
+        "Total citations": 61
+      },
+      "Prediction and analysis of nucleotide-binding residues using sequence and sequence-derived structural descriptors": {
+        "Publication date": "2011/11/29",
+        "Total citations": 58
+      },
+      "Prediction of beta-turns at over 80% accuracy based on an ensemble of predicted secondary structures and multiple alignments": {
+        "Publication date": "2008/12",
+        "Total citations": 58
+      },
+      "The roles of \u03b2-tubulin mutations and isotype expression in acquired drug resistance": {
+        "Publication date": "2007/1",
+        "Total citations": 58
+      },
+      "BEST: improved prediction of B-cell epitopes from antigen sequences": {
+        "Publication date": "2012/6/27",
+        "Total citations": 57
+      },
+      "Modeling software development project using fuzzy cognitive maps": {
+        "Publication date": "2004",
+        "Total citations": 57
+      },
+      "On the complementarity of the consensus-based disorder prediction": {
+        "Publication date": "2012",
+        "Total citations": 51
+      },
+      "Hybrid inductive machine learning: An overview of CLIP algorithms": {
+        "Publication date": "2002",
+        "Total citations": 50
+      },
+      "High-throughput prediction of RNA, DNA and protein binding regions mediated by intrinsic disorder": {
+        "Publication date": "2015/10/10",
+        "Total citations": 48
+      },
+      "Resilience of death: intrinsic disorder in proteins involved in the programmed cell death": {
+        "Publication date": "2013/9",
+        "Total citations": 48
+      },
+      "Analysis and prediction of RNA-binding residues using sequence, evolutionary conservation, and predicted secondary structure and solvent accessibility": {
+        "Publication date": "2010/11/1",
+        "Total citations": 47
+      },
+      "Highly accurate and consistent method for prediction of helix and strand content from primary protein sequences": {
+        "Publication date": "2005/9/1",
+        "Total citations": 47
+      },
+      "Comprehensive overview and assessment of computational prediction of microRNA targets in animals": {
+        "Publication date": "2014/12/2",
+        "Total citations": 46
+      },
+      "Interplay between the oxidoreductase PDIA6 and microRNA-322 controls the response to disrupted endoplasmic reticulum calcium homeostasis": {
+        "Publication date": "2014/6/10",
+        "Total citations": 45
+      },
+      "ATPsite: sequence-based prediction of ATP-binding residues": {
+        "Publication date": "2011/12",
+        "Total citations": 45
+      },
+      "Critical assessment of high-throughput standalone methods for secondary structure prediction": {
+        "Publication date": "2011/1/20",
+        "Total citations": 44
+      },
+      "Novel scales based on hydrophobicity indices for secondary protein structure": {
+        "Publication date": "2007/9/21",
+        "Total citations": 44
+      },
+      "Highly scalable and robust rule learner: performance evaluation and comparison": {
+        "Publication date": "2006/2",
+        "Total citations": 44
+      },
+      "Genome\u2010scale prediction of proteins with long intrinsically disordered regions": {
+        "Publication date": "2014/1",
+        "Total citations": 42
+      },
+      "Comprehensive review of methods for prediction of intrinsic disorder and its molecular functions": {
+        "Publication date": "2017/9/1",
+        "Total citations": 41
+      },
+      "Sequence based residue depth prediction using evolutionary information and predicted secondary structure": {
+        "Publication date": "2008/12",
+        "Total citations": 41
+      },
+      "A comprehensive comparative review of sequence-based predictors of DNA-and RNA-binding residues": {
+        "Publication date": "2015/5/1",
+        "Total citations": 40
+      },
+      "In-silico prediction of disorder content using hybrid sequence representation": {
+        "Publication date": "2011/12",
+        "Total citations": 40
+      },
+      "Compartmentalization and functionality of nuclear disorder: intrinsic disorder and protein-protein interactions in intra-nuclear compartments": {
+        "Publication date": "2016",
+        "Total citations": 39
+      },
+      "Investigation of atomic level patterns in protein\u2014small ligand interactions": {
+        "Publication date": "2009/2/16",
+        "Total citations": 39
+      },
+      "Molecular recognition features (MoRFs) in three domains of life": {
+        "Publication date": "2016",
+        "Total citations": 38
+      },
+      "Accurate prediction of protein folding rates from sequence and sequence\u2010derived residue flexibility and solvent accessibility": {
+        "Publication date": "2010/7/1",
+        "Total citations": 38
+      },
+      "Parallel learning of large fuzzy cognitive maps": {
+        "Publication date": "2007/8/12",
+        "Total citations": 38
+      },
+      "Prediction of integral membrane protein type by collocated hydrophobic amino acid pairs": {
+        "Publication date": "2009/1/15",
+        "Total citations": 37
+      },
+      "Prediction of protein secondary structure content for the twilight zone sequences": {
+        "Publication date": "2007/11/15",
+        "Total citations": 37
+      },
+      "Learning fuzzy cognitive maps with required precision using genetic algorithm approach": {
+        "Publication date": "2004/11/25",
+        "Total citations": 37
+      },
+      "Learning of fuzzy cognitive maps using density estimate": {
+        "Publication date": "2012/6",
+        "Total citations": 36
+      },
+      "Prediction of protein folding rates from primary sequences using hybrid sequence representation": {
+        "Publication date": "2009/4/15",
+        "Total citations": 36
+      },
+      "Parallel fuzzy cognitive maps as a tool for modeling software development projects": {
+        "Publication date": "2004/6/27",
+        "Total citations": 36
+      },
+      "Meta prediction of protein crystallization propensity": {
+        "Publication date": "2009/12/4",
+        "Total citations": 35
+      },
+      "Experimental analysis of methods for imputation of missing values in databases": {
+        "Publication date": "2004/4/12",
+        "Total citations": 35
+      },
+      "The intrinsic disorder status of the human hepatitis C virus proteome": {
+        "Publication date": "2014",
+        "Total citations": 34
+      },
+      "Discovery of factors influencing patent value based on machine learning in patents in the field of nanotechnology": {
+        "Publication date": "2009/6/9",
+        "Total citations": 34
+      },
+      "Evolutionary development of fuzzy cognitive maps": {
+        "Publication date": "2005/5/25",
+        "Total citations": 34
+      },
+      "Multi-label associative classification of medical documents from medline": {
+        "Publication date": "2005/12/15",
+        "Total citations": 32
+      },
+      "A critical comparative assessment of predictions of protein-binding sites for biologically relevant organic compounds": {
+        "Publication date": "2011/5/11",
+        "Total citations": 31
+      },
+      "Human structural proteome-wide characterization of Cyclosporine A targets": {
+        "Publication date": "2014/8/28",
+        "Total citations": 30
+      },
+      "RAPID: fast and accurate sequence-based prediction of intrinsic disorder content on proteomic scale": {
+        "Publication date": "2013/8/1",
+        "Total citations": 30
+      },
+      "Fast Class-Attribute Interdependence Maximization (CAIM) Discretization Algorithm.": {
+        "Publication date": "2003/6",
+        "Total citations": 30
+      },
+      "A tree-projection-based algorithm for multi-label recurrent-item associative-classification rule generation": {
+        "Publication date": "2008/1/1",
+        "Total citations": 29
+      },
+      "The increased in vitro osteoclastogenesis in patients with rheumatoid arthritis is due to increased percentage of precursors and decreased apoptosis\u2014the In Vitro Osteoclast \u2026": {
+        "Publication date": "2011/3/1",
+        "Total citations": 28
+      },
+      "Recognition of partially occluded and rotated images with a network of spiking neurons": {
+        "Publication date": "2010/11",
+        "Total citations": 27
+      },
+      "HuMiTar: a sequence-based method for prediction of human microRNA targets": {
+        "Publication date": "2008/12",
+        "Total citations": 27
+      },
+      "mi-DS: Multiple-instance learning algorithm": {
+        "Publication date": "2013/2",
+        "Total citations": 26
+      },
+      "Monocytes from patients with osteoarthritis display increased osteoclastogenesis and bone resorption: the In Vitro Osteoclast Differentiation in Arthritis study": {
+        "Publication date": "2013/1",
+        "Total citations": 26
+      },
+      "Soft computing data mining": {
+        "Publication date": "2004",
+        "Total citations": 26
+      },
+      "DRNApred, fast sequence-based method that accurately predicts and discriminates DNA-and RNA-binding residues": {
+        "Publication date": "2017/6/2",
+        "Total citations": 25
+      },
+      "Stochastic machines as a colocalization mechanism for scaffold protein function": {
+        "Publication date": "2013/6/5",
+        "Total citations": 25
+      },
+      "Comparative analysis of the impact of discretization on the classification with naive bayes and semi-naive bayes classifiers": {
+        "Publication date": "2008/12/11",
+        "Total citations": 25
+      },
+      "Determination of protein folding kinetic types using sequence and predicted secondary structure and solvent accessibility": {
+        "Publication date": "2012/1/1",
+        "Total citations": 24
+      },
+      "Structural protein descriptors in 1-dimension and their sequence-based predictions": {
+        "Publication date": "2011/9/1",
+        "Total citations": 24
+      },
+      "Multilabel associative classification categorization of MEDLINE articles into MeSH keywords": {
+        "Publication date": "2007/3",
+        "Total citations": 24
+      },
+      "MFDp2: Accurate predictor of disorder in proteins by fusion of disorder probabilities, content and profiles": {
+        "Publication date": "2013/1/1",
+        "Total citations": 23
+      }
+    }
+  },
+  "John D. Leonard II": {
+    "id": "thmq-GAAAAAJ",
+    "citation_count": 871,
+    "articles": {
+      "An analysis of the severity and incident duration of truck-involved freeway accidents": {
+        "Publication date": "1987/10/1",
+        "Total citations": 232
+      },
+      "A comparative analysis of time use data in the Netherlands and California": {
+        "Publication date": "1992",
+        "Total citations": 93
+      },
+      "Multiple imputation scheme for overcoming the missing values and variability issues in ITS data": {
+        "Publication date": "2005/12",
+        "Total citations": 84
+      },
+      "A simplified kinematic wave model at a merge bottleneck": {
+        "Publication date": "2005/11/1",
+        "Total citations": 76
+      },
+      "Systematic approach for validating traffic simulation models": {
+        "Publication date": "2004/1/1",
+        "Total citations": 41
+      },
+      "Dynamic data driven application simulation of surface transportation systems": {
+        "Publication date": "2006/5/28",
+        "Total citations": 34
+      },
+      "Vehicle detection using video image processing system: Evaluation of PEEK VideoTrak": {
+        "Publication date": "2003/7",
+        "Total citations": 31
+      },
+      "Markov chain monte carlo multiple imputation using bayesian networks for incomplete intelligent transportation systems data": {
+        "Publication date": "2005/1/1",
+        "Total citations": 27
+      },
+      "Beyond the Highway Capacity Manual Framework for Selecting Simulation Models in Traffic Operational Analyses": {
+        "Publication date": "1999/1/1",
+        "Total citations": 22
+      },
+      "Development of trafficXML: Prototype XML for traffic simulation": {
+        "Publication date": "2004/1/1",
+        "Total citations": 19
+      },
+      "Vehicle longitudinal control and traffic stream modeling": {
+        "Publication date": "2015/7/10",
+        "Total citations": 18
+      },
+      "The network kinematic waves model: a simplified approach to network traffic": {
+        "Publication date": "2006/1/1",
+        "Total citations": 18
+      },
+      "Business travelers\u2019 ticketing, refund, and exchange behavior": {
+        "Publication date": "2010/7/1",
+        "Total citations": 17
+      },
+      "Forecasting vehicle modes of operation needed as input to\" modal\" emissions models": {
+        "Publication date": "1998/1/1",
+        "Total citations": 14
+      },
+      "Grand challenges in modeling and simulating urban transportation systems": {
+        "Publication date": "2002/1/27",
+        "Total citations": 12
+      },
+      "Comparison of alternate signal timing policies": {
+        "Publication date": "1998/11",
+        "Total citations": 12
+      },
+      "Conceptual framework for collecting online airline pricing data: challenges, opportunities, and preliminary results": {
+        "Publication date": "2009/10/16",
+        "Total citations": 10
+      },
+      "Forecasting dynamic vehicular activity on freeways: Bridging the gap between travel demand and emerging emissions models": {
+        "Publication date": "1999/1/1",
+        "Total citations": 10
+      },
+      "Urban traffic calming treatments: Performance measures & design conformance": {
+        "Publication date": "1997/8/1",
+        "Total citations": 10
+      },
+      "Superelevation rates at rural highway intersections": {
+        "Publication date": "1994/1",
+        "Total citations": 10
+      },
+      "Direct methods of determining traffic stream characteristics by definition": {
+        "Publication date": "2004/7/15",
+        "Total citations": 7
+      },
+      "Research needs for determining spatially resolved subfleet characteristics": {
+        "Publication date": "1998",
+        "Total citations": 7
+      },
+      "A real-time information processing algorithm for the evaluation and implementation of atms strategies": {
+        "Publication date": "1992/6/29",
+        "Total citations": 7
+      },
+      "Stopline distributions of speed and acceleration for signalized intersections": {
+        "Publication date": "1998/6/14",
+        "Total citations": 6
+      },
+      "Monte Carlo technique for assessing motor vehicle emission model uncertainty": {
+        "Publication date": "1995/10",
+        "Total citations": 6
+      },
+      "Markov Chain Monte Carlo Multiple Imputation for Incomplete ITS Data Using Bayesian Networks": {
+        "Publication date": "2004/7/12",
+        "Total citations": 5
+      },
+      "Computer Implementation of a\" Simplified Theory of Kinematic Waves\"": {
+        "Publication date": "1997",
+        "Total citations": 5
+      },
+      "II. A Tool for Evaluating Freeway Congestion": {
+        "Total citations": 5
+      },
+      "A methodology for assessing the impact of radar transmissions on a work zone": {
+        "Publication date": "2002",
+        "Total citations": 4
+      },
+      "Panorama of Transportation Simulation": {
+        "Publication date": "2001/11/20",
+        "Total citations": 4
+      },
+      "Dynamic Tests of a Time-Space Model of Complex Travel Behavior": {
+        "Publication date": "1987",
+        "Total citations": 3
+      },
+      "Engineering strategies for major reconstruction of urban highways": {
+        "Publication date": "1985/12",
+        "Total citations": 3
+      },
+      "Retention analysis of Women Engineering students": {
+        "Publication date": "2012",
+        "Total citations": 2
+      },
+      "Transims and developments of regional impact": {
+        "Publication date": "2010/11/19",
+        "Total citations": 2
+      },
+      "Determining traffic stream impacts of radar detectors using microscopic simulation": {
+        "Publication date": "2003/1",
+        "Total citations": 2
+      },
+      "A Large Scale Gridded Application of the CALINE4 Dispersion Model": {
+        "Publication date": "2000",
+        "Total citations": 2
+      },
+      "Alternative approach to estimation of critical cornering speed": {
+        "Publication date": "1994/5",
+        "Total citations": 2
+      },
+      "Interjurisdictional coordination of Katella Avenue traffic signals": {
+        "Publication date": "1992/8/1",
+        "Total citations": 2
+      },
+      "Simplified kinematic waves at a diverge": {
+        "Publication date": "2004",
+        "Total citations": 1
+      },
+      "Traffic and road planning simulation: simulation of freeway merging and diverging behavior": {
+        "Publication date": "2003/12/7",
+        "Total citations": 1
+      },
+      "Study of radar detector use on Georgia highways": {
+        "Publication date": "2001/1/1",
+        "Total citations": 1
+      },
+      "A streamlined methodology for application of TRANSYT-7F": {
+        "Publication date": "1997/2/1",
+        "Total citations": 1
+      },
+      "Analysis of large truck crashes on freeway-to-freeway connectors": {
+        "Publication date": "1991",
+        "Total citations": 1
+      },
+      "ADVANCES IN THE PC INTERFACE OF THE TRANSYT-7F TRAFFIC SIMULATION MODEL": {
+        "Publication date": "1989",
+        "Total citations": 1
+      },
+      "Driver Dynamics and the Longitudinal Control Model": {
+        "Publication date": "2012"
+      },
+      "DDDAS-TMRP: Dynamic, simulation-based management of surface transportation systems": {
+        "Publication date": "2009/12/21"
+      },
+      "Evaluating speed reduction strategies for highway work zones": {
+        "Publication date": "2005"
+      },
+      "Technical enhancements to the Kwaves software": {
+        "Publication date": "2004"
+      },
+      "Simulation-based operations planning for regional transportation systems": {
+        "Publication date": "2003/5/18"
+      },
+      "Corridor and Network Applications of": {
+        "Publication date": "2003/1/12"
+      },
+      "Quantifying secondary crashes on Atlanta highways": {
+        "Publication date": "2003"
+      },
+      "ARCHIVING REAL TIME INCIDENT DATA: AN ADUS APPLICATION IN METRO ATLANTA AREA": {
+        "Publication date": "2002"
+      },
+      "SCIENTIFIC APPROACHES TO TRANSPORTATION RESEARCH: VOLUMES 1 AND 2. CD-ROM": {
+        "Publication date": "2002"
+      },
+      "TransNet: the transportation research Internet cooperative": {
+        "Publication date": "1999/11"
+      },
+      "Microscale Carbon Monoxide Impact Assessment for the Atlantic Steel Development Project": {
+        "Publication date": "1999/3/18"
+      },
+      "Real time, traffic-adaptive, signal control system": {
+        "Publication date": "1998"
+      },
+      "Traffic Control Systems Handbook. Report Number: FHWA-SA 95-032 by Robert L. Gordon, Robert A. Reiss, Herman Haenel, E. Ryerson Case, Robert L. French, Abbas Mohaddes and \u2026": {
+        "Publication date": "1997"
+      },
+      "Initial methodology for forecasting vehicle modes of activity as input to modal emissions models": {
+        "Publication date": "1997"
+      },
+      "Development of an ITS strategic plan for the state of Georgia": {
+        "Publication date": "1997"
+      },
+      "PRECURSOR SYSTEMS ANALYSES OF AUTOMATED HIGHWAY SYSTEM. FINAL REPORT. VOLUME 7: ENTRY/EXIT IMPLEMENTATION STRATEGY": {
+        "Publication date": "1995/3"
+      },
+      "Workshop on traffic models in support of IVHS Level II breakout session, group 3": {
+        "Publication date": "1995"
+      },
+      "Eisehower Faculty Fellowship To Attend Workshop On Models In Support IVHS": {
+        "Publication date": "1995"
+      },
+      "PRECURSOR SYSTEMS ANALYSES OF AUTOMATED HIGHWAY SYSTEMS ENTRY/EXIT IMPLEMENTATION. VOLUME SEVEN": {
+        "Publication date": "1995"
+      },
+      "Proceedings of the Twelfth International Symposium on Transportation and Traffic Theory": {
+        "Publication date": "1994/11/1"
+      },
+      "Bibliographic Section": {
+        "Publication date": "1994/11"
+      },
+      "Triple left turns: an analysis of capacity and other issues": {
+        "Publication date": "1994/3"
+      },
+      "IMPLEMENTATION OF A REAL-TIME INFORMATION PROCESSING ALGORITHM IN TRANSYT-7F": {
+        "Publication date": "1992"
+      },
+      "Summary Analysis of Potential Differences Between Truck-involved and Non-truck Involved Freeway Crashes": {
+        "Publication date": "1991/10"
+      },
+      "DYNAMIC TESTS OF A TIME-SPACE MODEL OF COMPLEX TRAVEL BEHAVIOUR. TRAVEL BEHAVIOR RESEARCH. 5TH INTERNATIONAL CONFERENCE ON TRAVEL BEHAVIOR": {
+        "Publication date": "1989"
+      },
+      "Procedure for the assessment of traffic impacts during freeway reconstruction": {
+        "Publication date": "1987"
+      },
+      "Computer Assisted Reconstruction Strategies for Highway Operations and Planning (CARHOP)": {
+        "Publication date": "1986"
+      },
+      "ENGINEERING STRATEGIES FOR MAJOR RECONSTRUCTION OF URBAN HIGHWAYS. FINAL REPORT. VOLUME 2: APPLICATION TO THE I-5 RECONSTRUCTION PROJECT": {
+        "Publication date": "1985/12"
+      },
+      "ENGINEERING STRATEGIES FOR MAJOR RECONSTRUCTION OF URBAN HIGHWAYS. FINAL REPORT. VOLUME 1: CARHOP ENVIRONMENT": {
+        "Publication date": "1985/12"
+      },
+      "Engineering strategies for major reconstruction of urban highways. Volume 1: carhop environment. Final report": {
+        "Publication date": "1985/12/1"
+      },
+      "Engineering Strategies for Major Reconstruction of Urban Highways: Application to the I-5 reconstruction project": {
+        "Publication date": "1985"
+      },
+      "Research Needs for Determining Spatially": {},
+      "A NEW METHOD FOR EVALUATING THE CAPACITY OF A ROAD NETWORK": {},
+      "A Kinematic Wave Model For Merge Queuing": {},
+      "Autonomous Reasoning on Dynamically Built Maps": {},
+      "Simulation Architecture for Advanced Traffic Management Systems": {},
+      "Blacks, historical disadvantage, and engineering education: Lessons learned from the United States of America": {}
+    }
+  },
+  "Changqing Luo": {
+    "id": "8spZ1jIAAAAJ",
+    "citation_count": 856,
+    "articles": {
+      "Cross-layer design for TCP performance improvement in cognitive radio networks": {
+        "Publication date": "2010/6",
+        "Total citations": 199
+      },
+      "A tensor-based approach for big data representation and dimensionality reduction": {
+        "Publication date": "2014/9",
+        "Total citations": 84
+      },
+      "Green communication in energy renewable wireless mesh networks: Routing, rate control, and power allocation": {
+        "Publication date": "2014/12",
+        "Total citations": 53
+      },
+      "Energy-efficient distributed relay and power control in cognitive radio cooperative communications": {
+        "Publication date": "2013/11",
+        "Total citations": 49
+      },
+      "Distributed relay selection and power control in cognitive radio networks with cooperative transmission": {
+        "Publication date": "2010/5/23",
+        "Total citations": 45
+      },
+      "MobiFuzzyTrust: an efficient fuzzy trust inference mechanism in mobile social networks": {
+        "Publication date": "2014/11",
+        "Total citations": 42
+      },
+      "Utility-based multi-service bandwidth allocation in the 4G heterogeneous wireless access networks": {
+        "Publication date": "2009/4/5",
+        "Total citations": 42
+      },
+      "Cloud-based mobile multimedia recommendation system with user behavior information": {
+        "Publication date": "2014/3",
+        "Total citations": 40
+      },
+      "Joint relay scheduling, channel access, and power allocation for green cognitive radio communications": {
+        "Publication date": "2015/5",
+        "Total citations": 37
+      },
+      "Efficient secure outsourcing of large-scale linear systems of equations": {
+        "Publication date": "2015/4/26",
+        "Total citations": 37
+      },
+      "Optimal data fusion of collaborative spectrum sensing under attack in cognitive radio networks": {
+        "Publication date": "2014/1",
+        "Total citations": 34
+      },
+      "Optimal channel access for TCP performance improvement in cognitive radio networks": {
+        "Publication date": "2011/2/1",
+        "Total citations": 29
+      },
+      "An optimized computational model for multi-community-cloud social collaboration": {
+        "Publication date": "2014/7",
+        "Total citations": 25
+      },
+      "A holistic energy optimization framework for cloud-assisted mobile computing": {
+        "Publication date": "2015/6",
+        "Total citations": 17
+      },
+      "Efficient secure outsourcing of large-scale quadratic programs": {
+        "Publication date": "2016/5/30",
+        "Total citations": 16
+      },
+      "Efficient secure outsourcing of large-scale sparse linear systems of equations": {
+        "Publication date": "2018/3/1",
+        "Total citations": 13
+      },
+      "CRIL: An efficient online adaptive indoor localization system": {
+        "Publication date": "2017/5",
+        "Total citations": 12
+      },
+      "Optimal channel access for TCP performance improvement in cognitive radio networks: A cross-layer design approach": {
+        "Publication date": "2009/11/30",
+        "Total citations": 12
+      },
+      "A Holistic Approach for Distributed Dimensionality Reduction of Big Data": {
+        "Publication date": "2018/4/1",
+        "Total citations": 11
+      },
+      "Channel state information prediction for 5g wireless communications: A deep learning approach": {
+        "Publication date": "2018/6/25",
+        "Total citations": 8
+      },
+      "State estimation for energy theft detection in microgrids": {
+        "Publication date": "2014/8/14",
+        "Total citations": 8
+      },
+      "Efficient secure outsourcing of large-scale convex separable programming for big data": {
+        "Publication date": "2017/12/25",
+        "Total citations": 7
+      },
+      "Energy-efficient dynamic network selection in heterogeneous wireless networks": {
+        "Publication date": "2013/8/20",
+        "Total citations": 6
+      },
+      "Secfact: Secure large-scale QR and LU factorizations": {
+        "Publication date": "2017/12/13",
+        "Total citations": 4
+      },
+      "Energy-Efficient Autonomic Offloading in Mobile Edge Computing": {
+        "Publication date": "2017/11/6",
+        "Total citations": 4
+      },
+      "Efficient privacy-preserving outsourcing of large-scale QR factorization": {
+        "Publication date": "2017/8/1",
+        "Total citations": 4
+      },
+      "Centralized scheme for joint relay selection and channel access in partially-sensed cognitive radio cooperative networks": {
+        "Publication date": "2011/12/5",
+        "Total citations": 4
+      },
+      "Parallel Secure Outsourcing of Large-scale Nonlinearly Constrained Nonlinear Programming Problems": {
+        "Publication date": "2018/3/30",
+        "Total citations": 3
+      },
+      "Privacy-preserving spectrum query with location proofs in database-driven crns": {
+        "Publication date": "2016/12/4",
+        "Total citations": 3
+      },
+      "TCP-aware cross-layer design in cognitive radio networks": {
+        "Publication date": "2009/10/12",
+        "Total citations": 3
+      },
+      "Cross-Domain Sentiment Classification via a Bifurcated-LSTM": {
+        "Publication date": "2018/6/3",
+        "Total citations": 2
+      },
+      "Optimal capacity in underlay paradigm based cognitive radio network with cooperative transmission": {
+        "Publication date": "2010/9/6",
+        "Total citations": 2
+      },
+      "A deep multi-task learning approach for ECG data analysis": {
+        "Publication date": "2018/3/4",
+        "Total citations": 1
+      },
+      "When Machine Learning Meets Blockchain: A Decentralized, Privacy-preserving and Secure Design": {
+        "Publication date": "2018/12/10"
+      },
+      "Efficient Privacy-Preserving Large-Scale CP Tensor Decompositions": {
+        "Publication date": "2018/12/9"
+      },
+      "SecureNets: Secure Inference of Deep Neural Networks on an Untrusted Cloud": {
+        "Publication date": "2018/11/4"
+      },
+      "Green TCP Transmission Over Cognitive Radio Networks": {
+        "Publication date": "2018/8"
+      },
+      "Online Power Control for 5G Wireless Communications: A Deep Q-Network Approach": {
+        "Publication date": "2018/5/20"
+      },
+      "Secure Outsourcing of Matrix Convolutions": {
+        "Publication date": "2018/5/20"
+      }
+    }
+  },
+  "Milos Manic": {
+    "id": "jp-Ye7gAAAAJ",
+    "citation_count": 2717,
+    "articles": {
+      "CIMS: A framework for infrastructure interdependency modeling and analysis": {
+        "Publication date": "2006/12/3",
+        "Total citations": 239
+      },
+      "Neural network based intrusion detection system for critical infrastructures": {
+        "Publication date": "2009/6/14",
+        "Total citations": 171
+      },
+      "General type-2 fuzzy c-means algorithm for uncertain fuzzy clustering": {
+        "Publication date": "2012/10",
+        "Total citations": 105
+      },
+      "Uncertainty-robust design of interval type-2 fuzzy logic controller for delta parallel robot": {
+        "Publication date": "2011/11",
+        "Total citations": 97
+      },
+      "Building energy load forecasting using deep neural networks": {
+        "Publication date": "2016/10/23",
+        "Total citations": 84
+      },
+      "Multi-robot, multi-target particle swarm optimization search in noisy wireless environments": {
+        "Publication date": "2009/5/21",
+        "Total citations": 78
+      },
+      "Interval type-2 fuzzy voter design for fault tolerant systems": {
+        "Publication date": "2011/7/15",
+        "Total citations": 71
+      },
+      "Building energy management systems: The age of intelligent and adaptive buildings": {
+        "Publication date": "2016/3",
+        "Total citations": 70
+      },
+      "Mining building energy management system data using fuzzy anomaly detection and linguistic descriptions": {
+        "Publication date": "2014/8",
+        "Total citations": 63
+      },
+      "Self-organizing fuzzy haptic teleoperation of mobile robot using sparse sonar data": {
+        "Publication date": "2011/8",
+        "Total citations": 62
+      },
+      "Wireless based object tracking based on neural networks": {
+        "Publication date": "2008/6/3",
+        "Total citations": 47
+      },
+      "Fuzzy force-feedback augmentation for manual control of multirobot system": {
+        "Publication date": "2011/8",
+        "Total citations": 45
+      },
+      "Evolutionary approach to optimal design of 3 DOF translation exoskeleton and medical parallel robots": {
+        "Publication date": "2008/5/25",
+        "Total citations": 45
+      },
+      "Fuzzy logic based anomaly detection for embedded network security cyber sensor": {
+        "Publication date": "2011/4/11",
+        "Total citations": 44
+      },
+      "Kinematics analysis, design, and control of an Isoglide3 Parallel Robot (IG3PR)": {
+        "Publication date": "2008/11/10",
+        "Total citations": 41
+      },
+      "Introduction to intelligent systems": {
+        "Publication date": "2011",
+        "Total citations": 40
+      },
+      "Monotone centroid flow algorithm for type reduction of general type-2 fuzzy sets": {
+        "Publication date": "2012/10",
+        "Total citations": 39
+      },
+      "Wireless sensor networks\u2014Node localization for various industry problems": {
+        "Publication date": "2015/6",
+        "Total citations": 37
+      },
+      "Extended virtual spring mesh (EVSM): The distributed self-organizing mobile ad hoc network for area exploration": {
+        "Publication date": "2011/12",
+        "Total citations": 37
+      },
+      "FN-DFE: Fuzzy-neural data fusion engine for enhanced resilient state-awareness of hybrid energy systems": {
+        "Publication date": "2014/11",
+        "Total citations": 34
+      },
+      "Cyber-Physical System Security With Deceptive Virtual Hosts for Industrial Control Networks": {
+        "Publication date": "2014",
+        "Total citations": 34
+      },
+      "Intelligent buildings of the future: Cyberaware, deep learning powered, and human interacting": {
+        "Publication date": "2016/12",
+        "Total citations": 33
+      },
+      "A literature review of state of-charge estimation techniques applicable to lithium poly-carbon monoflouride (LI/CFx) battery": {
+        "Publication date": "2011/1/28",
+        "Total citations": 33
+      },
+      "Comparative analysis of type-1 and type-2 fuzzy control in context of learning behaviors for mobile robotics": {
+        "Publication date": "2010/11/7",
+        "Total citations": 33
+      },
+      "CAVE-SOM: Immersive visual data mining using 3D Self-Organizing Maps": {
+        "Publication date": "2011/7/31",
+        "Total citations": 31
+      },
+      "Interdependency modeling and emergency response": {
+        "Publication date": "2007/7/16",
+        "Total citations": 28
+      },
+      "Mining bug databases for unidentified software vulnerabilities": {
+        "Publication date": "2012/6/6",
+        "Total citations": 27
+      },
+      "Optimal artificial neural network architecture selection for performance prediction of compact heat exchanger with the EBaLM-OTR technique": {
+        "Publication date": "2011/7/1",
+        "Total citations": 25
+      },
+      "Performance analysis of 3 DOF Delta parallel robot": {
+        "Publication date": "2011/5/19",
+        "Total citations": 25
+      },
+      "EBaLM-THP\u2013A neural network thermohydraulic prediction model of advanced nuclear system components": {
+        "Publication date": "2009/2/1",
+        "Total citations": 25
+      },
+      "Deep neural networks for energy load forecasting": {
+        "Publication date": "2017/6/19",
+        "Total citations": 24
+      },
+      "Autonomic intelligent cyber-sensor to support industrial control network awareness": {
+        "Publication date": "2014/5",
+        "Total citations": 24
+      },
+      "Adaptive control parameters for dispersal of multi-agent mobile ad hoc network (MANET) swarms": {
+        "Publication date": "2013/11",
+        "Total citations": 23
+      },
+      "Wireless sensor network configuration\u2014part II: adaptive coverage for decentralized algorithms": {
+        "Publication date": "2013/8",
+        "Total citations": 20
+      },
+      "Human machine interaction via brain activity monitoring": {
+        "Publication date": "2013/6/6",
+        "Total citations": 20
+      },
+      "Autonomous rule creation for intrusion detection": {
+        "Publication date": "2011/4/11",
+        "Total citations": 20
+      },
+      "Vulnerability identification and classification via text mining bug databases": {
+        "Publication date": "2014/10/29",
+        "Total citations": 19
+      },
+      "Computational intelligence based anomaly detection for building energy management systems": {
+        "Publication date": "2012/8/14",
+        "Total citations": 18
+      },
+      "Online spatio-temporal risk assessment for intelligent transportation systems": {
+        "Publication date": "2011/3",
+        "Total citations": 18
+      },
+      "EEG based brain activity monitoring using Artificial Neural Networks": {
+        "Publication date": "2014/6/16",
+        "Total citations": 17
+      },
+      "Improving cyber-security of smart grid systems via anomaly detection and linguistic domain knowledge": {
+        "Publication date": "2012/8/14",
+        "Total citations": 17
+      },
+      "Design, Simulation and Control in Virtual Reality of a RV-2AJ robot": {
+        "Publication date": "2009/11/3",
+        "Total citations": 17
+      },
+      "Kinematics analysis, workspace, design and control of 3-RPS and TRIGLIDE medical parallel robots": {
+        "Publication date": "2009/5/21",
+        "Total citations": 17
+      },
+      "Next generation emergency communication systems via software defined networks": {
+        "Publication date": "2014/3/19",
+        "Total citations": 16
+      },
+      "Wireless sensor network configuration\u2014Part I: Mesh simplification for centralized algorithms": {
+        "Publication date": "2013/8",
+        "Total citations": 16
+      },
+      "Anomaly detection for resilient control systems using fuzzy-neural data fusion engine": {
+        "Publication date": "2011/8/9",
+        "Total citations": 16
+      },
+      "Neural network architecture selection analysis with application to cryptography location": {
+        "Publication date": "2010/7/18",
+        "Total citations": 16
+      },
+      "Computationally efficient neural network intrusion security awareness": {
+        "Publication date": "2009/8/11",
+        "Total citations": 16
+      },
+      "Intelligent neural network implementation for SOCI development of Li/CFx batteries": {
+        "Publication date": "2009/8/11",
+        "Total citations": 16
+      },
+      "Fuzzy preference approach for computer network attack detection": {
+        "Publication date": "2001",
+        "Total citations": 15
+      },
+      "The internet of things: The role of reconfigurable platforms": {
+        "Publication date": "2017/9",
+        "Total citations": 13
+      },
+      "Importance sampling based defuzzification for general type-2 fuzzy sets": {
+        "Publication date": "2010/7/18",
+        "Total citations": 13
+      },
+      "Kinematics, workspace, design and accuracy analysis of RPRPR medical parallel robot": {
+        "Publication date": "2009/5/21",
+        "Total citations": 13
+      },
+      "Fuzzy manual control of multi-robot system with built-in swarm behavior": {
+        "Publication date": "2009/5/21",
+        "Total citations": 13
+      },
+      "Wireless indoor location estimation based on neural network RSS signature recognition (LENSR)": {
+        "Publication date": "2008/6/1",
+        "Total citations": 13
+      },
+      "Towards resilient critical infrastructures: Application of type-2 fuzzy logic in embedded network security cyber sensor": {
+        "Publication date": "2011/8/9",
+        "Total citations": 12
+      },
+      "Uncertainty modeling for interval type-2 fuzzy logic systems based on sensor characteristics": {
+        "Publication date": "2011/4/11",
+        "Total citations": 12
+      },
+      "Neural network approach to locating cryptography in object code": {
+        "Publication date": "2009/9/22",
+        "Total citations": 12
+      },
+      "A novel virtual reality robot interface for isoglide3 parallel robot": {
+        "Publication date": "2008/10/15",
+        "Total citations": 12
+      },
+      "Derivation of a bed load sediment transport formula using artificial neural networks": {
+        "Publication date": "2006",
+        "Total citations": 12
+      },
+      "Towards the fault tolerant software: Fuzzy extension of crisp equivalence voters": {
+        "Publication date": "2001",
+        "Total citations": 12
+      },
+      "Data driven fuzzy membership function generation for increased understandability": {
+        "Publication date": "2014/7/6",
+        "Total citations": 11
+      },
+      "Real time evaluation of inverse kinematics for a 3-RPS medical parallel robot usind dSpace platform": {
+        "Publication date": "2010/5/13",
+        "Total citations": 11
+      },
+      "Clustering of web search results based on an Iterative Fuzzy C-means Algorithm and Bayesian Information Criterion": {
+        "Publication date": "2013/6/24",
+        "Total citations": 10
+      },
+      "Evaluating uncertainty resiliency of type-2 fuzzy logic controllers for parallel delta robot": {
+        "Publication date": "2011/5/19",
+        "Total citations": 10
+      },
+      "The analysis of dimensionality reduction techniques in cryptographic object code classification": {
+        "Publication date": "2010/5/13",
+        "Total citations": 10
+      },
+      "Contextual fuzzy type-2 hierarchies for decision trees (CoFuH-DT)\u2014An accelerated data mining technique": {
+        "Publication date": "2008/5/25",
+        "Total citations": 10
+      },
+      "EEG feature selection for thought driven robots using evolutionary algorithms": {
+        "Publication date": "2016/7/6",
+        "Total citations": 9
+      },
+      "Epileptic spike detection with EEG using artificial neural networks": {
+        "Publication date": "2016/7/6",
+        "Total citations": 9
+      },
+      "Optimal stop word selection for text mining in critical infrastructure domain": {
+        "Publication date": "2015/8/18",
+        "Total citations": 9
+      },
+      "Neural network based downscaling of building energy management system data": {
+        "Publication date": "2014/6/1",
+        "Total citations": 9
+      },
+      "TopicSearch-Personalized Web Clustering Engine Using Semantic Query Expansion, Memetic Algorithms and Intelligent Agents": {
+        "Publication date": "2013/7",
+        "Total citations": 9
+      },
+      "Improving control system cyber-state awareness using known secure sensor measurements": {
+        "Publication date": "2013",
+        "Total citations": 9
+      },
+      "A RESTful technique for collaborative learning content transclusion by Wiki-style mashups": {
+        "Publication date": "2011/11/7",
+        "Total citations": 9
+      },
+      "FuSnap: Fuzzy control of logical volume snapshot replication for disk arrays": {
+        "Publication date": "2011/9",
+        "Total citations": 9
+      },
+      "A distance measure comparison to improve crowding in multi-modal optimization problems": {
+        "Publication date": "2010/8/10",
+        "Total citations": 9
+      },
+      "STRICR-FB, A novel size-translation-rotation-invariant character recognition method": {
+        "Publication date": "2010/5/13",
+        "Total citations": 9
+      },
+      "GNG-SVM framework-classifying large datasets with Support Vector Machines using Growing Neural Gas": {
+        "Publication date": "2009/6/14",
+        "Total citations": 9
+      },
+      "Genetic algorithms for workspace optimization of planar medical parallel robot": {
+        "Publication date": "2009/1/8",
+        "Total citations": 9
+      },
+      "Data-fusion for increasing temporal resolution of building energy management system data": {
+        "Publication date": "2015/11/9",
+        "Total citations": 8
+      },
+      "Random weights search in compressed neural networks using overdetermined pseudoinverse": {
+        "Publication date": "2003/6/9",
+        "Total citations": 8
+      },
+      "Internet based neural network online simulation tool": {
+        "Publication date": "2002/11/5",
+        "Total citations": 8
+      },
+      "VD-IT2, Virtual Disk cloning on disk arrays using a type-2 fuzzy controller": {
+        "Publication date": "2017/12",
+        "Total citations": 7
+      },
+      "Artificial neural networks based thermal energy storage control for buildings": {
+        "Publication date": "2015/11/9",
+        "Total citations": 7
+      },
+      "Optimal placement of Phasor Measurement Units in power grids using Memetic Algorithms": {
+        "Publication date": "2014/6/1",
+        "Total citations": 7
+      },
+      "Fuzzy linguistic knowledge based behavior extraction for building energy management systems": {
+        "Publication date": "2013/8/13",
+        "Total citations": 7
+      },
+      "Multi-criteria based staging of optimal PMU placement using fuzzy weighted average": {
+        "Publication date": "2013/5/28",
+        "Total citations": 7
+      },
+      "Prioritizing and visualizing energy management and control system data to provide actionable information for building operators": {
+        "Publication date": "2011/8",
+        "Total citations": 7
+      },
+      "Fuzzy Control of a 3 Degree of Freedom Parallel Robot": {
+        "Publication date": "2010",
+        "Total citations": 7
+      },
+      "Unsupervised pattern clustering for data mining": {
+        "Publication date": "2001",
+        "Total citations": 7
+      },
+      "Driving behavior prompting framework for improving fuel efficiency": {
+        "Publication date": "2014/6/16",
+        "Total citations": 6
+      },
+      "Information gain based dimensionality selection for classifying text documents": {
+        "Publication date": "2013/6/20",
+        "Total citations": 6
+      },
+      "Control of sparing in storage systems": {
+        "Publication date": "2012/6/12",
+        "Total citations": 6
+      },
+      "Shadowed type-2 fuzzy sets-type-2 fuzzy sets with shadowed secondary membership functions": {
+        "Publication date": "2012/6/10",
+        "Total citations": 6
+      },
+      "Improving Vehicle Fleet Fuel Economy via Learning Fuel-Efficient Driving Behaviors": {
+        "Publication date": "2012/6/6",
+        "Total citations": 6
+      },
+      "Centroid density of interval type-2 fuzzy sets: Comparing stochastic and deterministic defuzzification": {
+        "Publication date": "2011/6/27",
+        "Total citations": 6
+      },
+      "Video game device haptic interface for robotic arc welding": {
+        "Publication date": "2009/5/21",
+        "Total citations": 6
+      },
+      "Robust algorithm for neural network training": {
+        "Publication date": "2002",
+        "Total citations": 6
+      },
+      "Deep learning and reconfigurable platforms in the Internet of Things: Challenges and opportunities in algorithms and hardware": {
+        "Publication date": "2018/6",
+        "Total citations": 5
+      },
+      "Html web content extraction using paragraph tags": {
+        "Publication date": "2016/6/8",
+        "Total citations": 5
+      }
+    }
+  },
+  "Tamer Nadeem": {
+    "id": "0ltdcO4AAAAJ",
+    "citation_count": 2752,
+    "articles": {
+      "TrafficView: traffic data dissemination using car-to-car communication": {
+        "Publication date": "2004/7/1",
+        "Total citations": 465
+      },
+      "A comparative study of data dissemination models for VANETs": {
+        "Publication date": "2006/7",
+        "Total citations": 246
+      },
+      "Location-aware services over vehicular ad-hoc networks using car-to-car communication": {
+        "Publication date": "2007/10",
+        "Total citations": 203
+      },
+      "Trafficview: A scalable traffic monitoring system": {
+        "Publication date": "2004",
+        "Total citations": 168
+      },
+      "VITP: an information transfer protocol for vehicular computing": {
+        "Publication date": "2005/9/2",
+        "Total citations": 132
+      },
+      "Context-aware migratory services in ad hoc networks": {
+        "Publication date": "2007/12",
+        "Total citations": 120
+      },
+      "Cars: Context-aware rate selection for vehicular networks": {
+        "Publication date": "2008/10/19",
+        "Total citations": 115
+      },
+      "Transparent digital rights management for extendible content viewers": {
+        "Publication date": "2007/1/30",
+        "Total citations": 107
+      },
+      "TrafficView: a driver assistant device for traffic monitoring based on car-to-car communication": {
+        "Publication date": "2004/5/17",
+        "Total citations": 95
+      },
+      "Effect of antenna placement and diversity on vehicular network communications": {
+        "Publication date": "2007/6/18",
+        "Total citations": 93
+      },
+      "Adaptation of reputation management systems to dynamic network conditions in ad hoc networks": {
+        "Publication date": "2010/5",
+        "Total citations": 92
+      },
+      "Understanding the limitations of transmit power control for indoor wlans": {
+        "Publication date": "2007/10/24",
+        "Total citations": 68
+      },
+      "EZCab: A cab booking application using short-range wireless communication": {
+        "Publication date": "2005/3/8",
+        "Total citations": 66
+      },
+      "Rover: Scalable location-aware computing": {
+        "Publication date": "2002/10",
+        "Total citations": 64
+      },
+      "mesdn: Mobile extension of sdn": {
+        "Publication date": "2014/6/11",
+        "Total citations": 51
+      },
+      "Location enhancement to IEEE 802.11 DCF": {
+        "Publication date": "2005/3/13",
+        "Total citations": 51
+      },
+      "IEEE 802.11 DCF enhancements for noisy environments": {
+        "Publication date": "2004/9/5",
+        "Total citations": 47
+      },
+      "Mobile sensing for road safety, traffic management, and road maintenance": {
+        "Publication date": "2011/4/28"
+      },
+      "Toward a wireless charging for battery electric vehicles at traffic intersections": {
+        "Publication date": "2011/10/5",
+        "Total citations": 35
+      },
+      "IEEE 802.11 fragmentation-aware energy-efficient ad-hoc routing protocols": {
+        "Publication date": "2004/10/25",
+        "Total citations": 31
+      },
+      "Wearable sensing framework for human activity monitoring": {
+        "Publication date": "2015/5/18",
+        "Total citations": 28
+      },
+      "Location-aware IEEE 802.11 for spatial reuse enhancement": {
+        "Publication date": "2007/10",
+        "Total citations": 27
+      },
+      "Analysis and enhancements for IEEE 802.11 networks using directional antenna with opportunistic mechanisms": {
+        "Publication date": "2010/7",
+        "Total citations": 24
+      },
+      "SpyLoc: A light weight localization system for smartphones": {
+        "Publication date": "2014/6/30",
+        "Total citations": 23
+      },
+      "Energy efficient MAC protocols for wireless sensor networks": {
+        "Publication date": "2004",
+        "Total citations": 23
+      },
+      "A study of three browser history mechanisms for web navigation": {
+        "Publication date": "2001",
+        "Total citations": 20
+      },
+      "EnergySniffer: Home energy monitoring system using smart phones": {
+        "Publication date": "2012/8/27",
+        "Total citations": 19
+      },
+      "Mobility control for throughput maximization in ad hoc networks": {
+        "Publication date": "2006/11",
+        "Total citations": 19
+      },
+      "A2PSM: audio assisted wi-fi power saving mechanism for smart devices": {
+        "Publication date": "2013/2/26",
+        "Total citations": 17
+      },
+      "Estimation of travel times using bluetooth": {
+        "Publication date": "2011/6/30"
+      },
+      "RF-Beep: A light ranging scheme for smart devices": {
+        "Publication date": "2013/3/18",
+        "Total citations": 15
+      },
+      "Performance of IEEE 802.11 based wireless sensor networks in noisy environments": {
+        "Publication date": "2005/4/7",
+        "Total citations": 13
+      },
+      "Energy-efficient reliable paths for on-demand routing protocols": {
+        "Publication date": "2004/10/25",
+        "Total citations": 12
+      },
+      "Mobile services: context-aware service migration in ad hoc networks": {
+        "Publication date": "2004",
+        "Total citations": 11
+      },
+      "Colphone: A smartphone is just a piece of the puzzle": {
+        "Publication date": "2014/9/13",
+        "Total citations": 10
+      },
+      "WebGuard: A System for Web Content Protection.": {
+        "Publication date": "2001/5",
+        "Total citations": 10
+      },
+      "Driveblue: Traffic incident prediction through single site bluetooth": {
+        "Publication date": "2015/9/15",
+        "Total citations": 9
+      },
+      "Dynamic traffic shaping technique for HTTP adaptive video streaming using software defined networks": {
+        "Publication date": "2015/6/22",
+        "Total citations": 9
+      },
+      "Scheme for operating a wireless station having directional antennas": {
+        "Publication date": "2009/12/8",
+        "Total citations": 9
+      },
+      "Understanding the intermittent traffic pattern of HTTP video streaming over wireless networks": {
+        "Publication date": "2016/5/9",
+        "Total citations": 8
+      },
+      "Data collection and traffic control using multiple wireless receivers": {
+        "Publication date": "2013/10/22",
+        "Total citations": 8
+      },
+      "Rover technology: Enabling scalable location-aware computing": {
+        "Publication date": "2002/1/31",
+        "Total citations": 8
+      },
+      "Enhancing 802.11 wireless networks with directional antenna and multiple receivers": {
+        "Publication date": "2006/10/23",
+        "Total citations": 7
+      },
+      "Lamen: leveraging resources on anonymous mobile edge nodes": {
+        "Publication date": "2016/10/3",
+        "Total citations": 6
+      },
+      "Parkzoom: A parking spot identification system": {
+        "Publication date": "2013/10/6",
+        "Total citations": 6
+      },
+      "MagnoTricorder: what you need to do before leaving home": {
+        "Publication date": "2012/9/5",
+        "Total citations": 6
+      },
+      "ATP: Autonomous Transport Protocol": {
+        "Publication date": "2003/12/30",
+        "Total citations": 6
+      },
+      "Implementation of a scalable context-aware computing system": {
+        "Publication date": "2003/9/23",
+        "Total citations": 6
+      },
+      "Efficient time-based topology-dependent scheduling for radio packet networks": {
+        "Publication date": "2002/8/1",
+        "Total citations": 6
+      },
+      "Enhancements for IEEE 802.11 networks with directional antennas": {
+        "Publication date": "2009/10/20",
+        "Total citations": 5
+      },
+      "Survey on Wireless and Mobile ATM Networks": {
+        "Publication date": "2002/4/4",
+        "Total citations": 5
+      },
+      "The Effects of the Browser History Mechanisms on the Web Navigation": {
+        "Publication date": "2001/7/25",
+        "Total citations": 5
+      },
+      "Kinaara: Distributed discovery and allocation of mobile edge resources": {
+        "Publication date": "2017/10/22",
+        "Total citations": 4
+      },
+      "Trafficvision: A case for pushing software defined networks to wireless edges": {
+        "Publication date": "2016/10/10",
+        "Total citations": 4
+      },
+      "Poster: ColPhone: a smartphone is just a piece of the puzzle": {
+        "Publication date": "2014/9/7",
+        "Total citations": 4
+      },
+      "SmartSpaghetti: Accurate and robust tracking of Human's location": {
+        "Publication date": "2014/6/1",
+        "Total citations": 4
+      },
+      "Opportunistic mechanisms for IEEE 802.11 networks using directional antennas": {
+        "Publication date": "2009/12/14",
+        "Total citations": 4
+      },
+      "On the (in) feasibility of fine grained power control": {
+        "Publication date": "2007/4/1",
+        "Total citations": 4
+      },
+      "Magnopark-locating on-street parking spaces using magnetometer-based pedestrians' smartphones": {
+        "Publication date": "2017/6/12",
+        "Total citations": 3
+      },
+      "UniCoor: A smartphone unified coordinate system for ITS applications": {
+        "Publication date": "2016/10/10",
+        "Total citations": 3
+      },
+      "SmartSpaghetti: use of smart devices to solve health care problems": {
+        "Publication date": "2013/12/18",
+        "Total citations": 3
+      },
+      "MachineSense: detecting and monitoring active machines using smart phone.": {
+        "Publication date": "2012/10",
+        "Total citations": 3
+      },
+      "Making wireless networks MORAL": {
+        "Publication date": "2011/4/10",
+        "Total citations": 3
+      },
+      "How Conservative IEEE 802.11 DCF is when using Directional Antenna?": {
+        "Publication date": "2008/11/30",
+        "Total citations": 3
+      },
+      "Exposing bluetooth lower layers for iot communication": {
+        "Publication date": "2016/12/12",
+        "Total citations": 2
+      },
+      "EdgeEye: fine grained traffic visibility at wireless network edge": {
+        "Publication date": "2016/10/27",
+        "Total citations": 2
+      },
+      "Resource hunting on the edge": {
+        "Publication date": "2016/10/27",
+        "Total citations": 2
+      },
+      "Harmony: Content resolution for smart devices using acoustic channel": {
+        "Publication date": "2015/4/26",
+        "Total citations": 2
+      },
+      "Optimized inquiry mechanisms for Bluetooth devices": {
+        "Publication date": "2014/6/10",
+        "Total citations": 2
+      },
+      "TDMA slot reservation in cluster-based vanets": {
+        "Publication date": "2013",
+        "Total citations": 2
+      },
+      "Exploring the design and implementation of vehicular networked systems": {
+        "Total citations": 2
+      },
+      "LAMEN: Towards orchestrating the growing intelligence on the edge": {
+        "Publication date": "2016/12/12",
+        "Total citations": 1
+      },
+      "itsblue: A Bluetooth-Based Framework for Intersection Management ITS Applications": {
+        "Publication date": "2016/5/18",
+        "Total citations": 1
+      },
+      "Poster: Driveblue: can bluetooth enhance your driving experience?": {
+        "Publication date": "2014/6/2",
+        "Total citations": 1
+      },
+      "Audio-WiFi: Augmented WiFi Network with Audio Channel for Smart Devices": {
+        "Publication date": "2012",
+        "Total citations": 1
+      },
+      "Network-aware applications in wireless networks": {
+        "Publication date": "2009",
+        "Total citations": 1
+      },
+      "Data Rate and Fragmentation Aware Ad hoc Routing": {
+        "Publication date": "2007/1",
+        "Total citations": 1
+      },
+      "Efficient cross layer designs for IEEE 802.11 wireless networks": {
+        "Publication date": "2006/4/24",
+        "Total citations": 1
+      },
+      "TrafficView: Towards a Scalable Traffic Monitoring System": {
+        "Publication date": "2003/11/25",
+        "Total citations": 1
+      },
+      "IEEE 802.11 DCF Location Aware": {
+        "Total citations": 1
+      },
+      "TrafficView: How Far Can You See?": {
+        "Total citations": 1
+      },
+      "Poster: Towards Self-Managing and Self-Adaptive Framework for Automating MAC Protocol Design in Wireless Networks": {
+        "Publication date": "2019/2/22"
+      },
+      "Challenges and Limitations in Automating the Design of MAC Protocols Using Machine-Learning": {
+        "Publication date": "2019/2/11"
+      },
+      "BlueMap: A Pervasive Bluetooth-Based Vehicle Trajectory Reconstruction System": {
+        "Publication date": "2018/12/9"
+      },
+      "FlexStream: Towards Flexible Adaptive Video Streaming on End Devices using Extreme SDN": {
+        "Publication date": "2018/10/15"
+      },
+      "inLaneCom: Enabling In-lane Vehicular Communication Using on-Board Smartphones": {
+        "Publication date": "2018/10/9"
+      },
+      "BLINK: Making the case for Bluetooth open source stack": {
+        "Publication date": "2018/4/3"
+      },
+      "Smartphone-based solutions to monitor and reduce fuel consumption and CO2 footprint": {
+        "Publication date": "2016/6/1"
+      },
+      "Dead Reckoning with Smartphone Sensors for Emergency Rooms": {
+        "Publication date": "2015/6/10"
+      },
+      "Poster: in-lane communication framework using smartphone's inertial sensors": {
+        "Publication date": "2014/9/7"
+      },
+      "Energy-Efficient Medium Access Control Protocols for Wireless Sensor Networks": {
+        "Publication date": "2013/8/28"
+      },
+      "Vehicular ad hoc networks (VANETS): Status, results and challenges.": {
+        "Publication date": "2013"
+      },
+      "Context-aware content adaptation in access point": {
+        "Publication date": "2012/9/5"
+      },
+      "Data Collection and Traffic Control Using Multiple Wireless Receivers": {
+        "Publication date": "2012/4/5"
+      },
+      "Power Control in Wireless Traffic Detection Devices": {
+        "Publication date": "2012/4/5"
+      },
+      "Poster: What's on your mind?: a mind-based driving alert system": {
+        "Publication date": "2011/6/28"
+      },
+      "Energy-Efficient Reliable Paths for On-Demand Routing Protocols": {
+        "Publication date": "2010/8/25"
+      },
+      "Protocol for improved utilization of a wireless network using interference estimation": {
+        "Publication date": "2007/8/30"
+      }
+    }
+  },
+  "Cang Ye": {
+    "id": "dVbCvDtnltMC",
+    "citation_count": 1575,
+    "articles": {
+      "Characterization of a 2D laser scanner for mobile robot obstacle negotiation": {
+        "Publication date": "2002",
+        "Total citations": 324
+      },
+      "A fuzzy controller with supervised learning assisted reinforcement learning algorithm for obstacle avoidance": {
+        "Publication date": "2003/2",
+        "Total citations": 172
+      },
+      "An intelligent mobile vehicle navigator based on fuzzy logic and reinforcement learning": {
+        "Publication date": "1999/4",
+        "Total citations": 132
+      },
+      "Characterization of the Hokuyo URG-04LX laser rangefinder for mobile robot obstacle negotiation": {
+        "Publication date": "2009/4/30",
+        "Total citations": 104
+      },
+      "A new terrain mapping method for mobile robots obstacle negotiation": {
+        "Publication date": "2003/9/30",
+        "Total citations": 72
+      },
+      "Navigating a mobile robot by a traversability field histogram": {
+        "Publication date": "2007/4",
+        "Total citations": 63
+      },
+      "A method for mobile robot navigation on rough terrain": {
+        "Publication date": "2004/4/26",
+        "Total citations": 60
+      },
+      "A novel filter for terrain mapping with laser rangefinders": {
+        "Publication date": "2004/10",
+        "Total citations": 54
+      },
+      "NCC-RANSAC: a fast plane extraction method for 3-D range data segmentation": {
+        "Publication date": "2014/12",
+        "Total citations": 41
+      },
+      "Extraction of planar features from swissranger sr-3000 range images by a clustering method using normalized cuts": {
+        "Publication date": "2009/10/10",
+        "Total citations": 30
+      },
+      "A visual odometry method based on the SwissRanger SR4000": {
+        "Publication date": "2010/5/8",
+        "Total citations": 29
+      },
+      "T-transformation: a new traversability analysis method for terrain navigation": {
+        "Publication date": "2004",
+        "Total citations": 28
+      },
+      "A novel behavior fusion method for the navigation of mobile robots": {
+        "Publication date": "2000",
+        "Total citations": 28
+      },
+      "A novel navigation method for autonomous mobile vehicles": {
+        "Publication date": "2001/12/1",
+        "Total citations": 27
+      },
+      "An Extended Kalman Filter for Pose Estimation of a Portable Navigation Aid for the Visually Impaired": {
+        "Publication date": "2013/10/21",
+        "Total citations": 25
+      },
+      "Navigating a portable robotic device by a 3D imaging sensor": {
+        "Publication date": "2010/11/1",
+        "Total citations": 24
+      },
+      "Robust edge extraction for SwissRanger SR-3000 range images": {
+        "Publication date": "2009/5/12",
+        "Total citations": 23
+      },
+      "6-DOF pose estimation of a robotic navigation aid by tracking visual and geometric features": {
+        "Publication date": "2015/10",
+        "Total citations": 22
+      },
+      "Mixed pixels removal of a laser rangefinder for mobile robot 3-D terrain mapping": {
+        "Publication date": "2008/6/20",
+        "Total citations": 22
+      },
+      "Avoidance of moving obstacles through behavior fusion and motion prediction": {
+        "Publication date": "1998/10/11",
+        "Total citations": 22
+      },
+      "Computer-vision-based wheel sinkage estimation for robot navigation on lunar terrain": {
+        "Publication date": "2013/8",
+        "Total citations": 15
+      },
+      "NCC-RANSAC: A Fast Plane Extraction Method for Navigating a Smart Cane for the Visually Impaired": {
+        "Publication date": "2013",
+        "Total citations": 14
+      },
+      "Co-robotic cane: A new robotic navigation aid for the visually impaired": {
+        "Publication date": "2016/4",
+        "Total citations": 13
+      },
+      "Performance evaluation of a pose estimation method based on the SwissRanger SR4000": {
+        "Publication date": "2012/8/5",
+        "Total citations": 13
+      },
+      "3D object recognition by geometric context and Gaussian-mixture-model-based plane classification": {
+        "Publication date": "2014/5/31",
+        "Total citations": 12
+      },
+      "A recursive planar feature extraction method for 3D range data segmentation": {
+        "Publication date": "2011/10/9",
+        "Total citations": 12
+      },
+      "Position tracking system": {
+        "Publication date": "2011/10/4",
+        "Total citations": 12
+      },
+      "Obstacle avoidance for the segway robotic mobility platform": {
+        "Publication date": "2004/3/28",
+        "Total citations": 12
+      },
+      "Swissranger sr-3000 range images enhancement by a singular value decomposition filter": {
+        "Publication date": "2008/6/20",
+        "Total citations": 10
+      },
+      "A pose graph based visual SLAM algorithm for robot pose estimation": {
+        "Publication date": "2014/8/3",
+        "Total citations": 9
+      },
+      "An intelligent navigator for mobile vehicles": {
+        "Publication date": "1996",
+        "Total citations": 9
+      },
+      "An indoor wayfinding system based on geometric features aided graph SLAM for the visually impaired": {
+        "Publication date": "2017/9",
+        "Total citations": 8
+      },
+      "An indoor navigation aid for the visually impaired": {
+        "Publication date": "2016/12/3",
+        "Total citations": 8
+      },
+      "Portable robotic device": {
+        "Publication date": "2013/4/18"
+      },
+      "A co-robotic cane for blind navigation": {
+        "Publication date": "2014/10/5",
+        "Total citations": 8
+      },
+      "Singular value decomposition filter: an effective method to enhance the Swiss Ranger SR-3000\u2019s range images": {
+        "Publication date": "2008/12",
+        "Total citations": 8
+      },
+      "Behavior-based fuzzy navigation of mobile vehicle in unknown and dynamically changing environment": {
+        "Publication date": "1999/1/1",
+        "Total citations": 8
+      },
+      "Computer vision based wheel sinkage detection for robotic lunar exploration tasks": {
+        "Publication date": "2010/8/4",
+        "Total citations": 7
+      },
+      "A method for mobile robot obstacle negotiation": {
+        "Publication date": "2005/9",
+        "Total citations": 7
+      },
+      "An adaptive fuzzy approach to obstacle avoidance": {
+        "Publication date": "1998/10/11",
+        "Total citations": 7
+      },
+      "Vehicle navigation strategy based on behavior fusion": {
+        "Publication date": "1997/10/12",
+        "Total citations": 7
+      },
+      "Self-learning fuzzy navigation of mobile vehicle": {
+        "Publication date": "1996/10/14",
+        "Total citations": 7
+      },
+      "A fast egomotion estimation method based on visual feature tracking and Iterative Closest Point": {
+        "Publication date": "2014/4/7",
+        "Total citations": 6
+      },
+      "6-DOF pose estimation of an autonomous car by visual feature correspondence and tracking": {
+        "Publication date": "2012/9",
+        "Total citations": 6
+      },
+      "An extended normalized cuts method for real-time planar feature extraction from noisy range images": {
+        "Publication date": "2010/10/18",
+        "Total citations": 6
+      },
+      "Polar Traversability Index: A Measure of terrain traversal property for mobile robot navigation in urban environments": {
+        "Publication date": "2007/10/7",
+        "Total citations": 6
+      },
+      "Toward safe navigation in urban environments": {
+        "Publication date": "2007/5/2",
+        "Total citations": 5
+      },
+      "A COMPOSITE APPROACH TO THE ADAPTIVE NEURAL NETWORKS CONTROL OF UNKNOWN FLEXIBLE JOINT ROBOTS": {
+        "Publication date": "2007",
+        "Total citations": 5
+      },
+      "3-D object recognition of a robotic navigation aid for the visually impaired": {
+        "Publication date": "2018/2",
+        "Total citations": 4
+      },
+      "Enhancing mobile robot navigation in urban environments by a polar traversability index": {
+        "Publication date": "2008/3",
+        "Total citations": 4
+      },
+      "Robust Edge Extraction for Swissranger SR-3000 Range Images by Singular Value Decomposition Filtering and Hough Transform": {
+        "Publication date": "2010/12",
+        "Total citations": 3
+      },
+      "EXPECTATIONS-an autonomous mobile vehicle simulator": {
+        "Publication date": "1997/10/12",
+        "Total citations": 3
+      },
+      "A pose estimation method for unmanned ground vehicles in GPS denied environments": {
+        "Publication date": "2012/5/25",
+        "Total citations": 2
+      },
+      "Road vehicle navigation through virtual world simulation": {
+        "Publication date": "1997/11/9",
+        "Total citations": 2
+      },
+      "Learning of Holism-Landmark Graph Embedding for Place Recognition in Long-Term Autonomy": {
+        "Publication date": "2018/7/16",
+        "Total citations": 1
+      },
+      "A Motorized Robotic Walker for Human Walking Assistance": {
+        "Publication date": "2017/4/10",
+        "Total citations": 1
+      },
+      "RGB-D camera based walking pattern recognition by support vector machines for a smart rollator": {
+        "Publication date": "2017/2/1",
+        "Total citations": 1
+      },
+      "An RGB-D camera based walking pattern detection method for smart rollators": {
+        "Publication date": "2015/12/14",
+        "Total citations": 1
+      },
+      "An EKF-SLAM method with filter consistency test for mobile robots using a 3D camera": {
+        "Publication date": "2015/12/6",
+        "Total citations": 1
+      },
+      "Plane Segmentation of 3D Time-of-Flight Camera\u2019s Range Data by Normalized Cuts for Navigating a Tracked Robot": {
+        "Publication date": "2015/3/1",
+        "Total citations": 1
+      },
+      "Behavior learning and behavior fusion in autonomous navigation of mobile robots": {
+        "Publication date": "2005",
+        "Total citations": 1
+      },
+      "A Comparative Analysis of Visual-Inertial SLAM for Assisted Wayfinding of the Visually Impaired": {
+        "Publication date": "2019/1/7"
+      },
+      "Development of a Motorized Robotic Walker Guided by an Image Processing System for Human Walking Assistance and Rehabilitation": {
+        "Publication date": "2018/9/30"
+      },
+      "A Gaussian-mixture-model-based visual feature matching scheme for small-object detection from RGB-D data": {
+        "Publication date": "2017/7/14"
+      },
+      "Plane-Aided Visual-Inertial Odometry for Pose Estimation of a 3D Camera based Indoor Blind Navigation": {
+        "Publication date": "2017"
+      },
+      "Data Processing in Current 3D Robotic Perception Systems": {
+        "Publication date": "2015/4/3"
+      },
+      "Advances in Field Robotics and Intelligent Systems": {
+        "Publication date": "2008/3"
+      },
+      "A Web Lecture Capture System with Robotic Speaker Tracking": {
+        "Publication date": "2006"
+      },
+      "DEVELOPMENT OF A TEST-BED FOR OUTDOOR AGV RESEARCH": {
+        "Publication date": "2001"
+      },
+      "EXPECTATIONS-an autonomous mobile vehicle": {
+        "Publication date": "1997"
+      }
+    }
+  },
+  "Hong-Sheng Zhou": {
+    "id": "PQl5OHMAAAAJ",
+    "citation_count": 879,
+    "articles": {
+      "Multi-input functional encryption": {
+        "Publication date": "2014/5/11",
+        "Total citations": 191
+      },
+      "On the security of the \u201cfree-XOR\u201d technique": {
+        "Publication date": "2012/3/19",
+        "Total citations": 63
+      },
+      "Concurrent blind signatures without random oracles": {
+        "Publication date": "2006/9/6",
+        "Total citations": 49
+      },
+      "Somewhat non-committing encryption and efficient adaptively secure oblivious transfer": {
+        "Publication date": "2009/8/16",
+        "Total citations": 47
+      },
+      "Fair and robust multi-party computation using a global transaction ledger": {
+        "Publication date": "2016/5/8",
+        "Total citations": 44
+      },
+      "Cryptography for parallel RAM from indistinguishability obfuscation": {
+        "Publication date": "2016/1/14",
+        "Total citations": 37
+      },
+      "Multi-client verifiable computation with stronger security guarantees": {
+        "Publication date": "2015/3/23",
+        "Total citations": 37
+      },
+      "Cliptography: Clipping the power of kleptographic attacks": {
+        "Publication date": "2016/12/4",
+        "Total citations": 36
+      },
+      "Locally decodable and updatable non-malleable codes and their applications": {
+        "Publication date": "2015/3/23",
+        "Total citations": 35
+      },
+      "Efficient, adaptively secure, and composable oblivious transfer with a single, global CRS": {
+        "Publication date": "2013/2/26",
+        "Total citations": 31
+      },
+      "Equivocal blind signatures and adaptive UC-security": {
+        "Publication date": "2008/3/19",
+        "Total citations": 29
+      },
+      "Adaptively secure broadcast, revisited.": {
+        "Publication date": "2011/6/6",
+        "Total citations": 21
+      },
+      "Remarks on unknown key-share attack on authenticated multiple-key agreement protocol": {
+        "Publication date": "2003/8/21",
+        "Total citations": 21
+      },
+      "Generic semantic security against a kleptographic adversary": {
+        "Publication date": "2017/10/30",
+        "Total citations": 20
+      },
+      "TwinsCoin: a cryptocurrency via proof-of-work and proof-of-stake": {
+        "Publication date": "2018/5/22",
+        "Total citations": 19
+      },
+      "2-hop Blockchain: Combining Proof-of-Work and Proof-of-Stake Securely": {
+        "Publication date": "2016/11",
+        "Total citations": 18
+      },
+      "Feasibility and completeness of cryptographic tasks in the quantum world": {
+        "Publication date": "2013",
+        "Total citations": 16
+      },
+      "Designing proof of human-work puzzles for cryptocurrency and beyond": {
+        "Publication date": "2016/11/1",
+        "Total citations": 15
+      },
+      "Leakage-resilient circuits revisited\u2013optimal number of computing components without leak-free hardware": {
+        "Publication date": "2015/4/26",
+        "Total citations": 15
+      },
+      "Feasibility and infeasibility of adaptively secure fully homomorphic encryption": {
+        "Publication date": "2013",
+        "Total citations": 14
+      },
+      "Incoercible multi-party computation and universally composable receipt-free voting": {
+        "Publication date": "2015/8/16",
+        "Total citations": 11
+      },
+      "Hidden identity-based signatures": {
+        "Publication date": "2009/9/1",
+        "Total citations": 8
+      },
+      "An Improved Proxy Multi-Signature Scheme": {
+        "Publication date": "2004",
+        "Total citations": 11
+      },
+      "Functional encryption from (small) hardware tokens": {
+        "Publication date": "2013/12/1",
+        "Total citations": 9
+      },
+      "A framework for the sound specification of cryptographic tasks": {
+        "Publication date": "2010/7/17",
+        "Total citations": 9
+      },
+      "A unified approach to idealized model separations via indistinguishability obfuscation": {
+        "Publication date": "2016/8/31",
+        "Total citations": 8
+      },
+      "Leakage-resilient public-key encryption from obfuscation": {
+        "Publication date": "2016/3/6",
+        "Total citations": 7
+      },
+      "(Efficient) Universally Composable Oblivious Transfer Using a Minimal Number of Stateless Tokens": {
+        "Publication date": "2019/4",
+        "Total citations": 5
+      },
+      "Brief announcement: Statement voting and liquid democracy": {
+        "Publication date": "2017/7/25",
+        "Total citations": 5
+      },
+      "Trading static for adaptive security in universally composable zero-knowledge": {
+        "Publication date": "2007/7/9",
+        "Total citations": 5
+      },
+      "An electronic cash system with multiple banks based on proxy signature scheme": {
+        "Publication date": "2004",
+        "Total citations": 5
+      },
+      "Zero-knowledge proofs with witness elimination": {
+        "Publication date": "2009/3/18",
+        "Total citations": 4
+      },
+      "Statement voting": {
+        "Publication date": "2019",
+        "Total citations": 3
+      },
+      "A scalable proof-of-stake blockchain in the open setting (or, how to mimic nakamoto\u2019s design via proof-of-stake)": {
+        "Publication date": "2017",
+        "Total citations": 3
+      },
+      "Distributing the setup in universally composable multi-party computation": {
+        "Publication date": "2014/7/15",
+        "Total citations": 3
+      },
+      "Non-interactive cryptography in the ram model of computation": {
+        "Publication date": "2014",
+        "Total citations": 3
+      },
+      "Correcting subverted random oracles": {
+        "Publication date": "2018/8/19",
+        "Total citations": 2
+      },
+      "iChing: A Scalable Proof-of-Stake Blockchain in the Open Setting (or, How to Mimic Nakamoto's Design via Proof-of-Stake)": {
+        "Publication date": "2017/7/5",
+        "Total citations": 2
+      },
+      "Quantum one-time memories from stateless hardware": {
+        "Publication date": "2015/11/4",
+        "Total citations": 2
+      },
+      "Multi-mode Cryptocurrency Systems": {
+        "Publication date": "2018/5/22",
+        "Total citations": 1
+      },
+      "Leakage resilience from program obfuscation": {
+        "Publication date": "2018/4",
+        "Total citations": 1
+      },
+      "Multi-key FHE for multi-bit messages": {
+        "Publication date": "2018/2/1",
+        "Total citations": 1
+      },
+      "Secure function collection with sublinear storage": {
+        "Publication date": "2009/7/5",
+        "Total citations": 1
+      },
+      "Sound and Fine-grain Specification of Ideal Functionalities": {
+        "Publication date": "2009",
+        "Total citations": 1
+      },
+      "Leakage-Resilient Cryptography from Puncturable Primitives and Obfuscation": {
+        "Publication date": "2018/12"
+      },
+      "A Generic Paradigm for Blockchain Design": {
+        "Publication date": "2018/11/5"
+      },
+      "Towards Quantum One-Time Memories from Stateless Hardware": {
+        "Publication date": "2018/10/11"
+      },
+      "Lecture Notes: Cryptography Primitives and Protocols": {
+        "Publication date": "2016/11"
+      },
+      "Deniable Two-Party Computation": {
+        "Publication date": "2011/2"
+      },
+      "From Impossibility to Completeness for Deterministic Two-Party SFE": {
+        "Publication date": "2011"
+      },
+      "Efficient and adaptively secure cryptographic primitives---designing for composability": {
+        "Publication date": "2010"
+      }
+    }
+  }
+}
