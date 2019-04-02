@@ -310,9 +310,9 @@ class ScholarScraper(object):
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
 
                     # Get href from link
-                    article_id_url = v.get_attribute('href')
+                    article_id_url = v.get_attribute("href")
 
-                    article_dict['id'] = self.parse_article_id(article_id_url)
+                    article_dict["id"] = self.parse_article_id(article_id_url)
 
                     # Click on the link for total citations to parse the citations
                     # article_dict["Citation Titles"] = self.parse_citations()

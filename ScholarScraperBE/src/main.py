@@ -3,6 +3,7 @@
 import json
 import logging
 from .scraper import scraper
+
 # from .entities.entity import Session, engine, Base
 # from .entities.scholar import Scholar
 from flask_cors import CORS
