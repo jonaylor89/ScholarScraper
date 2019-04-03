@@ -4,6 +4,7 @@ import json
 import logging
 from time import sleep
 from random import randint
+from datetime import datetime
 from typing import List, Dict
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -24,7 +25,7 @@ class ScholarScraper(object):
         logging.basicConfig(
             filename="scraper.log",
             filemode="w",
-            format="%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s",
+            format="%(asctime)s %(name)s %(levelname)s %(message)s",
             datefmt="%H:%M:%S",
             level=logging.INFO,
         )
@@ -48,10 +49,10 @@ class ScholarScraper(object):
             "John D. Leonard II",
             "Changqing Luo",
             "Milos Manic",
-            "Bridget McInnes",
+            "Bridget T. McInnes",
             "Tamer Nadeem",
             # "Zachary Whitten",
-            "Tarynn Witten",
+            "Tarynn M Witten",
             "Cang Ye",
             "Hong-Sheng Zhou",
         ]
@@ -87,7 +88,6 @@ class ScholarScraper(object):
         """
         Seperate method in case we don't want to use the Context Manager
         """
-
         self.browser.quit()
 
     def goto_start(self) -> None:
@@ -131,8 +131,9 @@ class ScholarScraper(object):
         self.researcher_dict[name] = {}
 
         try:
-            self.logger.info(f"creating researcher {name} from scratch")
+            self.logger.warning(f"creating researcher {name} from scratch")
             self.researcher_dict[name]["id"] = self.parse_id()
+            self.researcher_dict[name]["date"] = str(datetime.now())
             self.researcher_dict[name]["citation_count"] = self.citation_count()
             self.researcher_dict[name]["articles"] = self.parse_articles()
         except Exception as e:
@@ -172,16 +173,25 @@ class ScholarScraper(object):
             f"current citation count is {cur_citations} vs the old of {prev['citation_count']}"
         )
 
-        if cur_citations != prev["citation_count"]:
-            self.logger.info(
-                f"change in citation count for {name}, updating researcher"
-            )
-            self.researcher_dict[name]["id"] = prev["id"]
-            self.researcher_dict[name]["citations_count"] = cur_citations
-            self.researcher_dict[name]["articles"] = self.parse_articles(name)
-        else:
-            self.logger.info(f"citation count for {name} has remained constant")
-            self.researcher_dict[name] = prev
+        self.researcher_dict[name] = {}
+
+        try:
+            if cur_citations != prev["citation_count"]:
+                self.logger.info(
+                    f"change in citation count for {name}, updating researcher"
+                )
+                self.researcher_dict[name]["id"] = prev["id"]
+                self.researcher_dict[name]["date"] = str(datetime.now())
+                self.researcher_dict[name]["citations_count"] = cur_citations
+                self.researcher_dict[name]["articles"] = self.check_articles(prev["articles"])
+            else:
+                self.logger.info(f"citation count for {name} has remained constant")
+                self.researcher_dict[name] = prev
+                self.researcher_dict[name]["date"] = str(datetime.now())
+
+        except Exception as e:
+            self.logger.error(f"couldn't properly check the researcher {name} because: {e}")
+            self.researcher_dict[name] = {}
 
     def parse_articles(self) -> Dict:
         """
@@ -234,7 +244,7 @@ class ScholarScraper(object):
         [!!!] Assumed to be on the researcher's page
         """
 
-        parameters = self.get_url_parameters()
+        parameters = self.get_url_parameters(self.browser.current_url)
 
         if "user" in parameters:
             scholar_id = parameters[parameters.index("user") + 1]
@@ -246,19 +256,86 @@ class ScholarScraper(object):
             self.logger.error("`user` not in parameters")
             return ""
 
-    def get_url_parameters(self) -> List[str]:
+    def get_url_parameters(self, url: str) -> List[str]:
         """
         parse the keywords in the parameters of the url and put them in a python list
         """
-        url = self.browser.current_url
         return url[url.find("?") + 1 :].replace("&", "=").split("=")
 
-    def check_article(self, article_link) -> None:
+    def check_articles(self, prev_articles: Dict) -> None:
         """
-        Check if an article's citation number has changed and parse it if it has
+        Check if an articles citation number has changed and parse it if it has
+
+        [!!!] Assumed to already be on the researcher's page
+
+        TODO: Just download the html and use scraPY rather than selenium scraping (parallel scraping perhaps?)
 
         """
-        pass
+
+        sleep(randint(1, 3))
+
+        # Click the `SHOW MORE` button at the bottom of the page
+        show_more = self.browser.find_element_by_id("gsc_bpf_more")
+
+        # Show more until the button is disabled
+        count = 0
+        while show_more.is_enabled():
+            show_more.click()
+            count += 1
+
+        self.logger.debug(f"show more was pressed {count} times")
+
+        sleep(2)  # Sleep to allow everything to load
+
+        try:
+            # Grab all articles from researcher (map them to their text and not the webelement)
+            titles = self.browser.find_elements_by_class_name("gsc_a_at")
+
+            # Grab all citations for the articles (map them to their text and not the webelement)
+            citations = self.browser.find_elements_by_class_name("gsc_a_c")[2:]
+
+        except Exception as e:
+            self.logger.error(f"trouble grabbing the titles and citations: {e}")
+            return prev_articles
+
+        self.logger.info(f"titles for author: {len(titles)}")
+        self.logger.info(f"cited titles for author: {len(citations)}")
+
+        # Create article section
+        articles_dict = {}
+
+        try:
+            # Loop through all articles for the researcher
+            for title, citation_link in zip(titles, citations):
+
+                # I have to make it weird like this because web attributes changed be changed
+                if citation_link.text == "":
+                    citation = "0"
+                else:
+                    citation = citation_link.text
+
+                # Add the publication as a key to the dictionary
+                try:
+                    if int(citation) == prev_articles[title.text]["Total citations"]:
+                        self.logger.debug(f"article `{title.text}` has not changed citation count")
+                        articles_dict[title.text] = prev_articles[title.text]["Total citations"]
+                    else:
+                        self.logger.info(f"citation count for article `{title.text}` has changed {prev_articles[title.text]['Total citations']} vs {citation}")
+                        articles_dict[title.text] = self.parse_article(title)
+                except Exception as e:
+                    # title wasn't even in the old database
+                    self.logger.warning(f"title `{title.text}` is new to the data: {e}")
+                    articles_dict[title.text] = self.parse_article(title)
+
+        except Exception as e:
+            self.logger.error(f"problem grabbing the data for articles: {e}")
+            return prev_articles
+
+        # End of publication parsing
+
+        self.logger.info("parsing complete for articles")
+
+        return articles_dict
 
     def parse_article(self, article_link) -> Dict:
         """
@@ -275,7 +352,7 @@ class ScholarScraper(object):
         try:
             # Click the title to get the information about the publication
             article_link.click()
-            self.logger.debug(f"entering article ({article_link.text})")
+            self.logger.debug(f"entering article ({article_link})")
         except Exception as e:
             self.logger.error(f"article `{article_link.text}` could not be clicked on")
             self.browser.back()
@@ -312,9 +389,12 @@ class ScholarScraper(object):
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
 
                     # Get href from link
-                    article_id_url = v.get_attribute("href")
+                    article_id_url = v.find_element_by_css_selector("a").get_attribute(
+                        "href"
+                    )
 
-                    article_dict["id"] = self.parse_article_id(article_id_url)
+                    if article_id_url is not None:
+                        article_dict["id"] = self.parse_article_id(article_id_url)
 
                     # Click on the link for total citations to parse the citations
                     # article_dict["Citation Titles"] = self.parse_citations()
@@ -324,8 +404,8 @@ class ScholarScraper(object):
                 elif k.text == "Publication date":
                     article_dict[k.text] = v.text
 
-            except:
-                self.logger.error(f"field parsing error on {k.text}")
+            except Exception as e:
+                self.logger.error(f"field parsing error on field {k.text}: {e}")
                 self.browser.back()
                 sleep(1)
                 article_dict[k.text] = {}
@@ -346,7 +426,7 @@ class ScholarScraper(object):
 
         # The id is in the parameters of the link
         if "cites" in article_id_parameters:
-            article_id = article_id_parameters[parameters.index("cites") + 1]
+            article_id = article_id_parameters[article_id_parameters.index("cites") + 1]
             self.logger.debug(f"article id is {article_id}")
 
             return article_id
@@ -380,7 +460,7 @@ class ScholarScraper(object):
 
         try:
             citation_list = self.browser.execute_script(
-                        """
+                """
                             // let list= document.getElementsByClassName("gs_rt"); 
                             // let arr = [];
                             // for (var i = 0; i < list.length; i++) {
@@ -466,10 +546,15 @@ def main() -> None:
                         try:
                             researcher = researcher_data[name]
                             scraper.check_researcher(name, researcher)
-                        except:
+                        except KeyError as ke:
+                            scraper.logger.warning(f"researcher {name} not in existing data: {ke}")
                             researcher = {}
                             scraper.parse_researcher(name)
+                        except Exception as e:
+                            scraper.logger.error(f"error with researcher {name}: {e}")
+                            scraper.researcher_dict[name] = {}
                     else:
+                        scraper.logger.error(f"database not found parsing {name}")
                         scraper.parse_researcher(name)
 
                     break  # Successful attempt
