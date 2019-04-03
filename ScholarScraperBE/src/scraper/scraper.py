@@ -18,7 +18,7 @@ from selenium.webdriver import ChromeOptions
 class ScholarScraper(object):
     def __init__(self) -> None:
         """
-        Initialize logging and start the browser
+        Initialize logging and set everything up
         """
 
         self.logger = logging.getLogger(__name__)
