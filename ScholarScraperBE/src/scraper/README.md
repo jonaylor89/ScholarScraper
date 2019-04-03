@@ -35,9 +35,9 @@
 
 # Possible Optimizations
 * Download the html for a publication and parse that to allow for parallelization without the browser thinkings we're DOSing it
-    * Using ScraPY
+    * Using ScraPY or BeautifulSoup
 * Switch drivers sometimes to confuse google's algorithms
-* Send an email of any change that occurs (python smtp library)
+* Email report to me of the changes since the last parse (python smtp library)
 * Argparse for quick command line configuring
 
 -------------------------------------

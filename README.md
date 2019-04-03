@@ -92,14 +92,5 @@ CRON is formatted like so
 
  ---------------------------
 
-# TODO
-
-1. Design upgraded web scraper
-    - Create new tables
-    - Scrape specified attributes for scholars and publications
-    - Get first batch of data in for Russia to display
-    - Sleep for random periods of time
-
-
 
 
