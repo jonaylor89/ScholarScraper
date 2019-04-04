@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Create all tables
-# Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
 
 @app.route("/")
