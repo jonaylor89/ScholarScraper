@@ -12,6 +12,7 @@ sqlalchemy = "*"
 gunicorn = "*"
 flask-cors = "*"
 psycopg2 = "*"
+marshmallow = "*"
 
 [requires]
 python_version = "3.7"
