@@ -1,5 +1,6 @@
 
 from sqlalchemy import Column, String, Integer, DateTime
+from marshmallow import Schema, fields
 
 from .entity import Entity, Base
 
@@ -16,3 +17,7 @@ class Publication(Entity, Base):
 
     def __repr__(self):
         return f"<Publication(publication_id='{publication_id}', date='{self.date}')>"
+
+class PublicationSchema(Schema):
+    publication_id = fields.Number()
+    date = fields.DateTime()
