@@ -12,3 +12,8 @@ class Publication-Author(Entity, Base):
 
     def __init__(self, pub_id, scholar_id, created_by):
         Entity.__init__(self, created_by)
+        self.publication_id = pub_id 
+        self.scholar_id = scholar_id
+
+    def __repr__(self)
+        return f"<Publication-Author(publication_id='{publication_id}', scholar_id='{self.scholar_id}')>"
