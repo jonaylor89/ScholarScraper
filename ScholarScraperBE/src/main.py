@@ -10,9 +10,9 @@ from .scraper import scraper
 from .entities.entity import Session, engine, Base
 from .entities.publication import Publication, PublicationSchema
 from .entities.scholar import Scholar, ScholarSchema
-from .entities.publication_author import PublicationAuthor, PublicationAuthorSchema
-from .entities.publication_cites import PublicationCites, PublicationCitesSchema
-from .entities.total_citations import TotalCitations, TotalCitationsSchema
+from .entities.publicationauthor import PublicationAuthor, PublicationAuthorSchema
+from .entities.publicationcites import PublicationCites, PublicationCitesSchema
+from .entities.totalcitations import TotalCitations, TotalCitationsSchema
 
 
 app = Flask(__name__)

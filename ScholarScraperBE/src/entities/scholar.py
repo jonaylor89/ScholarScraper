@@ -9,7 +9,7 @@ class Scholar(Entity, Base):
     __tablename__ = "scholar"
 
     scholar_id = Column(Integer, primary_key=True)
-    name = Clumn(String)
+    name = Column(String)
 
     def __init__(self, scholar_id, name, created_by):
         Entity.__init__(self, created_by)

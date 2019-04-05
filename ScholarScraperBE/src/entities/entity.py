@@ -5,13 +5,13 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # These will change depending on the database
-db_url = "localhost:3306"
+db_url = "172.18.233.70:3306"
 db_name = os.getenv("DB_NAME")
 db_user = os.getenv("BD_USERNAME")
 db_pass = os.getenv("DB_PASSWORD")
 
 # This will change depending on the database we have
-engine = create_engine(f"mysql://{db_user}:{db_pass}@{db_url}/{db_name}")
+engine = create_engine(f"mysql+pymysql://{db_user}:{db_pass}@{db_url}/{db_name}")
 
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
