@@ -31,7 +31,7 @@ def hello():
 
 
 @app.route("/scholar")
-def get_schiolars():
+def get_scholars():
 
     # fetching from the database
     session = Session()
@@ -69,6 +69,161 @@ def parse_by_name():
 
     return jsonify(new_exam), 201
 
+@app.route("/publication")
+def get_scholars():
+
+    # fetching from the database
+    session = Session()
+    scholar_objects = session.query(Scholar).all()
+
+    # transforming into JSON-serializable objects
+    schema = ScholarSchema(many=True)
+    scholars = schema.dump(scholar_objects)
+
+    # serializing as JSON
+    session.close()
+
+    return jsonify(scholars.data)
+
+
+@app.route("/publication", methods=["POST"])
+def parse_by_name():
+    """
+    Parse people
+    """
+    # mount scholar object
+    posted_exam = ScholarSchema() \
+            .load(request.get_json())
+
+    scholar = Scholar(**posted_exam.data, created_by="HTTP post request")
+
+    # persist scholar
+    session = Session()
+    session.add(scholar)
+    session.commit()
+
+    # return created scholar
+    new_exam = ScholarSchema().dump(scholar.data)
+    session.close()
+
+    return jsonify(new_exam), 201
+
+@app.route("/publication-author")
+def get_scholars():
+
+    # fetching from the database
+    session = Session()
+    scholar_objects = session.query(Scholar).all()
+
+    # transforming into JSON-serializable objects
+    schema = ScholarSchema(many=True)
+    scholars = schema.dump(scholar_objects)
+
+    # serializing as JSON
+    session.close()
+
+    return jsonify(scholars.data)
+
+
+@app.route("/publication_author", methods=["POST"])
+def parse_by_name():
+    """
+    Parse people
+    """
+    # mount scholar object
+    posted_exam = ScholarSchema() \
+            .load(request.get_json())
+
+    scholar = Scholar(**posted_exam.data, created_by="HTTP post request")
+
+    # persist scholar
+    session = Session()
+    session.add(scholar)
+    session.commit()
+
+    # return created scholar
+    new_exam = ScholarSchema().dump(scholar.data)
+    session.close()
+
+    return jsonify(new_exam), 201
+
+@app.route("/publication-cites")
+def get_scholars():
+
+    # fetching from the database
+    session = Session()
+    scholar_objects = session.query(Scholar).all()
+
+    # transforming into JSON-serializable objects
+    schema = ScholarSchema(many=True)
+    scholars = schema.dump(scholar_objects)
+
+    # serializing as JSON
+    session.close()
+
+    return jsonify(scholars.data)
+
+
+@app.route("/publication-cites", methods=["POST"])
+def parse_by_name():
+    """
+    Parse people
+    """
+    # mount scholar object
+    posted_exam = ScholarSchema() \
+            .load(request.get_json())
+
+    scholar = Scholar(**posted_exam.data, created_by="HTTP post request")
+
+    # persist scholar
+    session = Session()
+    session.add(scholar)
+    session.commit()
+
+    # return created scholar
+    new_exam = ScholarSchema().dump(scholar.data)
+    session.close()
+
+    return jsonify(new_exam), 201
+
+@app.route("/total-citations")
+def get_scholars():
+
+    # fetching from the database
+    session = Session()
+    scholar_objects = session.query(Scholar).all()
+
+    # transforming into JSON-serializable objects
+    schema = ScholarSchema(many=True)
+    scholars = schema.dump(scholar_objects)
+
+    # serializing as JSON
+    session.close()
+
+    return jsonify(scholars.data)
+
+
+@app.route("/total-citations", methods=["POST"])
+def parse_by_name():
+    """
+    Parse people
+    """
+    # mount scholar object
+    posted_exam = ScholarSchema() \
+            .load(request.get_json())
+
+    scholar = Scholar(**posted_exam.data, created_by="HTTP post request")
+
+    # persist scholar
+    session = Session()
+    session.add(scholar)
+    session.commit()
+
+    # return created scholar
+    new_exam = ScholarSchema().dump(scholar.data)
+    session.close()
+
+    return jsonify(new_exam), 201
 
 @app.route("/secret")
 def secret():

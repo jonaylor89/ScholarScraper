@@ -19,7 +19,7 @@ Base = declarative_base()
 
 class Entity(object):
 
-    id = Column(Integer, primary_key=True)
+    # id = Column(Integer, primary_key=True)
     created_at = Column(DateTime)
     updated_at = Column(DateTime)
     last_updated_by = Column(String)
