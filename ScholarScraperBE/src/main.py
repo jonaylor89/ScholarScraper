@@ -2,12 +2,18 @@
 
 import json
 import logging
-from .scraper import scraper
 
-# from .entities.entity import Session, engine, Base
-# from .entities.scholar import Scholar
 from flask_cors import CORS
 from flask import Flask, redirect, jsonify
+
+from .scraper import scraper
+from .entities.entity import Session, engine, Base
+from .entities.publication_author import PublicationAuthor, PublicationAuthorSchema
+from .entities.publication_cites import PublicationCites, PublicationCitesSchema
+from .entities.publication import Publication, PublicationSchema
+from .entities.scholar import Scholar, ScholarSchema
+from .entities.total_citations import TotalCitations, TotalCitationsSchema
+
 
 app = Flask(__name__)
 CORS(app)
