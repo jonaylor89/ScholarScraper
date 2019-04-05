@@ -1,4 +1,3 @@
-
 from sqlalchemy import Column, String, Integer
 from marshmallow import Schema, fields
 
@@ -14,11 +13,12 @@ class PublicationAuthor(Entity, Base):
 
     def __init__(self, pub_id, scholar_id, created_by):
         Entity.__init__(self, created_by)
-        self.publication_id = pub_id 
+        self.publication_id = pub_id
         self.scholar_id = scholar_id
 
-    def __repr__(self)
+    def __repr__(self):
         return f"<PublicationAuthor(publication_id='{publication_id}', scholar_id='{self.scholar_id}')>"
+
 
 class PublicationAuthorSchema(Schema):
     publication_id = fields.Number()

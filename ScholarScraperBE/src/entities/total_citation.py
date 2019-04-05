@@ -1,9 +1,9 @@
-
 from datetime import datetime
 from sqlalchemy import Column, String, Integer, DateTime
 from marshmallow import Schema, fields
 
 from .entity import Entity, Base
+
 
 class TotalCitations(Entity, Base):
 
@@ -21,6 +21,7 @@ class TotalCitations(Entity, Base):
 
     def __repr__(self):
         return f"<TotalCitations(scholar_id='{self.scholar_id}', date='{self.date}', total_cites='{self.total_cites}')>"
+
 
 class TotalCitationsSchema(Schema):
     scholar_id = fields.Number()

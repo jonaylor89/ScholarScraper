@@ -4,14 +4,14 @@ import json
 import logging
 
 from flask_cors import CORS
-from flask import Flask, redirect, jsonify
+from flask import Flask, redirect, jsonify, request
 
 from .scraper import scraper
 from .entities.entity import Session, engine, Base
-from .entities.publication_author import PublicationAuthor, PublicationAuthorSchema
-from .entities.publication_cites import PublicationCites, PublicationCitesSchema
 from .entities.publication import Publication, PublicationSchema
 from .entities.scholar import Scholar, ScholarSchema
+from .entities.publication_author import PublicationAuthor, PublicationAuthorSchema
+from .entities.publication_cites import PublicationCites, PublicationCitesSchema
 from .entities.total_citations import TotalCitations, TotalCitationsSchema
 
 
@@ -30,32 +30,47 @@ def hello():
     return "<h1>WELCOME TO SCHOLAR SCRAPER!</h1>"
 
 
-@app.route("/names/<name>", methods=["GET"])
-def show_by_name(name: str):
-    """
-    The main meat and potatoes right now
-    In construction!!!
-    """
-    json_data = {}
+@app.route("/scholar")
+def get_schiolars():
 
-    with open("src/scraper/data.json", "r") as f:
-        json_data = json.load(f)
+    # fetching from the database
+    session = Session()
+    scholar_objects = session.query(Scholar).all()
 
-    return jsonify(json_data[name])
+    # transforming into JSON-serializable objects
+    schema = ScholarSchema(many=True)
+    scholars = schema.dump(scholar_objects)
+
+    # serializing as JSON
+    session.close()
+
+    return jsonify(scholars.data)
 
 
-@app.route("/parse/<name>", methods=["GET", "POST"])
-def parse_by_name(name: str):
+@app.route("/scholar", methods=["POST"])
+def parse_by_name():
     """
     Parse people
     """
+    # mount scholar object
+    posted_exam = ScholarSchema() \
+            .load(request.get_json())
 
-    # scraper.check_researcher(name)
+    scholar = Scholar(**posted_exam.data, created_by="HTTP post request")
 
-    return redirect(f"/name/{name}")
+    # persist scholar
+    session = Session()
+    session.add(scholar)
+    session.commit()
+
+    # return created scholar
+    new_exam = ScholarSchema().dump(scholar.data)
+    session.close()
+
+    return jsonify(new_exam), 201
 
 
-@app.route("/secret", methods=["GET", "POST"])
+@app.route("/secret")
 def secret():
     """
     A secret

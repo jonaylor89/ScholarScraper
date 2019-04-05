@@ -1,4 +1,3 @@
-
 from sqlalchemy import Column, String, Integer
 from marshmallow import Schema, fields
 
@@ -20,6 +19,7 @@ class Scholar(Entity, Base):
 
     def __repr__(self):
         return f"<Scholar(scholar_id='{self.scholar_id}', name='{self.name}')>"
+
 
 class ScholarSchema(Schema):
     scholar_id = fields.Number()

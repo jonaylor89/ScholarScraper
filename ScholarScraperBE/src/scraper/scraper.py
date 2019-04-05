@@ -183,14 +183,18 @@ class ScholarScraper(object):
                 self.researcher_dict[name]["id"] = prev["id"]
                 self.researcher_dict[name]["date"] = str(datetime.now())
                 self.researcher_dict[name]["citations_count"] = cur_citations
-                self.researcher_dict[name]["articles"] = self.check_articles(prev["articles"])
+                self.researcher_dict[name]["articles"] = self.check_articles(
+                    prev["articles"]
+                )
             else:
                 self.logger.info(f"citation count for {name} has remained constant")
                 self.researcher_dict[name] = prev
                 self.researcher_dict[name]["date"] = str(datetime.now())
 
         except Exception as e:
-            self.logger.error(f"couldn't properly check the researcher {name} because: {e}")
+            self.logger.error(
+                f"couldn't properly check the researcher {name} because: {e}"
+            )
             self.researcher_dict[name] = {}
 
     def parse_articles(self) -> Dict:
@@ -317,10 +321,16 @@ class ScholarScraper(object):
                 # Add the publication as a key to the dictionary
                 try:
                     if int(citation) == prev_articles[title.text]["Total citations"]:
-                        self.logger.debug(f"article `{title.text}` has not changed citation count")
-                        articles_dict[title.text] = prev_articles[title.text]["Total citations"]
+                        self.logger.debug(
+                            f"article `{title.text}` has not changed citation count"
+                        )
+                        articles_dict[title.text] = prev_articles[title.text][
+                            "Total citations"
+                        ]
                     else:
-                        self.logger.info(f"citation count for article `{title.text}` has changed {prev_articles[title.text]['Total citations']} vs {citation}")
+                        self.logger.info(
+                            f"citation count for article `{title.text}` has changed {prev_articles[title.text]['Total citations']} vs {citation}"
+                        )
                         articles_dict[title.text] = self.parse_article(title)
                 except Exception as e:
                     # title wasn't even in the old database
@@ -547,7 +557,9 @@ def main() -> None:
                             researcher = researcher_data[name]
                             scraper.check_researcher(name, researcher)
                         except KeyError as ke:
-                            scraper.logger.warning(f"researcher {name} not in existing data: {ke}")
+                            scraper.logger.warning(
+                                f"researcher {name} not in existing data: {ke}"
+                            )
                             researcher = {}
                             scraper.parse_researcher(name)
                         except Exception as e:
