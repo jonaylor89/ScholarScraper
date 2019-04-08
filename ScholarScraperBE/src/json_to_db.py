@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 ##############################################
 ## THIS IS JUST A BUNCH OF SCRIPTS I'M 
@@ -6,9 +7,9 @@
 ## EVERYTHING IN A JSON FILE. 
 ##############################################
 
-
 from entities.entity import Session, Base, engine
 from entities.scholar import Scholar, ScholarSchema
+from entities.publication import Publication, PublicationSchema
 from entities.totalcitations import TotalCitations, TotalCitationsSchema
 
 import json
@@ -57,7 +58,20 @@ def upload_publication():
 
     for name, info in data.items():
         for title, article_info in info["articles"].items():
-            pass
+            pub = Publication(article_info["id"], title, article_info["publication_date"], "json file")
+
+            new_pub = PublicationSchema().dump(pub).data
+
+            print(json.dumps(new_pub, indent=2))
+
+            session.add(pub)
+
+            session.commit()
+
+
+    session.close()
+
+
 
 def upload_total_citations():
     session = Session()
@@ -79,4 +93,8 @@ def upload_total_citations():
     session.close()
 
 if __name__ == "__main__":
-    upload_total_citations()
+    #########################
+    ##  script to execute  ##
+    #########################
+
+    pass
