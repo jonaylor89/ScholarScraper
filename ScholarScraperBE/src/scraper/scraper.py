@@ -7,12 +7,12 @@ from random import randint
 from datetime import datetime
 from typing import List, Dict
 
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Chrome
 from selenium.webdriver import ChromeOptions
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-# TODO: Make this not shit
+# TODO: Make this not shit (i.e. Refactor the hell out of this)
 
 
 class ScholarScraper(object):

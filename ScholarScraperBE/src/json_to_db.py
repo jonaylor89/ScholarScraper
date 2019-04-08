@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 ##############################################
-## THIS IS JUST A BUNCH OF SCRIPTS I'M 
+## THIS IS JUST A BUNCH OF SCRIPTS I'M
 ## USING TO UPLOAD AND UPDATE THINGS IN
 ## THE DATABASE BECAUSE I WAS STUPID AND PUT
-## EVERYTHING IN A JSON FILE. 
+## EVERYTHING IN A JSON FILE.
 ##############################################
 
 from entities.entity import Session, Base, engine
@@ -38,6 +38,7 @@ def upload_scholar():
 
     session.close()
 
+
 def update_scholar():
     """
     Because I messed up the first time
@@ -58,7 +59,9 @@ def upload_publication():
 
     for name, info in data.items():
         for title, article_info in info["articles"].items():
-            pub = Publication(article_info["id"], title, article_info["publication_date"], "json file")
+            pub = Publication(
+                article_info["id"], title, article_info["publication_date"], "json file"
+            )
 
             new_pub = PublicationSchema().dump(pub).data
 
@@ -68,9 +71,7 @@ def upload_publication():
 
             session.commit()
 
-
     session.close()
-
 
 
 def upload_total_citations():
@@ -78,10 +79,13 @@ def upload_total_citations():
 
     for name, info in data.items():
         try:
-            total_cites = TotalCitations(info["id"], info["citation_count"], "json file")
+            total_cites = TotalCitations(
+                info["id"], info["citation_count"], "json file"
+            )
         except KeyError:
-            total_cites = TotalCitations(info["id"], info["citations_count"], "json file")
-
+            total_cites = TotalCitations(
+                info["id"], info["citations_count"], "json file"
+            )
 
         new_total = TotalCitationsSchema().dump(total_cites).data
         print(json.dumps(new_total, indent=2))
@@ -91,6 +95,7 @@ def upload_total_citations():
         session.commit()
 
     session.close()
+
 
 if __name__ == "__main__":
     #########################
