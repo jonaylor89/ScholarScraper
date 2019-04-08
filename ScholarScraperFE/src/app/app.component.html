@@ -1,9 +1,41 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<!-- <link rel="stylesheet" href="bootstrap.css"> -->
 <div style="text-align:center">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+rel="stylesheet">  
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <h1>Hello World</h1>
+  <div class = "container">
+  
+  <form>
+    <div class="form-row align-items-center justify-content-center">
+      <div class="col-auto">
+        <label class="sr-only" id="scholarID"  for="inlineFormInput">Scholar ID</label>
+        <input #scholar type="text" class="form-control"   placeholder="Scholar ID">
+      </div>
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInput">Date</label>
+        <input type="date" class="form-control" id="dateInput" placeholder="Date">
+      </div>
+      <div class="col-auto">
+        <button (click) = "addScholar(scholar.value)" type="button" id="button1" class="btn btn-primary">Add</button>
+        <button (click) = "deleteScholar(scholar.value)" type="button" id="button2" class="btn btn-primary">Delete</button> <!----≈type="submit"-->
+      </div>
+    </div>
+    </form>
+    <ul><li *ngFor="let scholar of scholars">{{scholar}}</li></ul>
+  </div>
+
+</div>
+<!--  -->
+<!-- <router-outlet></router-outlet> -->
+
+  <!-- <link rel="stylesheet" href="bootstrap.css"> -->
+  
+  
+  <!-- <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
 <h2>Here are some links to help you start: </h2>
 <ul>
@@ -16,5 +48,25 @@
   <li>
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
-</ul>
+</ul> -->
 
+<!-- @Component({
+  selector: 'app-little-tour',
+  template: `
+    <input #newHero
+      (keyup.enter)="addHero(newHero.value)"
+      (blur)="addHero(newHero.value); newHero.value='' ">
+
+    <button (click)="addHero(newHero.value)">Add</button>
+
+    <ul><li *ngFor="let hero of heroes">{{hero}}</li></ul>
+  `
+})
+export class LittleTourComponent {
+  heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
+  addHero(newHero: string) {
+    if (newHero) {
+      this.heroes.push(newHero);
+    }
+  }
+} -->
