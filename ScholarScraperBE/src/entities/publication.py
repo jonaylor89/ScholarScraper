@@ -7,18 +7,23 @@ from .entity import Entity, Base
 class Publication(Entity, Base):
 
     __tablename__ = "publication"
-    publication_id = Column(Integer, primary_key=True)
+    id = Column("id", Integer, primary_key=True)
+    title = Column("title", String(256), nullable=True)
     date = Column(DateTime)
 
-    def __init__(self, pub_id, date, created_by):
+    def __init__(self, id, name, date, created_by):
         Entity.__init__(self, created_by)
-        self.publication_id = pub_id
+        self.id = id
+        self.name = name
         self.date = date
 
     def __repr__(self):
-        return f"<Publication(publication_id='{publication_id}', date='{self.date}')>"
+        return (
+            f"<Publication(id='{self.id}', title='{self.title}', date='{self.date}')>"
+        )
 
 
 class PublicationSchema(Schema):
-    publication_id = fields.Number()
+    id = fields.Number()
+    title = fields.Str()
     date = fields.DateTime()

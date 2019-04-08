@@ -4,7 +4,7 @@ import json
 import logging
 
 from flask_cors import CORS
-from flask import Flask, redirect, jsonify, request
+from flask import Flask, redirect, jsonify, request, render_template
 
 from .scraper import scraper
 from .entities.entity import Session, engine, Base
@@ -27,7 +27,7 @@ def hello():
     """
     Hello message mostly used for development error checking
     """
-    return "<h1>WELCOME TO SCHOLAR SCRAPER!</h1>"
+    return render_template("index.html")
 
 
 @app.route("/scholar")
@@ -48,15 +48,14 @@ def get_scholars():
 
 
 @app.route("/scholar", methods=["POST"])
-def parse_by_name():
+def scholar():
     """
     Parse people
     """
     # mount scholar object
-    posted_exam = ScholarSchema() \
-            .load(request.get_json())
+    posted_exam = ScholarSchema().load(request.get_json())
 
-    scholar = Scholar(**posted_exam.data, created_by="HTTP post request")
+    scholar = Scholar(**posted_exam.data)
 
     # persist scholar
     session = Session()
@@ -64,13 +63,14 @@ def parse_by_name():
     session.commit()
 
     # return created scholar
-    new_exam = ScholarSchema().dump(scholar.data)
+    new_scholar = ScholarSchema().dump(scholar.data)
     session.close()
 
-    return jsonify(new_exam), 201
+    return jsonify(new_scholar), 201
+
 
 @app.route("/publication")
-def get_scholars():
+def get_publications():
 
     # fetching from the database
     session = Session()
@@ -87,13 +87,12 @@ def get_scholars():
 
 
 @app.route("/publication", methods=["POST"])
-def parse_by_name():
+def publication():
     """
     Parse people
     """
     # mount scholar object
-    posted_exam = ScholarSchema() \
-            .load(request.get_json())
+    posted_exam = ScholarSchema().load(request.get_json())
 
     scholar = Scholar(**posted_exam.data, created_by="HTTP post request")
 
@@ -108,8 +107,9 @@ def parse_by_name():
 
     return jsonify(new_exam), 201
 
+
 @app.route("/publication-author")
-def get_scholars():
+def get_publication_author():
 
     # fetching from the database
     session = Session()
@@ -126,13 +126,12 @@ def get_scholars():
 
 
 @app.route("/publication_author", methods=["POST"])
-def parse_by_name():
+def publication_author():
     """
     Parse people
     """
     # mount scholar object
-    posted_exam = ScholarSchema() \
-            .load(request.get_json())
+    posted_exam = ScholarSchema().load(request.get_json())
 
     scholar = Scholar(**posted_exam.data, created_by="HTTP post request")
 
@@ -147,8 +146,9 @@ def parse_by_name():
 
     return jsonify(new_exam), 201
 
+
 @app.route("/publication-cites")
-def get_scholars():
+def get_publication_cites():
 
     # fetching from the database
     session = Session()
@@ -165,13 +165,12 @@ def get_scholars():
 
 
 @app.route("/publication-cites", methods=["POST"])
-def parse_by_name():
+def publication_cites():
     """
     Parse people
     """
     # mount scholar object
-    posted_exam = ScholarSchema() \
-            .load(request.get_json())
+    posted_exam = ScholarSchema().load(request.get_json())
 
     scholar = Scholar(**posted_exam.data, created_by="HTTP post request")
 
@@ -186,8 +185,9 @@ def parse_by_name():
 
     return jsonify(new_exam), 201
 
-@app.route("/total-citations")
-def get_scholars():
+
+@app.route("/total-citation")
+def get_total_citations():
 
     # fetching from the database
     session = Session()
@@ -204,13 +204,12 @@ def get_scholars():
 
 
 @app.route("/total-citations", methods=["POST"])
-def parse_by_name():
+def total_citations():
     """
     Parse people
     """
     # mount scholar object
-    posted_exam = ScholarSchema() \
-            .load(request.get_json())
+    posted_exam = ScholarSchema().load(request.get_json())
 
     scholar = Scholar(**posted_exam.data, created_by="HTTP post request")
 
@@ -224,6 +223,7 @@ def parse_by_name():
     session.close()
 
     return jsonify(new_exam), 201
+
 
 @app.route("/secret")
 def secret():

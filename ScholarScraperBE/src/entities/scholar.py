@@ -8,19 +8,19 @@ class Scholar(Entity, Base):
 
     __tablename__ = "scholar"
 
-    scholar_id = Column(Integer, primary_key=True)
-    name = Column(String)
+    id = Column("id", Integer, primary_key=True)
+    full_name = Column("full_name", String(64), nullable=True)
 
-    def __init__(self, scholar_id, name, created_by):
+    def __init__(self, id, name, created_by):
         Entity.__init__(self, created_by)
 
-        self.scholar_id = scholar_id
+        self.id = id
         self.name = name
 
     def __repr__(self):
-        return f"<Scholar(scholar_id='{self.scholar_id}', name='{self.name}')>"
+        return f"<Scholar(id='{self.id}', full_name='{self.full_name}')>"
 
 
 class ScholarSchema(Schema):
-    scholar_id = fields.Number()
-    name = fields.String()
+    id = fields.Number()
+    full_name = fields.Str()

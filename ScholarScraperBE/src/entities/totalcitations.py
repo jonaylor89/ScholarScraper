@@ -1,5 +1,6 @@
 from datetime import datetime
-from sqlalchemy import Column, String, Integer, DateTime
+
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from marshmallow import Schema, fields
 
 from .entity import Entity, Base
@@ -9,7 +10,7 @@ class TotalCitations(Entity, Base):
 
     __tablename__ = "total-citation"
 
-    scholar_id = Column(Integer, primary_key=True)
+    scholar_id = Column(Integer, ForeignKey("scholar.id"), primary_key=True)
     date = Column(DateTime, primary_key=True)
     total_cites = Column(Integer)
 
