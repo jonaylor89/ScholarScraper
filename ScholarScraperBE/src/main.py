@@ -27,7 +27,7 @@ def hello():
     """
     Hello message mostly used for development error checking
     """
-    return render_template("index.html")
+    return render_template("static/index.html")
 
 
 @app.route("/scholar")
