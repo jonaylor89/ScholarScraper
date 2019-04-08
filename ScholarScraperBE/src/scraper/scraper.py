@@ -182,7 +182,7 @@ class ScholarScraper(object):
                 )
                 self.researcher_dict[name]["id"] = prev["id"]
                 self.researcher_dict[name]["date"] = str(datetime.now())
-                self.researcher_dict[name]["citations_count"] = cur_citations
+                self.researcher_dict[name]["citation_count"] = cur_citations
                 self.researcher_dict[name]["articles"] = self.check_articles(
                     prev["articles"]
                 )

@@ -9,7 +9,7 @@ class PublicationAuthor(Entity, Base):
     __tablename__ = "publication-author"
 
     publication_id = Column(Integer, ForeignKey("publication.id"), primary_key=True)
-    scholar_id = Column(Integer, ForeignKey("scholar.id"), primary_key=True)
+    scholar_id = Column(String(32), ForeignKey("scholar.id"), primary_key=True)
 
     def __init__(self, pub_id, scholar_id, created_by):
         Entity.__init__(self, created_by)
@@ -22,4 +22,4 @@ class PublicationAuthor(Entity, Base):
 
 class PublicationAuthorSchema(Schema):
     publication_id = fields.Number()
-    scholar_id = fields.Number()
+    scholar_id = fields.Str()

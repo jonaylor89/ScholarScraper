@@ -1,5 +1,15 @@
+
+##############################################
+## THIS IS JUST A BUNCH OF SCRIPTS I'M 
+## USING TO UPLOAD AND UPDATE THINGS IN
+## THE DATABASE BECAUSE I WAS STUPID AND PUT
+## EVERYTHING IN A JSON FILE. 
+##############################################
+
+
 from entities.entity import Session, Base, engine
 from entities.scholar import Scholar, ScholarSchema
+from entities.totalcitations import TotalCitations, TotalCitationsSchema
 
 import json
 
@@ -27,6 +37,46 @@ def upload_scholar():
 
     session.close()
 
+def update_scholar():
+    """
+    Because I messed up the first time
+    """
+    session = Session()
+
+    for name, info in data.items():
+        s = session.query(Scholar).get(info["id"])
+        s.full_name = name
+        print(name)
+        session.commit()
+
+    session.close()
+
+
+def upload_publication():
+    session = Session()
+
+    for name, info in data.items():
+        for title, article_info in info["articles"].items():
+            pass
+
+def upload_total_citations():
+    session = Session()
+
+    for name, info in data.items():
+        try:
+            total_cites = TotalCitations(info["id"], info["citation_count"], "json file")
+        except KeyError:
+            total_cites = TotalCitations(info["id"], info["citations_count"], "json file")
+
+
+        new_total = TotalCitationsSchema().dump(total_cites).data
+        print(json.dumps(new_total, indent=2))
+
+        session.add(total_cites)
+
+        session.commit()
+
+    session.close()
 
 if __name__ == "__main__":
-    upload_scholar()
+    upload_total_citations()
