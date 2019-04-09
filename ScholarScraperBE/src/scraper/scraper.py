@@ -280,7 +280,7 @@ class ScholarScraper(object):
         self.logger.info(f"cited titles for author: {len(citations)}")
 
         # Create article section
-        articles_dict = {}
+        articles_dict: Dict[str, Dict] = {}
 
         try:
             # Loop through all articles for the researcher
@@ -298,7 +298,7 @@ class ScholarScraper(object):
                         self.logger.debug(
                             f"article `{title.text}` has not changed citation count"
                         )
-                        articles_dict[title.text] = prev_articles[title.text][
+                        articles_dict[title.text]["Total citations"] = prev_articles[title.text][
                             "Total citations"
                         ]
                     else:
@@ -444,7 +444,7 @@ class ScholarScraper(object):
 
         try:
             citation_list = self.browser.execute_script(
-                """
+                        """
                             // let list= document.getElementsByClassName("gs_rt"); 
                             // let arr = [];
                             // for (var i = 0; i < list.length; i++) {
@@ -479,7 +479,7 @@ class ScholarScraper(object):
         try:
             # citation_data = self.browser.find_elements_by_xpath("/html/body/div/div[14]/div[2]/div/div[1]/div[1]/table/tbody/tr[1]/td[2]")
             citation_data = self.browser.execute_script(
-                """
+                                """
                                     function getElementByXpath(path) {
                                         return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
                                     }
