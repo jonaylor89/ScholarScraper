@@ -13,12 +13,74 @@ from .entities.publicationauthor import PublicationAuthor, PublicationAuthorSche
 from .entities.publicationcites import PublicationCites, PublicationCitesSchema
 from .entities.totalcitations import TotalCitations, TotalCitationsSchema
 
-
+# Create app
 app = Flask(__name__)
 CORS(app)
 
 # Create all tables
 Base.metadata.create_all(engine)
+
+def scan():
+    # TODO: Use MySQL database instead of data.json
+
+    scraper = ScholarScraper()
+
+    with scraper:
+
+        researcher_data = None
+
+        # THIS IS BAD DON'T DO THIS JOHN!
+        with open("scraper/data.json") as f:
+
+            try:
+                # Get `database`
+                researcher_data = json.load(f)
+            except Exception as e:
+                # Something happened to the `database`
+                scraper.logger.error(f"database is missing? {e}")
+
+        # Go through all names
+        for name in scraper.cs_researchers:
+
+            # Five attempts to parse the page because it can be janky
+            n = 5
+            while n > 0:
+                n -= 1
+                try:
+
+                    if researcher_data is not None:
+                        try:
+                            researcher = researcher_data[name]
+                            scraper.check_researcher(name, researcher)
+                        except KeyError as ke:
+                            scraper.logger.warning(
+                                f"researcher {name} not in existing data: {ke}"
+                            )
+                            researcher = {}
+                            scraper.parse_researcher(name)
+                        except Exception as e:
+                            scraper.logger.error(f"error with researcher {name}: {e}")
+                            scraper.researcher_dict[name] = {}
+                    else:
+                        scraper.logger.error(f"database not found parsing {name}")
+                        scraper.parse_researcher(name)
+
+                    break  # Successful attempt
+                except Exception as e:
+                    scraper.logger.error(
+                        f"failed to parse researcher, {n} attempt(s) left: {e}"
+                    )
+
+                sleep(2)
+
+            if n == 0:
+                print("scraping failed")
+                exit(1)
+
+            sleep(randint(1, 3))
+
+        with open("data.json", "w+") as f:
+            f.write(json.dumps(scraper.researcher_dict, indent=2))
 
 
 @app.route("/")
@@ -132,7 +194,9 @@ def publication_author():
     # mount scholar object
     posted_publication_author = PublicationAuthorSchema().load(request.get_json())
 
-    publication_author = PublicationAuthor(**posted_publication_author.data, created_by="HTTP post request")
+    publication_author = PublicationAuthor(
+        **posted_publication_author.data, created_by="HTTP post request"
+    )
 
     # persist scholar
     session = Session()
@@ -171,7 +235,9 @@ def publication_cites():
     # mount scholar object
     posted_publication_cites = PublicationCitesSchema().load(request.get_json())
 
-    publication_cites = PublicationCites(**posted_publication_cites.data, created_by="HTTP post request")
+    publication_cites = PublicationCites(
+        **posted_publication_cites.data, created_by="HTTP post request"
+    )
 
     # persist scholar
     session = Session()
@@ -210,7 +276,9 @@ def total_citations():
     # mount scholar object
     posted_total_citations = TotalCitationsSchema().load(request.get_json())
 
-    total_citations = TotalCitations(**posted_total_citations.data, created_by="HTTP post request")
+    total_citations = TotalCitations(
+        **posted_total_citations.data, created_by="HTTP post request"
+    )
 
     # persist scholar
     session = Session()
@@ -230,3 +298,12 @@ def secret():
     A secret
     """
     return redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+
+
+@app.errorhandler(404)
+def not_found(error=None):
+    message = {"status": 404, "message": "Not Found: " + request.url}
+    resp = jsonify(message)
+    resp.status_code = 404
+
+    return resp

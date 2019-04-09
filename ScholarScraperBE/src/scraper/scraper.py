@@ -30,35 +30,8 @@ class ScholarScraper(object):
             level=logging.INFO,
         )
 
-        self.cs_researchers: List[str] = [
-            "Irfan Ahmed",
-            "Tomasz Arodz",
-            # "Caroline Budwell",
-            "Eyuphan Bulut",
-            "Alberto Cano",
-            "Krzysztof J Cios",
-            # "Robert Dahlberg",
-            "Kostadin Damevski",
-            "Thang N. Dinh",
-            # "Debra Duke",
-            "Carol Fung",
-            "preetam ghosh",
-            "Vojislav Kecman",
-            "Bartosz Krawczyk",
-            "Lukasz Kurgan",
-            "John D. Leonard II",
-            "Changqing Luo",
-            "Milos Manic",
-            "Bridget T. McInnes",
-            "Tamer Nadeem",
-            # "Zachary Whitten",
-            "Tarynn M Witten",
-            "Cang Ye",
-            "Hong-Sheng Zhou",
-        ]
-
         self.home_url = "https://scholar.google.com"
-        self.researcher_dict = {}
+        self.researcher_dict: Dict = {}
 
     def __enter__(self) -> Chrome:
         """
@@ -100,9 +73,9 @@ class ScholarScraper(object):
         self.browser.get(self.home_url)
         sleep(1)
 
-    def parse_researcher(self, name: str) -> Dict:
+    def parse_researcher(self, name: str) -> None:
         """
-        Create new researcher
+        Parse new researcher
         """
 
         # Go to google scholar start screen
@@ -124,7 +97,7 @@ class ScholarScraper(object):
         except:
             self.logger.error(f"researcher {name} could not be found")
             self.researcher_dict[name] = {}
-            return
+            return 
 
         sleep(randint(1, 3))
 
@@ -142,8 +115,9 @@ class ScholarScraper(object):
 
     def check_researcher(self, name: str, prev: Dict) -> None:
         """
-        Used to check if a researcher needs undating and automatically does so if needed
+        Used to check if a researcher needs updating and automatically does so if needed
         """
+
         # Go to google scholar start screen
         self.goto_start()
 
@@ -162,7 +136,7 @@ class ScholarScraper(object):
 
         except:
             self.logger.error(f"researcher {name} could not be found")
-            researcher_dict[name] = prev
+            self.researcher_dict[name] = prev
             return
 
         sleep(randint(1, 3))
@@ -241,7 +215,7 @@ class ScholarScraper(object):
 
         return articles_dict
 
-    def parse_id(self) -> int:
+    def parse_id(self) -> str:
         """
         parse the id for a researcher
 
@@ -266,7 +240,7 @@ class ScholarScraper(object):
         """
         return url[url.find("?") + 1 :].replace("&", "=").split("=")
 
-    def check_articles(self, prev_articles: Dict) -> None:
+    def check_articles(self, prev_articles: Dict) -> Dict:
         """
         Check if an articles citation number has changed and parse it if it has
 
@@ -355,7 +329,7 @@ class ScholarScraper(object):
         """
 
         # Add the publication as a key to the dictionary
-        article_dict = {}
+        article_dict: Dict = {}
 
         sleep(randint(2, 4))
 
@@ -523,69 +497,3 @@ class ScholarScraper(object):
 
         return total_citations
 
-
-def main() -> None:
-
-    scraper = ScholarScraper()
-
-    with scraper:
-        """
-        Context manager to handle opening and closing of browser
-        """
-        researcher_data = None
-
-        with open("data.json") as f:
-
-            try:
-                # Get `database`
-                researcher_data = json.load(f)
-            except Exception as e:
-                # Something happened to the `database`
-                scraper.logger.error(f"database is missing? {e}")
-
-        # Go through all names
-        for name in scraper.cs_researchers:
-
-            # Five attempts to parse the page because it can be janky
-            n = 5
-            while n > 0:
-                n -= 1
-                try:
-
-                    if researcher_data is not None:
-                        try:
-                            researcher = researcher_data[name]
-                            scraper.check_researcher(name, researcher)
-                        except KeyError as ke:
-                            scraper.logger.warning(
-                                f"researcher {name} not in existing data: {ke}"
-                            )
-                            researcher = {}
-                            scraper.parse_researcher(name)
-                        except Exception as e:
-                            scraper.logger.error(f"error with researcher {name}: {e}")
-                            scraper.researcher_dict[name] = {}
-                    else:
-                        scraper.logger.error(f"database not found parsing {name}")
-                        scraper.parse_researcher(name)
-
-                    break  # Successful attempt
-                except Exception as e:
-                    scraper.logger.error(
-                        f"failed to parse researcher, {n} attempt(s) left: {e}"
-                    )
-
-                sleep(2)
-
-            if n == 0:
-                print("scraping failed")
-                exit(1)
-
-            sleep(randint(1, 3))
-
-        with open("data.json", "w+") as f:
-            f.write(json.dumps(scraper.researcher_dict, indent=2))
-
-
-if __name__ == "__main__":
-    main()

@@ -8,7 +8,6 @@
 # Names to parse
 - Irfan Ahmed
 - Tomasz Arodz
-- Caroline Budwell
 - Eyuphan Bulut
 - Alberto Cano
 - Krzysztof Cios
@@ -26,19 +25,18 @@
 - Milos Manic
 - Bridget McInnes
 - Tamer Nadeem
-- Zachary Whitten
 - Tarynn Witten
 - Cang Ye
 - Hong-Sheng Zhou
 
 ---------------------
 
-# Possible Optimizations
+# Optimizations
 * Download the html for a publication and parse that to allow for parallelization without the browser thinkings we're DOSing it
     * Using ScraPY or BeautifulSoup
 * Switch drivers sometimes to confuse google's algorithms
 * Email report to me of the changes since the last parse (python smtp library)
-* Argparse for quick command line configuring
+* Use configuration file
 
 -------------------------------------
 

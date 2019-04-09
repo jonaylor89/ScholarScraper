@@ -1,4 +1,3 @@
-
 from sqlalchemy import Column, String, Integer
 from marshmallow import Schema, fields
 
