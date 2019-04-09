@@ -3,6 +3,7 @@
 import json
 import logging
 from flask_cors import CORS
+from threading import Thread
 from flask import Flask, redirect, jsonify, request, render_template
 
 from .scraper import scraper
@@ -19,69 +20,6 @@ CORS(app)
 
 # Create all tables
 Base.metadata.create_all(engine)
-
-def scan():
-    # TODO: Use MySQL database instead of data.json
-
-    scraper = ScholarScraper()
-
-    with scraper:
-
-        researcher_data = None
-
-        # THIS IS BAD DON'T DO THIS JOHN!
-        with open("scraper/data.json") as f:
-
-            try:
-                # Get `database`
-                researcher_data = json.load(f)
-            except Exception as e:
-                # Something happened to the `database`
-                scraper.logger.error(f"database is missing? {e}")
-
-        # Go through all names
-        for name in scraper.cs_researchers:
-
-            # Five attempts to parse the page because it can be janky
-            n = 5
-            while n > 0:
-                n -= 1
-                try:
-
-                    if researcher_data is not None:
-                        try:
-                            researcher = researcher_data[name]
-                            scraper.check_researcher(name, researcher)
-                        except KeyError as ke:
-                            scraper.logger.warning(
-                                f"researcher {name} not in existing data: {ke}"
-                            )
-                            researcher = {}
-                            scraper.parse_researcher(name)
-                        except Exception as e:
-                            scraper.logger.error(f"error with researcher {name}: {e}")
-                            scraper.researcher_dict[name] = {}
-                    else:
-                        scraper.logger.error(f"database not found parsing {name}")
-                        scraper.parse_researcher(name)
-
-                    break  # Successful attempt
-                except Exception as e:
-                    scraper.logger.error(
-                        f"failed to parse researcher, {n} attempt(s) left: {e}"
-                    )
-
-                sleep(2)
-
-            if n == 0:
-                print("scraping failed")
-                exit(1)
-
-            sleep(randint(1, 3))
-
-        with open("data.json", "w+") as f:
-            f.write(json.dumps(scraper.researcher_dict, indent=2))
-
 
 @app.route("/")
 def hello():
@@ -307,3 +245,77 @@ def not_found(error=None):
     resp.status_code = 404
 
     return resp
+
+
+def scan():
+    # TODO: Use MySQL database instead of data.json
+
+    scraper = ScholarScraper()
+
+    with scraper:
+
+        # fetching from the database
+        session = Session()
+        scholar_objects = session.query(Scholar).all()
+
+        # transforming into JSON-serializable objects
+        schema = ScholarSchema(many=True)
+        scholars = schema.dump(scholar_objects)
+
+        # serializing as JSON
+        session.close()
+
+        # Go through all names
+        for name in map(lambda x: x["name"], scholars):
+
+            # TODO: Get data about researcher from other tables
+
+            researcher_data = None
+
+            # Five attempts to parse the page because it can be janky
+            n = 5
+            while n > 0:
+                n -= 1
+                try:
+
+                    if researcher_data is not None:
+                        try:
+                            researcher = researcher_data[name]
+                            scraper.check_researcher(name, researcher)
+                        except KeyError as ke:
+                            scraper.logger.warning(
+                                f"researcher {name} not in existing data: {ke}"
+                            )
+                            researcher = {}
+                            scraper.parse_researcher(name)
+                        except Exception as e:
+                            scraper.logger.error(f"error with researcher {name}: {e}")
+                            scraper.researcher_dict[name] = {}
+                    else:
+                        scraper.logger.error(f"database not found parsing {name}")
+                        scraper.parse_researcher(name)
+
+                    break  # Successful attempt
+                except Exception as e:
+                    scraper.logger.error(
+                        f"failed to parse researcher, {n} attempt(s) left: {e}"
+                    )
+
+                sleep(2)
+
+            if n == 0:
+                print("scraping failed")
+                exit(1)
+
+            sleep(randint(1, 3))
+
+            # TODO:
+            # scraper.researcher_dict
+            # Move this dict to the db
+            # Or do that for every researcher 
+
+if __name__ == "__main__":
+    print("HERE")
+
+# t = Thread(target=scan)
+# t.start()
