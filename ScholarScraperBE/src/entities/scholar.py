@@ -1,3 +1,4 @@
+
 from sqlalchemy import Column, String, Integer
 from marshmallow import Schema, fields
 
@@ -8,19 +9,19 @@ class Scholar(Entity, Base):
 
     __tablename__ = "scholar"
 
-    scholar_id = Column(Integer, primary_key=True)
-    name = Column(String)
+    id = Column("id", String(32), primary_key=True)
+    full_name = Column("full_name", String(64), nullable=True)
 
-    def __init__(self, scholar_id, name, created_by):
+    def __init__(self, id, full_name, created_by):
         Entity.__init__(self, created_by)
 
-        self.scholar_id = scholar_id
-        self.name = name
+        self.id = id
+        self.full_name = full_name
 
     def __repr__(self):
-        return f"<Scholar(scholar_id='{self.scholar_id}', name='{self.name}')>"
+        return f"<Scholar(id='{self.id}', full_name='{self.full_name}')>"
 
 
 class ScholarSchema(Schema):
-    scholar_id = fields.Number()
-    name = fields.String()
+    id = fields.Str()
+    full_name = fields.Str()
