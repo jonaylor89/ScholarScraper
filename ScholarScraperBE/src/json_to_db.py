@@ -7,12 +7,12 @@
 ## EVERYTHING IN A JSON FILE.
 ##############################################
 
+import json
+
 from entities.entity import Session, Base, engine
 from entities.scholar import Scholar, ScholarSchema
 from entities.publication import Publication, PublicationSchema
 from entities.totalcitations import TotalCitations, TotalCitationsSchema
-
-import json
 
 data = None
 

@@ -248,29 +248,39 @@ def not_found(error=None):
 
 
 def scan():
-    # TODO: Use MySQL database instead of data.json
 
     scraper = ScholarScraper()
 
     with scraper:
 
-        # fetching from the database
+        # fetching from the database and serialize to JSON
         session = Session()
-        scholar_objects = session.query(Scholar).all()
-
-        # transforming into JSON-serializable objects
-        schema = ScholarSchema(many=True)
-        scholars = schema.dump(scholar_objects)
-
-        # serializing as JSON
+        scholars = ScholarSchema(many=True).dump(session.query(Scholar).all())
         session.close()
 
         # Go through all names
-        for name in map(lambda x: x["name"], scholars):
+        for scholar in scholars:
 
-            # TODO: Get data about researcher from other tables
+            # Build researcher data
+            session = Session()
 
-            researcher_data = None
+            researcher_data = {}
+            researcher_data["id"] = scholar["id"]
+            
+            total_citations = TotalCitationsSchema(many=True).dump(session.query(TotalCitations).all())
+
+            researcher_data["date"] = None
+            researcher_data["citation_count"] = None
+
+            publication_authors = PublicationAuthorSchema(many=True).dump(session.query(PublicationAuthor).all())
+            publications = PublicationSchema(many=True).dump(session.query(Publication).all())
+            publication_cites = PublicationCitesSchema(many=True).dump(session.query(PublicationCites).all())
+
+            researcher_data["articles"] = {}
+
+            session.close()
+
+
 
             # Five attempts to parse the page because it can be janky
             n = 5
@@ -280,20 +290,18 @@ def scan():
 
                     if researcher_data is not None:
                         try:
-                            researcher = researcher_data[name]
-                            scraper.check_researcher(name, researcher)
+                            scraper.check_researcher(scholar["name"], researcher_data)
                         except KeyError as ke:
                             scraper.logger.warning(
-                                f"researcher {name} not in existing data: {ke}"
+                                f"researcher {scholar['name']} not in existing data: {ke}"
                             )
-                            researcher = {}
-                            scraper.parse_researcher(name)
+                            scraper.parse_researcher(scholar["name"])
                         except Exception as e:
-                            scraper.logger.error(f"error with researcher {name}: {e}")
-                            scraper.researcher_dict[name] = {}
+                            scraper.logger.error(f"error with researcher {scholar['name']}: {e}")
+                            scraper.parse_researcher(name)
                     else:
-                        scraper.logger.error(f"database not found parsing {name}")
-                        scraper.parse_researcher(name)
+                        scraper.logger.error(f"database not found parsing {scholar['name']}")
+                        scraper.parse_researcher(scholar['name'])
 
                     break  # Successful attempt
                 except Exception as e:

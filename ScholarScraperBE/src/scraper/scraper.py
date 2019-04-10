@@ -29,6 +29,32 @@ class ScholarScraper(object):
             datefmt="%H:%M:%S",
             level=logging.INFO,
         )
+        self.cs_researchers: List[str] = [
+            "Irfan Ahmed",
+            "Tomasz Arodz",
+            # "Caroline Budwell",
+            "Eyuphan Bulut",
+            "Alberto Cano",
+            "Krzysztof J Cios",
+            # "Robert Dahlberg",
+            "Kostadin Damevski",
+            "Thang N. Dinh",
+            # "Debra Duke",
+            "Carol Fung",
+            "preetam ghosh",
+            "Vojislav Kecman",
+            "Bartosz Krawczyk",
+            "Lukasz Kurgan",
+            "John D. Leonard II",
+            "Changqing Luo",
+            "Milos Manic",
+            "Bridget T. McInnes",
+            "Tamer Nadeem",
+            # "Zachary Whitten",
+            "Tarynn M Witten",
+            "Cang Ye",
+            "Hong-Sheng Zhou",
+        ]
 
         self.home_url = "https://scholar.google.com"
         self.researcher_dict: Dict = {}
@@ -497,3 +523,68 @@ class ScholarScraper(object):
 
         return total_citations
 
+def main() -> None:
+
+    scraper = ScholarScraper()
+
+    with scraper:
+        """
+        Context manager to handle opening and closing of browser
+        """
+        researcher_data = None
+
+        with open("data.json") as f:
+
+            try:
+                # Get `database`
+                researcher_data = json.load(f)
+            except Exception as e:
+                # Something happened to the `database`
+                scraper.logger.error(f"database is missing? {e}")
+
+        # Go through all names
+        for name in scraper.cs_researchers:
+
+            # Five attempts to parse the page because it can be janky
+            n = 5
+            while n > 0:
+                n -= 1
+                try:
+
+                    if researcher_data is not None:
+                        try:
+                            researcher = researcher_data[name]
+                            scraper.check_researcher(name, researcher)
+                        except KeyError as ke:
+                            scraper.logger.warning(
+                                f"researcher {name} not in existing data: {ke}"
+                            )
+                            researcher = {}
+                            scraper.parse_researcher(name)
+                        except Exception as e:
+                            scraper.logger.error(f"error with researcher {name}: {e}")
+                            scraper.researcher_dict[name] = {}
+                    else:
+                        scraper.logger.error(f"database not found parsing {name}")
+                        scraper.parse_researcher(name)
+
+                    break  # Successful attempt
+                except Exception as e:
+                    scraper.logger.error(
+                        f"failed to parse researcher, {n} attempt(s) left: {e}"
+                    )
+
+                sleep(2)
+
+            if n == 0:
+                print("scraping failed")
+                exit(1)
+
+            sleep(randint(1, 3))
+
+        with open("data.json", "w+") as f:
+            f.write(json.dumps(scraper.researcher_dict, indent=2))
+
+
+if __name__ == "__main__":
+    main()
