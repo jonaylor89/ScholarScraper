@@ -55,23 +55,32 @@ def update_scholar():
 
 
 def upload_publication():
-    session = Session()
 
     for name, info in data.items():
+        session = Session()
+
         for title, article_info in info["articles"].items():
-            pub = Publication(
-                article_info["id"], title, article_info["publication_date"], "json file"
-            )
+            try:
+                pub = Publication(
+                    str(article_info["id"]), title, article_info["Total citations"], article_info["Publication date"], "json file"
+                )
 
-            new_pub = PublicationSchema().dump(pub).data
+                new_pub = PublicationSchema().dump(pub).data
 
-            print(json.dumps(new_pub, indent=2))
+                print(json.dumps(new_pub, indent=2))
 
-            session.add(pub)
+                session.add(pub)
 
-            session.commit()
+                session.commit()
+            except KeyError:
+                print("nein")
+                continue
 
-    session.close()
+            except Exception as e:
+                print(f"bad things: {e}")
+                break
+
+        session.close()
 
 
 def upload_total_citations():
@@ -97,4 +106,4 @@ if __name__ == "__main__":
     ##  script to execute  ##
     #########################
 
-    pass
+    upload_publication()
