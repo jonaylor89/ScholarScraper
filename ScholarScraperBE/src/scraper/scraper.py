@@ -27,7 +27,7 @@ class ScholarScraper(object):
             filemode="w",
             format="%(asctime)s %(name)s %(levelname)s %(message)s",
             datefmt="%H:%M:%S",
-            level=logging.DEBUG,
+            level=logging.INFO,
         )
         self.cs_researchers: List[str] = [
             "Irfan Ahmed",
