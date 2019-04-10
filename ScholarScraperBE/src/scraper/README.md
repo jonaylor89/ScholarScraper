@@ -43,16 +43,16 @@
 # To Parse
 - **FROM SCHOLAR**
 
-[x] Total Citations
-[x] Publications IDs 
+- [x] Total Citations
+- [x] Publications IDs 
 
 - **FROM PUBLICATIONS**
 
-[] Publication ID
-[x] Date of publications
-[x] Number of citations
-[] Publication ID of citations
-[] Publication information of citations
+- [] Publication ID
+- [x] Date of publications
+- [x] Number of citations
+- [] Publication ID of citations
+- [] Publication information of citations
 
 ----------------------------------
 
