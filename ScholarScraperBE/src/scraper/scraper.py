@@ -352,7 +352,7 @@ class ScholarScraper(object):
         try:
             # Click the title to get the information about the publication
             article_link.click()
-            self.logger.debug(f"entering article ({article_link})")
+            self.logger.debug(f"entering article ({article_link.title})")
         except Exception as e:
             self.logger.error(f"article `{article_link.text}` could not be clicked on")
             self.browser.back()
@@ -397,7 +397,8 @@ class ScholarScraper(object):
                         article_dict["id"] = self.parse_article_id(article_id_url)
 
                     # Click on the link for total citations to parse the citations
-                    article_dict["Citation Titles"] = self.parse_citations()
+                    # TODO: For tomorrow
+                    # article_dict["Citation Titles"] = self.parse_citations()
 
                     sleep(randint(3, 5))
 
