@@ -12,6 +12,7 @@ import json
 from entities.entity import Session, Base, engine
 from entities.scholar import Scholar, ScholarSchema
 from entities.publication import Publication, PublicationSchema
+from entities.publicationauthor import PublicationAuthor, PublicationAuthorSchema
 from entities.totalcitations import TotalCitations, TotalCitationsSchema
 
 data = None
@@ -53,6 +54,28 @@ def update_scholar():
 
     session.close()
 
+def upload_publication_author():
+
+    for name, info in data.items():
+        session = Session()
+
+        for title, article_info in info["articles"].items():
+            try:
+                pub_auth = PublicationAuthor(str(article_info["id"]), info["id"], 'json file')
+
+                new_pub_auth = PublicationAuthorSchema().dump(pub_auth).data
+
+                print(json.dumps(new_pub_auth, indent=2))
+
+                session.add(pub_auth)
+
+                session.commit()
+
+            except Exception as e:
+                print(f"bad things {e}")
+                break
+
+        session.close()
 
 def upload_publication():
 
@@ -106,4 +129,4 @@ if __name__ == "__main__":
     ##  script to execute  ##
     #########################
 
-    upload_publication()
+    upload_publication_author()
