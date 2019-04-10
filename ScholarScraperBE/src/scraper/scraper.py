@@ -395,12 +395,15 @@ class ScholarScraper(object):
 
                     if article_id_url is not None:
                         article_dict["id"] = self.parse_article_id(article_id_url)
+                    else:
+                        self.logger.error("couldn't get the url of the article")
+                        article_dict["id"] = 0
 
                     # Click on the link for total citations to parse the citations
                     # TODO: For tomorrow
                     # article_dict["Citation Titles"] = self.parse_citations()
 
-                    sleep(randint(3, 5))
+                    sleep(randint(2, 3))
 
                 elif k.text == "Publication date":
                     article_dict[k.text] = v.text
