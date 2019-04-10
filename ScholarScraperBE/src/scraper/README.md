@@ -68,4 +68,4 @@ end
 
 # State Diagram
 
-![State Diagram](scraper/Scraper\ State\ Diagram.pdf)
+![State Diagram](scraper/ScraperStateDiagram.png)
