@@ -95,7 +95,7 @@ class ScholarScraper(object):
         """
 
         sleep(1)
-        self.logger.info("retrieving google scholar website")
+        self.logger.debug("retrieving google scholar website")
         self.browser.get(self.home_url)
         sleep(1)
 
@@ -123,7 +123,7 @@ class ScholarScraper(object):
         except:
             self.logger.error(f"researcher {name} could not be found")
             self.researcher_dict[name] = {}
-            return 
+            return
 
         sleep(randint(1, 3))
 
@@ -144,24 +144,14 @@ class ScholarScraper(object):
         Used to check if a researcher needs updating and automatically does so if needed
         """
 
-        # Go to google scholar start screen
-        self.goto_start()
-
-        # Grab the search bar
-        search = self.browser.find_element_by_name("q")
-
-        # Profession error handling that just catches everything
         try:
-            # Enter the researcher's name and hit `ENTER/RETURN`
-            search.send_keys(name)
-            search.send_keys(Keys.RETURN)
 
-            # Find the researcher's name out of the search results
-            link = self.browser.find_element_by_link_text(name)
-            link.click()
+            self.browser.get(
+                f"https://scholar.google.com/citations?user={prev['id']}&hl=en&oi=ao"
+            )
 
-        except:
-            self.logger.error(f"researcher {name} could not be found")
+        except Exception as e:
+            self.logger.error(f"researcher {name} could not be found: {e}")
             self.researcher_dict[name] = prev
             return
 
@@ -324,12 +314,12 @@ class ScholarScraper(object):
                         self.logger.debug(
                             f"article `{title.text}` has not changed citation count"
                         )
-                        articles_dict[title.text]["Total citations"] = prev_articles[title.text][
-                            "Total citations"
-                        ]
+                        articles_dict[title.text]["Total citations"] = prev_articles[
+                            title.text
+                        ]["Total citations"]
                     else:
                         self.logger.info(
-                            f"citation count for article `{title.text}` has changed {prev_articles[title.text]['Total citations']} vs {citation}"
+                            f"citation count for article `{title.text}` has changed {citation} vs {prev_articles[title.text]['Total citations']} before"
                         )
                         articles_dict[title.text] = self.parse_article(title)
                 except Exception as e:
@@ -391,9 +381,9 @@ class ScholarScraper(object):
                 if k.text == "Total citations":
 
                     # Getting the xpath for the cited by link
-                    # cited_by_link = self.browser.find_elements_by_xpath(
-                    #   "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]"
-                    # )
+                    cited_by_link = self.browser.find_elements_by_xpath(
+                        "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]"
+                    )
 
                     # This is hacky parsing, it can be done better for sure
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
@@ -407,7 +397,7 @@ class ScholarScraper(object):
                         article_dict["id"] = self.parse_article_id(article_id_url)
 
                     # Click on the link for total citations to parse the citations
-                    # article_dict["Citation Titles"] = self.parse_citations()
+                    article_dict["Citation Titles"] = self.parse_citations()
 
                     sleep(randint(3, 5))
 
@@ -470,7 +460,7 @@ class ScholarScraper(object):
 
         try:
             citation_list = self.browser.execute_script(
-                        """
+                """
                             // let list= document.getElementsByClassName("gs_rt"); 
                             // let arr = [];
                             // for (var i = 0; i < list.length; i++) {
@@ -505,7 +495,7 @@ class ScholarScraper(object):
         try:
             # citation_data = self.browser.find_elements_by_xpath("/html/body/div/div[14]/div[2]/div/div[1]/div[1]/table/tbody/tr[1]/td[2]")
             citation_data = self.browser.execute_script(
-                                """
+                """
                                     function getElementByXpath(path) {
                                         return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
                                     }
@@ -522,6 +512,7 @@ class ScholarScraper(object):
         self.logger.debug(f"{total_citations} citations in total")
 
         return total_citations
+
 
 def main() -> None:
 

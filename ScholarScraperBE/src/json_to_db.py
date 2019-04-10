@@ -78,14 +78,9 @@ def upload_total_citations():
     session = Session()
 
     for name, info in data.items():
-        try:
-            total_cites = TotalCitations(
-                info["id"], info["citation_count"], "json file"
-            )
-        except KeyError:
-            total_cites = TotalCitations(
-                info["id"], info["citations_count"], "json file"
-            )
+        total_cites = TotalCitations(
+            info["id"], info["citation_count"], "json file"
+        )
 
         new_total = TotalCitationsSchema().dump(total_cites).data
         print(json.dumps(new_total, indent=2))

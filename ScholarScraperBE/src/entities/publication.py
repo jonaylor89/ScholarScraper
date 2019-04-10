@@ -9,7 +9,8 @@ class Publication(Entity, Base):
     __tablename__ = "publication"
     id = Column("id", Integer, primary_key=True)
     title = Column("title", String(256), nullable=True)
-    date = Column(DateTime)
+    cites = Column("cites", Integer, nullable=True)
+    date = Column(String)
 
     def __init__(self, id, name, date, created_by):
         Entity.__init__(self, created_by)
@@ -26,4 +27,4 @@ class Publication(Entity, Base):
 class PublicationSchema(Schema):
     id = fields.Number()
     title = fields.Str()
-    date = fields.DateTime()
+    date = fields.Str()
