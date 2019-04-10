@@ -59,7 +59,7 @@
 # Algorithm
 
 ## Build Database
-
+```
 Grab the total citations for each researcher
 for each of their publications then
     Grab name, date of publishing, id
@@ -68,6 +68,7 @@ for each of their publications then
         grab name, date of publish (citation date), and id
     end
 end 
+```
 
 # State Diagram
 
