@@ -48,7 +48,7 @@
 
 - **FROM PUBLICATIONS**
 
-- [ ] Publication ID
+- [x] Publication ID
 - [x] Date of publications
 - [x] Number of citations
 - [ ] Publication ID of citations
