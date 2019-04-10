@@ -66,14 +66,6 @@ for each of their publications then
     end
 end 
 
-## Event loop
+# State Diagram
 
-Check the total citations
-if there is a change then
-    Go through the publications looking for the number of changes
-
-    once found then
-        go through that publication to find the exact publication to cite it and parse it
-        i.e. Get data, publication id, and title of the new citation
-    end
-end
+![State Diagram](scraper/Scraper\ State\ Diagram.pdf)
