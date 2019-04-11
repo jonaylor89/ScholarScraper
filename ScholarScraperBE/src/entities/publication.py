@@ -1,4 +1,3 @@
-
 from sqlalchemy import Column, String, Integer, DateTime
 from marshmallow import Schema, fields
 
@@ -21,9 +20,7 @@ class Publication(Entity, Base):
         self.date = date
 
     def __repr__(self):
-        return (
-            f"<Publication(id='{self.id}', title='{self.title}', cites='{self.cites}', date='{self.date}')>"
-        )
+        return f"<Publication(id='{self.id}', title='{self.title}', cites='{self.cites}', date='{self.date}')>"
 
 
 class PublicationSchema(Schema):

@@ -354,7 +354,9 @@ class ScholarScraper(object):
             article_link.click()
             self.logger.debug(f"entering article ({article_link.text})")
         except Exception as e:
-            self.logger.error(f"article `{article_link.text}` could not be clicked on: {e}")
+            self.logger.error(
+                f"article `{article_link.text}` could not be clicked on: {e}"
+            )
             self.browser.back()
             sleep(randint(1, 3))
             return {}
