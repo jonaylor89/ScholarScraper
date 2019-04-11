@@ -42,20 +42,24 @@
 
 # To Parse
 - **FROM SCHOLAR**
-    [x] Total Citations
-    [x] Publications IDs 
+
+- [x] Total Citations
+- [x] Publications IDs 
+
 - **FROM PUBLICATIONS**
-    [] Publication ID
-    [x] Date of publications
-    [x] Number of citations
-    [] Publication ID of citations
+
+- [x] Publication ID
+- [x] Date of publications
+- [x] Number of citations
+- [ ] Publication ID of citations
+- [ ] Publication information of citations
 
 ----------------------------------
 
 # Algorithm
 
 ## Build Database
-
+```
 Grab the total citations for each researcher
 for each of their publications then
     Grab name, date of publishing, id
@@ -64,15 +68,8 @@ for each of their publications then
         grab name, date of publish (citation date), and id
     end
 end 
+```
 
-## Event loop
+# State Diagram
 
-Check the total citations
-if there is a change then
-    Go through the publications looking for the number of changes
-
-    once found then
-        go through that publication to find the exact publication to cite it and parse it
-        i.e. Get data, publication id, and title of the new citation
-    end
-end
+![State Diagram](ScraperStateDiagram.png)
