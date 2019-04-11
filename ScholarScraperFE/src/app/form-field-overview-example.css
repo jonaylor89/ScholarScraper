@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container > * {
+    left: 50px;
+    width: 20%;
+  }
+  .button-row > * {
+    left: 50px;
+  }
