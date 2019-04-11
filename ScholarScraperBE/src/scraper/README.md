@@ -8,7 +8,6 @@
 # Names to parse
 - Irfan Ahmed
 - Tomasz Arodz
-- Caroline Budwell
 - Eyuphan Bulut
 - Alberto Cano
 - Krzysztof Cios
@@ -26,38 +25,41 @@
 - Milos Manic
 - Bridget McInnes
 - Tamer Nadeem
-- Zachary Whitten
 - Tarynn Witten
 - Cang Ye
 - Hong-Sheng Zhou
 
 ---------------------
 
-# Possible Optimizations
+# Optimizations
 * Download the html for a publication and parse that to allow for parallelization without the browser thinkings we're DOSing it
     * Using ScraPY or BeautifulSoup
 * Switch drivers sometimes to confuse google's algorithms
 * Email report to me of the changes since the last parse (python smtp library)
-* Argparse for quick command line configuring
+* Use configuration file
 
 -------------------------------------
 
 # To Parse
 - **FROM SCHOLAR**
-    [x] Total Citations
-    [x] Publications IDs 
+
+- [x] Total Citations
+- [x] Publications IDs 
+
 - **FROM PUBLICATIONS**
-    [] Publication ID
-    [x] Date of publications
-    [x] Number of citations
-    [] Publication ID of citations
+
+- [x] Publication ID
+- [x] Date of publications
+- [x] Number of citations
+- [ ] Publication ID of citations
+- [ ] Publication information of citations
 
 ----------------------------------
 
 # Algorithm
 
 ## Build Database
-
+```
 Grab the total citations for each researcher
 for each of their publications then
     Grab name, date of publishing, id
@@ -66,15 +68,8 @@ for each of their publications then
         grab name, date of publish (citation date), and id
     end
 end 
+```
 
-## Event loop
+# State Diagram
 
-Check the total citations
-if there is a change then
-    Go through the publications looking for the number of changes
-
-    once found then
-        go through that publication to find the exact publication to cite it and parse it
-        i.e. Get data, publication id, and title of the new citation
-    end
-end
+![State Diagram](ScraperStateDiagram.png)

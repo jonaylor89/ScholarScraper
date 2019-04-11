@@ -7,12 +7,13 @@
 ## EVERYTHING IN A JSON FILE.
 ##############################################
 
+import json
+
 from entities.entity import Session, Base, engine
 from entities.scholar import Scholar, ScholarSchema
 from entities.publication import Publication, PublicationSchema
+from entities.publicationauthor import PublicationAuthor, PublicationAuthorSchema
 from entities.totalcitations import TotalCitations, TotalCitationsSchema
-
-import json
 
 data = None
 
@@ -54,38 +55,70 @@ def update_scholar():
     session.close()
 
 
-def upload_publication():
-    session = Session()
+def upload_publication_author():
 
     for name, info in data.items():
+        session = Session()
+
         for title, article_info in info["articles"].items():
-            pub = Publication(
-                article_info["id"], title, article_info["publication_date"], "json file"
-            )
+            try:
+                pub_auth = PublicationAuthor(
+                    str(article_info["id"]), info["id"], "json file"
+                )
 
-            new_pub = PublicationSchema().dump(pub).data
+                new_pub_auth = PublicationAuthorSchema().dump(pub_auth).data
 
-            print(json.dumps(new_pub, indent=2))
+                print(json.dumps(new_pub_auth, indent=2))
 
-            session.add(pub)
+                session.add(pub_auth)
 
-            session.commit()
+                session.commit()
 
-    session.close()
+            except Exception as e:
+                print(f"bad things {e}")
+                break
+
+        session.close()
+
+
+def upload_publication():
+
+    for name, info in data.items():
+        session = Session()
+
+        for title, article_info in info["articles"].items():
+            try:
+                pub = Publication(
+                    str(article_info["id"]),
+                    title,
+                    article_info["Total citations"],
+                    article_info["Publication date"],
+                    "json file",
+                )
+
+                new_pub = PublicationSchema().dump(pub).data
+
+                print(json.dumps(new_pub, indent=2))
+
+                session.add(pub)
+
+                session.commit()
+            except KeyError:
+                print("nein")
+                continue
+
+            except Exception as e:
+                print(f"bad things: {e}")
+                break
+
+        session.close()
 
 
 def upload_total_citations():
     session = Session()
 
     for name, info in data.items():
-        try:
-            total_cites = TotalCitations(
-                info["id"], info["citation_count"], "json file"
-            )
-        except KeyError:
-            total_cites = TotalCitations(
-                info["id"], info["citations_count"], "json file"
-            )
+        total_cites = TotalCitations(info["id"], info["citation_count"], "json file")
 
         new_total = TotalCitationsSchema().dump(total_cites).data
         print(json.dumps(new_total, indent=2))
@@ -101,5 +134,4 @@ if __name__ == "__main__":
     #########################
     ##  script to execute  ##
     #########################
-
     pass

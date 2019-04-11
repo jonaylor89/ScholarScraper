@@ -29,7 +29,6 @@ class ScholarScraper(object):
             datefmt="%H:%M:%S",
             level=logging.INFO,
         )
-
         self.cs_researchers: List[str] = [
             "Irfan Ahmed",
             "Tomasz Arodz",
@@ -58,7 +57,7 @@ class ScholarScraper(object):
         ]
 
         self.home_url = "https://scholar.google.com"
-        self.researcher_dict = {}
+        self.researcher_dict: Dict = {}
 
     def __enter__(self) -> Chrome:
         """
@@ -68,7 +67,7 @@ class ScholarScraper(object):
         options = ChromeOptions()
 
         # Show chrome during for debugging
-        options.add_argument("--headless")
+        #options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
 
@@ -96,13 +95,13 @@ class ScholarScraper(object):
         """
 
         sleep(1)
-        self.logger.info("retrieving google scholar website")
+        self.logger.debug("retrieving google scholar website")
         self.browser.get(self.home_url)
         sleep(1)
 
-    def parse_researcher(self, name: str) -> Dict:
+    def parse_researcher(self, name: str) -> None:
         """
-        Create new researcher
+        Parse new researcher
         """
 
         # Go to google scholar start screen
@@ -142,27 +141,18 @@ class ScholarScraper(object):
 
     def check_researcher(self, name: str, prev: Dict) -> None:
         """
-        Used to check if a researcher needs undating and automatically does so if needed
+        Used to check if a researcher needs updating and automatically does so if needed
         """
-        # Go to google scholar start screen
-        self.goto_start()
 
-        # Grab the search bar
-        search = self.browser.find_element_by_name("q")
-
-        # Profession error handling that just catches everything
         try:
-            # Enter the researcher's name and hit `ENTER/RETURN`
-            search.send_keys(name)
-            search.send_keys(Keys.RETURN)
 
-            # Find the researcher's name out of the search results
-            link = self.browser.find_element_by_link_text(name)
-            link.click()
+            self.browser.get(
+                f"https://scholar.google.com/citations?user={prev['id']}&hl=en&oi=ao"
+            )
 
-        except:
-            self.logger.error(f"researcher {name} could not be found")
-            researcher_dict[name] = prev
+        except Exception as e:
+            self.logger.error(f"researcher {name} could not be found: {e}")
+            self.researcher_dict[name] = prev
             return
 
         sleep(randint(1, 3))
@@ -241,7 +231,7 @@ class ScholarScraper(object):
 
         return articles_dict
 
-    def parse_id(self) -> int:
+    def parse_id(self) -> str:
         """
         parse the id for a researcher
 
@@ -266,7 +256,7 @@ class ScholarScraper(object):
         """
         return url[url.find("?") + 1 :].replace("&", "=").split("=")
 
-    def check_articles(self, prev_articles: Dict) -> None:
+    def check_articles(self, prev_articles: Dict) -> Dict:
         """
         Check if an articles citation number has changed and parse it if it has
 
@@ -306,7 +296,7 @@ class ScholarScraper(object):
         self.logger.info(f"cited titles for author: {len(citations)}")
 
         # Create article section
-        articles_dict = {}
+        articles_dict: Dict[str, Dict] = {}
 
         try:
             # Loop through all articles for the researcher
@@ -324,12 +314,12 @@ class ScholarScraper(object):
                         self.logger.debug(
                             f"article `{title.text}` has not changed citation count"
                         )
-                        articles_dict[title.text] = prev_articles[title.text][
-                            "Total citations"
-                        ]
+                        articles_dict[title.text]["Total citations"] = prev_articles[
+                            title.text
+                        ]["Total citations"]
                     else:
                         self.logger.info(
-                            f"citation count for article `{title.text}` has changed {prev_articles[title.text]['Total citations']} vs {citation}"
+                            f"citation count for article `{title.text}` has changed {citation} vs {prev_articles[title.text]['Total citations']} before"
                         )
                         articles_dict[title.text] = self.parse_article(title)
                 except Exception as e:
@@ -355,16 +345,18 @@ class ScholarScraper(object):
         """
 
         # Add the publication as a key to the dictionary
-        article_dict = {}
+        article_dict: Dict = {}
 
         sleep(randint(2, 4))
 
         try:
             # Click the title to get the information about the publication
             article_link.click()
-            self.logger.debug(f"entering article ({article_link})")
+            self.logger.debug(f"entering article ({article_link.text})")
         except Exception as e:
-            self.logger.error(f"article `{article_link.text}` could not be clicked on")
+            self.logger.error(
+                f"article `{article_link.text}` could not be clicked on: {e}"
+            )
             self.browser.back()
             sleep(randint(1, 3))
             return {}
@@ -390,11 +382,6 @@ class ScholarScraper(object):
 
                 if k.text == "Total citations":
 
-                    # Getting the xpath for the cited by link
-                    # cited_by_link = self.browser.find_elements_by_xpath(
-                    #   "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]"
-                    # )
-
                     # This is hacky parsing, it can be done better for sure
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
 
@@ -405,11 +392,14 @@ class ScholarScraper(object):
 
                     if article_id_url is not None:
                         article_dict["id"] = self.parse_article_id(article_id_url)
+                    else:
+                        self.logger.error("couldn't get the url of the article")
+                        article_dict["id"] = 0
 
                     # Click on the link for total citations to parse the citations
-                    # article_dict["Citation Titles"] = self.parse_citations()
+                    article_dict["Citation Titles"] = self.parse_citations(v.find_element_by_css_selector("a"))
 
-                    sleep(randint(3, 5))
+                    sleep(randint(2, 3))
 
                 elif k.text == "Publication date":
                     article_dict[k.text] = v.text
@@ -444,53 +434,55 @@ class ScholarScraper(object):
             self.logger.error("`cites` not in parameters")
             return ""
 
-    def parse_citations(self) -> List[str]:
+    def parse_citations(self, citations_link) -> Dict[str, Dict]:
         """
         Grab the titles of citations of a specific article from google scholar
         """
 
+        citations_dict: Dict[str, Dict] = {}
+
         sleep(randint(1, 3))
 
+        """
         try:
             citation_link = self.browser.find_element_by_xpath(
                 "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]/div[1]/a"
             )
         except:
             self.logger.error("couldn't grab citation link")
-            return []
+            return {}
+        """
 
         try:
-            citation_link.click()
+            citations_link.click()
 
         except:
             self.logger.error("citations could not be clicked")
-            return []
+            return {}
 
         sleep(randint(1, 3))
 
         try:
             citation_list = self.browser.execute_script(
                 """
-                            // let list= document.getElementsByClassName("gs_rt"); 
-                            // let arr = [];
-                            // for (var i = 0; i < list.length; i++) {
-                            //     arr.push(list[i].lastChild.firstChild.data);
-                            // }   
-
-                            // return arr;
                             return [...document.querySelectorAll('.gs_rt')].map(i => i.lastChild.firstChild.data);
                         """
             )
         except:
             self.logger.error("couldn't get citation titles")
             self.browser.back()
-            return []
+            return {}
 
         sleep(1)
 
         self.browser.back()
 
-        return citation_list
+
+        for citation in citation_list:
+            print(citation)
+            citations_dict[citation] = {}
+
+        return citations_dict
 
     def citation_count(self) -> int:
         """
