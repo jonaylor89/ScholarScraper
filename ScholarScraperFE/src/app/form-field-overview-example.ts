@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { ApiService } from './api.service';
 
 /** @title Simple form field */
 @Component({
@@ -6,46 +7,44 @@ import {Component} from '@angular/core';
   templateUrl: 'form-field-overview-example.html',
   styleUrls: ['form-field-overview-example.css'],
 })
-export class FormFieldOverviewExample {
-    scholars = [];
+export class FormFieldOverviewExample implements OnInit {
+    public scholars = [];
+    public scholarsInput = [];
+
   addScholar(newScholar: string) {
     if (newScholar) {
-      this.scholars.push(newScholar);
+      this.scholarsInput.push(newScholar);
     }
 
-    var json = [   
-      {
-      "scholarID": "Alberto Cano",
-      "scholarIDFK": "Dr. Seuss",
-      "Date": "2012/04/23"
-      },
-      {
-          "scholarID": "Alberto Cano",
-          "scholarIDFK": "Dr. Seuss",
-          "Date": "2013/04/23"
-      },
-      {
-          "scholarID": "Alberto Cano",
-          "scholarIDFK": "Dr. Seuss",
-          "Date": "2013/04/23"
-      },
-      {
-          "scholarID": "Dr. Seuss",
-          "scholarIDFK": "Alberto Cano",
-          "Date": "2016/04/23"
+    this.scholars.forEach(element => {
+      debugger;
+      console.log(newScholar+ " is equal to " + element.full_name)
+      if(newScholar == element.full_name){
+        alert(newScholar+ " is equal to " + element.full_name);
+        //use element.id and look into publication-cites to find all the scholars that have cited them
+        //then check with the authors that cited element.id and see if element.id has cited
       }
-  ]
-  // var obj = JSON.parse(json);
+    });
   }
 
   deleteScholar(deleteScholar: string) {
-    for (var i = 0; i < this.scholars.length; i++) {
-      if(this.scholars[i] === deleteScholar){
-        this.scholars.splice(i,1);
+    for (var i = 0; i < this.scholarsInput.length; i++) {
+      if(this.scholarsInput[i] === deleteScholar){
+        this.scholarsInput.splice(i,1);
       }
     }
   }
+
+
   title = 'ScholarScraperFE';
+  
+
+ constructor(private _apiservice: ApiService){}
+  ngOnInit(){
+    this._apiservice.getScholars().subscribe(data => this.scholars = data);
+    // JSON.stringify(this.scholars.toString);
+
+  }
 }
 
 

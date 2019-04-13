@@ -1,6 +1,7 @@
+<!-- <script src="jquery-3.3.1.min.js"></script> -->
 <div class="container">
     <mat-form-field>
-      <input #scholar matInput placeholder="Scholar Name">
+      <input #scholarInput matInput placeholder="Scholar Name">
     </mat-form-field>
 
 
@@ -16,12 +17,15 @@
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <div class="button-row">
-            <button (click) = "addScholar(scholar.value)" mat-stroked-button>Add</button>
-            <button (click) = "deleteScholar(scholar.value)" mat-stroked-button>Delete</button>
+            <button (click) = "addScholar(scholarInput.value)" mat-stroked-button>Add</button>
+            <button (click) = "deleteScholar(scholarInput.value)" mat-stroked-button>Delete</button>
             <button mat-stroked-button>Submit</button>
-            <ul><li *ngFor="let scholar of scholars">{{scholar}}</li></ul>
+             <ul><li *ngFor="let scholar of scholars">{{scholar.full_name}}</li></ul>
+            
           </div>
-    
+          <div>
+          <ul><li *ngFor="let scholar of scholarsInput">{{scholarInput.value}}</li></ul>
+        </div>
   </div>
 
 

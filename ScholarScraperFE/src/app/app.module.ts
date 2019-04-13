@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import {FormFieldOverviewExample} from './form-field-overview-example';
 import { HttpClientModule } from '@angular/common/http';
+import {ApiService} from './api.service';
 
 @NgModule({
   declarations: [
@@ -10,9 +11,10 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    ApiService
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [FormFieldOverviewExample]
 })
 export class AppModule { }
