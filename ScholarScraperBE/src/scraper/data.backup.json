@@ -242,11 +242,7 @@
   },
   "Tomasz Arodz": {
     "id": "UXlsAbwAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 09:47:35.500072",
-=======
-    "date": "2019-04-10 20:48:58.975988",
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "citation_count": 795,
     "articles": {
       "Computational methods in developing quantitative structure-activity relationships (QSAR): a review": {
@@ -440,13 +436,8 @@
   },
   "Eyuphan Bulut": {
     "id": "wvvIyOwAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 09:47:42.627259",
     "citation_count": 1470,
-=======
-    "date": "2019-04-10 20:49:06.107010",
-    "citation_count": 1468,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Exploiting friendship relations for efficient routing in mobile social networks": {
         "Publication date": "2012/12",
@@ -791,13 +782,8 @@
   },
   "Alberto Cano": {
     "id": "8f_w4HQAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 10:00:11.804263",
     "citation_count": 860,
-=======
-    "date": "2019-04-10 20:49:13.264404",
-    "citation_count": 859,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Predicting student failure at school using genetic programming and different data mining approaches with high dimensional and imbalanced data": {
         "Publication date": "2013",
@@ -1126,13 +1112,8 @@
   },
   "Krzysztof J Cios": {
     "id": "hrWVmoAAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 10:11:42.072142",
     "citation_count": 6614,
-=======
-    "date": "2019-04-10 20:49:21.402064",
-    "citation_count": 6607,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Data mining and knowledge discovery": {
         "Publication date": "1998",
@@ -1638,13 +1619,8 @@
   },
   "Kostadin Damevski": {
     "id": "3f847ugAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 10:28:54.160519",
     "citation_count": 805,
-=======
-    "date": "2019-04-10 20:49:27.526387",
-    "citation_count": 804,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "A component architecture for high-performance scientific computing": {
         "Publication date": "2006/5",
@@ -1922,13 +1898,8 @@
   },
   "Thang N. Dinh": {
     "id": "M5W9tuUAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 10:39:15.218428",
     "citation_count": 1577,
-=======
-    "date": "2019-04-10 20:49:32.643968",
-    "citation_count": 1573,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Adaptive algorithms for detecting community structure in dynamic social networks": {
         "Publication date": "2011/4/10",
@@ -1999,14 +1970,11 @@
         "Publication date": "2013/6",
         "Total citations": 30,
         "id": "5345688102207572365"
-<<<<<<< HEAD
-=======
       },
       "Precise structural vulnerability assessment via mathematical programming": {
         "Publication date": "2011/11",
         "Total citations": 28,
         "id": "2948439653823244192"
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
       },
       "Least cost influence in multiplex social networks: Model representation and analysis": {
         "Publication date": "2013/12/7",
@@ -2313,13 +2281,8 @@
   },
   "Carol Fung": {
     "id": "lIYpkGYAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 10:53:01.687349",
     "citation_count": 989,
-=======
-    "date": "2019-04-10 20:49:40.757060",
-    "citation_count": 987,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Dirichlet-based trust management for effective collaborative intrusion detection networks": {
         "Publication date": "2011/6",
@@ -2708,13 +2671,8 @@
   },
   "preetam ghosh": {
     "id": "S30uT7YAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 11:07:34.135645",
     "citation_count": 1284,
-=======
-    "date": "2019-04-10 20:49:44.873493",
-    "citation_count": 1282,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "A game theory based pricing strategy for job allocation in mobile grids": {
         "Publication date": "2004/4/26",
@@ -3208,13 +3166,8 @@
   },
   "Vojislav Kecman": {
     "id": "2TOvEFoAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 11:24:24.489096",
     "citation_count": 5007,
-=======
-    "date": "2019-04-10 20:49:51.009641",
-    "citation_count": 5004,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Learning and soft computing: support vector machines, neural networks, and fuzzy logic models": {
         "Publication date": "2001",
@@ -3720,11 +3673,7 @@
   },
   "Bartosz Krawczyk": {
     "id": "0GrFcZsAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 11:42:08.281984",
-=======
-    "date": "2019-04-10 20:49:57.129919",
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "citation_count": 1967,
     "articles": {
       "Learning from imbalanced data: open challenges and future directions": {
@@ -4231,13 +4180,8 @@
   },
   "Lukasz Kurgan": {
     "id": "zXw_54AAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 11:42:12.430725",
     "citation_count": 9371,
-=======
-    "date": "2019-04-10 20:50:03.422097",
-    "citation_count": 9360,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Data Mining: A Knowledge Discovery Approach": {
         "Publication date": "2007",
@@ -4743,11 +4687,7 @@
   },
   "John D. Leonard II": {
     "id": "thmq-GAAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 11:59:14.546232",
-=======
-    "date": "2019-04-10 20:50:10.542762",
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "citation_count": 866,
     "articles": {
       "An analysis of the severity and incident duration of truck-involved freeway accidents": {
@@ -5072,13 +5012,8 @@
   },
   "Changqing Luo": {
     "id": "8spZ1jIAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 11:59:20.655573",
     "citation_count": 863,
-=======
-    "date": "2019-04-10 20:50:15.648191",
-    "citation_count": 862,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Cross-layer design for TCP performance improvement in cognitive radio networks": {
         "Publication date": "2010/6",
@@ -5269,13 +5204,8 @@
   },
   "Milos Manic": {
     "id": "jp-Ye7gAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 12:05:43.103140",
     "citation_count": 2815,
-=======
-    "date": "2019-04-10 20:50:24.769697",
-    "citation_count": 2814,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "CIMS: A framework for infrastructure interdependency modeling and analysis": {
         "Publication date": "2006/12/3",
@@ -5781,13 +5711,8 @@
   },
   "Bridget T. McInnes": {
     "id": "dWRneN0AAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 12:23:07.801420",
     "citation_count": 875,
-=======
-    "date": "2019-04-10 20:50:28.859362",
-    "citation_count": 874,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "UMLS-Interface and UMLS-Similarity: open source software for measuring paths and semantic similarity": {
         "Publication date": "2009",
@@ -6049,13 +5974,8 @@
   },
   "Tamer Nadeem": {
     "id": "0ltdcO4AAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 12:32:45.483385",
     "citation_count": 2841,
-=======
-    "date": "2019-04-10 20:50:35.982781",
-    "citation_count": 2838,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "TrafficView: traffic data dissemination using car-to-car communication": {
         "Publication date": "2004/7/1",
@@ -6526,13 +6446,8 @@
   },
   "Tarynn M Witten": {
     "id": "SJ8Ssp4AAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 12:49:27.205437",
     "citation_count": 3233,
-=======
-    "date": "2019-04-10 20:50:39.115251",
-    "citation_count": 3230,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Impaired wound healing": {
         "Publication date": "2007/2/28",
@@ -7033,13 +6948,8 @@
   },
   "Cang Ye": {
     "id": "dVbCvDtnltMC",
-<<<<<<< HEAD
     "date": "2019-04-15 13:06:11.364966",
     "citation_count": 1606,
-=======
-    "date": "2019-04-10 20:50:44.221580",
-    "citation_count": 1604,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Characterization of a 2D laser scanner for mobile robot obstacle negotiation": {
         "Publication date": "2002",
@@ -7377,13 +7287,8 @@
   },
   "Hong-Sheng Zhou": {
     "id": "PQl5OHMAAAAJ",
-<<<<<<< HEAD
     "date": "2019-04-15 13:18:00.010202",
     "citation_count": 884,
-=======
-    "date": "2019-04-10 20:50:49.451406",
-    "citation_count": 882,
->>>>>>> 2669cedca4ae7177ed6c73c8189fc207a6cf85f5
     "articles": {
       "Multi-input functional encryption": {
         "Publication date": "2014/5/11",
