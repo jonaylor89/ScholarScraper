@@ -389,6 +389,7 @@ def scan() -> None:
             # Move this dict to the db
             # Or do that for every researcher
 
+
 def update_scholar(data: Dict):
     """
     Upload scholar to db
@@ -402,6 +403,7 @@ def update_scholar(data: Dict):
         session.commit()
 
     session.close()
+
 
 def upload_publication(data: Dict):
     """
@@ -425,6 +427,7 @@ def upload_publication(data: Dict):
 
     session.close()
 
+
 def upload_total_citations(data: Dict) -> None:
     """
     Upload total citations to db
@@ -432,9 +435,7 @@ def upload_total_citations(data: Dict) -> None:
     session = Session()
 
     for name, info in data.items():
-        total_cites = TotalCitations(
-            info["id"], info["citation_count"], "json file"
-        )
+        total_cites = TotalCitations(info["id"], info["citation_count"], "json file")
 
         new_total = TotalCitationsSchema().dump(total_cites).data
         print(json.dumps(new_total, indent=2))
@@ -444,6 +445,7 @@ def upload_total_citations(data: Dict) -> None:
         session.commit()
 
     session.close()
+
 
 # t = Thread(target=scan)
 # t.start()

@@ -67,7 +67,7 @@ class ScholarScraper(object):
         options = ChromeOptions()
 
         # Show chrome during for debugging
-        options.add_argument("--headless")
+        #options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
 
@@ -354,7 +354,9 @@ class ScholarScraper(object):
             article_link.click()
             self.logger.debug(f"entering article ({article_link.text})")
         except Exception as e:
-            self.logger.error(f"article `{article_link.text}` could not be clicked on: {e}")
+            self.logger.error(
+                f"article `{article_link.text}` could not be clicked on: {e}"
+            )
             self.browser.back()
             sleep(randint(1, 3))
             return {}
@@ -380,11 +382,6 @@ class ScholarScraper(object):
 
                 if k.text == "Total citations":
 
-                    # Getting the xpath for the cited by link
-                    cited_by_link = self.browser.find_elements_by_xpath(
-                        "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]"
-                    )
-
                     # This is hacky parsing, it can be done better for sure
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
 
@@ -400,8 +397,7 @@ class ScholarScraper(object):
                         article_dict["id"] = 0
 
                     # Click on the link for total citations to parse the citations
-                    # TODO: For tomorrow
-                    # article_dict["Citation Titles"] = self.parse_citations()
+                    article_dict["Citation Titles"] = self.parse_citations(v.find_element_by_css_selector("a"))
 
                     sleep(randint(2, 3))
 
@@ -438,53 +434,55 @@ class ScholarScraper(object):
             self.logger.error("`cites` not in parameters")
             return ""
 
-    def parse_citations(self) -> List[str]:
+    def parse_citations(self, citations_link) -> Dict[str, Dict]:
         """
         Grab the titles of citations of a specific article from google scholar
         """
 
+        citations_dict: Dict[str, Dict] = {}
+
         sleep(randint(1, 3))
 
+        """
         try:
             citation_link = self.browser.find_element_by_xpath(
                 "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]/div[1]/a"
             )
         except:
             self.logger.error("couldn't grab citation link")
-            return []
+            return {}
+        """
 
         try:
-            citation_link.click()
+            citations_link.click()
 
         except:
             self.logger.error("citations could not be clicked")
-            return []
+            return {}
 
         sleep(randint(1, 3))
 
         try:
             citation_list = self.browser.execute_script(
                 """
-                            // let list= document.getElementsByClassName("gs_rt"); 
-                            // let arr = [];
-                            // for (var i = 0; i < list.length; i++) {
-                            //     arr.push(list[i].lastChild.firstChild.data);
-                            // }   
-
-                            // return arr;
                             return [...document.querySelectorAll('.gs_rt')].map(i => i.lastChild.firstChild.data);
                         """
             )
         except:
             self.logger.error("couldn't get citation titles")
             self.browser.back()
-            return []
+            return {}
 
         sleep(1)
 
         self.browser.back()
 
-        return citation_list
+
+        for citation in citation_list:
+            print(citation)
+            citations_dict[citation] = {}
+
+        return citations_dict
 
     def citation_count(self) -> int:
         """

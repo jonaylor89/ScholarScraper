@@ -54,6 +54,7 @@ def update_scholar():
 
     session.close()
 
+
 def upload_publication_author():
 
     for name, info in data.items():
@@ -61,7 +62,9 @@ def upload_publication_author():
 
         for title, article_info in info["articles"].items():
             try:
-                pub_auth = PublicationAuthor(str(article_info["id"]), info["id"], 'json file')
+                pub_auth = PublicationAuthor(
+                    str(article_info["id"]), info["id"], "json file"
+                )
 
                 new_pub_auth = PublicationAuthorSchema().dump(pub_auth).data
 
@@ -77,6 +80,7 @@ def upload_publication_author():
 
         session.close()
 
+
 def upload_publication():
 
     for name, info in data.items():
@@ -85,7 +89,11 @@ def upload_publication():
         for title, article_info in info["articles"].items():
             try:
                 pub = Publication(
-                    str(article_info["id"]), title, article_info["Total citations"], article_info["Publication date"], "json file"
+                    str(article_info["id"]),
+                    title,
+                    article_info["Total citations"],
+                    article_info["Publication date"],
+                    "json file",
                 )
 
                 new_pub = PublicationSchema().dump(pub).data
@@ -110,9 +118,7 @@ def upload_total_citations():
     session = Session()
 
     for name, info in data.items():
-        total_cites = TotalCitations(
-            info["id"], info["citation_count"], "json file"
-        )
+        total_cites = TotalCitations(info["id"], info["citation_count"], "json file")
 
         new_total = TotalCitationsSchema().dump(total_cites).data
         print(json.dumps(new_total, indent=2))
@@ -128,5 +134,4 @@ if __name__ == "__main__":
     #########################
     ##  script to execute  ##
     #########################
-
-    upload_publication_author()
+    pass
