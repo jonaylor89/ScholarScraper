@@ -25,7 +25,7 @@ class ScholarScraper(object):
         logging.basicConfig(
             filename="scraper.log",
             filemode="w",
-            format="%(asctime)s %(name)s %(levelname)s %(message)s",
+            format="%(asctime)s %(levelname)s %(message)s",
             datefmt="%H:%M:%S",
             level=logging.INFO,
         )
@@ -300,7 +300,10 @@ class ScholarScraper(object):
 
         try:
             # Loop through all articles for the researcher
-            for title, citation_link in zip(titles, citations):
+            for x in range(len(titles)):
+
+                title = titles[x]
+                citation_link = citations[x]
 
                 # I have to make it weird like this because web attributes changed be changed
                 if citation_link.text == "":
@@ -326,6 +329,20 @@ class ScholarScraper(object):
                     # title wasn't even in the old database
                     self.logger.warning(f"title `{title.text}` is new to the data: {e}")
                     articles_dict[title.text] = self.parse_article(title)
+
+
+                # It has to be done every loop because webelements get lost every citation
+                try:
+                    # Grab all articles from researcher (map them to their text and not the webelement)
+                    titles = self.browser.find_elements_by_class_name("gsc_a_at")
+
+                    # Grab all citations for the articles (map them to their text and not the webelement)
+                    citations = self.browser.find_elements_by_class_name("gsc_a_c")[2:]
+
+                except Exception as e:
+                    self.logger.error(f"trouble grabbing the titles and citations: {e}")
+                    return prev_articles
+
 
         except Exception as e:
             self.logger.error(f"problem grabbing the data for articles: {e}")
@@ -377,7 +394,11 @@ class ScholarScraper(object):
         self.logger.debug(f"there are {len(fields)} fields to parse")
 
         # Zip fields and values to add them to the dictionary
-        for k, v in zip(fields, values):
+        for i in range(len(fields) - 1): # I don't want the last element
+
+            k = fields[i]
+            v = values[i]
+
             try:
 
                 if k.text == "Total citations":
@@ -399,10 +420,14 @@ class ScholarScraper(object):
                     # Click on the link for total citations to parse the citations
                     article_dict["Citation Titles"] = self.parse_citations(v.find_element_by_css_selector("a"))
 
-                    sleep(randint(2, 3))
+                    sleep(randint(3, 4))
+
+                    break
 
                 elif k.text == "Publication date":
                     article_dict[k.text] = v.text
+
+                self.logger.debug(f"parsed : {k.text} : {v.text}")
 
             except Exception as e:
                 self.logger.error(f"field parsing error on field {k.text}: {e}")
@@ -410,9 +435,9 @@ class ScholarScraper(object):
                 sleep(1)
                 article_dict[k.text] = {}
 
-            self.logger.debug(f"parsed : {k.text} : {v.text}")
 
         # Go back to grab the next article
+        print("We should get to this back")
         self.browser.back()
         sleep(randint(1, 3))
 
@@ -462,25 +487,42 @@ class ScholarScraper(object):
 
         sleep(randint(1, 3))
 
+        citation_list = None
+        authors = None
+
         try:
             citation_list = self.browser.execute_script(
                 """
                             return [...document.querySelectorAll('.gs_rt')].map(i => i.lastChild.firstChild.data);
                         """
-            )
+            )[1:] # The first element is the original article
         except:
             self.logger.error("couldn't get citation titles")
             self.browser.back()
             return {}
 
+        try:
+            author_divs = self.browser.find_elements_by_class_name('gs_a')
+
+        except:
+            self.logger.error("couldn't get citation author")
+            self.browser.back()
+            return {}
+
         sleep(1)
 
+
+        for citation, author_div in zip(citation_list, author_divs):
+            try:
+                citations_dict[citation] = {}
+                author = author_div.find_element_by_css_selector("a").text
+
+            except Exception as e:
+                self.logger.error(f"couldn't get link to author for {citation}, skipping...")
+                continue
+
+        sleep(randint(1, 2))
         self.browser.back()
-
-
-        for citation in citation_list:
-            print(citation)
-            citations_dict[citation] = {}
 
         return citations_dict
 
