@@ -10,7 +10,7 @@ from typing import List, Dict
 from selenium.webdriver import Chrome
 from selenium.webdriver import Firefox
 from selenium.webdriver import ChromeOptions
-from selenium.webdriver import FirefoxOptions
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
@@ -62,9 +62,10 @@ class ScholarScraper(object):
         Returns browser on google scholar for Context Manager
         """
 
-        # 50% chance firefox or chrome
-        if randint(0, 1) > 0:
+        # randomly choose firefox or chrome
+        if randint(0, 1):
             options = ChromeOptions()
+
             # Show chrome during for debugging
             # options.add_argument("--headless")
             options.add_argument("--no-sandbox")
@@ -73,11 +74,12 @@ class ScholarScraper(object):
             self.browser = Chrome(options=options)
 
         else:
-            options = FirefoxOptions()
+            options = Options()
+
             # show firefox during debugging
             # options.add_argument('-headless')
  
-            self.browser = Firefox(firefox_options=options)
+            self.browser = Firefox(options=options)
  
 
         self.logger.info("connect to selenium server")
