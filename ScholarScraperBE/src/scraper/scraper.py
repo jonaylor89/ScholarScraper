@@ -8,7 +8,9 @@ from datetime import datetime
 from typing import List, Dict
 
 from selenium.webdriver import Chrome
+from selenium.webdriver import Firefox
 from selenium.webdriver import ChromeOptions
+from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
@@ -32,14 +34,11 @@ class ScholarScraper(object):
         self.cs_researchers: List[str] = [
             "Irfan Ahmed",
             "Tomasz Arodz",
-            # "Caroline Budwell",
             "Eyuphan Bulut",
             "Alberto Cano",
             "Krzysztof J Cios",
-            # "Robert Dahlberg",
             "Kostadin Damevski",
             "Thang N. Dinh",
-            # "Debra Duke",
             "Carol Fung",
             "preetam ghosh",
             "Vojislav Kecman",
@@ -50,7 +49,6 @@ class ScholarScraper(object):
             "Milos Manic",
             "Bridget T. McInnes",
             "Tamer Nadeem",
-            # "Zachary Whitten",
             "Tarynn M Witten",
             "Cang Ye",
             "Hong-Sheng Zhou",
@@ -64,14 +62,23 @@ class ScholarScraper(object):
         Returns browser on google scholar for Context Manager
         """
 
-        options = ChromeOptions()
+        # 50% chance firefox or chrome
+        if randint(0, 1) > 0:
+            options = ChromeOptions()
+            # Show chrome during for debugging
+            # options.add_argument("--headless")
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
 
-        # Show chrome during for debugging
-        # options.add_argument("--headless")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
+            self.browser = Chrome(options=options)
 
-        self.browser = Chrome(options=options)
+        else:
+            options = FirefoxOptions()
+            # options.add_argument('-headless')
+ 
+            self.browser = Firefox(firefox_options=options)
+ 
+
         self.logger.info("connect to selenium server")
 
         return self.browser
