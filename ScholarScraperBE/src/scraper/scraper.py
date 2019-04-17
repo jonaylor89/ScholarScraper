@@ -212,18 +212,55 @@ class ScholarScraper(object):
 
         sleep(2)  # Sleep to allow everything to load
 
-        # Grab all articles from researcher
-        titles = self.browser.find_elements_by_class_name("gsc_a_at")
-        self.logger.debug(f"titles for author: {len(titles)}")
-
         # Create article section
-        articles_dict = {}
+        articles_dict: Dict = {}
+
+        # Grab all articles from researcher
+        try:
+            titles = self.browser.find_elements_by_class_name("gsc_a_at")
+            self.logger.debug(f"titles for author: {len(titles)}")
+        except:
+            self.logger.error("couldn't get title from page")
+            return articles_dict
 
         # Loop through all articles for the researcher
-        for title in titles:
+        try:
+            for x in range(len(titles)):
 
-            # Add the publication as a key to the dictionary
-            articles_dict[title.text] = self.parse_article(title)
+                sleep(randint(1, 2))
+
+                title = titles[x]
+
+                print(title.text)
+
+                # Add the publication as a key to the dictionary
+                title_text = title.text # Temperary variable so I don't lose the webelement reference
+                articles_dict[title_text] = self.parse_article(title)
+
+                try:
+                    # Click the `SHOW MORE` button at the bottom of the page
+                    show_more = self.browser.find_element_by_id("gsc_bpf_more")
+
+                    # Show more until the button is disabled
+                    count = 0
+                    while show_more.is_enabled():
+                        show_more.click()
+                        count += 1
+                except Exception as e:
+                    self.logger.error("error getting more articles")
+                    return articles_dict
+
+                try:
+                    # Grab all articles from researcher
+                    titles = self.browser.find_elements_by_class_name("gsc_a_at")
+                    self.logger.debug(f"titles for author: {len(titles)}")
+                except:
+                    self.logger.error("couldn't get titles from page")
+                    return articles_dict
+
+        except Exception as e:
+            self.logger.error(f"Something went wrong with parsing the articles: {e}")
+            return articles_dict
 
         # End of publication parsing
 
@@ -437,7 +474,6 @@ class ScholarScraper(object):
 
 
         # Go back to grab the next article
-        print("We should get to this back")
         self.browser.back()
         sleep(randint(1, 3))
 
@@ -516,9 +552,9 @@ class ScholarScraper(object):
             try:
                 citations_dict[citation] = {}
                 author = author_div.find_element_by_css_selector("a").text
-
             except Exception as e:
-                self.logger.error(f"couldn't get link to author for {citation}, skipping...")
+                self.logger.warning(f"couldn't get link to author for {citation}, skipping... ")
+                self.logger.debug(f"{e}")
                 continue
 
         sleep(randint(1, 2))

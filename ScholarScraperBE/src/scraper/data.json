@@ -1971,6 +1971,11 @@
         "Total citations": 30,
         "id": "5345688102207572365"
       },
+      "Precise structural vulnerability assessment via mathematical programming": {
+        "Publication date": "2011/11",
+        "Total citations": 28,
+        "id": "2948439653823244192"
+      },
       "Least cost influence in multiplex social networks: Model representation and analysis": {
         "Publication date": "2013/12/7",
         "Total citations": 28,
@@ -5924,11 +5929,7 @@
         "Total citations": 1,
         "id": "13160890828298380424"
       },
-      "Using Volunteers to Annotate Biomedical Corpora for Anaphora Resolution.": {
-        "Publication date": "2005/12/1",
-        "Total citations": 1,
-        "id": "9151295852319017606"
-      },
+      "Using Volunteers to Annotate Biomedical Corpora for Anaphora Resolution.": {},
       "Incorporating Bigram Statistics into Spelling Correction Tools": {
         "Publication date": "2004",
         "Total citations": 1,
@@ -7533,4 +7534,3 @@
     }
   }
 }
->>>>>>> 33f624f47b3ae6879af9039d0c771ce3815c28ef
