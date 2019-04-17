@@ -67,7 +67,7 @@ class ScholarScraper(object):
         options = ChromeOptions()
 
         # Show chrome during for debugging
-        #options.add_argument("--headless")
+        # options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
 
@@ -231,11 +231,11 @@ class ScholarScraper(object):
 
                 title = titles[x]
 
-                print(title.text)
-
                 # Add the publication as a key to the dictionary
-                title_text = title.text # Temperary variable so I don't lose the webelement reference
-                articles_dict[title_text] = self.parse_article(title)
+                title_text = (
+                    title.text
+                )  # Temperary variable so I don't lose the webelement reference
+                articles_dict[title_text] = self.parse_article(title, True)
 
                 try:
                     # Click the `SHOW MORE` button at the bottom of the page
@@ -361,12 +361,11 @@ class ScholarScraper(object):
                         self.logger.info(
                             f"citation count for article `{title.text}` has changed {citation} vs {prev_articles[title.text]['Total citations']} before"
                         )
-                        articles_dict[title.text] = self.parse_article(title)
+                        articles_dict[title.text] = self.parse_article(title, True)
                 except Exception as e:
                     # title wasn't even in the old database
                     self.logger.warning(f"title `{title.text}` is new to the data: {e}")
-                    articles_dict[title.text] = self.parse_article(title)
-
+                    articles_dict[title.text] = self.parse_article(title, True)
 
                 # It has to be done every loop because webelements get lost every citation
                 try:
@@ -380,7 +379,6 @@ class ScholarScraper(object):
                     self.logger.error(f"trouble grabbing the titles and citations: {e}")
                     return prev_articles
 
-
         except Exception as e:
             self.logger.error(f"problem grabbing the data for articles: {e}")
             return prev_articles
@@ -391,7 +389,7 @@ class ScholarScraper(object):
 
         return articles_dict
 
-    def parse_article(self, article_link) -> Dict:
+    def parse_article(self, article_link, citations: bool) -> Dict:
         """
         Grab the fields and values from a publication 
         It might be possible to have the html for the article inputed instead of the link
@@ -431,7 +429,7 @@ class ScholarScraper(object):
         self.logger.debug(f"there are {len(fields)} fields to parse")
 
         # Zip fields and values to add them to the dictionary
-        for i in range(len(fields) - 1): # I don't want the last element
+        for i in range(len(fields) - 1):  # I don't want the last element
 
             k = fields[i]
             v = values[i]
@@ -443,19 +441,22 @@ class ScholarScraper(object):
                     # This is hacky parsing, it can be done better for sure
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
 
-                    # Get href from link
-                    article_id_url = v.find_element_by_css_selector("a").get_attribute(
-                        "href"
-                    )
+                    if citations:  # Some articles we want citations and others we don't
+                        # Get href from link
+                        article_id_url = v.find_element_by_css_selector(
+                            "a"
+                        ).get_attribute("href")
 
-                    if article_id_url is not None:
-                        article_dict["id"] = self.parse_article_id(article_id_url)
-                    else:
-                        self.logger.error("couldn't get the url of the article")
-                        article_dict["id"] = 0
+                        if article_id_url is not None:
+                            article_dict["id"] = self.parse_article_id(article_id_url)
+                        else:
+                            self.logger.error("couldn't get the url of the article")
+                            article_dict["id"] = 0
 
-                    # Click on the link for total citations to parse the citations
-                    article_dict["Citation Titles"] = self.parse_citations(v.find_element_by_css_selector("a"))
+                        # Click on the link for total citations to parse the citations
+                        article_dict["Citation Titles"] = self.parse_citations(
+                            article_link.text, v.find_element_by_css_selector("a")
+                        )
 
                     sleep(randint(3, 4))
 
@@ -471,7 +472,6 @@ class ScholarScraper(object):
                 self.browser.back()
                 sleep(1)
                 article_dict[k.text] = {}
-
 
         # Go back to grab the next article
         self.browser.back()
@@ -495,7 +495,7 @@ class ScholarScraper(object):
             self.logger.error("`cites` not in parameters")
             return ""
 
-    def parse_citations(self, citations_link) -> Dict[str, Dict]:
+    def parse_citations(self, cited_title, citations_link) -> Dict[str, Dict]:
         """
         Grab the titles of citations of a specific article from google scholar
         """
@@ -531,14 +531,16 @@ class ScholarScraper(object):
                 """
                             return [...document.querySelectorAll('.gs_rt')].map(i => i.lastChild.firstChild.data);
                         """
-            )[1:] # The first element is the original article
+            )[
+                1:
+            ]  # The first element is the original article
         except:
             self.logger.error("couldn't get citation titles")
             self.browser.back()
             return {}
 
         try:
-            author_divs = self.browser.find_elements_by_class_name('gs_a')
+            author_divs = self.browser.find_elements_by_class_name("gs_a")
 
         except:
             self.logger.error("couldn't get citation author")
@@ -547,13 +549,17 @@ class ScholarScraper(object):
 
         sleep(1)
 
-
         for citation, author_div in zip(citation_list, author_divs):
             try:
-                citations_dict[citation] = {}
-                author = author_div.find_element_by_css_selector("a").text
+                author_link = author_div.find_element_by_css_selector("a")
+                citations_dict[citation] = self.parse_citation(
+                    cited_title, citation, author_link
+                )
+
             except Exception as e:
-                self.logger.warning(f"couldn't get link to author for {citation}, skipping... ")
+                self.logger.warning(
+                    f"couldn't get link to author for {citation}, skipping... "
+                )
                 self.logger.debug(f"{e}")
                 continue
 
@@ -561,6 +567,44 @@ class ScholarScraper(object):
         self.browser.back()
 
         return citations_dict
+
+    def parse_citation(self, cited_title, citation, author_link) -> Dict:
+
+        citation_dict: Dict = {}
+
+        try:
+            author_link.click()
+
+            try:
+                # Click the `SHOW MORE` button at the bottom of the page
+                show_more = self.browser.find_element_by_id("gsc_bpf_more")
+
+                # Show more until the button is disabled
+                count = 0
+                while show_more.is_enabled():
+                    show_more.click()
+                    count += 1
+
+            except Exception as e:
+                self.logger.error("error getting more articles")
+                return citation_dict
+
+            try:
+                # Grab the article that cited the target article
+                citation_article = self.browser.find_element_by_link_text(cited_title)
+
+                citation_dict = self.parse_article(
+                    citation_article, False
+                )  # The false means we don't grab its citations
+            except:
+                self.logger.error("couldn't get citation article from page")
+                return citation_dict
+
+        except Exception as e:
+            self.logger.error(f"{e}")
+            return citation_dict
+
+        return citation_dict
 
     def citation_count(self) -> int:
         """
