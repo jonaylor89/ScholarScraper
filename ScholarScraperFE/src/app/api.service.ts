@@ -21,6 +21,7 @@ export class ApiService {
 
   public getScholars(url?: string){
     return this.httpClient.get<Scholar[]>(`${this.apiURL}`);
+
   }
 
   // public getScholarPublicationCites
