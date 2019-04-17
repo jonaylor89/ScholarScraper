@@ -34,7 +34,6 @@
 # Optimizations
 * Download the html for a publication and parse that to allow for parallelization without the browser thinkings we're DOSing it
     * Using ScraPY or BeautifulSoup
-* Switch drivers sometimes to confuse google's algorithms
 * Email report to me of the changes since the last parse (python smtp library)
 * Use configuration file
 

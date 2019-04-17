@@ -8,7 +8,9 @@ from datetime import datetime
 from typing import List, Dict
 
 from selenium.webdriver import Chrome
+from selenium.webdriver import Firefox
 from selenium.webdriver import ChromeOptions
+from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
@@ -25,21 +27,18 @@ class ScholarScraper(object):
         logging.basicConfig(
             filename="scraper.log",
             filemode="w",
-            format="%(asctime)s %(name)s %(levelname)s %(message)s",
+            format="%(asctime)s %(levelname)s %(message)s",
             datefmt="%H:%M:%S",
             level=logging.INFO,
         )
         self.cs_researchers: List[str] = [
             "Irfan Ahmed",
             "Tomasz Arodz",
-            # "Caroline Budwell",
             "Eyuphan Bulut",
             "Alberto Cano",
             "Krzysztof J Cios",
-            # "Robert Dahlberg",
             "Kostadin Damevski",
             "Thang N. Dinh",
-            # "Debra Duke",
             "Carol Fung",
             "preetam ghosh",
             "Vojislav Kecman",
@@ -50,7 +49,6 @@ class ScholarScraper(object):
             "Milos Manic",
             "Bridget T. McInnes",
             "Tamer Nadeem",
-            # "Zachary Whitten",
             "Tarynn M Witten",
             "Cang Ye",
             "Hong-Sheng Zhou",
@@ -64,14 +62,24 @@ class ScholarScraper(object):
         Returns browser on google scholar for Context Manager
         """
 
-        options = ChromeOptions()
+        # 50% chance firefox or chrome
+        if randint(0, 1) > 0:
+            options = ChromeOptions()
+            # Show chrome during for debugging
+            # options.add_argument("--headless")
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
 
-        # Show chrome during for debugging
-        #options.add_argument("--headless")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
+            self.browser = Chrome(options=options)
 
-        self.browser = Chrome(options=options)
+        else:
+            options = FirefoxOptions()
+            # show firefox during debugging
+            # options.add_argument('-headless')
+ 
+            self.browser = Firefox(firefox_options=options)
+ 
+
         self.logger.info("connect to selenium server")
 
         return self.browser
@@ -212,18 +220,55 @@ class ScholarScraper(object):
 
         sleep(2)  # Sleep to allow everything to load
 
-        # Grab all articles from researcher
-        titles = self.browser.find_elements_by_class_name("gsc_a_at")
-        self.logger.debug(f"titles for author: {len(titles)}")
-
         # Create article section
-        articles_dict = {}
+        articles_dict: Dict = {}
+
+        # Grab all articles from researcher
+        try:
+            titles = self.browser.find_elements_by_class_name("gsc_a_at")
+            self.logger.debug(f"titles for author: {len(titles)}")
+        except:
+            self.logger.error("couldn't get title from page")
+            return articles_dict
 
         # Loop through all articles for the researcher
-        for title in titles:
+        try:
+            for x in range(len(titles)):
 
-            # Add the publication as a key to the dictionary
-            articles_dict[title.text] = self.parse_article(title)
+                sleep(randint(1, 2))
+
+                title = titles[x]
+
+                # Add the publication as a key to the dictionary
+                title_text = (
+                    title.text
+                )  # Temperary variable so I don't lose the webelement reference
+                articles_dict[title_text] = self.parse_article(title, True)
+
+                try:
+                    # Click the `SHOW MORE` button at the bottom of the page
+                    show_more = self.browser.find_element_by_id("gsc_bpf_more")
+
+                    # Show more until the button is disabled
+                    count = 0
+                    while show_more.is_enabled():
+                        show_more.click()
+                        count += 1
+                except Exception as e:
+                    self.logger.error("error getting more articles")
+                    return articles_dict
+
+                try:
+                    # Grab all articles from researcher
+                    titles = self.browser.find_elements_by_class_name("gsc_a_at")
+                    self.logger.debug(f"titles for author: {len(titles)}")
+                except:
+                    self.logger.error("couldn't get titles from page")
+                    return articles_dict
+
+        except Exception as e:
+            self.logger.error(f"Something went wrong with parsing the articles: {e}")
+            return articles_dict
 
         # End of publication parsing
 
@@ -300,7 +345,10 @@ class ScholarScraper(object):
 
         try:
             # Loop through all articles for the researcher
-            for title, citation_link in zip(titles, citations):
+            for x in range(len(titles)):
+
+                title = titles[x]
+                citation_link = citations[x]
 
                 # I have to make it weird like this because web attributes changed be changed
                 if citation_link.text == "":
@@ -321,11 +369,23 @@ class ScholarScraper(object):
                         self.logger.info(
                             f"citation count for article `{title.text}` has changed {citation} vs {prev_articles[title.text]['Total citations']} before"
                         )
-                        articles_dict[title.text] = self.parse_article(title)
+                        articles_dict[title.text] = self.parse_article(title, True)
                 except Exception as e:
                     # title wasn't even in the old database
                     self.logger.warning(f"title `{title.text}` is new to the data: {e}")
-                    articles_dict[title.text] = self.parse_article(title)
+                    articles_dict[title.text] = self.parse_article(title, True)
+
+                # It has to be done every loop because webelements get lost every citation
+                try:
+                    # Grab all articles from researcher (map them to their text and not the webelement)
+                    titles = self.browser.find_elements_by_class_name("gsc_a_at")
+
+                    # Grab all citations for the articles (map them to their text and not the webelement)
+                    citations = self.browser.find_elements_by_class_name("gsc_a_c")[2:]
+
+                except Exception as e:
+                    self.logger.error(f"trouble grabbing the titles and citations: {e}")
+                    return prev_articles
 
         except Exception as e:
             self.logger.error(f"problem grabbing the data for articles: {e}")
@@ -337,7 +397,7 @@ class ScholarScraper(object):
 
         return articles_dict
 
-    def parse_article(self, article_link) -> Dict:
+    def parse_article(self, article_link, citations: bool) -> Dict:
         """
         Grab the fields and values from a publication 
         It might be possible to have the html for the article inputed instead of the link
@@ -377,7 +437,11 @@ class ScholarScraper(object):
         self.logger.debug(f"there are {len(fields)} fields to parse")
 
         # Zip fields and values to add them to the dictionary
-        for k, v in zip(fields, values):
+        for i in range(len(fields) - 1):  # I don't want the last element
+
+            k = fields[i]
+            v = values[i]
+
             try:
 
                 if k.text == "Total citations":
@@ -385,32 +449,37 @@ class ScholarScraper(object):
                     # This is hacky parsing, it can be done better for sure
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
 
-                    # Get href from link
-                    article_id_url = v.find_element_by_css_selector("a").get_attribute(
-                        "href"
-                    )
+                    if citations:  # Some articles we want citations and others we don't
+                        # Get href from link
+                        article_id_url = v.find_element_by_css_selector(
+                            "a"
+                        ).get_attribute("href")
 
-                    if article_id_url is not None:
-                        article_dict["id"] = self.parse_article_id(article_id_url)
-                    else:
-                        self.logger.error("couldn't get the url of the article")
-                        article_dict["id"] = 0
+                        if article_id_url is not None:
+                            article_dict["id"] = self.parse_article_id(article_id_url)
+                        else:
+                            self.logger.error("couldn't get the url of the article")
+                            article_dict["id"] = 0
 
-                    # Click on the link for total citations to parse the citations
-                    article_dict["Citation Titles"] = self.parse_citations(v.find_element_by_css_selector("a"))
+                        # Click on the link for total citations to parse the citations
+                        article_dict["Citation Titles"] = self.parse_citations(
+                            article_link.text, v.find_element_by_css_selector("a")
+                        )
 
-                    sleep(randint(2, 3))
+                    sleep(randint(3, 4))
+
+                    break
 
                 elif k.text == "Publication date":
                     article_dict[k.text] = v.text
+
+                self.logger.debug(f"parsed : {k.text} : {v.text}")
 
             except Exception as e:
                 self.logger.error(f"field parsing error on field {k.text}: {e}")
                 self.browser.back()
                 sleep(1)
                 article_dict[k.text] = {}
-
-            self.logger.debug(f"parsed : {k.text} : {v.text}")
 
         # Go back to grab the next article
         self.browser.back()
@@ -434,7 +503,7 @@ class ScholarScraper(object):
             self.logger.error("`cites` not in parameters")
             return ""
 
-    def parse_citations(self, citations_link) -> Dict[str, Dict]:
+    def parse_citations(self, cited_title, citations_link) -> Dict[str, Dict]:
         """
         Grab the titles of citations of a specific article from google scholar
         """
@@ -462,27 +531,91 @@ class ScholarScraper(object):
 
         sleep(randint(1, 3))
 
+        citation_list = None
+        authors = None
+
         try:
             citation_list = self.browser.execute_script(
                 """
                             return [...document.querySelectorAll('.gs_rt')].map(i => i.lastChild.firstChild.data);
                         """
-            )
+            )[
+                1:
+            ]  # The first element is the original article
         except:
             self.logger.error("couldn't get citation titles")
             self.browser.back()
             return {}
 
+        try:
+            author_divs = self.browser.find_elements_by_class_name("gs_a")
+
+        except:
+            self.logger.error("couldn't get citation author")
+            self.browser.back()
+            return {}
+
         sleep(1)
 
+        for citation, author_div in zip(citation_list, author_divs):
+            try:
+                author_link = author_div.find_element_by_css_selector("a")
+                citations_dict[citation] = self.parse_citation(
+                    cited_title, citation, author_link
+                )
+
+            except Exception as e:
+                self.logger.warning(
+                    f"couldn't get link to author for {citation}, skipping... "
+                )
+                self.logger.debug(f"{e}")
+                continue
+
+        sleep(randint(1, 2))
         self.browser.back()
 
-
-        for citation in citation_list:
-            print(citation)
-            citations_dict[citation] = {}
-
         return citations_dict
+
+    def parse_citation(self, cited_title, citation, author_link) -> Dict:
+
+        citation_dict: Dict = {}
+
+        try:
+            author_link.click()
+
+            try:
+                # Click the `SHOW MORE` button at the bottom of the page
+                show_more = self.browser.find_element_by_id("gsc_bpf_more")
+
+                # Show more until the button is disabled
+                count = 0
+                while show_more.is_enabled():
+                    show_more.click()
+                    count += 1
+
+            except Exception as e:
+                self.logger.error("error getting more articles")
+                self.browser.back()
+                return citation_dict
+
+            try:
+                # Grab the article that cited the target article
+                citation_article = self.browser.find_element_by_link_text(cited_title)
+
+                citation_dict = self.parse_article(
+                    citation_article, False
+                )  # The false means we don't grab its citations
+            except:
+                self.logger.error("couldn't get citation article from page")
+                self.browser.back()
+                return citation_dict
+
+        except Exception as e:
+            self.logger.error(f"{e}")
+            return citation_dict
+
+        self.browser.back()
+        return citation_dict
 
     def citation_count(self) -> int:
         """
