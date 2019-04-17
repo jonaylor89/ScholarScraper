@@ -21,10 +21,11 @@
             <button (click) = "deleteScholar(scholarInput.value)" mat-stroked-button>Delete</button>
             <button mat-stroked-button>Submit</button>
              <ul><li *ngFor="let scholar of scholars">{{scholar.full_name}}</li></ul>
-            
+             <ul><li *ngFor="let scholarInput of scholarsInput">{{scholarInput}}</li></ul>
+             <ul><li *ngFor="let scholarCiting of mockScholarsCitingEachOtherNames">{{scholarCiting.full_name + ':' + scholarCiting.scholarID2}}</li></ul>
           </div>
           <div>
-          <ul><li *ngFor="let scholar of scholarsInput">{{scholarInput.value}}</li></ul>
+          
         </div>
   </div>
 
