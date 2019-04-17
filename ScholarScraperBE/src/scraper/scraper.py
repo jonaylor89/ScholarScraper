@@ -74,6 +74,7 @@ class ScholarScraper(object):
 
         else:
             options = FirefoxOptions()
+            # show firefox during debugging
             # options.add_argument('-headless')
  
             self.browser = Firefox(firefox_options=options)
@@ -594,6 +595,7 @@ class ScholarScraper(object):
 
             except Exception as e:
                 self.logger.error("error getting more articles")
+                self.browser.back()
                 return citation_dict
 
             try:
@@ -605,12 +607,14 @@ class ScholarScraper(object):
                 )  # The false means we don't grab its citations
             except:
                 self.logger.error("couldn't get citation article from page")
+                self.browser.back()
                 return citation_dict
 
         except Exception as e:
             self.logger.error(f"{e}")
             return citation_dict
 
+        self.browser.back()
         return citation_dict
 
     def citation_count(self) -> int:
