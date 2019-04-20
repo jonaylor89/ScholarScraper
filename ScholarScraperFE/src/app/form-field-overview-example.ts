@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import { ApiService } from './api.service';         
 
 //TODO
-//Save and display the saved data
+//Save and display the saved data (Display if user entered Dr Zeus and Alberto Cano)
 //Display deleted data
 //Show count
 //Show data
 //Display it using some Javascript library
+//Prevent User from entering the same scholar twice
+
 
 /** @title Simple form field */
 @Component({
@@ -46,7 +48,7 @@ export class FormFieldOverviewExample implements OnInit {
         {publicationID:"6", publicationIDFK:'1'},
         {publicationID:"5", publicationIDFK:'2'},
         {publicationID:"6", publicationIDFK:'7'},
-        {publicationID:"7", publicationIDFK:'8'}
+        {publicationID:"7", publicationIDFK:'6'}
         
         // {publicationID:"1", publicationIDFK:'5'},
         // {publicationID:"1", publicationIDFK:'5'},
@@ -192,6 +194,8 @@ export class FormFieldOverviewExample implements OnInit {
     //debugger; // this.mockStorePublicationsCitedByOriginalAuthor = 5
     //double check with john and cano about what this database actually contains 
     // (what if authors who are cited by original authors are not on the mockPublicationAuthorDatabase)
+
+     
     if(this.mockStorePublicationsCitedByOriginalAuthor.length > -1){
        //loop through mockPublicationAuthor Database
        for(let i = 0; i < this.mockPublicationAuthor.length; i++){
@@ -210,20 +214,61 @@ export class FormFieldOverviewExample implements OnInit {
       }
 
     // debugger;
-    if(this.mockScholarsCitingEachOther.length > 0){
+    //logic for when user enters another name, and that name of the previous scholar includes that new name under
+    //mock scholars citing each other, then don't repeat it, this should also be where we keep count of which scholar is citing who
+    let newObj = []
+    if(this.mockScholarsCitingEachOther.length > 0){ //unecessary delete later
       for(let i = 0; i <this.mockScholars.length; i++){
         for(let j = 0; j < this.mockScholarsCitingEachOther.length; j++){
-          debugger;
+          
           if(this.mockScholars[i].id == this.mockScholarsCitingEachOther[j].scholarID2){
-            let newObj = {full_name: newScholar, scholarID2: this.mockScholars[i].full_name}
-            this.mockScholarsCitingEachOtherNames.push(newObj);
+  
+                newObj.push({full_name: newScholar, scholarID2: this.mockScholars[i].full_name})
+              // if(this.mockScholarsCitingEachOtherNames.length > 0 ){
+              //   if(this.mockScholars[i].full_name != this.mockScholarsCitingEachOtherNames[j].full_name
+              //     && newScholar != this.mockScholarsCitingEachOtherNames[j].scholarID2) {
+              //   this.mockScholarsCitingEachOtherNames.push(newObj);
+              // }
+            // }
             
           }
           
         }
-        
       }
-      this.mockScholarsCitingEachOtherNames.push({full_name: '', scholarID2: ''});
+    }
+      //now loop through all the new obj found and make sure that we are not adding repeated information
+      // debugger;
+      //just loop through citingEachOthersName if newObj[i] == it then increment i and start citing each others name at 0
+      if(this.mockScholarsCitingEachOtherNames.length > 0 ){
+      let i = 0
+      let savedIndex= [];
+      for(let i = 0; i < newObj.length; i++){
+      for(let j = 0; j < this.mockScholarsCitingEachOtherNames.length; j++){
+       
+        
+        if((newObj[i].full_name == this.mockScholarsCitingEachOtherNames[j].scholarID2
+             && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNames[j].full_name)) {
+              newObj.splice(i,1); 
+            i = 0;
+             }
+        
+        if(newObj[i].full_name == this.mockScholarsCitingEachOtherNames[j].full_name
+              && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNames[j].scholarID2) {    
+            newObj.splice(i,1);
+            i = 0;
+        }
+      }
+        
+      } 
+      for(let i = 0; i < newObj.length; i++){
+        this.mockScholarsCitingEachOtherNames.push(newObj[i]);
+      }
+    }
+    else {
+      for(let i = 0; i < newObj.length; i++){
+      this.mockScholarsCitingEachOtherNames.push({full_name: newObj[i].full_name, scholarID2: newObj[i].scholarID2});
+      }
+      
     }
     
   }
@@ -254,3 +299,5 @@ export class FormFieldOverviewExample implements OnInit {
 
   }
 }
+
+//WHAT IF INSTEAD OF DOUBLE FOR LOOPS I JUST DIRECTLY ACCESS IT IN IF STATEMENTS BUT WAIT NO
