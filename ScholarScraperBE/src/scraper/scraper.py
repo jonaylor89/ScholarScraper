@@ -614,7 +614,7 @@ class ScholarScraper(object):
                 self.logger.debug(f"attempting to enter citation article: <{citation}>")
 
                 # Grab the article that cited the target article
-                citation_article = self.browser.find_element_by_link_text(citation.text)
+                citation_article = self.find_article_link(citation.text)
 
                 citation_dict = self.parse_article(
                     citation_article, False
@@ -630,6 +630,33 @@ class ScholarScraper(object):
 
         self.browser.back()
         return citation_dict
+
+    def find_article_link(self, search_title: str):
+        """
+        [!!!] Assumes the browser is on an author's page
+        """
+
+        # Grab all articles from researcher
+        try:
+            titles = self.browser.find_elements_by_class_name("gsc_a_at")
+            self.logger.debug(f"titles for author: {len(titles)}")
+        except:
+            self.logger.error("couldn't get titles from page")
+            return None
+
+        # Loop through all articles for the researcher
+        try:
+            for title in titles:
+
+                if title == search_title:
+                    return title
+
+            else:
+                return None
+
+        except Exception as e:
+            self.logger.error(f"Something went wrong with parsing the citation author's articles: {e}")
+            return None
 
     def citation_count(self) -> int:
         """
