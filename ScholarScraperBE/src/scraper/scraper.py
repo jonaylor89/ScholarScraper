@@ -3,7 +3,7 @@
 import json
 import logging
 from time import sleep
-from random import randint
+from random import randint, shuffle
 from datetime import datetime
 from typing import List, Dict
 
@@ -12,10 +12,16 @@ from selenium.webdriver import Firefox
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.remote.remote_connection import LOGGER as slog
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 # TODO: Make this not shit (i.e. Refactor the hell out of this)
 
+# I could probably break this up into smaller classes like
+# one class for researchers, one for articles, one for citations
+# because right now this big guy is disgusting.
+
+# I just want it to work right now
 
 class ScholarScraper(object):
     def __init__(self) -> None:
@@ -27,10 +33,15 @@ class ScholarScraper(object):
         logging.basicConfig(
             filename="scraper.log",
             filemode="w",
-            format="%(asctime)s %(levelname)s %(message)s",
+            format="%(asctime)s %(name)s %(levelname)s %(message)s",
             datefmt="%H:%M:%S",
-            level=logging.INFO,
+            level=logging.DEBUG,
         )
+
+        slog.setLevel(logging.ERROR)
+        logging.getLogger("requests").setLevel(logging.ERROR)
+        logging.getLogger("urllib3").setLevel(logging.ERROR)
+
         self.cs_researchers: List[str] = [
             "Irfan Ahmed",
             "Tomasz Arodz",
@@ -63,7 +74,7 @@ class ScholarScraper(object):
         """
 
         # randomly choose firefox or chrome
-        if randint(0, 1):
+        if randint(1, 1): # Should be randint(0, 1) in prod
             options = ChromeOptions()
 
             # Show chrome during for debugging
@@ -124,10 +135,12 @@ class ScholarScraper(object):
         try:
             # Enter the researcher's name and hit `ENTER/RETURN`
             search.send_keys(name)
+            sleep(randint(1, 2))
             search.send_keys(Keys.RETURN)
 
             # Find the researcher's name out of the search results
             link = self.browser.find_element_by_link_text(name)
+            sleep(randint(1, 2))
             link.click()
 
         except:
@@ -218,7 +231,7 @@ class ScholarScraper(object):
             show_more.click()
             count += 1
 
-        self.logger.debug(f"show more was pressed {count} times")
+        self.logger.debug(f"show more was pressed {count} time(s)")
 
         sleep(2)  # Sleep to allow everything to load
 
@@ -514,16 +527,6 @@ class ScholarScraper(object):
 
         sleep(randint(1, 3))
 
-        """
-        try:
-            citation_link = self.browser.find_element_by_xpath(
-                "/html/body/div/div[8]/div/div[2]/div/div/div[2]/form/div[2]/div[9]/div[2]/div[1]/a"
-            )
-        except:
-            self.logger.error("couldn't grab citation link")
-            return {}
-        """
-
         try:
             citations_link.click()
 
@@ -570,8 +573,10 @@ class ScholarScraper(object):
                 self.logger.warning(
                     f"couldn't get link to author for {citation}, skipping... "
                 )
-                self.logger.debug(f"{e}")
+                # self.logger.debug(f"{e}")
                 continue
+
+                sleep(randint(1, 2))
 
         sleep(randint(1, 2))
         self.browser.back()
@@ -580,10 +585,15 @@ class ScholarScraper(object):
 
     def parse_citation(self, cited_title, citation, author_link) -> Dict:
 
+        sleep(randint(2, 3))
+
         citation_dict: Dict = {}
 
         try:
+            self.logger.debug(f"parsing citation author : {author_link.text}")
             author_link.click()
+
+            sleep(randint(1, 2))
 
             try:
                 # Click the `SHOW MORE` button at the bottom of the page
@@ -601,12 +611,14 @@ class ScholarScraper(object):
                 return citation_dict
 
             try:
+                self.logger.debug(f"attempting to enter citation article: <{citation}>")
+
                 # Grab the article that cited the target article
-                citation_article = self.browser.find_element_by_link_text(cited_title)
+                citation_article = self.browser.find_element_by_link_text(citation.text)
 
                 citation_dict = self.parse_article(
                     citation_article, False
-                )  # The false means we don't grab its citations
+                )  # The 'False' means we don't grab its citations
             except:
                 self.logger.error("couldn't get citation article from page")
                 self.browser.back()
@@ -669,6 +681,9 @@ def main() -> None:
             except Exception as e:
                 # Something happened to the `database`
                 scraper.logger.error(f"database is missing? {e}")
+
+        # Shuffle list to confuse google bot detection
+        shuffle(scraper.cs_researchers)
 
         # Go through all names
         for name in scraper.cs_researchers:
