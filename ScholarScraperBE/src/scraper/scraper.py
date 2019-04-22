@@ -23,6 +23,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 # I just want it to work right now
 
+
 class ScholarScraper(object):
     def __init__(self) -> None:
         """
@@ -38,6 +39,7 @@ class ScholarScraper(object):
             level=logging.DEBUG,
         )
 
+        # Silence these guys
         slog.setLevel(logging.ERROR)
         logging.getLogger("requests").setLevel(logging.ERROR)
         logging.getLogger("urllib3").setLevel(logging.ERROR)
@@ -74,7 +76,7 @@ class ScholarScraper(object):
         """
 
         # randomly choose firefox or chrome
-        if randint(1, 1): # Should be randint(0, 1) in prod
+        if randint(1, 1):  # Should be randint(0, 1) in prod
             options = ChromeOptions()
 
             # Show chrome during for debugging
@@ -89,9 +91,8 @@ class ScholarScraper(object):
 
             # show firefox during debugging
             # options.add_argument('-headless')
- 
+
             self.browser = Firefox(options=options)
- 
 
         self.logger.info("connect to selenium server")
 
@@ -231,8 +232,6 @@ class ScholarScraper(object):
             show_more.click()
             count += 1
 
-        self.logger.debug(f"show more was pressed {count} time(s)")
-
         sleep(2)  # Sleep to allow everything to load
 
         # Create article section
@@ -258,6 +257,7 @@ class ScholarScraper(object):
                 title_text = (
                     title.text
                 )  # Temperary variable so I don't lose the webelement reference
+
                 articles_dict[title_text] = self.parse_article(title, True)
 
                 try:
@@ -277,6 +277,7 @@ class ScholarScraper(object):
                     # Grab all articles from researcher
                     titles = self.browser.find_elements_by_class_name("gsc_a_at")
                     self.logger.debug(f"titles for author: {len(titles)}")
+
                 except:
                     self.logger.error("couldn't get titles from page")
                     return articles_dict
@@ -449,8 +450,6 @@ class ScholarScraper(object):
             sleep(1)
             return {}
 
-        self.logger.debug(f"there are {len(fields)} fields to parse")
-
         # Zip fields and values to add them to the dictionary
         for i in range(len(fields) - 1):  # I don't want the last element
 
@@ -487,8 +486,6 @@ class ScholarScraper(object):
 
                 elif k.text == "Publication date":
                     article_dict[k.text] = v.text
-
-                self.logger.debug(f"parsed : {k.text} : {v.text}")
 
             except Exception as e:
                 self.logger.error(f"field parsing error on field {k.text}: {e}")
@@ -536,8 +533,8 @@ class ScholarScraper(object):
 
         sleep(randint(1, 3))
 
-        citation_list = None
-        authors = None
+        citation_list: List = []
+        authors_divs: List = []
 
         try:
             citation_list = self.browser.execute_script(
@@ -546,9 +543,10 @@ class ScholarScraper(object):
                         """
             )[
                 1:
-            ]  # The first element is the original article
-        except:
-            self.logger.error("couldn't get citation titles")
+            ]  # The first element is the original article so we just need the rest
+
+        except Exception as e:
+            self.logger.error(f"couldn't get citation titles: {e}")
             self.browser.back()
             return {}
 
@@ -562,18 +560,45 @@ class ScholarScraper(object):
 
         sleep(1)
 
-        for citation, author_div in zip(citation_list, author_divs):
+        for x in range(len(citation_list)):
+
+            citation = citation_list[x]
+            author_div = author_divs[x]
+
             try:
                 author_link = author_div.find_element_by_css_selector("a")
                 citations_dict[citation] = self.parse_citation(
                     cited_title, citation, author_link
                 )
 
+                try:
+                    citation_list = self.browser.execute_script(
+                        """
+                            return [...document.querySelectorAll('.gs_rt')].map(i => i.lastChild.firstChild.data);
+                        """
+                    )[
+                        1:
+                    ]  # The first element is the original article
+
+                except:
+                    self.logger.error("couldn't get citation titles again")
+                    self.browser.back()
+                    return {}
+
+                try:
+                    author_divs = self.browser.find_elements_by_class_name("gs_a")
+
+                except:
+                    self.logger.error("couldn't get citation author")
+                    self.browser.back()
+                    return {}
+
+                sleep(1)
+
             except Exception as e:
                 self.logger.warning(
-                    f"couldn't get link to author for {citation}, skipping... "
+                    f"Author for citation: <{citation}> could not be clicked, skipping..."
                 )
-                # self.logger.debug(f"{e}")
                 continue
 
                 sleep(randint(1, 2))
@@ -614,13 +639,17 @@ class ScholarScraper(object):
                 self.logger.debug(f"attempting to enter citation article: <{citation}>")
 
                 # Grab the article that cited the target article
-                citation_article = self.find_article_link(citation.text)
+                citation_article = self.find_article_link(citation)
+
+                if citation_article is None:
+                    return citation_dict
 
                 citation_dict = self.parse_article(
                     citation_article, False
                 )  # The 'False' means we don't grab its citations
-            except:
-                self.logger.error("couldn't get citation article from page")
+
+            except Exception as e:
+                self.logger.error(f"couldn't get citation article from page: {e}")
                 self.browser.back()
                 return citation_dict
 
@@ -636,6 +665,8 @@ class ScholarScraper(object):
         [!!!] Assumes the browser is on an author's page
         """
 
+        sleep(randint(1, 2))
+
         # Grab all articles from researcher
         try:
             titles = self.browser.find_elements_by_class_name("gsc_a_at")
@@ -648,14 +679,16 @@ class ScholarScraper(object):
         try:
             for title in titles:
 
-                if title == search_title:
+                if title.text == search_title:
                     return title
 
             else:
                 return None
 
         except Exception as e:
-            self.logger.error(f"Something went wrong with parsing the citation author's articles: {e}")
+            self.logger.error(
+                f"Something went wrong with parsing the citation author's articles: {e}"
+            )
             return None
 
     def citation_count(self) -> int:
