@@ -463,18 +463,18 @@ class ScholarScraper(object):
                     # This is hacky parsing, it can be done better for sure
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
 
+                    # Get href from link
+                    article_id_url = v.find_element_by_css_selector(
+                        "a"
+                    ).get_attribute("href")
+
+                    if article_id_url is not None:
+                        article_dict["id"] = self.parse_article_id(article_id_url)
+                    else:
+                        self.logger.error("couldn't get the url of the article")
+                        article_dict["id"] = 0
+
                     if citations:  # Some articles we want citations and others we don't
-                        # Get href from link
-                        article_id_url = v.find_element_by_css_selector(
-                            "a"
-                        ).get_attribute("href")
-
-                        if article_id_url is not None:
-                            article_dict["id"] = self.parse_article_id(article_id_url)
-                        else:
-                            self.logger.error("couldn't get the url of the article")
-                            article_dict["id"] = 0
-
                         # Click on the link for total citations to parse the citations
                         article_dict["Citation Titles"] = self.parse_citations(
                             article_link.text, v.find_element_by_css_selector("a")
