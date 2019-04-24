@@ -8,7 +8,7 @@ class PublicationCites(Entity, Base):
 
     __tablename__ = "publication-cites"
 
-    publcation_id_1 = Column(String(32), ForeignKey("publication.id"), primary_key=True)
+    publication_id_1 = Column(String(32), ForeignKey("publication.id"), primary_key=True)
     publication_id_2 = Column(
         String(32), ForeignKey("publication.id"), primary_key=True
     )

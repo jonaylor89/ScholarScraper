@@ -33,8 +33,8 @@
 
 # Optimizations
 * Download the html for a publication and parse that to allow for parallelization without the browser thinkings we're DOSing it
-    * Using ScraPY or BeautifulSoup
-* Email report to me of the changes since the last parse (python smtp library)
+    * Using BeautifulSoup
+* Create reports for me of the changes since the last parse
 * Use configuration file
 
 -------------------------------------
