@@ -14,6 +14,7 @@ from entities.scholar import Scholar, ScholarSchema
 from entities.publication import Publication, PublicationSchema
 from entities.publicationauthor import PublicationAuthor, PublicationAuthorSchema
 from entities.totalcitations import TotalCitations, TotalCitationsSchema
+from entities.publicationcites import PublicationCites, PublicationCitesSchema
 
 data = None
 
@@ -130,8 +131,92 @@ def upload_total_citations():
     session.close()
 
 
+def upload_publication_citations():
+    session = Session()
+
+    for name, info in data.items():
+
+        for title, article_info in info["articles"].items():
+            try:
+
+                for cite_title, cite_info in article_info["Citation Titles"].items():
+                    try:
+                        pub = Publication(
+                            str(cite_info["id"]),
+                            cite_title,
+                            cite_info["Total citations"],
+                            cite_info["Publication date"],
+                            "json file",
+                        )
+
+                        new_pub = PublicationSchema().dump(pub).data
+
+                        print(json.dumps(new_pub, indent=2))
+
+                        session.add(pub)
+
+                        session.commit()
+                    except KeyError:
+                        print("cite nein")
+                        continue
+
+                    except Exception as e:
+                        print(f"cite bad things: {e}")
+                        break
+
+            except KeyError:
+                print("nein")
+                continue
+
+            except Exception as e:
+                print(f"bad things: {e}")
+                break
+
+    session.close()
+
+
+def upload_publication_cites():
+    session = Session()
+
+    for name, info in data.items():
+
+        for title, article_info in info["articles"].items():
+            try:
+
+                for cite_title, cite_info in article_info["Citation Titles"].items():
+                    try:
+                        pub_cites = PublicationCites(
+                            str(article_info["id"]), str(cite_info["id"]), "json file"
+                        )
+
+                        new_pub_cites = PublicationCitesSchema().dump(pub_cites).data
+
+                        print(json.dumps(new_pub_cites, indent=2))
+
+                        session.add(pub_cites)
+
+                        session.commit()
+                    except KeyError:
+                        print("cite nein")
+                        continue
+
+                    except Exception as e:
+                        print(f"cite bad things: {e}")
+                        break
+
+            except KeyError:
+                print("nein")
+                continue
+
+            except Exception as e:
+                print(f"bad things: {e}")
+                break
+
+    session.close()
+
+
 if __name__ == "__main__":
     #########################
     ##  script to execute  ##
     #########################
-    pass
+    upload_publication_cites()

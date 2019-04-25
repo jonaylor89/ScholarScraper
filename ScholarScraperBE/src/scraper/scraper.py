@@ -464,9 +464,9 @@ class ScholarScraper(object):
                     article_dict[k.text] = int(v.text.split("\n")[0].split(" ")[2])
 
                     # Get href from link
-                    article_id_url = v.find_element_by_css_selector(
-                        "a"
-                    ).get_attribute("href")
+                    article_id_url = v.find_element_by_css_selector("a").get_attribute(
+                        "href"
+                    )
 
                     if article_id_url is not None:
                         article_dict["id"] = self.parse_article_id(article_id_url)

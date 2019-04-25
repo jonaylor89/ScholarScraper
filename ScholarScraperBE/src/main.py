@@ -4,14 +4,12 @@ import json
 import logging
 from time import sleep
 from random import randint
-from threading import Thread
 from typing import Dict
 
 from sqlalchemy import func
 from flask_cors import CORS
 from flask import Flask, redirect, jsonify, request, render_template
 
-from .scraper import scraper
 from .entities.entity import Session, engine, Base
 from .entities.publication import Publication, PublicationSchema
 from .entities.scholar import Scholar, ScholarSchema
@@ -253,143 +251,6 @@ def not_found(error=None):
     return resp
 
 
-def scan() -> None:
-
-    gscraper = scraper.ScholarScraper()
-
-    with gscraper:
-
-        # fetching from the database and serialize to JSON
-        session = Session()
-        scholars = ScholarSchema(many=True).dump(session.query(Scholar).all())
-        session.close()
-
-        # Go through all names
-        for scholar in scholars:
-
-            # Build researcher data
-            session = Session()
-
-            researcher_data = {}
-            researcher_data["id"] = scholar["id"]
-
-            total_citations = TotalCitationsSchema(many=True).dump(
-                session.query(TotalCitations)
-                .filter(TotalCitations.scholar_id.like(scholar["id"]))
-                .group_by(TotalCitations.scholar_id)
-                .having(
-                    TotalCitations.scholar_id == func.max(TotalCitations.scholar_id)
-                )
-            )
-
-            researcher_data["date"] = total_citations["date"]
-            researcher_data["citation_count"] = total_citations["total_cites"]
-
-            publication_authors = PublicationAuthorSchema(many=True).dump(
-                session.query(PublicationAuthor).filter(
-                    PublicationAuthor.scholar_id.like(scholar["id"])
-                )
-            )
-
-            publications = PublicationSchema(many=True).dump(
-                session.query(Publication).filter(
-                    Publication.id
-                    in [
-                        publication["publication_id"]
-                        for publication in publication_authors
-                    ]
-                )
-            )
-
-            publication_cites = PublicationCitesSchema(many=True).dump(
-                session.query(PublicationCites).filter(PublicationCites)
-            )
-
-            researcher_data["articles"] = {}
-
-            for publication in publications:
-                researcher_data["articles"][publication["title"]] = {}
-
-                researcher_data["articles"][publication["title"]][
-                    "Publication date"
-                ] = publication["date"]
-                researcher_data["articles"][publication["title"]][
-                    "Total citations"
-                ] = publication["cites"]
-                researcher_data["articles"][publication["title"]]["id"] = publication[
-                    "id"
-                ]
-
-                researcher_data["articles"][publication["title"]]["citations"] = {}
-
-                citations = PublicationCitesSchema(many=True).dump(
-                    session.query(Publication).filter(
-                        PublicationCites.publication_id_1 == publication["id"]
-                    )
-                )
-
-                for citation in citations:
-                    cite_publication = PublicationSchema(many=True).dump(
-                        session.query(Publication).filter(
-                            Publication.id == citation["publication_id_2"]
-                        )
-                    )
-
-                    researcher_data["articles"][publication["title"]]["citations"][
-                        cite_publication["title"]
-                    ] = {}
-                    researcher_data["articles"][publication["title"]]["citations"][
-                        cite_publication["title"]
-                    ]["id"] = citation["publication_id_2"]
-                    # researcher_data["articles"][publication["title"]]["citations"][cite_publication["title"]] = The Date
-
-            session.close()
-
-            # Five attempts to parse the page because it can be janky
-            n = 5
-            while n > 0:
-                n -= 1
-                try:
-
-                    if researcher_data is not None:
-                        try:
-                            scraper.check_researcher(scholar["name"], researcher_data)
-                        except KeyError as ke:
-                            scraper.logger.warning(
-                                f"researcher {scholar['name']} not in existing data: {ke}"
-                            )
-                            scraper.parse_researcher(scholar["name"])
-                        except Exception as e:
-                            scraper.logger.error(
-                                f"error with researcher {scholar['name']}: {e}"
-                            )
-                            scraper.parse_researcher(scholar["name"])
-                    else:
-                        scraper.logger.error(
-                            f"database not found parsing {scholar['name']}"
-                        )
-                        scraper.parse_researcher(scholar["name"])
-
-                    break  # Successful attempt
-                except Exception as e:
-                    scraper.logger.error(
-                        f"failed to parse researcher, {n} attempt(s) left: {e}"
-                    )
-
-                sleep(2)
-
-            if n == 0:
-                print("scraping failed")
-                exit(1)
-
-            sleep(randint(1, 3))
-
-            # TODO:
-            # scraper.researcher_dict
-            # Move this dict to the db
-            # Or do that for every researcher
-
-
 def update_scholar(data: Dict):
     """
     Upload scholar to db
@@ -446,6 +307,3 @@ def upload_total_citations(data: Dict) -> None:
 
     session.close()
 
-
-# t = Thread(target=scan)
-# t.start()
