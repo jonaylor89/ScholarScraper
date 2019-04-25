@@ -14,8 +14,8 @@ interface Node {
 }
 
 interface Link {
-  full_name: string;
-  scholarID2: string;
+  source: string;
+  target: string;
   value: number;
 }
 
@@ -86,13 +86,14 @@ export class FormFieldOverviewExample implements OnInit {
   public mockStackOfOriginalAuthorsPublication; //maybe turn into an object that contains scholarID and publication id, publicationID
   public mockStackOfPublicationsThatHaveCitedOriginalAuthorsPublication; //publications that cited the original scholars publication, publicationID
   public mockScholarsCitingEachOther; //scholarID1 : scholarID2
-  public mockScholarsCitingEachOtherNamesLinks = []; //their actual names scholar: , citedby:
-  public mockScholarsCitingEachOtherNamesNodes = [];  
+  public mockScholarsCitingEachOtherNamesLinks; //their actual names scholar: , citedby:
+  public mockScholarsCitingEachOtherNamesNodes;  
   public combinedNodesAndLinks = [];
   public mockStorePublicationsCitedByOriginalAuthor;
   public mockStackOfScholarsCitingOriginalAuthorsPublication;
   public mockStackOfAllPublicationsFromAuthorsCitingOriginalAuthor;
   public citationCount = [];
+  public displayData = false;
 
 
   addScholar(newScholar: string) {
@@ -127,7 +128,9 @@ export class FormFieldOverviewExample implements OnInit {
 
 
   submitResults() {
+    // debugger;
     this.mockScholarsCitingEachOtherNamesLinks = []; //their actual names scholar: , citedby: 
+    this.mockScholarsCitingEachOtherNamesNodes = []; 
     
     for (let m = 0; m < this.scholarsInput.length; m++) {
       this.mockStackOfOriginalAuthorsPublication = []; //maybe turn into an object that contains scholarID and publication id, publicationID
@@ -388,7 +391,7 @@ export class FormFieldOverviewExample implements OnInit {
         this.mockScholarsCitingEachOtherNamesLinks[i].number2 = countOfCitingScholar;
 
 
-
+        // debugger;
 
         //  let found = publicationsOfScholar1.some()
       }
@@ -396,13 +399,12 @@ export class FormFieldOverviewExample implements OnInit {
 
       // debugger;
       // for()
+      this.combinedNodesAndLinks.push({"nodes": this.mockScholarsCitingEachOtherNamesNodes,"links": this.mockScholarsCitingEachOtherNamesLinks});
+      debugger;
     }
 
    
-    this.combinedNodesAndLinks.push({"nodes": [this.mockScholarsCitingEachOtherNamesNodes],"links": [this.mockScholarsCitingEachOtherNamesLinks]});
-    debugger;
-
-
+    // this.combinedNodesAndLinks.push({"nodes": this.mockScholarsCitingEachOtherNamesNodes,"links": this.mockScholarsCitingEachOtherNamesLinks});
 
   
     // const svg = d3.select('svg');
@@ -511,98 +513,100 @@ export class FormFieldOverviewExample implements OnInit {
   ngOnInit() {
 
     this._apiservice.getScholars().subscribe(data => this.scholars = data); //uncomment when using publication-cites api
-  }
+
+    this.submitResults;
+  // }
     // this.scholars = this.mockscholars;
 
-    // const svg = d3.select('svg');
-    // const width = +svg.attr('width');
-    // const height = +svg.attr('height');
+  //   const svg = d3.select('svg');
+  //   const width = +svg.attr('width');
+  //   const height = +svg.attr('height');
 
-    // const color = d3.scaleOrdinal(d3.schemeCategory10);
+  //   const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    // const simulation = d3.forceSimulation()
-    //   .force('link', d3.forceLink().id((d: any) => d.id))
-    //   .force('charge', d3.forceManyBody())
-    //   .force('center', d3.forceCenter(width / 2, height / 2));
+  //   const simulation = d3.forceSimulation()
+  //     .force('link', d3.forceLink().id((d: any) => d.id))
+  //     .force('charge', d3.forceManyBody())
+  //     .force('center', d3.forceCenter(width / 2, height / 2));
 
-    // d3.json('assets/miserables.json') .then((data: any) => {
+  //   d3.json('assets/miserables.json') .then((data: any) => {
 
-    //   const nodes: Node[] = [];
-    //   const links: Link[] = [];
+  //     const nodes: Node[] = [];
+  //     const links: Link[] = [];
 
-    //   data.nodes.forEach((d) => {
-    //     nodes.push(<Node>d);
-    //   });
+  //     data.nodes.forEach((d) => {
+  //       nodes.push(<Node>d);
+  //     });
 
-    //   data.links.forEach((d) => {
-    //     links.push(<Link>d);
-    //   });
-    //   const graph: Graph = <Graph>{ nodes, links };
+  //     data.links.forEach((d) => {
+  //       links.push(<Link>d);
+  //     });
+  //     const graph: Graph = <Graph>{ nodes, links };
 
-    //   const link = svg.append('g')
-    //     .attr('class', 'links')
-    //     .selectAll('line')
-    //     .data(graph.links)
-    //     .enter()
-    //     .append('line')
-    //     .attr('stroke-width', (d: any) => Math.sqrt(d.value));
+  //     const link = svg.append('g')
+  //       .attr('class', 'links')
+  //       .selectAll('line')
+  //       .data(graph.links)
+  //       .enter()
+  //       .append('line')
+  //       .attr('stroke-width', (d: any) => Math.sqrt(d.value));
 
-    //   const node = svg.append('g')
-    //     .attr('class', 'nodes')
-    //     .selectAll('circle')
-    //     .data(graph.nodes)
-    //     .enter()
-    //     .append('circle')
-    //     .attr('r', 5)
-    //     .attr('fill', (d: any) => color(d.group));
+  //     const node = svg.append('g')
+  //       .attr('class', 'nodes')
+  //       .selectAll('circle')
+  //       .data(graph.nodes)
+  //       .enter()
+  //       .append('circle')
+  //       .attr('r', 5)
+  //       .attr('fill', (d: any) => color(d.group));
 
 
-    //   svg.selectAll('circle').call(d3.drag()
-    //     .on('start', dragstarted)
-    //     .on('drag', dragged)
-    //     .on('end', dragended)
-    //   );
+  //     svg.selectAll('circle').call(d3.drag()
+  //       .on('start', dragstarted)
+  //       .on('drag', dragged)
+  //       .on('end', dragended)
+  //     );
 
-    //   node.append('title')
-    //     .text((d) => d.id);
+  //     node.append('title')
+  //       .text((d) => d.id);
 
-    //   simulation
-    //     .nodes(graph.nodes)
-    //     .on('tick', ticked);
+  //     simulation
+  //       .nodes(graph.nodes)
+  //       .on('tick', ticked);
 
-    //   simulation.force<d3.ForceLink<any, any>>('link')
-    //     .links(graph.links);
+  //     simulation.force<d3.ForceLink<any, any>>('link')
+  //       .links(graph.links);
 
-    //   function ticked() {
-    //     link
-    //       .attr('x1', function(d: any) { return d.source.x; })
-    //       .attr('y1', function(d: any) { return d.source.y; })
-    //       .attr('x2', function(d: any) { return d.target.x; })
-    //       .attr('y2', function(d: any) { return d.target.y; });
+  //     function ticked() {
+  //       link
+  //         .attr('x1', function(d: any) { return d.source.x; })
+  //         .attr('y1', function(d: any) { return d.source.y; })
+  //         .attr('x2', function(d: any) { return d.target.x; })
+  //         .attr('y2', function(d: any) { return d.target.y; });
 
-    //     node
-    //       .attr('cx', function(d: any) { return d.x; })
-    //       .attr('cy', function(d: any) { return d.y; });
-    //   }
-    // });
+  //       node
+  //         .attr('cx', function(d: any) { return d.x; })
+  //         .attr('cy', function(d: any) { return d.y; });
+  //     }
+  //   });
 
-    // function dragstarted(d) {
-    //   if (!d3.event.active) { simulation.alphaTarget(0.3).restart(); }
-    //   d.fx = d.x;
-    //   d.fy = d.y;
-    // }
+  //   function dragstarted(d) {
+  //     if (!d3.event.active) { simulation.alphaTarget(0.3).restart(); }
+  //     d.fx = d.x;
+  //     d.fy = d.y;
+  //   }
 
-    // function dragged(d) {
-    //   d.fx = d3.event.x;
-    //   d.fy = d3.event.y;
-    // }
+  //   function dragged(d) {
+  //     d.fx = d3.event.x;
+  //     d.fy = d3.event.y;
+  //   }
 
-    // function dragended(d) {
-    //   if (!d3.event.active) { simulation.alphaTarget(0); }
-    //   d.fx = null;
-    //   d.fy = null;
-    // }
-    ngAfterContentInit(){
+  //   function dragended(d) {
+  //     if (!d3.event.active) { simulation.alphaTarget(0); }
+  //     d.fx = null;
+  //     d.fy = null;
+  //   }
+  // }
     const svg = d3.select('svg');
     const width = +svg.attr('width');
     const height = +svg.attr('height');
@@ -620,18 +624,19 @@ export class FormFieldOverviewExample implements OnInit {
     // d3.json(jsonDataURL)
     // .then((data: any) => {
       let data = {
-        nodes: this.mockScholarsCitingEachOtherNamesNodes,
-        links: this.mockScholarsCitingEachOtherNamesLinks
+        nodes: [{id: "Alberto Cano", group: 1},
+         {id: "Dr Seuss", group: 1}],
+        links: [{source: "Alberto Cano", target: "Dr Seuss", value: 1, number1: 2, number2: 2}]
       }
       
       // debugger;
       // URL.revokeObjectURL(jsonDataURL);
-      const nodes: Node[] = [];
+      const nodes: Node[] = [...data.nodes];
       const links: Link[] = [...data.links];
       // debugger;
-      data.nodes.forEach((d) => {
-        nodes.push(d.nodes);
-      });
+      // data.nodes.forEach((d) => {
+      //   nodes.push(d.nodes);
+      // });
 
       const graph: Graph = <Graph>{ nodes, links };
 
@@ -670,11 +675,12 @@ export class FormFieldOverviewExample implements OnInit {
         .links(graph.links);
 
       function ticked() {
+        debugger;
         link
-          .attr('x1', function(d: any) { return d.full_name.x; })
-          .attr('y1', function(d: any) { return d.full_name.y; })
-          .attr('x2', function(d: any) { return d.scholarID2.x; })
-          .attr('y2', function(d: any) { return d.scholarID2.y; });
+          .attr('x1', function(d: any) { return d.source.x; })
+          .attr('y1', function(d: any) { return d.source.y; })
+          .attr('x2', function(d: any) { return d.target.x; })
+          .attr('y2', function(d: any) { return d.target.y; });
 
         node
           .attr('cx', function(d: any) { return d.x; })
@@ -698,9 +704,10 @@ export class FormFieldOverviewExample implements OnInit {
       d.fx = null;
       d.fy = null;
     }
-    
-    
   }
+    
+    
+  
 
 
   
