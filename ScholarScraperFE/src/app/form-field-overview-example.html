@@ -22,12 +22,15 @@
             <button  (click) = "submitResults()" mat-stroked-button>Submit</button>
              <ul><li *ngFor="let scholar of scholars">{{scholar.full_name}}</li></ul>
              <ul><li *ngFor="let scholarInput of scholarsInput">{{scholarInput}}</li></ul>
-             <ul><li *ngFor="let scholarCiting of mockScholarsCitingEachOtherNames">{{scholarCiting.full_name + ':' + scholarCiting.scholarID2}}</li></ul>
+             <ul><li *ngFor="let scholarCiting of mockScholarsCitingEachOtherNamesLinks">{{scholarCiting.full_name + ':' + scholarCiting.scholarID2}}</li></ul>
           </div>
           <div>
           
         </div>
   </div>
+
+
+  <svg width="960" height="600"></svg>
 
 
 
