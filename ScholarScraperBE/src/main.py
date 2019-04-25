@@ -306,4 +306,3 @@ def upload_total_citations(data: Dict) -> None:
         session.commit()
 
     session.close()
-
