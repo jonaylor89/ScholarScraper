@@ -32,8 +32,6 @@
 ---------------------
 
 # Optimizations
-* Download the html for a publication and parse that to allow for parallelization without the browser thinkings we're DOSing it
-    * Using BeautifulSoup
 * Create reports for me of the changes since the last parse
 * Use configuration file
 
@@ -50,25 +48,12 @@
 - [x] Publication ID
 - [x] Date of publications
 - [x] Number of citations
-- [ ] Publication ID of citations
-- [ ] Publication information of citations
+- [x] Publication ID of citations
+- [x] Publication information of citations
 
 ----------------------------------
 
-# Algorithm
 
-## Build Database
-```
-Grab the total citations for each researcher
-for each of their publications then
-    Grab name, date of publishing, id
-
-    for each citation of that publication then
-        grab name, date of publish (citation date), and id
-    end
-end 
-```
-
-# State Diagram
+# State Diagram [!!!] THIS IS OLD
 
 ![State Diagram](ScraperStateDiagram.png)

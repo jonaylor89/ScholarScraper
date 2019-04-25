@@ -130,6 +130,7 @@ def upload_total_citations():
 
     session.close()
 
+
 def upload_publication_citations():
     session = Session()
 
@@ -169,9 +170,10 @@ def upload_publication_citations():
 
             except Exception as e:
                 print(f"bad things: {e}")
-                break 
+                break
 
     session.close()
+
 
 def upload_publication_cites():
     session = Session()
@@ -184,9 +186,7 @@ def upload_publication_cites():
                 for cite_title, cite_info in article_info["Citation Titles"].items():
                     try:
                         pub_cites = PublicationCites(
-                            str(article_info["id"]),
-                            str(cite_info["id"]),
-                            "json file",
+                            str(article_info["id"]), str(cite_info["id"]), "json file"
                         )
 
                         new_pub_cites = PublicationCitesSchema().dump(pub_cites).data
@@ -210,9 +210,10 @@ def upload_publication_cites():
 
             except Exception as e:
                 print(f"bad things: {e}")
-                break 
+                break
 
-    session.close() 
+    session.close()
+
 
 if __name__ == "__main__":
     #########################
