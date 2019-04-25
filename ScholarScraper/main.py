@@ -95,10 +95,10 @@ def update_researchers(scholars: Dict) -> None:
             # Scholar has been seen before and just needs updating
 
             if new_info["citation_count"] == old_info["citation_count"]:
-                # Update the date to the current date
+                # TODO: Update the date to the current date
                 pass
             else:
-                # Update the citation count and date
+                # TODO: Update the citation count and date
                 pass
 
         # Commit new changes to the database
