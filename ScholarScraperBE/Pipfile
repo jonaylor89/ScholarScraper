@@ -14,10 +14,6 @@ gunicorn = "*"
 flask-cors = "*"
 marshmallow = "*"
 pymysql = "*"
-arrow = "*"
-beautifulsoup4 = "*"
-bibtexparser = "*"
-requests = {extras = ["security"],version = "*"}
 
 [requires]
 python_version = "3.7"
