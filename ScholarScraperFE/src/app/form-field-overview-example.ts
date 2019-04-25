@@ -1,24 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { ApiService } from './api.service';
 import { Breakpoints } from '@angular/cdk/layout';
+import * as d3 from 'd3'
 
 //TODO
-//Save and display the saved data (Display if user entered Dr Zeus and Alberto Cano)
-//Display deleted data
 //Show count
-//Show data
 //Display it using some Javascript library
 //Prevent User from adding/deleting the same scholar twice 
 //figure out how to save previous data so this process doesn't take long (after finding all citating store that author citations)
+interface Node {
+  id: string;
+  group: number;
+}
 
+interface Link {
+  source: string;
+  target: string;
+  value: number;
+}
+
+interface Graph {
+  nodes: Node[];
+  links: Link[];
+}
 
 /** @title Simple form field */
 @Component({
   selector: 'form-field-overview-example',
   templateUrl: 'form-field-overview-example.html',
   styleUrls: ['form-field-overview-example.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FormFieldOverviewExample implements OnInit {
+
+////////////////SCHOLAR SCRAPER LOGIC////////////////////
   public scholars = [];
   public scholarsInput = [];
 
@@ -71,11 +86,14 @@ export class FormFieldOverviewExample implements OnInit {
   public mockStackOfOriginalAuthorsPublication; //maybe turn into an object that contains scholarID and publication id, publicationID
   public mockStackOfPublicationsThatHaveCitedOriginalAuthorsPublication; //publications that cited the original scholars publication, publicationID
   public mockScholarsCitingEachOther; //scholarID1 : scholarID2
-  public mockScholarsCitingEachOtherNames = []; //their actual names scholar: , citedby: 
+  public mockScholarsCitingEachOtherNamesLinks; //their actual names scholar: , citedby:
+  public mockScholarsCitingEachOtherNamesNodes;  
+  public combinedNodesAndLinks = [];
   public mockStorePublicationsCitedByOriginalAuthor;
   public mockStackOfScholarsCitingOriginalAuthorsPublication;
   public mockStackOfAllPublicationsFromAuthorsCitingOriginalAuthor;
   public citationCount = [];
+  public displayData = false;
 
 
   addScholar(newScholar: string) {
@@ -110,8 +128,10 @@ export class FormFieldOverviewExample implements OnInit {
 
 
   submitResults() {
-    this.mockScholarsCitingEachOtherNames = []; //their actual names scholar: , citedby: 
-
+    // debugger;
+    this.mockScholarsCitingEachOtherNamesLinks = []; //their actual names scholar: , citedby: 
+    this.mockScholarsCitingEachOtherNamesNodes = []; 
+    
     for (let m = 0; m < this.scholarsInput.length; m++) {
       this.mockStackOfOriginalAuthorsPublication = []; //maybe turn into an object that contains scholarID and publication id, publicationID
       this.mockStackOfPublicationsThatHaveCitedOriginalAuthorsPublication = []; //publications that cited the original scholars publication, publicationID
@@ -285,21 +305,20 @@ export class FormFieldOverviewExample implements OnInit {
       //now loop through all the new obj found and make sure that we are not adding repeated information
       // debugger;
       //just loop through citingEachOthersName if newObj[i] == it then increment i and start citing each others name at 0
-      if (this.mockScholarsCitingEachOtherNames.length > 0) {
-        let i = 0
-        let savedIndex = [];
+      if (this.mockScholarsCitingEachOtherNamesLinks.length > 0) {
+       
         for (let i = 0; i < newObj.length; i++) {
-          for (let j = 0; j < this.mockScholarsCitingEachOtherNames.length; j++) {
+          for (let j = 0; j < this.mockScholarsCitingEachOtherNamesLinks.length; j++) {
 
 
-            if ((newObj[i].full_name == this.mockScholarsCitingEachOtherNames[j].scholarID2
-              && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNames[j].full_name)) {
+            if ((newObj[i].full_name == this.mockScholarsCitingEachOtherNamesLinks[j].scholarID2
+              && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNamesLinks[j].full_name)) {
               newObj.splice(i, 1);
               i = 0;
             }
 
-            if (newObj[i].full_name == this.mockScholarsCitingEachOtherNames[j].full_name
-              && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNames[j].scholarID2) {
+            if (newObj[i].full_name == this.mockScholarsCitingEachOtherNamesLinks[j].full_name
+              && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNamesLinks[j].scholarID2) {
               newObj.splice(i, 1);
               i = 0;
             }
@@ -307,12 +326,16 @@ export class FormFieldOverviewExample implements OnInit {
 
         }
         for (let i = 0; i < newObj.length; i++) {
-          this.mockScholarsCitingEachOtherNames.push(newObj[i]);
+          this.mockScholarsCitingEachOtherNamesLinks.push(newObj[i]);
+          // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].full_name, "group": 1})
+          // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholarID2, "group": 1})
         }
       }
       else {
         for (let i = 0; i < newObj.length; i++) {
-          this.mockScholarsCitingEachOtherNames.push({ full_name: newObj[i].full_name, scholarID2: newObj[i].scholarID2 });
+          this.mockScholarsCitingEachOtherNamesLinks.push({ full_name: newObj[i].full_name, scholarID2: newObj[i].scholarID2, value: 1 });
+          this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].full_name, "group": 1})
+          this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholarID2, "group": 1})
         }
 
       }
@@ -363,22 +386,122 @@ export class FormFieldOverviewExample implements OnInit {
             countOfOriginalScholar++;
           }
         }
-        debugger;
-        this.mockScholarsCitingEachOtherNames[i]["number1"] = countOfOriginalScholar;
-        this.mockScholarsCitingEachOtherNames[i]["number2"] = countOfCitingScholar;
+        
+        this.mockScholarsCitingEachOtherNamesLinks[i].number1 = countOfOriginalScholar;
+        this.mockScholarsCitingEachOtherNamesLinks[i].number2 = countOfCitingScholar;
 
 
-
+        // debugger;
 
         //  let found = publicationsOfScholar1.some()
       }
 
 
-
+      // debugger;
       // for()
+      this.combinedNodesAndLinks.push({"nodes": this.mockScholarsCitingEachOtherNamesNodes,"links": this.mockScholarsCitingEachOtherNamesLinks});
+      debugger;
     }
 
+   
+    // this.combinedNodesAndLinks.push({"nodes": this.mockScholarsCitingEachOtherNamesNodes,"links": this.mockScholarsCitingEachOtherNamesLinks});
 
+  
+    // const svg = d3.select('svg');
+    // const width = +svg.attr('width');
+    // const height = +svg.attr('height');
+
+    // const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    // const simulation = d3.forceSimulation()
+    //   .force('link', d3.forceLink().id((d: any) => d.id))
+    //   .force('charge', d3.forceManyBody())
+    //   .force('center', d3.forceCenter(width / 2, height / 2));
+
+    // // const blob = new Blob([JSON.stringify(this.combinedNodesAndLinks)], {type : 'application/json'});
+    // // const jsonDataURL = URL.createObjectURL(blob);
+    // // // d3.json('assets/miserables.json')
+    // // d3.json(jsonDataURL)
+    // // .then((data: any) => {
+    //   let data = {
+    //     nodes: this.mockScholarsCitingEachOtherNamesNodes,
+    //     links: this.mockScholarsCitingEachOtherNamesLinks
+    //   }
+      
+    //   // debugger;
+    //   // URL.revokeObjectURL(jsonDataURL);
+    //   const nodes: Node[] = [];
+    //   const links: Link[] = [...data.links];
+    //   // debugger;
+    //   data.nodes.forEach((d) => {
+    //     nodes.push(d.nodes);
+    //   });
+
+    //   const graph: Graph = <Graph>{ nodes, links };
+
+    //   const link = svg.append('g')
+    //     .attr('class', 'links')
+    //     .selectAll('line')
+    //     .data(graph.links)
+    //     .enter()
+    //     .append('line')
+    //     .attr('stroke-width', (d: any) => Math.sqrt(d.value));
+
+    //   const node = svg.append('g')
+    //     .attr('class', 'nodes')
+    //     .selectAll('circle')
+    //     .data(graph.nodes)
+    //     .enter()
+    //     .append('circle')
+    //     .attr('r', 5)
+    //     .attr('fill', (d: any) => color(d.group));
+
+
+    //   svg.selectAll('circle').call(d3.drag()
+    //     .on('start', dragstarted)
+    //     .on('drag', dragged)
+    //     .on('end', dragended)
+    //   );
+
+    //   node.append('title')
+    //     .text((d) => d.id);
+
+    //   simulation
+    //     .nodes(graph.nodes)
+    //     .on('tick', ticked);
+
+    //   simulation.force<d3.ForceLink<any, any>>('link')
+    //     .links(graph.links);
+
+    //   function ticked() {
+    //     link
+    //       .attr('x1', function(d: any) { return d.full_name.x; })
+    //       .attr('y1', function(d: any) { return d.full_name.y; })
+    //       .attr('x2', function(d: any) { return d.scholarID2.x; })
+    //       .attr('y2', function(d: any) { return d.scholarID2.y; });
+
+    //     node
+    //       .attr('cx', function(d: any) { return d.x; })
+    //       .attr('cy', function(d: any) { return d.y; });
+    //   }
+
+
+    // function dragstarted(d) {
+    //   if (!d3.event.active) { simulation.alphaTarget(0.3).restart(); }
+    //   d.fx = d.x;
+    //   d.fy = d.y;
+    // }
+
+    // function dragged(d) {
+    //   d.fx = d3.event.x;
+    //   d.fy = d3.event.y;
+    // }
+
+    // function dragended(d) {
+    //   if (!d3.event.active) { simulation.alphaTarget(0); }
+    //   d.fx = null;
+    //   d.fy = null;
+    // }
   }
 
 
@@ -391,27 +514,207 @@ export class FormFieldOverviewExample implements OnInit {
 
     this._apiservice.getScholars().subscribe(data => this.scholars = data); //uncomment when using publication-cites api
 
-
-
+    this.submitResults;
+  // }
     // this.scholars = this.mockscholars;
 
+  //   const svg = d3.select('svg');
+  //   const width = +svg.attr('width');
+  //   const height = +svg.attr('height');
+
+  //   const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+  //   const simulation = d3.forceSimulation()
+  //     .force('link', d3.forceLink().id((d: any) => d.id))
+  //     .force('charge', d3.forceManyBody())
+  //     .force('center', d3.forceCenter(width / 2, height / 2));
+
+  //   d3.json('assets/miserables.json') .then((data: any) => {
+
+  //     const nodes: Node[] = [];
+  //     const links: Link[] = [];
+
+  //     data.nodes.forEach((d) => {
+  //       nodes.push(<Node>d);
+  //     });
+
+  //     data.links.forEach((d) => {
+  //       links.push(<Link>d);
+  //     });
+  //     const graph: Graph = <Graph>{ nodes, links };
+
+  //     const link = svg.append('g')
+  //       .attr('class', 'links')
+  //       .selectAll('line')
+  //       .data(graph.links)
+  //       .enter()
+  //       .append('line')
+  //       .attr('stroke-width', (d: any) => Math.sqrt(d.value));
+
+  //     const node = svg.append('g')
+  //       .attr('class', 'nodes')
+  //       .selectAll('circle')
+  //       .data(graph.nodes)
+  //       .enter()
+  //       .append('circle')
+  //       .attr('r', 5)
+  //       .attr('fill', (d: any) => color(d.group));
+
+
+  //     svg.selectAll('circle').call(d3.drag()
+  //       .on('start', dragstarted)
+  //       .on('drag', dragged)
+  //       .on('end', dragended)
+  //     );
+
+  //     node.append('title')
+  //       .text((d) => d.id);
+
+  //     simulation
+  //       .nodes(graph.nodes)
+  //       .on('tick', ticked);
+
+  //     simulation.force<d3.ForceLink<any, any>>('link')
+  //       .links(graph.links);
+
+  //     function ticked() {
+  //       link
+  //         .attr('x1', function(d: any) { return d.source.x; })
+  //         .attr('y1', function(d: any) { return d.source.y; })
+  //         .attr('x2', function(d: any) { return d.target.x; })
+  //         .attr('y2', function(d: any) { return d.target.y; });
+
+  //       node
+  //         .attr('cx', function(d: any) { return d.x; })
+  //         .attr('cy', function(d: any) { return d.y; });
+  //     }
+  //   });
+
+  //   function dragstarted(d) {
+  //     if (!d3.event.active) { simulation.alphaTarget(0.3).restart(); }
+  //     d.fx = d.x;
+  //     d.fy = d.y;
+  //   }
+
+  //   function dragged(d) {
+  //     d.fx = d3.event.x;
+  //     d.fy = d3.event.y;
+  //   }
+
+  //   function dragended(d) {
+  //     if (!d3.event.active) { simulation.alphaTarget(0); }
+  //     d.fx = null;
+  //     d.fy = null;
+  //   }
+  // }
+    const svg = d3.select('svg');
+    const width = +svg.attr('width');
+    const height = +svg.attr('height');
+
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    const simulation = d3.forceSimulation()
+      .force('link', d3.forceLink().id((d: any) => d.id))
+      .force('charge', d3.forceManyBody())
+      .force('center', d3.forceCenter(width / 2, height / 2));
+
+    // const blob = new Blob([JSON.stringify(this.combinedNodesAndLinks)], {type : 'application/json'});
+    // const jsonDataURL = URL.createObjectURL(blob);
+    // // d3.json('assets/miserables.json')
+    // d3.json(jsonDataURL)
+    // .then((data: any) => {
+      let data = {
+        nodes: [{id: "Alberto Cano", group: 1},
+         {id: "Dr Seuss", group: 1}],
+        links: [{source: "Alberto Cano", target: "Dr Seuss", value: 1, number1: 2, number2: 2}]
+      }
+      
+      // debugger;
+      // URL.revokeObjectURL(jsonDataURL);
+      const nodes: Node[] = [...data.nodes];
+      const links: Link[] = [...data.links];
+      // debugger;
+      // data.nodes.forEach((d) => {
+      //   nodes.push(d.nodes);
+      // });
+
+      const graph: Graph = <Graph>{ nodes, links };
+
+      const link = svg.append('g')
+        .attr('class', 'links')
+        .selectAll('line')
+        .data(graph.links)
+        .enter()
+        .append('line')
+        .attr('stroke-width', (d: any) => Math.sqrt(d.value));
+
+      const node = svg.append('g')
+        .attr('class', 'nodes')
+        .selectAll('circle')
+        .data(graph.nodes)
+        .enter()
+        .append('circle')
+        .attr('r', 5)
+        .attr('fill', (d: any) => color(d.group));
+
+
+      svg.selectAll('circle').call(d3.drag()
+        .on('start', dragstarted)
+        .on('drag', dragged)
+        .on('end', dragended)
+      );
+
+      node.append('title')
+        .text((d) => d.id);
+
+      simulation
+        .nodes(graph.nodes)
+        .on('tick', ticked);
+
+      simulation.force<d3.ForceLink<any, any>>('link')
+        .links(graph.links);
+
+      function ticked() {
+        debugger;
+        link
+          .attr('x1', function(d: any) { return d.source.x; })
+          .attr('y1', function(d: any) { return d.source.y; })
+          .attr('x2', function(d: any) { return d.target.x; })
+          .attr('y2', function(d: any) { return d.target.y; });
+
+        node
+          .attr('cx', function(d: any) { return d.x; })
+          .attr('cy', function(d: any) { return d.y; });
+      }
+
+
+    function dragstarted(d) {
+      if (!d3.event.active) { simulation.alphaTarget(0.3).restart(); }
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(d) {
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    }
+
+    function dragended(d) {
+      if (!d3.event.active) { simulation.alphaTarget(0); }
+      d.fx = null;
+      d.fy = null;
+    }
   }
+    
+    
+  
+
+
+  
 
   //delete scholars from this.mockScholarsCitingEachOtherNames if full_name == scholar trying to delete
   //and make sure that the scholar in scholarID2 does not exist in the scholar input
   deleteScholar(deleteScholar: string) {
-    //loop through this.mockScholarsCitingEachOtherNames
-    // if(this.scholarsInput.indexOf(deleteScholar)>-1){
-    //   for(let i = 0; i < this.mockScholarsCitingEachOtherNames.length; i++){
-    //     if(this.mockScholarsCitingEachOtherNames[i].full_name == deleteScholar){
-    //       if(!(this.scholarsInput.indexOf(this.mockScholarsCitingEachOtherNames[i].scholarID2)>-1)){
-    //         this.mockScholarsCitingEachOtherNames.splice(i,1);
-    //       }
-    //     }
-    //   }
-    // }
-
-
     for (let i = 0; i < this.scholarsInput.length; i++) {
       if (this.scholarsInput[i] == deleteScholar) {
         this.scholarsInput.splice(i, 1);
@@ -419,5 +722,9 @@ export class FormFieldOverviewExample implements OnInit {
     }
 
   }
+
+  ///////////////D3.js Logic///////////////
+
+
 
 }
