@@ -1,4 +1,4 @@
-"""scholarly.py"""
+#!/usr/bin/env python
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
@@ -326,3 +326,67 @@ def search_author_custom_url(url):
     soup = _get_soup(_HOST+url)
     return _search_citation_soup(soup)
 
+
+def main() -> None:
+    import json
+    from time import sleep
+    from random import shuffle, randint
+
+    cs_researchers = [
+            "Alberto Cano",
+    ]
+    """
+            "Tomasz Arodz",
+            "Eyuphan Bulut",
+            "Irfan Ahmed",
+            "Krzysztof J Cios",
+            "Kostadin Damevski",
+            "Thang N. Dinh",
+            "Carol Fung",
+            "preetam ghosh",
+            "Vojislav Kecman",
+            "Bartosz Krawczyk",
+            "Lukasz Kurgan",
+            "John D. Leonard II",
+            "Changqing Luo",
+            "Milos Manic",
+            "Bridget T. McInnes",
+            "Tamer Nadeem",
+            "Tarynn M Witten",
+            "Cang Ye",
+            "Hong-Sheng Zhou",
+    ]
+    """
+
+    old_data = None
+    new_data = None
+
+    with open("data.json") as f:
+
+        try:
+            # Get `database`
+            old_data = json.load(f)
+        except Exception as e:
+            # Something happened to the `database`
+            print("[ERROR] Loading json error")
+
+    # Shuffle list to confuse google bot detection
+    shuffle(cs_researchers)
+
+    # Go through all names
+    for i, researcher in enumerate(cs_researchers):
+
+        query = search_author(researcher)
+        author = next(query).fill()
+
+        for pub in author.publications:
+            pub.fill()
+            cites = author.pub.get_citedby()
+            for cite in cites:
+                print(cite)
+
+    with open("data.json", "w+") as f:
+        json.dump(new_data, f)
+
+if __name__ == '__main__':
+    main()
