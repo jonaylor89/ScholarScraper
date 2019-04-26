@@ -1,7 +1,7 @@
 
--> # Selenium Web Scraper <-
+-> # Google Scholar Web Scraper <-
 
--> Python and Selenium scrapping google scholar <-
+-> Python with BeautifulSoup4 scrapping google scholar <-
 
 ---------------------
 

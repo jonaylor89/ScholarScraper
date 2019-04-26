@@ -1,2 +1,2 @@
 
-0 12 * * * /usr/local/bin/python3.7 /usr/src/app/src/scraper/scraper.py
+0 12 * * * /usr/local/bin/bash /home/V00837208/ScholarScraper/ScholarScraper/run.sh
