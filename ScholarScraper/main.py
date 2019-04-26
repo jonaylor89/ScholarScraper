@@ -4,7 +4,7 @@ import logging
 from datetime import datetime
 from typing import List, Dict
 
-from .scholarly import search_author
+from .scholarly import search_author, search_pub_query
 
 from .entities.entity import Session, engine, Base
 from .entities.publication import Publication, PublicationSchema
@@ -27,16 +27,9 @@ logging.basicConfig(
 )
 
 
-def parse_citation() -> None:
+def update_citations(pub_id: str, cites: List) -> None:
     """
-    Parses the article as well as parses the author for the publication
-    """
-    pass
-
-
-def parse_citations() -> None:
-    """
-
+    Add citations to the Publication-Cites tables
     """
     pass
 
@@ -54,12 +47,66 @@ def parse_article(pub) -> Dict:
     }
 
 
-def update_articles(articles: List) -> None:
+def update_articles(scholar_id: str, new_articles: List) -> None:
     """
     Add articles to the Publication and Publication-Cites tables
     """
-    
-    session = Session()
+
+    for article in new_articles:
+
+        # Convert the Publication objects to dictionaries for the db
+        new_info = parse_article(article)
+
+        session = Session()
+
+        # Query the old information for that article
+        old_info = (
+            ScholarSchema(many=True)
+            .dump(session.query(Publication).get(str(new_info["id"])))
+            .data
+        )
+
+        # First a check is done to see if the article existed in the database already
+        # and if it didn't then all that must be done is to create a publication object and add it
+        # Along with the accompanying citation
+        if old_info is None:
+
+            # New publications is added to the database
+            publication = Publication(str(new_info["id"]), new_info["title"], "scraper")
+            publication_author = PublicationAuthor(
+                scholar_id, str(new_info["id"]), "scraper"
+            )
+            session.add(publication)
+            session.add(publication_author)
+        else:
+            # Scholar has been seen before and just needs updating
+
+            if new_info["citation_count"] == old_info["citation_count"]:
+                # Update the date to the current date
+                session.query().filter(Scholar.id == new_info["id"]).update(
+                    {"date": new_info["date"]}
+                )
+            else:
+                # Update the citation count and date
+                session.query().filter(Scholar.id == new_info["id"]).update(
+                    {"date": new_info["date"]}
+                )
+                session.query().filter(
+                    TotalCitations.scholar_id == new_info["id"]
+                ).update(
+                    {
+                        "date": new_info["date"],
+                        "total_cites": new_info["citation_count"],
+                    }
+                )
+
+        session.commit()
+        session.close()
+
+    for article in new_articles:
+
+        # Update the publications for every author
+        update_citations(article.id_scholarcitedby, list(article.citedby()))
 
     """
     SELECT *
@@ -70,7 +117,6 @@ def update_articles(articles: List) -> None:
     ), Publication p
     WHERE p.id IN publication_id
     """
-
 
 
 def parse_researcher(author) -> Dict:
@@ -85,10 +131,26 @@ def parse_researcher(author) -> Dict:
     }
 
 
-def update_researchers(scholars: List) -> None:
+def update_researchers() -> None:
     """
     Add authors to the Scholar, Total-Citation, and Publication-Author tables
     """
+
+    # Start database session to retrieve which names to parse
+    session = Session()
+
+    # Filter the scholars that are meant to be parsed.
+    # Generally scholars that are added by the web app are
+    # meant to be parsed while scholars added through citations
+    # aren't set to be parsed
+    scholars = (
+        ScholarSchema(many=True)
+        .dump(session.query(Scholar).filter(Scholar.to_parse == True))
+        .data
+    )
+
+    # Close the current session
+    session.close()
 
     for old_info in scholars:
 
@@ -118,22 +180,21 @@ def update_researchers(scholars: List) -> None:
 
             if new_info["citation_count"] == old_info["citation_count"]:
                 # Update the date to the current date
-                session.query().filter(Scholar.id == new_info["id"]).update(
+                session.query().filter.get(new_info["id"]).update(
                     {"date": new_info["date"]}
                 )
             else:
                 # Update the citation count and date
-                session.query().filter(Scholar.id == new_info["id"]).update(
+                session.query().filter.get(new_info["id"]).update(
                     {"date": new_info["date"]}
                 )
-                session.query().filter(
-                    TotalCitations.scholar_id == new_info["id"]
-                ).update(
-                    {
-                        "date": new_info["date"],
-                        "total_cites": new_info["citation_count"],
-                    }
+
+                # Add new entry to TotalCitations
+                total_cite = TotalCitations(
+                    new_info["id"], new_info["citation_count"], "scraper"
                 )
+
+                session.add(total_cite)
 
         # Commit new changes to the database
         session.commit()
@@ -148,31 +209,13 @@ def update_researchers(scholars: List) -> None:
         author = next(search_author(old_info["full_name"])).fill()
 
         # Update the publications for every author
-        update_articles(list(author.publications))
+        update_articles(author.id, list(author.publications))
 
 
 def main():
 
-    # Start database session to retrieve which names to parse
-    session = Session()
-
-    # Filter the scholars that are meant to be parsed.
-    # Generally scholars that are added by the web app are
-    # meant to be parsed while scholars added through citations
-    # aren't set to be parsed
-    names = (
-        ScholarSchema(many=True)
-        .dump(session.query(Scholar).filter(Scholar.to_parse == True))
-        .data
-    )
-
-    # Close the current session
-    session.close()
-
-    logger.info(f"parsing {' '.join(names)}")
-
     # Begin parsing
-    parse_researchers(names)
+    update_researchers()
 
 
 if __name__ == "__main__":
