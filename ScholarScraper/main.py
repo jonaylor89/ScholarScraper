@@ -31,7 +31,42 @@ def update_citations(pub_id: str, cites: List) -> None:
     """
     Add citations to the Publication-Cites tables
     """
-    pass
+
+    for cite in cites:
+
+        session = Session()
+
+        # Convert Publication object tot dict
+        new_info = parse_article(cite)
+
+        # Grab old value for that publication
+        old_info = session.query(Publication).get(new_info["id"])
+
+        # First a check is done to see if the article existed in the database already
+        # and if it didn't then all that must be done is to create a publication object and add it
+        # along with the citation reference
+        if old_info is None:
+
+            # New publications is added to the database
+            publication = Publication(str(new_info["id"]), new_info["title"], "scraper")
+            publication_cites = PublicationCites(pub_id, str(new_info["id"]), "scraper")
+            session.add(publication)
+            session.add(publication_cites)
+        else:
+            # Citation has been seen before
+            # Because citaiton count changes so frequently,
+            # it has to be checked and updated even for citations
+            if new_info["citation_count"] == old_info["citation_count"]:
+                continue
+
+            else:
+                # Update the citation count
+                session.query(Publication).get(new_info["id"]).update(
+                    {"cites": new_info["citation_count"]}
+                )
+
+        session.commit()
+        session.close()
 
 
 def parse_article(pub) -> Dict:
@@ -61,7 +96,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
 
         # Query the old information for that article
         old_info = (
-            ScholarSchema(many=True)
+            PublicationSchema(many=True)
             .dump(session.query(Publication).get(str(new_info["id"])))
             .data
         )
@@ -82,22 +117,12 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
             # Scholar has been seen before and just needs updating
 
             if new_info["citation_count"] == old_info["citation_count"]:
-                # Update the date to the current date
-                session.query().filter(Scholar.id == new_info["id"]).update(
-                    {"date": new_info["date"]}
-                )
+                continue
+
             else:
-                # Update the citation count and date
-                session.query().filter(Scholar.id == new_info["id"]).update(
-                    {"date": new_info["date"]}
-                )
-                session.query().filter(
-                    TotalCitations.scholar_id == new_info["id"]
-                ).update(
-                    {
-                        "date": new_info["date"],
-                        "total_cites": new_info["citation_count"],
-                    }
+                # Update the citation count
+                session.query(Publication).get(new_info["id"]).update(
+                    {"cites": new_info["citation_count"]}
                 )
 
         session.commit()
@@ -107,16 +132,6 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
 
         # Update the publications for every author
         update_citations(article.id_scholarcitedby, list(article.citedby()))
-
-    """
-    SELECT *
-    FROM (
-        SELECT publication_id
-        FROM PublicationCites
-        WHERE 
-    ), Publication p
-    WHERE p.id IN publication_id
-    """
 
 
 def parse_researcher(author) -> Dict:
@@ -179,17 +194,10 @@ def update_researchers() -> None:
             # Scholar has been seen before and just needs updating
 
             if new_info["citation_count"] == old_info["citation_count"]:
-                # Update the date to the current date
-                session.query().filter.get(new_info["id"]).update(
-                    {"date": new_info["date"]}
-                )
+                # Citation count is the same so nothing to do
+                continue
             else:
-                # Update the citation count and date
-                session.query().filter.get(new_info["id"]).update(
-                    {"date": new_info["date"]}
-                )
-
-                # Add new entry to TotalCitations
+                # Add new entry to TotalCitations because of the change
                 total_cite = TotalCitations(
                     new_info["id"], new_info["citation_count"], "scraper"
                 )
