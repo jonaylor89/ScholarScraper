@@ -39,7 +39,7 @@ def update_citations(pub_id: str, cites: List) -> None:
     Add citations to the Publication-Cites tables
     """
 
-    logger.debug(f"Updating citations for publication id {pub_id}")
+    logger.debug(f"Updating citations for publication id '{pub_id}''")
 
     for cite in cites:
         logger.debug("opening session")
@@ -81,7 +81,7 @@ def update_citations(pub_id: str, cites: List) -> None:
                 # Citation has been seen before
                 # Because citaiton count changes so frequently,
                 # it has to be checked and updated even for citations
-                if new_info["citation_count"] == old_info["cites"]:
+                if new_info["citation_count"] == old_info["citation_count"]:
                     continue
 
                 else:
@@ -91,7 +91,7 @@ def update_citations(pub_id: str, cites: List) -> None:
                     )
 
         except Exception as e:
-            logger.error(f"error parsing citation: {e}")
+            logger.error(f"error parsing citation: '{e}''")
             traceback.print_exc()
             continue
 
@@ -105,7 +105,7 @@ def parse_article(pub) -> Dict:
     """
     Convert Publication objects to dictionaries for the database
     """
-    logger.info(f"parsing article {pub.bib['title']}")
+    logger.info(f"parsing article '{pub.bib['title']}'")
 
     return {
         "id": pub.id_scholarcitedby,
@@ -121,7 +121,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
     Add articles to the Publication and Publication-Cites tables
     """
 
-    logger.info(f"updating articles for scholar id {scholar_id}")
+    logger.info(f"updating articles for scholar id '{scholar_id}''")
 
     for article in new_articles:
 
@@ -166,7 +166,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
             else:
                 # Scholar has been seen before and just needs updating
 
-                if new_info["citation_count"] == old_info["cites"]:
+                if new_info["citation_count"] == old_info["citation_count"]:
                     continue
 
                 else:
@@ -175,7 +175,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
                         {"cites": new_info["citation_count"]}
                     )
         except Exception as e:
-            logger.error(f"error parsing article: {article.bib['title']}: {e}")
+            logger.error(f"error parsing article: '{article.bib['title']}': {e}")
             traceback.print_exc()
             continue
 
@@ -193,7 +193,7 @@ def parse_researcher(author) -> Dict:
     Convert Author objects to dictionaries for the database
     """
 
-    logger.info(f"parsing researcher {author.name}")
+    logger.info(f"parsing researcher '{author.name}'")
 
     return {
         "id": author.id,
@@ -300,7 +300,7 @@ def update_researchers() -> None:
             update_articles(author.id, list(author.publications))
 
         except Exception as e:
-            logger.error(f"issue parsing researcher {old_info['full_name']}: {e}")
+            logger.error(f"issue parsing researcher '{old_info['full_name']}': {e}")
             traceback.print_exc()
             continue
 
