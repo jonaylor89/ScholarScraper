@@ -42,53 +42,58 @@ def update_citations(pub_id: str, cites: List) -> None:
     logger.debug(f"Updating citations for publication id {pub_id}")
 
     for cite in cites:
-
         logger.debug("opening session")
         session = Session()
+        try:
 
-        cite.fill()
+            cite.fill()
 
-        # Convert Publication object tot dict
-        new_info = parse_article(cite)
+            # Convert Publication object tot dict
+            new_info = parse_article(cite)
 
-        # Grab old value for that publication
-        old_info = (
-            PublicationSchema(many=False)
-            .dump(session.query(Publication).get(str(new_info["id"])))
-            .data
-        )
-
-        # First a check is done to see if the article existed in the database already
-        # and if it didn't then all that must be done is to create a publication object and add it
-        # along with the citation reference
-        if not old_info:
-
-            # New publications is added to the database
-            publication = Publication(
-                str(new_info["id"]),
-                new_info["title"],
-                new_info["citation_count"],
-                new_info["date"],
-                "scraper",
+            # Grab old value for that publication
+            old_info = (
+                PublicationSchema(many=False)
+                .dump(session.query(Publication).get(str(new_info["id"])))
+                .data
             )
-            publication_cites = PublicationCites(pub_id, str(new_info["id"]), "scraper")
 
-            session.add(publication)
-            session.commit() # Commiting so I don't get integrety errors
+            # First a check is done to see if the article existed in the database already
+            # and if it didn't then all that must be done is to create a publication object and add it
+            # along with the citation reference
+            if not old_info:
 
-            session.add(publication_cites)
-        else:
-            # Citation has been seen before
-            # Because citaiton count changes so frequently,
-            # it has to be checked and updated even for citations
-            if new_info["citation_count"] == old_info["cites"]:
-                continue
-
-            else:
-                # Update the citation count
-                session.query(Publication).filter(Publication.id == new_info["id"]).update(
-                    {"cites": new_info["citation_count"]}
+                # New publications is added to the database
+                publication = Publication(
+                    str(new_info["id"]),
+                    new_info["title"],
+                    new_info["citation_count"],
+                    new_info["date"],
+                    "scraper",
                 )
+                publication_cites = PublicationCites(pub_id, str(new_info["id"]), "scraper")
+
+                session.add(publication)
+                session.commit() # Commiting so I don't get integrety errors
+
+                session.add(publication_cites)
+            else:
+                # Citation has been seen before
+                # Because citaiton count changes so frequently,
+                # it has to be checked and updated even for citations
+                if new_info["citation_count"] == old_info["cites"]:
+                    continue
+
+                else:
+                    # Update the citation count
+                    session.query(Publication).filter(Publication.id == new_info["id"]).update(
+                        {"cites": new_info["citation_count"]}
+                    )
+
+        except Exception as e:
+            logger.error(f"error parsing citation: {e}")
+            traceback.print_exc()
+            continue
 
         session.commit()
 
