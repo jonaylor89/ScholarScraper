@@ -7,4 +7,4 @@ printf "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n"
 
 pipenv install
 
-pipenv run python main.py
+pipenv run python src/main.py
