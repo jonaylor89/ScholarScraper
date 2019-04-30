@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import logging
+import traceback
 from random import shuffle
 from datetime import datetime
 from typing import List, Dict
@@ -24,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 logging.basicConfig(
     filename="scraper.log",
-    filemode="a",  
+    filemode="w", # TODO: Change to `a` for production
     format="%(asctime)s %(name)s %(levelname)s %(message)s",
     datefmt="%H:%M:%S",
     level=logging.DEBUG,  # Change to INFO in production
@@ -113,52 +114,57 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
 
     for article in new_articles:
 
-        article.fill()
+        try:
 
-        # Convert the Publication objects to dictionaries for the db
-        new_info = parse_article(article)
+            article.fill()
 
-        session = Session()
+            # Convert the Publication objects to dictionaries for the db
+            new_info = parse_article(article)
 
-        # Query the old information for that article
-        old_info = (
-            PublicationSchema(many=True)
-            .dump(session.query(Publication).get(str(new_info["id"])))
-            .data
-        )
+            session = Session()
 
-        # First a check is done to see if the article existed in the database already
-        # and if it didn't then all that must be done is to create a publication object and add it
-        # Along with the accompanying citation
-        if not old_info:
-
-            # New publications is added to the database
-            publication = Publication(
-                str(new_info["id"]),
-                new_info["title"],
-                new_info["citation_count"],
-                new_info["date"],
-                "scraper",
+            # Query the old information for that article
+            old_info = (
+                PublicationSchema(many=True)
+                .dump(session.query(Publication).get(str(new_info["id"])))
+                .data
             )
 
-            publication_author = PublicationAuthor(
-                str(new_info["id"]), scholar_id, "scraper"
-            )
+            # First a check is done to see if the article existed in the database already
+            # and if it didn't then all that must be done is to create a publication object and add it
+            # Along with the accompanying citation
+            if not old_info:
 
-            session.add(publication)
-            session.commit()
-            session.add(publication_author)
-        else:
-            # Scholar has been seen before and just needs updating
-
-            if new_info["citation_count"] == old_info["cites"]:
-                continue
-
-            else:
-                # Update the citation count
-                session.query(Publication).get(new_info["id"]).update(
-                    {"cites": new_info["citation_count"]}
+                # New publications is added to the database
+                publication = Publication(
+                    str(new_info["id"]),
+                    new_info["title"],
+                    new_info["citation_count"],
+                    new_info["date"],
+                    "scraper",
                 )
+
+                publication_author = PublicationAuthor(
+                    str(new_info["id"]), scholar_id, "scraper"
+                )
+
+                session.add(publication)
+                session.commit()
+                session.add(publication_author)
+            else:
+                # Scholar has been seen before and just needs updating
+
+                if new_info["citation_count"] == old_info["cites"]:
+                    continue
+
+                else:
+                    # Update the citation count
+                    session.query(Publication).get(new_info["id"]).update(
+                        {"cites": new_info["citation_count"]}
+                    )
+        except Exception as e:
+            logger.error(f"error parsing article: {article.bib['title']}: {e}")
+            return
 
         session.commit()
         session.close()
@@ -214,22 +220,27 @@ def update_researchers() -> None:
             # Create database session to upload scholar data
             session = Session()
 
-            total_citations = TotalCitationsSchema(many=True).dump(
-                session.query(TotalCitations)
-                .filter(TotalCitations.scholar_id == old_info["id"])
-                .group_by(TotalCitations.scholar_id)
-                .having(func.max(TotalCitations.date))
-                .first()
+            total_citations = (
+                TotalCitationsSchema(many=True)
+                .dump(
+                    session.query(TotalCitations)
+                    .filter(TotalCitations.scholar_id == old_info["id"])
+                    .group_by(TotalCitations.scholar_id)
+                    .having(func.max(TotalCitations.date))
+                )
+                .data
             )
 
-            old_info = {**old_info, **total_citations}
+
+            if total_citations != []:
+                old_info = {**old_info, **(total_citations[0])}
 
             # Searching for an author returns a generator expression so
             # we make the assumtion that the first search result is the correct one
             author = next(search_author(old_info["full_name"])).fill()
             new_info = parse_researcher(author)
 
-            # First there is a check to make sure citation_count is a key in case this is a new scholar that's never
+            # First there is a check if citation_count is not a key in case this is a new scholar that's never
             # been scaped before. If that works then there is a check to see if the citation count has changed
             # in which case there would need to be a scrape of the publications by the author
             if "citation_count" not in old_info.keys():
@@ -266,7 +277,8 @@ def update_researchers() -> None:
             session.close()
         except Exception as e:
             logger.error(f"issue parsing researcher {old_info['full_name']}: {e}")
-            return # Change to `continue` after debugging
+            traceback.print_exc()
+            return  # Change to `continue` after debugging
 
     # After updating the author tables, publications must be updated next
     for old_info in scholars:
