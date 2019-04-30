@@ -243,7 +243,7 @@ def update_researchers() -> None:
             )
 
             if total_citations != []:
-                old_info = {**old_info, **(total_citations[0])}
+                old_info = {**old_info, **(total_citations)}
 
             # Searching for an author returns a generator expression so
             # we make the assumtion that the first search result is the correct one
