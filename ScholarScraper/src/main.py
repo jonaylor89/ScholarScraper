@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 logging.basicConfig(
     filename="scraper.log",
-    filemode="w", # TODO: Change to `a` for production
+    filemode="w",  # TODO: Change to `a` for production
     format="%(asctime)s %(name)s %(levelname)s %(message)s",
     datefmt="%H:%M:%S",
     level=logging.DEBUG,  # Change to INFO in production
@@ -231,7 +231,6 @@ def update_researchers() -> None:
                 .data
             )
 
-
             if total_citations != []:
                 old_info = {**old_info, **(total_citations[0])}
 
@@ -275,19 +274,17 @@ def update_researchers() -> None:
 
             # Close the DB connection
             session.close()
+
+            # Get the author back
+            author = next(search_author(old_info["full_name"])).fill()
+
+            # Update the publications for every author
+            update_articles(author.id, list(author.publications))
+
         except Exception as e:
             logger.error(f"issue parsing researcher {old_info['full_name']}: {e}")
             traceback.print_exc()
-            return  # Change to `continue` after debugging
-
-    # After updating the author tables, publications must be updated next
-    for old_info in scholars:
-
-        # Get the author back
-        author = next(search_author(old_info["full_name"])).fill()
-
-        # Update the publications for every author
-        update_articles(author.id, list(author.publications))
+            continue
 
 
 def main():
