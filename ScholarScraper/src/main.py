@@ -81,7 +81,7 @@ def update_citations(pub_id: str, cites: List) -> None:
             # Citation has been seen before
             # Because citaiton count changes so frequently,
             # it has to be checked and updated even for citations
-            if new_info["citation_count"] == old_info["citation_count"]:
+            if new_info["citation_count"] == old_info["cites"]:
                 continue
 
             else:
