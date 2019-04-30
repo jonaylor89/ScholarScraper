@@ -72,7 +72,10 @@ def update_citations(pub_id: str, cites: List) -> None:
                 "scraper",
             )
             publication_cites = PublicationCites(pub_id, str(new_info["id"]), "scraper")
+
             session.add(publication)
+            session.commit() # Commiting so I don't get integrety errors
+
             session.add(publication_cites)
         else:
             # Citation has been seen before
@@ -153,7 +156,8 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
                 )
 
                 session.add(publication)
-                session.commit()
+                session.commit() # Commiting so I don't get integrity errors
+
                 session.add(publication_author)
             else:
                 # Scholar has been seen before and just needs updating
