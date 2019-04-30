@@ -10,7 +10,7 @@ class Publication(Entity, Base):
     id = Column("id", String(32), primary_key=True)
     title = Column("title", String(256), nullable=True)
     cites = Column("cites", Integer, nullable=True)
-    date = Column(String)
+    date = Column(String(16))
 
     def __init__(self, id, title, cites, date, created_by):
         Entity.__init__(self, created_by)
