@@ -49,7 +49,11 @@ def update_citations(pub_id: str, cites: List) -> None:
             cite.fill()
 
             # Convert Publication object tot dict
-            new_info = parse_article(cite)
+            try:
+                new_info = parse_article(cite)
+            except Exception as e:
+                logger.error(f"article parsing error: {e}")
+                continue
 
             # Grab old value for that publication
             old_info = (
@@ -129,7 +133,11 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
 
             # Fill the object to have all necessary fields
             # Convert the Publication objects to dictionaries for the db
-            new_info = parse_article(article.fill())
+            try:
+                new_info = parse_article(article.fill())
+            except Exception as e:
+                logger.error(f"article parsing error: {e}")
+                continue
 
             logger.debug("opening session")
             session = Session()
