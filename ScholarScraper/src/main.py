@@ -4,7 +4,7 @@ import logging
 from datetime import datetime
 from typing import List, Dict
 
-from .scholarly import search_author, search_pub_query
+from .scraper.scholarly import search_author, search_pub_query
 
 from .entities.entity import Session, engine, Base
 from .entities.publication import Publication, PublicationSchema
@@ -12,6 +12,7 @@ from .entities.scholar import Scholar, ScholarSchema
 from .entities.publicationauthor import PublicationAuthor, PublicationAuthorSchema
 from .entities.publicationcites import PublicationCites, PublicationCitesSchema
 from .entities.totalcitations import TotalCitations, TotalCitationsSchema
+
 
 # Create all the tables
 Base.metadata.create_all(engine)
@@ -224,7 +225,6 @@ def main():
 
     # Begin parsing
     update_researchers()
-
 
 if __name__ == "__main__":
     main()
