@@ -20,8 +20,3 @@
     stroke-width: 1.5px;
     cursor: pointer;
   }
-
-  #chart {
-    height: inherit;
-    width: inherit;
-  }
