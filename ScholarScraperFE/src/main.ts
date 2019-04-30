@@ -12,7 +12,7 @@
 // platformBrowserDynamic().bootstrapModule(AppModule)
 //   .catch(err => console.error(err));
 import './polyfills';
-
+import { Observable } from 'rxjs';
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -39,7 +39,9 @@ import {FormFieldOverviewExample} from './app/form-field-overview-example';
   bootstrap: [FormFieldOverviewExample],
   providers: []
 })
-export class AppModule {}
+export class AppModule {
+  data: Observable<any>;
+}
 
 platformBrowserDynamic().bootstrapModule(AppModule);
 

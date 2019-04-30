@@ -1,8 +1,7 @@
-import { Component,ElementRef, OnInit,ViewEncapsulation, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ApiService } from './api.service';
+import { Component, OnInit,ViewEncapsulation, OnChanges } from '@angular/core';
+import { ApiService } from '../api.service';
 import { Breakpoints } from '@angular/cdk/layout';
 import * as d3 from 'd3'
-import { debugOutputAstAsTypeScript } from '@angular/compiler';
 
 //TODO
 //Show count
@@ -32,128 +31,13 @@ interface Graph {
   styleUrls: ['form-field-overview-example.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class FormFieldOverviewExample implements OnChanges, OnInit {
-//D3 Set up//
-@ViewChild('graph')
-  private chartContainer: ElementRef;
+export class FormFieldOverviewExample implements OnInit {
   
-@Input() data:any;
 
-
-ngOnInit() {
-    
-    this._apiservice.getScholars().subscribe(data => this.scholars = data); //uncomment when using publication-cites api
-
-    this.buildGraph();
-    // this.initialized =true;
-
-    
-  }
-ngOnChanges(changes: SimpleChanges) {
-  // if(this.initialized){
-  // this.buildGraph();
-  // }
-  // console.log(this.initialized);
-  // this.initialized = false;
-  // console.log(this.initialized);
-  console.log(changes);
-}
-  
-  buildGraph(){
-    // d3.select('svg').remove();
-    // const element = this.chartContainer.nativeElement;
-  // const data = this.data;
-    const svg = d3.select('svg');
-  const width = +svg.attr('width');
-  const height = +svg.attr('height');
-
-  const color = d3.scaleOrdinal(d3.schemeCategory10);
-
-  const simulation = d3.forceSimulation()
-    .force('link', d3.forceLink().id((d: any) => d.id))
-    .force('charge', d3.forceManyBody())
-    .force('center', d3.forceCenter(width / 2, height / 2));
-
-    let data = {
-      nodes: [{id: "Alberto Cano", group: 1},
-       {id: "Dr Seuss", group: 1}],
-      links: [{source: "Alberto Cano", target: "Dr Seuss", value: 1, number1: 2, number2: 2}]
-    }
-    
-    const nodes: Node[] = [...data.nodes];
-    const links: Link[] = [...data.links];
-    
-    const graph: Graph = <Graph>{ nodes, links };
-
-    const link = svg.append('g')
-      .attr('class', 'links')
-      .selectAll('line')
-      .data(graph.links)
-      .enter()
-      .append('line')
-      .attr('stroke-width', (d: any) => Math.sqrt(d.value));
-
-    const node = svg.append('g')
-      .attr('class', 'nodes')
-      .selectAll('circle')
-      .data(graph.nodes)
-      .enter()
-      .append('circle')
-      .attr('r', 5)
-      .attr('fill', (d: any) => color(d.group));
-
-
-    svg.selectAll('circle').call(d3.drag()
-      .on('start', dragstarted)
-      .on('drag', dragged)
-      .on('end', dragended)
-    );
-
-    node.append('title')
-      .text((d) => d.id);
-
-    simulation
-      .nodes(graph.nodes)
-      .on('tick', ticked);
-
-    simulation.force<d3.ForceLink<any, any>>('link')
-      .links(graph.links);
-
-    function ticked() {
-      debugger;
-      link
-        .attr('x1', function(d: any) { return d.source.x; })
-        .attr('y1', function(d: any) { return d.source.y; })
-        .attr('x2', function(d: any) { return d.target.x; })
-        .attr('y2', function(d: any) { return d.target.y; });
-
-      node
-        .attr('cx', function(d: any) { return d.x; })
-        .attr('cy', function(d: any) { return d.y; });
-    }
-
-
-  function dragstarted(d) {
-    if (!d3.event.active) { simulation.alphaTarget(0.3).restart(); }
-    d.fx = d.x;
-    d.fy = d.y;
-  }
-
-  function dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-  }
-
-  function dragended(d) {
-    if (!d3.event.active) { simulation.alphaTarget(0); }
-    d.fx = null;
-    d.fy = null;
-  }
-  }
-  
 ////////////////SCHOLAR SCRAPER LOGIC////////////////////
   public scholars = [];
   public scholarsInput = [];
+  
 
   //input of user
   public mockScholarsInput = ["Alberto Cano"];
@@ -183,7 +67,6 @@ ngOnChanges(changes: SimpleChanges) {
     { publicationID: "6", publicationIDFK: '1' },
     { publicationID: "5", publicationIDFK: '2' },
     { publicationID: "6", publicationIDFK: '7' },
-    { publicationID: "7", publicationIDFK: '6' },
     { publicationID: "7", publicationIDFK: '6' }
 
     // {publicationID:"1", publicationIDFK:'5'},
@@ -205,15 +88,15 @@ ngOnChanges(changes: SimpleChanges) {
   public mockStackOfOriginalAuthorsPublication; //maybe turn into an object that contains scholarID and publication id, publicationID
   public mockStackOfPublicationsThatHaveCitedOriginalAuthorsPublication; //publications that cited the original scholars publication, publicationID
   public mockScholarsCitingEachOther; //scholarID1 : scholarID2
-  public mockScholarsCitingEachOtherNamesLinks; //their actual names scholar: , citedby:
-  public mockScholarsCitingEachOtherNamesNodes;  
+  public mockScholarsCitingEachOtherNamesLinks= []; //their actual names scholar: , citedby:
+  public mockScholarsCitingEachOtherNamesNodes= [];  
   public combinedNodesAndLinks = [];
   public mockStorePublicationsCitedByOriginalAuthor;
   public mockStackOfScholarsCitingOriginalAuthorsPublication;
   public mockStackOfAllPublicationsFromAuthorsCitingOriginalAuthor;
   public citationCount = [];
   public displayData = false;
-  public scholarCitationCount = [];
+  
 
 
   addScholar(newScholar: string) {
@@ -248,27 +131,20 @@ ngOnChanges(changes: SimpleChanges) {
 
 
   submitResults() {
-    this.data = true;
-    // debugger;
+    
     this.mockScholarsCitingEachOtherNamesLinks = []; //their actual names scholar: , citedby: 
     this.mockScholarsCitingEachOtherNamesNodes = []; 
-    this.scholarCitationCount = [];
-    let recordOfCitations = []
-    this.mockScholarsCitingEachOther = [];
+    
     for (let m = 0; m < this.scholarsInput.length; m++) {
-      
       this.mockStackOfOriginalAuthorsPublication = []; //maybe turn into an object that contains scholarID and publication id, publicationID
       this.mockStackOfPublicationsThatHaveCitedOriginalAuthorsPublication = []; //publications that cited the original scholars publication, publicationID
       this.mockStackOfScholarsCitingOriginalAuthorsPublication = [];
       this.mockStorePublicationsCitedByOriginalAuthor = [];
       this.mockStackOfAllPublicationsFromAuthorsCitingOriginalAuthor = [];
-      let countOfOriginalScholar = 0;
-      let countOfCitingScholar = 0;
       // this.mockScholarsCitingEachOtherNames = []; //their actual names scholar: , citedby: 
-       //scholarID1 : scholarID2
+      this.mockScholarsCitingEachOther = []; //scholarID1 : scholarID2
       let mockScholarID = '';
       // let name = this.mockScholars[0].full_name
-     
       for (let i = 0; i < this.mockScholars.length; i++) {
         if (this.scholarsInput[m] == this.mockScholars[i].full_name) {
           console.log(this.scholarsInput[m] + " is equal to " + this.mockScholars[i].full_name)
@@ -290,7 +166,7 @@ ngOnChanges(changes: SimpleChanges) {
 
       //cycle through publications that have cited the authors publication using mockPublicationCites
       //loop through mockStackOfScholarsPublication, loop through publication cites 
-      // debugger;
+      
       if (this.mockStackOfOriginalAuthorsPublication.length > 0) {
         //loop through all the publications in publicationcites. then store the publications that have cited
         //the original authors publication
@@ -304,13 +180,13 @@ ngOnChanges(changes: SimpleChanges) {
           }
         }
       }
-      // debugger; //display publication 5 (publication that cited the original author)
+       //display publication 5 (publication that cited the original author)
       //but first loop through authors publication 5 and find all the authors of publication 5, 
       //once finding all the others of publication five  loop through those authors and find all of their publications to add
       //onto the stack
 
       //*DO A LOOP FOR EACH AUTHOR AND CHECK TO SEE IF THAT AUTHOR HAS BEEN CITED BY ORIGINAL AUTHOR
-      // debugger
+     
       if (this.mockStackOfPublicationsThatHaveCitedOriginalAuthorsPublication.length > 0) {
         for (let i = 0; i < this.mockPublicationAuthor.length; i++) {
           for (let j = 0; j < this.mockStackOfPublicationsThatHaveCitedOriginalAuthorsPublication.length; j++) {
@@ -323,10 +199,10 @@ ngOnChanges(changes: SimpleChanges) {
           }
         }
       }
-      // debugger; //1234567890
+     //1234567890
       //loop through this.mockStackOfScholarsCitingOriginalAuthorsPublication, find all of their publications
       //and store them
-      // debugger;
+     
       if (this.mockStackOfScholarsCitingOriginalAuthorsPublication.length > 0) {
         for (let i = 0; i < this.mockPublicationAuthor.length; i++) {
           for (let j = 0; j < this.mockStackOfScholarsCitingOriginalAuthorsPublication.length; j++) {
@@ -338,11 +214,11 @@ ngOnChanges(changes: SimpleChanges) {
           }
         }
       }
-      // debugger;
+      
       //loop through the stack of publications that have cited the original scholars publications
       //check to see if these publications have been cited by the original scholars from the (this.mockStackOfScholarsPublication)
       // same this.mockPublicationCites database
-      // debugger;
+      
       if (this.mockStackOfAllPublicationsFromAuthorsCitingOriginalAuthor.length > 0) {
 
         for (let i = 0; i < this.mockPublicationCites.length; i++) {
@@ -366,40 +242,30 @@ ngOnChanges(changes: SimpleChanges) {
 
         }
       }
-      //debugger; // this.mockStorePublicationsCitedByOriginalAuthor = 5
+       // this.mockStorePublicationsCitedByOriginalAuthor = 5
       //double check with john and cano about what this database actually contains 
       // (what if authors who are cited by original authors are not on the mockPublicationAuthorDatabase)
 
-      ///////////debugger
+
       if (this.mockStorePublicationsCitedByOriginalAuthor.length > -1) {
         //loop through mockPublicationAuthor Database
         for (let i = 0; i < this.mockPublicationAuthor.length; i++) {
           for (let j = 0; j < this.mockStorePublicationsCitedByOriginalAuthor.length; j++) {
-            //  debugger;
+            
             if (this.mockPublicationAuthor[i].publicationID == this.mockStorePublicationsCitedByOriginalAuthor[j]) {
               //check to see if author of that publication is in this.mockStackOfScholarsCitingOriginalAuthorsPublication.
               //which ensures that we are only including authors that are cited by original author
-              //  debugger;
+              
               if (this.mockStackOfScholarsCitingOriginalAuthorsPublication.indexOf(this.mockPublicationAuthor[i].scholarID) > -1) {
 
                 let newObj_1 = { scholarID1: mockScholarID, scholarID2: this.mockPublicationAuthor[i].scholarID }
                 newObj_1.scholarID2;
-                // debugger;
+                
                 if (this.mockScholarsCitingEachOther.length > 0) {
-                  let found1 = this.mockScholarsCitingEachOther.some(el => el.scholarID1 === newObj_1.scholarID2);
-                  let found2 = this.mockScholarsCitingEachOther.some(el => el.scholarID2 === newObj_1.scholarID1);
-                  let found3 = this.mockScholarsCitingEachOther.some(el => el.scholarID1 === newObj_1.scholarID1);
-                  let found4 = this.mockScholarsCitingEachOther.some(el => el.scholarID2 === newObj_1.scholarID2);
-                  // let found3 = this.mockScholarsCitingEachOther.some(el => el.scholarID2 === newObj_1.scholarID2);
-                  // let found4 = this.mockScholarsCitingEachOther.some(el => el.scholarID2 === newObj_1.scholarID1);
-                  // let found2 = this.mockScholarsCitingEachOther.some(el => el.scholarID2 === newObj_1.scholarID2);
-                  if ((found1 && found2)== false){
-                    if((found3 && found4)== false){ this.mockScholarsCitingEachOther.push(newObj_1);
-                    }
-                  }
+                  let found = this.mockScholarsCitingEachOther.some(el => el.scholarID2 === newObj_1.scholarID2);
+                  if (!found) this.mockScholarsCitingEachOther.push(newObj_1);
                   //   if(!(this.mockScholarsCitingEachOther.indexOf(newObj_1.scholarID2)>-1)){
-                  //     debugger;
-
+                  
 
                   // }
 
@@ -407,12 +273,6 @@ ngOnChanges(changes: SimpleChanges) {
                 }
                 else {
                   this.mockScholarsCitingEachOther.push(newObj_1);
-
-                  // if(recordOfCitations.length < 1){
-                  //   recordOfCitations.push(newObj_1);
-                  // } else if(recordOfCitations.indexOf(newObj_1) > -1 && recordOfCitations.indexOf(newObj_1) > -1 && ) {
-                    
-                  // }
                 }
               }
             }
@@ -421,69 +281,67 @@ ngOnChanges(changes: SimpleChanges) {
       }
 
 
-      // debugger;
+      
       //logic for when user enters another name, and that name of the previous scholar includes that new name under
       //mock scholars citing each other, then don't repeat it, this should also be where we keep count of which scholar is citing who
-      // let newObj = []
-      // if (this.mockScholarsCitingEachOther.length > 0) { //unecessary delete later
-      //   for (let i = 0; i < this.mockScholars.length; i++) {
-      //     for (let j = 0; j < this.mockScholarsCitingEachOther.length; j++) {
+      let newObj = []
+      if (this.mockScholarsCitingEachOther.length > 0) { //unecessary delete later
+        for (let i = 0; i < this.mockScholars.length; i++) {
+          for (let j = 0; j < this.mockScholarsCitingEachOther.length; j++) {
 
-      //       if (this.mockScholars[i].id == this.mockScholarsCitingEachOther[j].scholarID2) {
+            if (this.mockScholars[i].id == this.mockScholarsCitingEachOther[j].scholarID2) {
 
-      //         newObj.push({ full_name: this.scholarsInput[m], scholarID2: this.mockScholars[i].full_name })
-      //         // if(this.mockScholarsCitingEachOtherNames.length > 0 ){
-      //         //   if(this.mockScholars[i].full_name != this.mockScholarsCitingEachOtherNames[j].full_name
-      //         //     && newScholar != this.mockScholarsCitingEachOtherNames[j].scholarID2) {
-      //         //   this.mockScholarsCitingEachOtherNames.push(newObj);
-      //         // }
-      //         // }
+              newObj.push({ full_name: this.scholarsInput[m], scholarID2: this.mockScholars[i].full_name })
+              // if(this.mockScholarsCitingEachOtherNames.length > 0 ){
+              //   if(this.mockScholars[i].full_name != this.mockScholarsCitingEachOtherNames[j].full_name
+              //     && newScholar != this.mockScholarsCitingEachOtherNames[j].scholarID2) {
+              //   this.mockScholarsCitingEachOtherNames.push(newObj);
+              // }
+              // }
 
-      //       }
+            }
 
-      //     }
-      //   }
-      // }
-      // //now loop through all the new obj found and make sure that we are not adding repeated information
-      // // debugger;
-      // //just loop through citingEachOthersName if newObj[i] == it then increment i and start citing each others name at 0
-      // // debugger;
-      // if (this.mockScholarsCitingEachOtherNamesLinks.length > 0) {
+          }
+        }
+      }
+      //now loop through all the new obj found and make sure that we are not adding repeated information
+      
+      //just loop through citingEachOthersName if newObj[i] == it then increment i and start citing each others name at 0
+      if (this.mockScholarsCitingEachOtherNamesLinks.length > 0) {
        
-      //   for (let i = 0; i < newObj.length; i++) {
-      //     for (let j = 0; j < this.mockScholarsCitingEachOtherNamesLinks.length; j++) {
+        for (let i = 0; i < newObj.length; i++) {
+          for (let j = 0; j < this.mockScholarsCitingEachOtherNamesLinks.length; j++) {
 
 
-      //       if ((newObj[i].full_name == this.mockScholarsCitingEachOtherNamesLinks[j].scholarID2
-      //         && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNamesLinks[j].full_name)) {
-      //         newObj.splice(i, 1);
-      //         i = 0;
-      //       }
-      //       else
-      //       if (newObj[i].full_name == this.mockScholarsCitingEachOtherNamesLinks[j].full_name
-      //         && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNamesLinks[j].scholarID2) {
-      //         newObj.splice(i, 1);
-      //         i = 0;
-      //       }
-      //     }
+            if ((newObj[i].full_name == this.mockScholarsCitingEachOtherNamesLinks[j].scholarID2
+              && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNamesLinks[j].full_name)) {
+              newObj.splice(i, 1);
+              i = 0;
+            }
 
-      //   }
-      //   for (let i = 0; i < newObj.length; i++) {
-      //     this.mockScholarsCitingEachOtherNamesLinks.push(newObj[i]);
-      //     // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].full_name, "group": 1})
-      //     // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholarID2, "group": 1})
-      //   }
-      // }
-      // else {
-      //   // debugger;
-      //   for (let i = 0; i < newObj.length; i++) {
-      //     this.mockScholarsCitingEachOtherNamesLinks.push({ full_name: newObj[i].full_name, scholarID2: newObj[i].scholarID2, value: 1 });
-      //     this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].full_name, "group": 1})
-      //     this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholarID2, "group": 1})
-      //   }
+            if (newObj[i].full_name == this.mockScholarsCitingEachOtherNamesLinks[j].full_name
+              && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNamesLinks[j].scholarID2) {
+              newObj.splice(i, 1);
+              i = 0;
+            }
+          }
 
-      // }
+        }
+        for (let i = 0; i < newObj.length; i++) {
+          this.mockScholarsCitingEachOtherNamesLinks.push(newObj[i]);
+          // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].full_name, "group": 1})
+          // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholarID2, "group": 1})
+        }
+      }
+      else {
+        for (let i = 0; i < newObj.length; i++) {
+          this.mockScholarsCitingEachOtherNamesLinks.push({ full_name: newObj[i].full_name, scholarID2: newObj[i].scholarID2, value: 1 });
+          this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].full_name, "group": 1})
+          this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholarID2, "group": 1})
+        }
 
+      }
+     
       //To get the count look at 
       //mockScholarsCitingEachOther
       //mockPublicationAuthor
@@ -494,127 +352,179 @@ ngOnChanges(changes: SimpleChanges) {
 
       //make these lists empty for when looping to the next this.mockScholarsCitingEachOther
 
-      // for()
-      // this.combinedNodesAndLinks.push({"nodes": this.mockScholarsCitingEachOtherNamesNodes,"links": this.mockScholarsCitingEachOtherNamesLinks});
-      // debugger;
-      
-  }
-  // debugger;
-  for (let i = 0; i < this.mockScholarsCitingEachOther.length; i++) {
-    let publicationsOfScholar1 = [];
-    let publicationsOfScholar2 = [];
-    let countOfOriginalScholar = 0;
-    let countOfCitingScholar = 0;
-    // debugger;
+      for (let i = 0; i < this.mockScholarsCitingEachOther.length; i++) {
+        let publicationsOfScholar1 = [];
+        let publicationsOfScholar2 = [];
+        let countOfOriginalScholar = 0;
+        let countOfCitingScholar = 0;
+        for (let j = 0; j < this.mockPublicationAuthor.length; j++) {
+          if (this.mockScholarsCitingEachOther[i].scholarID1 == this.mockPublicationAuthor[j].scholarID) {
+            //do a arr.some to prevent storing the same publications multiple times
+            let found = publicationsOfScholar1.some(el => el === this.mockPublicationAuthor[j].publicationID);
+            if (!found)
+              publicationsOfScholar1.push(this.mockPublicationAuthor[j].publicationID);
+          }
+          if (this.mockScholarsCitingEachOther[i].scholarID2 == this.mockPublicationAuthor[j].scholarID) {
+            //do a arr.some
+            let found = publicationsOfScholar2.some(el => el === this.mockPublicationAuthor[j].publicationID);
+            if (!found)
+              publicationsOfScholar2.push(this.mockPublicationAuthor[j].publicationID);
+          }
 
-    for (let j = 0; j < this.mockPublicationAuthor.length; j++) {
-      if (this.mockScholarsCitingEachOther[i].scholarID1 == this.mockPublicationAuthor[j].scholarID) {
-        //do a arr.some to prevent storing the same publications multiple times
-        let found = publicationsOfScholar1.some(el => el === this.mockPublicationAuthor[j].publicationID);
-        if (!found)
-          publicationsOfScholar1.push(this.mockPublicationAuthor[j].publicationID);
-      }
-      if (this.mockScholarsCitingEachOther[i].scholarID2 == this.mockPublicationAuthor[j].scholarID) {
-        //do a arr.some
-        let found = publicationsOfScholar2.some(el => el === this.mockPublicationAuthor[j].publicationID);
-        if (!found)
-          publicationsOfScholar2.push(this.mockPublicationAuthor[j].publicationID);
-      }
+        }
 
-    }
+        //further logic for counting
+        //then clear out the two arrays and do another count
+        for (let k = 0; k < this.mockPublicationCites.length; k++) {
 
-    //further logic for counting
-    //then clear out the two arrays and do another count
-    //loop thorugh scholar citing each other
-    // debugger;
-    for (let k = 0; k < this.mockPublicationCites.length; k++) {
 
-      if ((publicationsOfScholar1.indexOf(this.mockPublicationCites[k].publicationID) > -1)
-        && (publicationsOfScholar2.indexOf(this.mockPublicationCites[k].publicationIDFK) > -1)) {
-        countOfCitingScholar++;
-      }
+          if ((publicationsOfScholar1.indexOf(this.mockPublicationCites[k].publicationID) > -1)
+            && (publicationsOfScholar2.indexOf(this.mockPublicationCites[k].publicationIDFK) > -1)) {
+            countOfCitingScholar++;
+          }
 
-      if ((publicationsOfScholar2.indexOf(this.mockPublicationCites[k].publicationID) > -1)
-        && (publicationsOfScholar1.indexOf(this.mockPublicationCites[k].publicationIDFK) > -1)) {
-        countOfOriginalScholar++;
-      }
-      //     this.mockScholarsCitingEachOtherNamesLinks[k].number1 = countOfOriginalScholar;
-      // this.mockScholarsCitingEachOtherNamesLinks[k].number2 = countOfCitingScholar;
-    }
-    
-    // if(this.mockScholarsCitingEachOther.length == 1){
-    //   this.mockScholarsCitingEachOtherNamesLinks[m].number1 = countOfOriginalScholar;
-    //   this.mockScholarsCitingEachOtherNamesLinks[m].number2 = countOfCitingScholar;
-    // }
-     //     this.mockScholarsCitingEachOtherNamesLinks.push({ full_name: newObj[i].full_name, scholarID2: newObj[i].scholarID2, value: 1 });
-      //     this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].full_name, "group": 1})
-   
-    // debugger;
-    this.scholarCitationCount.push({number1: countOfOriginalScholar, number2: countOfCitingScholar});
-
-    
-    //  let found = publicationsOfScholar1.some()
-  } 
-
-  //find the scholar names for the id of scholar cites 
-    let linksObj= [];
-    let scholar_name1 = '';
-    let scholar_name2 = '';
-    // if (this.mockScholarsCitingEachOther.length > 0) { //unecessary delete later
-        for (let i = 0; i <  this.mockScholarsCitingEachOther.length; i++) {
-          for (let j = 0; j <this.mockScholars.length; j++) {
-
-            if(this.mockScholarsCitingEachOther[i].scholarID1=== this.mockScholars[j].id){
-              scholar_name1 = this.mockScholars[j].full_name
-            }
-
-            if(this.mockScholarsCitingEachOther[i].scholarID2=== this.mockScholars[j].id){
-              scholar_name2 = this.mockScholars[j].full_name
-            }
-
-            if(scholar_name1.length > 0 && scholar_name2.length > 0){
-              // debugger
-              linksObj.push({"scholarname1": scholar_name1, "number1": this.scholarCitationCount[i].number1, "scholarname2": scholar_name2, "number2": this.scholarCitationCount[i].number2,"value": 1})
-              this.mockScholarsCitingEachOtherNamesNodes.push({"id": scholar_name1, "group": 1});
-              this.mockScholarsCitingEachOtherNamesNodes.push({"id": scholar_name2, "group": 1});
-              scholar_name1 = '';
-              scholar_name2 = '';
-            }
-
-            // if (this.mockScholars[i].id == this.mockScholarsCitingEachOther[j].scholarID2) {
-
-             
-              // newObj.push({ full_name: this.scholarsInput[m], scholarID2: this.mockScholars[i].full_name })
-              // if(this.mockScholarsCitingEachOtherNames.length > 0 ){
-              //   if(this.mockScholars[i].full_name != this.mockScholarsCitingEachOtherNames[j].full_name
-              //     && newScholar != this.mockScholarsCitingEachOtherNames[j].scholarID2) {
-              //   this.mockScholarsCitingEachOtherNames.push(newObj);
-              // }
-              // }
-            // }
+          if ((publicationsOfScholar2.indexOf(this.mockPublicationCites[k].publicationID) > -1)
+            && (publicationsOfScholar1.indexOf(this.mockPublicationCites[k].publicationIDFK) > -1)) {
+            countOfOriginalScholar++;
           }
         }
-        // }
         debugger;
-    for(let i = 0; i < this.scholarCitationCount.length; i++){
-    this.mockScholarsCitingEachOtherNamesLinks[i]= linksObj[i];
-    // this.mockScholarsCitingEachOtherNamesLinks[i].number2 = this.scholarCitationCount[i].number2;
-    // this.mockScholarsCitingEachOtherNamesLinks.push({ scholar_name1: newObj[i].scholar_name1, scholar_name2: newObj[i].scholar_name2, value: 1 });
-        // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholar_name1, "group": 1})
-        // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholar_name2, "group": 1})
+        this.mockScholarsCitingEachOtherNamesLinks[i].number1 = countOfOriginalScholar;
+        this.mockScholarsCitingEachOtherNamesLinks[i].number2 = countOfCitingScholar;
+
+
+        
+
+        //  let found = publicationsOfScholar1.some()
+      }
+
+      // this.combinedNodesAndLinks.push({"nodes": this.mockScholarsCitingEachOtherNamesNodes,"links": this.mockScholarsCitingEachOtherNamesLinks});
+      
+      this.displayData= true;
+      
+      this.buildGraph();
+      // this.ngOnInit();
+       
+    }
+
   }
-  debugger;
-
-}
-
 
   title = 'ScholarScraperFE';
 
-
   constructor(private _apiservice: ApiService) { }
-  
-  
-  
+
+  ngOnInit() {
+
+    this._apiservice.getScholars().subscribe(data => this.scholars = data); //uncomment when using publication-cites api
+    // if(this.displayData)
+   
+  }
+
+  // ngOnChanges(){
+  //   if(this.displayData){
+  //   this.buildGraph();
+  //   }
+  // }
+    
+  buildGraph(){
+    const svg = d3.select('svg');
+    const width = +svg.attr('width');
+    const height = +svg.attr('height');
+
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    const simulation = d3.forceSimulation()
+      .force('link', d3.forceLink().id((d: any) => d.id))
+      .force('charge', d3.forceManyBody())
+      .force('center', d3.forceCenter(width / 2, height / 2));
+      let nodesScholar = this.mockScholarsCitingEachOtherNamesNodes;
+      let linksScholar = this.mockScholarsCitingEachOtherNamesLinks;
+      let data = {
+        nodes:  nodesScholar,
+        links: linksScholar
+      }
+      // let data = {
+      //   nodes: [{id: "Alberto Cano", group: 1},
+      //    {id: "Dr Seuss", group: 1}],
+      //   links: [{source: "Alberto Cano", target: "Dr Seuss", value: 1, number1: 2, number2: 2}]
+      // }
+      
+      
+      // URL.revokeObjectURL(jsonDataURL);
+      const nodes: Node[] = [...data.nodes];
+      const links: Link[] = [...data.links];
+      
+      // data.nodes.forEach((d) => {
+      //   nodes.push(d.nodes);
+      // });
+
+      const graph: Graph = <Graph>{ nodes, links };
+
+      const link = svg.append('g')
+        .attr('class', 'links')
+        .selectAll('line')
+        .data(graph.links)
+        .enter()
+        .append('line')
+        .attr('stroke-width', (d: any) => Math.sqrt(d.value));
+
+      const node = svg.append('g')
+        .attr('class', 'nodes')
+        .selectAll('circle')
+        .data(graph.nodes)
+        .enter()
+        .append('circle')
+        .attr('r', 5)
+        .attr('fill', (d: any) => color(d.group));
+
+
+      svg.selectAll('circle').call(d3.drag()
+        .on('start', dragstarted)
+        .on('drag', dragged)
+        .on('end', dragended)
+      );
+
+      node.append('title')
+        .text((d) => d.id);
+
+      simulation
+        .nodes(graph.nodes)
+        .on('tick', ticked);
+
+      simulation.force<d3.ForceLink<any, any>>('link')
+        .links(graph.links);
+
+      function ticked() {
+        link
+          .attr('x1', function(d: any) { return d.source.x; })
+          .attr('y1', function(d: any) { return d.source.y; })
+          .attr('x2', function(d: any) { return d.target.x; })
+          .attr('y2', function(d: any) { return d.target.y; });
+
+        node
+          .attr('cx', function(d: any) { return d.x; })
+          .attr('cy', function(d: any) { return d.y; });
+      }
+
+
+    function dragstarted(d) {
+      if (!d3.event.active) { simulation.alphaTarget(0.3).restart(); }
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(d) {
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    }
+
+    function dragended(d) {
+      if (!d3.event.active) { simulation.alphaTarget(0); }
+      d.fx = null;
+      d.fy = null;
+    }
+  }
+    
   
 
 
