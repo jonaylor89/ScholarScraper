@@ -86,7 +86,7 @@ def update_citations(pub_id: str, cites: List) -> None:
 
             else:
                 # Update the citation count
-                session.query(Publication).get(new_info["id"]).update(
+                session.query(Publication).filter(Publication.id == new_info["id"]).update(
                     {"cites": new_info["citation_count"]}
                 )
 
@@ -166,7 +166,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
 
                 else:
                     # Update the citation count
-                    session.query(Publication).get(new_info["id"]).update(
+                    session.query(Publication).filter(Publication.id == new_info["id"]).update(
                         {"cites": new_info["citation_count"]}
                     )
         except Exception as e:
@@ -179,7 +179,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
         logger.debug("closing session")
         session.close()
 
-        # Update the citations for the article
+        # Update the citations for article
         update_citations(article.id_scholarcitedby, list(article.get_citedby()))
 
 
