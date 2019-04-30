@@ -122,10 +122,9 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
 
         try:
 
-            article.fill()
-
+            # Fill the object to have all necessary fields
             # Convert the Publication objects to dictionaries for the db
-            new_info = parse_article(article)
+            new_info = parse_article(article.fill())
 
             logger.debug("opening session")
             session = Session()
@@ -180,9 +179,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
         logger.debug("closing session")
         session.close()
 
-    for article in new_articles:
-
-        # Update the publications for every author
+        # Update the citations for the article
         update_citations(article.id_scholarcitedby, list(article.get_citedby()))
 
 
