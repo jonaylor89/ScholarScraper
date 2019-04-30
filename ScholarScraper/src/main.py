@@ -179,7 +179,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
     for article in new_articles:
 
         # Update the publications for every author
-        update_citations(article.id_scholarcitedby, list(article.citedby()))
+        update_citations(article.id_scholarcitedby, list(article.get_citedby()))
 
 
 def parse_researcher(author) -> Dict:
