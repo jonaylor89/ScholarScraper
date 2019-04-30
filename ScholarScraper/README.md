@@ -1,7 +1,7 @@
 
--> # Google Scholar Web Scraper <-
+# Google Scholar Web Scraper
 
--> Python with BeautifulSoup4 scrapping google scholar <-
+Python with BeautifulSoup4 scrapping google scholar
 
 ---------------------
 
@@ -13,19 +13,4 @@
 
 -------------------------------------
 
-# To Parse
-- **FROM SCHOLAR**
-
-- [x] Total Citations
-- [x] Publications IDs 
-
-- **FROM PUBLICATIONS**
-
-- [x] Publication ID
-- [x] Date of publications
-- [x] Number of citations
-- [x] Publication ID of citations
-- [x] Publication information of citations
-
-----------------------------------
 

@@ -39,10 +39,11 @@ def update_citations(pub_id: str, cites: List) -> None:
     Add citations to the Publication-Cites tables
     """
 
-    logger.debug(f"Updating citation for publication id {pub_id}")
+    logger.debug(f"Updating citations for publication id {pub_id}")
 
     for cite in cites:
 
+        logger.debug("opening session")
         session = Session()
 
         cite.fill()
@@ -87,6 +88,8 @@ def update_citations(pub_id: str, cites: List) -> None:
                 )
 
         session.commit()
+
+        logger.debug("closing dession")
         session.close()
 
 
@@ -94,7 +97,7 @@ def parse_article(pub) -> Dict:
     """
     Convert Publication objects to dictionaries for the database
     """
-    logger.debug(f"parsing article {pub.bib['title']}")
+    logger.info(f"parsing article {pub.bib['title']}")
 
     return {
         "id": pub.id_scholarcitedby,
@@ -110,7 +113,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
     Add articles to the Publication and Publication-Cites tables
     """
 
-    logger.debug(f"updating article for scholar id {scholar_id}")
+    logger.info(f"updating articles for scholar id {scholar_id}")
 
     for article in new_articles:
 
@@ -121,6 +124,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
             # Convert the Publication objects to dictionaries for the db
             new_info = parse_article(article)
 
+            logger.debug("opening session")
             session = Session()
 
             # Query the old information for that article
@@ -164,9 +168,12 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
                     )
         except Exception as e:
             logger.error(f"error parsing article: {article.bib['title']}: {e}")
-            return
+            traceback.print_exc()
+            continue
 
         session.commit()
+        
+        logger.debug("closing session")
         session.close()
 
     for article in new_articles:
@@ -180,7 +187,7 @@ def parse_researcher(author) -> Dict:
     Convert Author objects to dictionaries for the database
     """
 
-    logger.debug(f"parsing researcher {author.name}")
+    logger.info(f"parsing researcher {author.name}")
 
     return {
         "id": author.id,
@@ -195,9 +202,10 @@ def update_researchers() -> None:
     Add authors to the Scholar, Total-Citation, and Publication-Author tables
     """
 
-    logger.debug("updating researchers")
+    logger.info("updating researchers")
 
     # Start database session to retrieve which names to parse
+    logger.debug("opening session")
     session = Session()
 
     # Filter the scholars that are meant to be parsed.
@@ -211,6 +219,7 @@ def update_researchers() -> None:
     )
 
     # Close the current session
+    logger.debug("closing session")
     session.close()
 
     shuffle(scholars)
@@ -218,6 +227,7 @@ def update_researchers() -> None:
     for old_info in scholars:
         try:
             # Create database session to upload scholar data
+            logger.debug("opening session")
             session = Session()
 
             total_citations = (
@@ -273,6 +283,7 @@ def update_researchers() -> None:
             session.commit()
 
             # Close the DB connection
+            logger.debug("closing session")
             session.close()
 
             # Get the author back
