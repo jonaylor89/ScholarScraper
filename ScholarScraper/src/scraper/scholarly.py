@@ -173,7 +173,7 @@ class Publication(object):
                 self.bib["eprint"] = __data.find("div", class_="gs_ggs gs_fl").a["href"]
         self._filled = False
 
-    def fill(self) -> Publication:
+    def fill(self):
         """Populate the Publication with information from its profile"""
         if self.source == "citations":
             url = _CITATIONPUB.format(self.id_citations)
@@ -217,7 +217,7 @@ class Publication(object):
             self._filled = True
         return self
 
-    def get_citedby(self) -> List[Publication]:
+    def get_citedby(self) -> List:
         """Searches GScholar for other articles that cite this Publication and
         returns a Publication generator.
         """
@@ -260,7 +260,7 @@ class Author(object):
                 self.citedby = int(citedby.text[9:])
         self._filled = False
 
-    def fill(self) -> Publication:
+    def fill(self):
         """Populate the Author with information from their profile"""
         url_citations = _CITATIONAUTH.format(self.id)
         url = "{0}&pagesize={1}".format(url_citations, _PAGESIZE)
