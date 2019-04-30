@@ -3,7 +3,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 from bs4 import BeautifulSoup
-from typing import List
+from typing import List, Dict
 
 import arrow
 import bibtexparser
@@ -131,7 +131,7 @@ class Publication(object):
     """Returns an object for a single publication"""
 
     def __init__(self, __data, pubtype=None) -> None:
-        self.bib = {}
+        self.bib: Dict = {}
         self.source = pubtype
         if self.source == "citations":
             self.bib["title"] = __data.find("a", class_="gsc_a_at").text
