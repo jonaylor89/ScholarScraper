@@ -53,7 +53,7 @@ def update_citations(pub_id: str, cites: List) -> None:
 
         # Grab old value for that publication
         old_info = (
-            PublicationSchema(many=True)
+            PublicationSchema(many=False)
             .dump(session.query(Publication).get(str(new_info["id"])))
             .data
         )
@@ -129,7 +129,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
 
             # Query the old information for that article
             old_info = (
-                PublicationSchema(many=True)
+                PublicationSchema(many=False)
                 .dump(session.query(Publication).get(str(new_info["id"])))
                 .data
             )
@@ -231,12 +231,13 @@ def update_researchers() -> None:
             session = Session()
 
             total_citations = (
-                TotalCitationsSchema(many=True)
+                TotalCitationsSchema(many=False)
                 .dump(
                     session.query(TotalCitations)
                     .filter(TotalCitations.scholar_id == old_info["id"])
                     .group_by(TotalCitations.scholar_id)
                     .having(func.max(TotalCitations.date))
+                    .first()
                 )
                 .data
             )
