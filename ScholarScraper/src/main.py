@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import time
 import logging
 import traceback
 from random import shuffle
@@ -39,7 +40,7 @@ def update_citations(pub_id: str, cites: List) -> None:
     Add citations to the Publication-Cites tables
     """
 
-    logger.debug(f"Updating citations for publication id '{pub_id}''")
+    logger.info(f"Updating citations for publication id '{pub_id}''")
 
     for cite in cites:
         logger.debug("opening session")
@@ -315,8 +316,14 @@ def update_researchers() -> None:
 
 def main():
 
+    logger.info("begin scrape")
+    n0 = time.time()
+
     # Begin parsing
     update_researchers()
+
+    n_delta = time.time() - n0
+    logger.info(f"end scrape (time elapsed = {n_delta})")
 
 
 if __name__ == "__main__":
