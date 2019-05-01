@@ -42,13 +42,19 @@ export class FormFieldOverviewExample implements OnChanges, OnInit {
 
 ngOnInit() {
     
-    this._apiservice.getScholars().subscribe(data => this.scholars = data); //uncomment when using publication-cites api
+    this._apiservice.getScholars().subscribe(data => this.apiScholars = data); //uncomment when using publication-cites api
+    this._apiservice.getPublication().subscribe(data => this.apiPublications = data); //uncomment when using publication-cites api
+    this._apiservice.getPublicationCites().subscribe(data => this.apiPublicationCites = data); //uncomment when using publication-cites api
+    this._apiservice.getPublicationAuthor().subscribe(data => this.apiPublicationAuthor = data); //uncomment when using publication-cites api
+    this._apiservice.getTotalCitations().subscribe(data => this.apiTotalCitations = data); //uncomment when using publication-cites api
 
     this.buildGraph();
     // this.initialized =true;
 
     
   }
+
+  
 ngOnChanges(changes: SimpleChanges) {
   // if(this.initialized){
   // this.buildGraph();
@@ -59,100 +65,10 @@ ngOnChanges(changes: SimpleChanges) {
   console.log(changes);
 }
   
-  buildGraph(){
-    // d3.select('svg').remove();
-    // const element = this.chartContainer.nativeElement;
-  // const data = this.data;
-    const svg = d3.select('svg');
-  const width = +svg.attr('width');
-  const height = +svg.attr('height');
-
-  const color = d3.scaleOrdinal(d3.schemeCategory10);
-
-  const simulation = d3.forceSimulation()
-    .force('link', d3.forceLink().id((d: any) => d.id))
-    .force('charge', d3.forceManyBody())
-    .force('center', d3.forceCenter(width / 2, height / 2));
-
-    let data = {
-      nodes: [{id: "Alberto Cano", group: 1},
-       {id: "Dr Seuss", group: 1}],
-      links: [{source: "Alberto Cano", target: "Dr Seuss", value: 1, number1: 2, number2: 2}]
-    }
-    
-    const nodes: Node[] = [...data.nodes];
-    const links: Link[] = [...data.links];
-    
-    const graph: Graph = <Graph>{ nodes, links };
-
-    const link = svg.append('g')
-      .attr('class', 'links')
-      .selectAll('line')
-      .data(graph.links)
-      .enter()
-      .append('line')
-      .attr('stroke-width', (d: any) => Math.sqrt(d.value));
-
-    const node = svg.append('g')
-      .attr('class', 'nodes')
-      .selectAll('circle')
-      .data(graph.nodes)
-      .enter()
-      .append('circle')
-      .attr('r', 5)
-      .attr('fill', (d: any) => color(d.group));
-
-
-    svg.selectAll('circle').call(d3.drag()
-      .on('start', dragstarted)
-      .on('drag', dragged)
-      .on('end', dragended)
-    );
-
-    node.append('title')
-      .text((d) => d.id);
-
-    simulation
-      .nodes(graph.nodes)
-      .on('tick', ticked);
-
-    simulation.force<d3.ForceLink<any, any>>('link')
-      .links(graph.links);
-
-    function ticked() {
-      debugger;
-      link
-        .attr('x1', function(d: any) { return d.source.x; })
-        .attr('y1', function(d: any) { return d.source.y; })
-        .attr('x2', function(d: any) { return d.target.x; })
-        .attr('y2', function(d: any) { return d.target.y; });
-
-      node
-        .attr('cx', function(d: any) { return d.x; })
-        .attr('cy', function(d: any) { return d.y; });
-    }
-
-
-  function dragstarted(d) {
-    if (!d3.event.active) { simulation.alphaTarget(0.3).restart(); }
-    d.fx = d.x;
-    d.fy = d.y;
-  }
-
-  function dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-  }
-
-  function dragended(d) {
-    if (!d3.event.active) { simulation.alphaTarget(0); }
-    d.fx = null;
-    d.fy = null;
-  }
-  }
+ 
   
 ////////////////SCHOLAR SCRAPER LOGIC////////////////////
-  public scholars = [];
+  public apiScholars = [];
   public scholarsInput = [];
 
   //input of user
@@ -244,8 +160,253 @@ ngOnChanges(changes: SimpleChanges) {
 
   }
 
+  public apiPublications;
+  public apiPublicationCites;
+  public apiPublicationAuthor;
+  public apiTotalCitations;
+  public realStackOfOriginalAuthorsPublication;
+  public realStackOfPublicationsThatHaveCitedOriginalAuthorsPublication;
+  public realStackOfScholarsCitingOriginalAuthorsPublication;
+  public realStorePublicationsCitedByOriginalAuthor;
+  public realStackOfAllPublicationsFromAuthorsCitingOriginalAuthor;
+  public realScholarsCitingEachOther;
+  public realScholarsCitingEachOtherNamesLinks;
+  public realScholarsCitingEachOtherNamesNodes;
+  apiResults(){
+    this.data = true;
+    // debugger;
+    this.realScholarsCitingEachOtherNamesLinks = []; //their actual names scholar: , citedby: 
+    this.realScholarsCitingEachOtherNamesNodes = []; 
+    this.scholarCitationCount = [];
+    let recordOfCitations = []
+    this.realScholarsCitingEachOther = [];
+    for (let m = 0; m < this.scholarsInput.length; m++) {
+      
+      this.realStackOfOriginalAuthorsPublication = []; //maybe turn into an object that contains scholarID and publication id, publicationID
+      this.realStackOfPublicationsThatHaveCitedOriginalAuthorsPublication = []; //publications that cited the original scholars publication, publicationID
+      this.realStackOfScholarsCitingOriginalAuthorsPublication = [];
+      this.realStorePublicationsCitedByOriginalAuthor = [];
+      this.realStackOfAllPublicationsFromAuthorsCitingOriginalAuthor = [];
+      let countOfOriginalScholar = 0;
+      let countOfCitingScholar = 0;
+      // this.mockScholarsCitingEachOtherNames = []; //their actual names scholar: , citedby: 
+       //scholarID1 : scholarID2
+      let realScholarID = '';
+      // let name = this.mockScholars[0].full_name
+      debugger;
+      for (let i = 0; i < this.apiScholars.length; i++) {
+        if (this.scholarsInput[m] == this.apiScholars[i].full_name) {
+          console.log(this.scholarsInput[m] + " is equal to " + this.apiScholars[i].full_name)
+          realScholarID = this.apiScholars[i].id;
+        }
+      }
+
+      //we found a scholar that maps to the scholar database
+      if (realScholarID != '') {
+        //cycle through all their publications and store them
+        for (let i = 0; i < this.apiPublicationAuthor.length; i++) {
+          if (realScholarID == this.apiPublicationAuthor[i].scholarID) {
+            this.realStackOfOriginalAuthorsPublication.push(this.apiPublicationAuthor[i].publicationID); //maybe make it a hashmap all publications of specific author
+
+          }
+        }
+      }
 
 
+      //cycle through publications that have cited the authors publication using mockPublicationCites
+      //loop through mockStackOfScholarsPublication, loop through publication cites 
+      // debugger;
+      if (this.realStackOfOriginalAuthorsPublication.length > 0) {
+        //loop through all the publications in publicationcites. then store the publications that have cited
+        //the original authors publication
+        //side note: check how to see contains
+        for (let i = 0; i < this.apiPublicationCites.length; i++) {
+          for (let j = 0; j < this.realStackOfOriginalAuthorsPublication.length; j++) {
+            if (this.realStackOfOriginalAuthorsPublication[j] == this.apiPublicationCites[i].publicationID) {
+
+              this.realStackOfPublicationsThatHaveCitedOriginalAuthorsPublication.push(this.apiPublicationCites[i].publicationIDFK) //this will contains publications that cited original scholars publication
+            }
+          }
+        }
+      }
+      // debugger; //display publication 5 (publication that cited the original author)
+      //but first loop through authors publication 5 and find all the authors of publication 5, 
+      //once finding all the others of publication five  loop through those authors and find all of their publications to add
+      //onto the stack
+
+      //*DO A LOOP FOR EACH AUTHOR AND CHECK TO SEE IF THAT AUTHOR HAS BEEN CITED BY ORIGINAL AUTHOR
+      // debugger
+      if (this.realStackOfPublicationsThatHaveCitedOriginalAuthorsPublication.length > 0) {
+        for (let i = 0; i < this.apiPublicationAuthor.length; i++) {
+          for (let j = 0; j < this.realStackOfPublicationsThatHaveCitedOriginalAuthorsPublication.length; j++) {
+            if (this.apiPublicationAuthor[i].publicationID == this.realStackOfPublicationsThatHaveCitedOriginalAuthorsPublication[j]) {
+              if (!(this.realStackOfScholarsCitingOriginalAuthorsPublication.indexOf(this.apiPublicationAuthor[i].scholarID) > -1)) { //find a more efficient way to do this
+                this.realStackOfScholarsCitingOriginalAuthorsPublication.push(this.apiPublicationAuthor[i].scholarID);
+                //*now for each author do a loop determining if that authors publication has been cited by original author
+              }
+            }
+          }
+        }
+      }
+      // debugger; //1234567890
+      //loop through this.mockStackOfScholarsCitingOriginalAuthorsPublication, find all of their publications
+      //and store them
+      // debugger;
+      if (this.realStackOfScholarsCitingOriginalAuthorsPublication.length > 0) {
+        for (let i = 0; i < this.apiPublicationAuthor.length; i++) {
+          for (let j = 0; j < this.realStackOfScholarsCitingOriginalAuthorsPublication.length; j++) {
+            if (this.apiPublicationAuthor[i].scholarID == this.realStackOfScholarsCitingOriginalAuthorsPublication[j]) {
+              this.realStackOfAllPublicationsFromAuthorsCitingOriginalAuthor.push(this.apiPublicationAuthor[i].publicationID);
+            }
+            //store the scholars publications
+
+          }
+        }
+      }
+      // debugger;
+      //loop through the stack of publications that have cited the original scholars publications
+      //check to see if these publications have been cited by the original scholars from the (this.mockStackOfScholarsPublication)
+      // same this.mockPublicationCites database
+      // debugger;
+      if (this.realStackOfAllPublicationsFromAuthorsCitingOriginalAuthor.length > 0) {
+
+        for (let i = 0; i < this.apiPublicationCites.length; i++) {
+          // for(let j = 0; j < this.mockStackOfAllPublicationsFromAuthorsCitingOriginalAuthor.length; j++){ 
+
+          if (this.realStackOfOriginalAuthorsPublication.indexOf(this.apiPublicationCites[i].publicationIDFK) > -1) {
+            if (this.realStackOfAllPublicationsFromAuthorsCitingOriginalAuthor.indexOf(this.apiPublicationCites[i].publicationID) > -1) {
+              this.realStorePublicationsCitedByOriginalAuthor.push(this.apiPublicationCites[i].publicationID);
+            }
+          }
+
+        }
+      }
+      //debugger; // this.mockStorePublicationsCitedByOriginalAuthor = 5
+      //double check with john and cano about what this database actually contains 
+      // (what if authors who are cited by original authors are not on the mockPublicationAuthorDatabase)
+
+      ///////////debugger
+      if (this.realStorePublicationsCitedByOriginalAuthor.length > -1) {
+        //loop through mockPublicationAuthor Database
+        for (let i = 0; i < this.apiPublicationAuthor.length; i++) {
+          for (let j = 0; j < this.realStorePublicationsCitedByOriginalAuthor.length; j++) {
+            //  debugger;
+            if (this.apiPublicationAuthor[i].publicationID == this.realStorePublicationsCitedByOriginalAuthor[j]) {
+              //check to see if author of that publication is in this.mockStackOfScholarsCitingOriginalAuthorsPublication.
+              //which ensures that we are only including authors that are cited by original author
+              //  debugger;
+              if (this.realStackOfScholarsCitingOriginalAuthorsPublication.indexOf(this.apiPublicationAuthor[i].scholarID) > -1) {
+
+                let newObj_1 = { scholarID1: realScholarID, scholarID2: this.apiPublicationAuthor[i].scholarID }
+                newObj_1.scholarID2;
+                // debugger;
+                if (this.realScholarsCitingEachOther.length > 0) {
+                  let found1 = this.mockScholarsCitingEachOther.some(el => el.scholarID1 === newObj_1.scholarID2);
+                  let found2 = this.mockScholarsCitingEachOther.some(el => el.scholarID2 === newObj_1.scholarID1);
+                  let found3 = this.mockScholarsCitingEachOther.some(el => el.scholarID1 === newObj_1.scholarID1);
+                  let found4 = this.mockScholarsCitingEachOther.some(el => el.scholarID2 === newObj_1.scholarID2);
+                  if ((found1 && found2)== false){
+                    if((found3 && found4)== false){ this.realScholarsCitingEachOther.push(newObj_1);
+                    }
+                  }
+             
+                }
+                else {
+                  this.realScholarsCitingEachOther.push(newObj_1);
+
+                 
+                }
+              }
+            }
+          }
+        }
+      }   
+  }
+  // debugger;
+  for (let i = 0; i < this.realScholarsCitingEachOther.length; i++) {
+    let publicationsOfScholar1 = [];
+    let publicationsOfScholar2 = [];
+    let countOfOriginalScholar = 0;
+    let countOfCitingScholar = 0;
+    // debugger;
+
+    for (let j = 0; j < this.mockPublicationAuthor.length; j++) {
+      if (this.realScholarsCitingEachOther[i].scholarID1 == this.apiPublicationAuthor[j].scholarID) {
+        //do a arr.some to prevent storing the same publications multiple times
+        let found = publicationsOfScholar1.some(el => el === this.apiPublicationAuthor[j].publicationID);
+        if (!found)
+          publicationsOfScholar1.push(this.apiPublicationAuthor[j].publicationID);
+      }
+      if (this.realScholarsCitingEachOther[i].scholarID2 == this.apiPublicationAuthor[j].scholarID) {
+        //do a arr.some
+        let found = publicationsOfScholar2.some(el => el === this.apiPublicationAuthor[j].publicationID);
+        if (!found)
+          publicationsOfScholar2.push(this.apiPublicationAuthor[j].publicationID);
+      }
+
+    }
+
+    //further logic for counting
+    //then clear out the two arrays and do another count
+    //loop thorugh scholar citing each other
+    // debugger;
+    for (let k = 0; k < this.apiPublicationCites.length; k++) {
+
+      if ((publicationsOfScholar1.indexOf(this.apiPublicationCites[k].publicationID) > -1)
+        && (publicationsOfScholar2.indexOf(this.apiPublicationCites[k].publicationIDFK) > -1)) {
+        countOfCitingScholar++;
+      }
+
+      if ((publicationsOfScholar2.indexOf(this.apiPublicationCites[k].publicationID) > -1)
+        && (publicationsOfScholar1.indexOf(this.apiPublicationCites[k].publicationIDFK) > -1)) {
+        countOfOriginalScholar++;
+      }
+    }
+    
+   
+    // debugger;
+    this.scholarCitationCount.push({number1: countOfOriginalScholar, number2: countOfCitingScholar});
+
+    
+    //  let found = publicationsOfScholar1.some()
+  } 
+
+  //find the scholar names for the id of scholar cites 
+    let linksObj= [];
+    let scholar_name1 = '';
+    let scholar_name2 = '';
+    // if (this.mockScholarsCitingEachOther.length > 0) { //unecessary delete later
+        for (let i = 0; i <  this.realScholarsCitingEachOther.length; i++) {
+          for (let j = 0; j <this.apiScholars.length; j++) {
+
+            if(this.realScholarsCitingEachOther[i].scholarID1=== this.apiScholars[j].id){
+              scholar_name1 = this.apiScholars[j].full_name
+            }
+
+            if(this.realScholarsCitingEachOther[i].scholarID2=== this.apiScholars[j].id){
+              scholar_name2 = this.apiScholars[j].full_name
+            }
+
+            if(scholar_name1.length > 0 && scholar_name2.length > 0){
+              // debugger
+              linksObj.push({"scholarname1": scholar_name1, "number1": this.scholarCitationCount[i].number1, "scholarname2": scholar_name2, "number2": this.scholarCitationCount[i].number2,"value": 1})
+              this.realScholarsCitingEachOtherNamesNodes.push({"id": scholar_name1, "group": 1});
+              this.realScholarsCitingEachOtherNamesNodes.push({"id": scholar_name2, "group": 1});
+              scholar_name1 = '';
+              scholar_name2 = '';
+            }
+
+       }
+        }
+        // }
+        debugger;
+    for(let i = 0; i < this.scholarCitationCount.length; i++){
+    this.realScholarsCitingEachOtherNamesLinks[i]= linksObj[i];
+  }
+  debugger;
+
+}
+  //////////////////////////SUBMIT RESULTS///////////////////
 
   submitResults() {
     this.data = true;
@@ -632,7 +793,97 @@ ngOnChanges(changes: SimpleChanges) {
   }
 
   ///////////////D3.js Logic///////////////
+  buildGraph(){
+    // d3.select('svg').remove();
+    // const element = this.chartContainer.nativeElement;
+  // const data = this.data;
+    const svg = d3.select('svg');
+  const width = +svg.attr('width');
+  const height = +svg.attr('height');
 
+  const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+  const simulation = d3.forceSimulation()
+    .force('link', d3.forceLink().id((d: any) => d.id))
+    .force('charge', d3.forceManyBody())
+    .force('center', d3.forceCenter(width / 2, height / 2));
+
+    let data = {
+      nodes: [{id: "Alberto Cano", group: 1},
+       {id: "Dr Seuss", group: 1}],
+      links: [{source: "Alberto Cano", target: "Dr Seuss", value: 1, number1: 2, number2: 2}]
+    }
+    
+    const nodes: Node[] = [...data.nodes];
+    const links: Link[] = [...data.links];
+    
+    const graph: Graph = <Graph>{ nodes, links };
+
+    const link = svg.append('g')
+      .attr('class', 'links')
+      .selectAll('line')
+      .data(graph.links)
+      .enter()
+      .append('line')
+      .attr('stroke-width', (d: any) => Math.sqrt(d.value));
+
+    const node = svg.append('g')
+      .attr('class', 'nodes')
+      .selectAll('circle')
+      .data(graph.nodes)
+      .enter()
+      .append('circle')
+      .attr('r', 5)
+      .attr('fill', (d: any) => color(d.group));
+
+
+    svg.selectAll('circle').call(d3.drag()
+      .on('start', dragstarted)
+      .on('drag', dragged)
+      .on('end', dragended)
+    );
+
+    node.append('title')
+      .text((d) => d.id);
+
+    simulation
+      .nodes(graph.nodes)
+      .on('tick', ticked);
+
+    simulation.force<d3.ForceLink<any, any>>('link')
+      .links(graph.links);
+
+    function ticked() {
+      debugger;
+      link
+        .attr('x1', function(d: any) { return d.source.x; })
+        .attr('y1', function(d: any) { return d.source.y; })
+        .attr('x2', function(d: any) { return d.target.x; })
+        .attr('y2', function(d: any) { return d.target.y; });
+
+      node
+        .attr('cx', function(d: any) { return d.x; })
+        .attr('cy', function(d: any) { return d.y; });
+    }
+
+
+  function dragstarted(d) {
+    if (!d3.event.active) { simulation.alphaTarget(0.3).restart(); }
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+
+  function dragged(d) {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+  }
+
+  function dragended(d) {
+    if (!d3.event.active) { simulation.alphaTarget(0); }
+    d.fx = null;
+    d.fy = null;
+  }
+  }
 
 
 }
