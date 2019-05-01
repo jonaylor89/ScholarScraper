@@ -20,7 +20,8 @@
             <button (click) = "addScholar(scholarInput.value)" mat-stroked-button>Add</button>
             <button (click) = "deleteScholar(scholarInput.value)" mat-stroked-button>Delete</button>
             <button  (click) = "submitResults()" mat-stroked-button>Submit</button>
-             <ul><li *ngFor="let scholar of scholars">{{scholar.full_name}}</li></ul>
+            <button  (click) = "apiResults()" mat-stroked-button>API</button>
+             <ul><li *ngFor="let scholar of scholars">{{scholar.full_name + ":" + scholar.id}}</li></ul>
              <ul><li *ngFor="let scholarInput of scholarsInput">{{scholarInput}}</li></ul>
              <ul><li *ngFor="let scholarCiting of mockScholarsCitingEachOtherNamesLinks">{{scholarCiting.scholarname1 + ' has cited ' + scholarCiting.scholarname2
                 + ' ' + scholarCiting.number1 + ' times\n' + scholarCiting.scholarname2 + ' has cited ' + scholarCiting.scholarname1 + ' ' 

@@ -1,4 +1,4 @@
-import { Scholar } from './scholar';
+import { Scholar } from './apiClass';
 
 describe('Scholar', () => {
   it('should create an instance', () => {
