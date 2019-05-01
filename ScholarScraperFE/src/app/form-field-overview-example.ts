@@ -1,7 +1,8 @@
 import { Component,ElementRef, OnInit,ViewEncapsulation, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ApiService } from './api.service';
 import { Breakpoints } from '@angular/cdk/layout';
-import * as d3 from 'd3'
+import * as d3 from 'd3';
+import * as moment from 'moment';
 import { debugOutputAstAsTypeScript } from '@angular/compiler';
 
 //TODO
@@ -94,13 +95,14 @@ ngOnChanges(changes: SimpleChanges) {
 
   //database that displays publications that cite each other
   public mockPublicationCites = [
-    { publicationID: "1", publicationIDFK: '5' },
-    { publicationID: "1", publicationIDFK: '4' },
-    { publicationID: "6", publicationIDFK: '1' },
-    { publicationID: "5", publicationIDFK: '2' },
-    { publicationID: "6", publicationIDFK: '7' },
-    { publicationID: "7", publicationIDFK: '6' },
-    { publicationID: "7", publicationIDFK: '6' }
+    
+    { publicationID: "1", publicationIDFK: '5', date: "2019-04-30 19:29:17.613210"},
+    { publicationID: "1", publicationIDFK: '4',  date: "2019-04-30 19:29:17.613210"},
+    { publicationID: "6", publicationIDFK: '1', date: "2019-04-30 19:29:17.613210"},
+    { publicationID: "5", publicationIDFK: '2', date: "2019-04-30 19:29:17.613210"},
+    { publicationID: "6", publicationIDFK: '7', date: "2019-05-30 19:29:17.613210"},
+    { publicationID: "7", publicationIDFK: '6', date: "2019-04-30 19:29:17.613210"},
+    { publicationID: "7", publicationIDFK: '6', date: "2019-05-30 19:29:17.613210"}
 
     // {publicationID:"1", publicationIDFK:'5'},
     // {publicationID:"1", publicationIDFK:'5'},
@@ -408,9 +410,17 @@ ngOnChanges(changes: SimpleChanges) {
 }
   //////////////////////////SUBMIT RESULTS///////////////////
 
-  submitResults() {
+  submitResults(fromDateInput: string, toDateInput: string) {
+    let fromDate = fromDateInput;
+    fromDate = fromDate.replace(/\//g, '-');
+    let toDate = toDateInput;
+    toDate = toDate.replace(/\//g, '-');
+  
     this.data = true;
-    // debugger;
+  
+
+    let dateFrom = '';
+    let dateTo = '';
     this.mockScholarsCitingEachOtherNamesLinks = []; //their actual names scholar: , citedby: 
     this.mockScholarsCitingEachOtherNamesNodes = []; 
     this.scholarCitationCount = [];
@@ -459,7 +469,7 @@ ngOnChanges(changes: SimpleChanges) {
         for (let i = 0; i < this.mockPublicationCites.length; i++) {
           for (let j = 0; j < this.mockStackOfOriginalAuthorsPublication.length; j++) {
             if (this.mockStackOfOriginalAuthorsPublication[j] == this.mockPublicationCites[i].publicationID) {
-
+              //HERE
               this.mockStackOfPublicationsThatHaveCitedOriginalAuthorsPublication.push(this.mockPublicationCites[i].publicationIDFK) //this will contains publications that cited original scholars publication
             }
           }
@@ -511,6 +521,7 @@ ngOnChanges(changes: SimpleChanges) {
 
           if (this.mockStackOfOriginalAuthorsPublication.indexOf(this.mockPublicationCites[i].publicationIDFK) > -1) {
             if (this.mockStackOfAllPublicationsFromAuthorsCitingOriginalAuthor.indexOf(this.mockPublicationCites[i].publicationID) > -1) {
+              //HERE
               this.mockStorePublicationsCitedByOriginalAuthor.push(this.mockPublicationCites[i].publicationID);
             }
           }
@@ -660,13 +671,13 @@ ngOnChanges(changes: SimpleChanges) {
       // debugger;
       
   }
-  // debugger;
+ 
   for (let i = 0; i < this.mockScholarsCitingEachOther.length; i++) {
     let publicationsOfScholar1 = [];
     let publicationsOfScholar2 = [];
     let countOfOriginalScholar = 0;
     let countOfCitingScholar = 0;
-    // debugger;
+   
 
     for (let j = 0; j < this.mockPublicationAuthor.length; j++) {
       if (this.mockScholarsCitingEachOther[i].scholarID1 == this.mockPublicationAuthor[j].scholarID) {
@@ -688,18 +699,92 @@ ngOnChanges(changes: SimpleChanges) {
     //then clear out the two arrays and do another count
     //loop thorugh scholar citing each other
     // debugger;
+    //might need to change it to loop through valid publications for the date
+
+  // var varDate = "2018-01-19 18:05:01.423";
+  // var myDate =  moment(varDate,"YYYY-MM-DD").format("MM-DD-YYYY");
+  // var todayDate = moment().format("MM-DD-YYYY");  
+  // var yesterdayDate = moment().subtract(1, 'days').format("DD-MM-YYYY");   
+  // var tomorrowDate = moment().add(1, 'days').format("DD-MM-YYYY");
+
+  // alert(todayDate);
+
+  // if (myDate == todayDate) {
+  //   alert("date is today");
+  // } else if (myDate == yesterdayDate) {
+  //   alert("date is yesterday");
+  // } else if (myDate == tomorrowDate) {
+  //   alert("date is tomorrow");
+  // } else {
+  //   alert("It's not today, tomorrow or yesterday!");
+  // }
+  
     for (let k = 0; k < this.mockPublicationCites.length; k++) {
 
       if ((publicationsOfScholar1.indexOf(this.mockPublicationCites[k].publicationID) > -1)
         && (publicationsOfScholar2.indexOf(this.mockPublicationCites[k].publicationIDFK) > -1)) {
-        countOfCitingScholar++;
+          //Do a check here to see if it fits the date
+          // debugger;
+          if(fromDate.length > 0){
+            
+            let substrPubDate = this.mockPublicationCites[k].date.substr(0,10);
+            // var varDate = "2018-01-19 18:05:01.423";
+            var pubDateFormat =  moment(substrPubDate,"YYYY-MM-DD");
+            // debugger;
+            let fromDateFormat = moment(fromDate,"MM-DD-YYYY").format("YYYY-MM-DD");
+            if(toDate.length > 0){
+              let toDateFormat = moment(toDate,"MM-DD-YYYY").format("YYYY-MM-DD");
+              let isSameOrAfter = moment(pubDateFormat).isSameOrAfter(fromDateFormat);
+              let isSameOrBefore = moment(pubDateFormat).isSameOrBefore(toDateFormat);
+              if(isSameOrAfter && isSameOrBefore)
+                countOfCitingScholar++;
+            }
+            else {
+              // debugger;
+              let isSameOrAfter = moment(pubDateFormat).isSameOrAfter(fromDateFormat);
+              // let isSameOr = moment('2019-04-25').isSame('2019-04-25');
+              if(isSameOrAfter)
+                countOfCitingScholar++;
+            }
+          } else {
+          countOfCitingScholar++;
+        }
       }
 
       if ((publicationsOfScholar2.indexOf(this.mockPublicationCites[k].publicationID) > -1)
         && (publicationsOfScholar1.indexOf(this.mockPublicationCites[k].publicationIDFK) > -1)) {
-        countOfOriginalScholar++;
-      }
-      //     this.mockScholarsCitingEachOtherNamesLinks[k].number1 = countOfOriginalScholar;
+          if(fromDate.length > 0){
+           
+            let substrPubDate = this.mockPublicationCites[k].date.substr(0,10);
+            // var varDate = "2018-01-19 18:05:01.423";
+            var pubDateFormat =  moment(substrPubDate,"YYYY-MM-DD");
+            // debugger;
+            let fromDateFormat = moment(fromDate,"MM-DD-YYYY").format("YYYY-MM-DD");
+       
+            if(toDate.length > 0){
+              let toDateFormat = moment(toDate,"MM-DD-YYYY").format("YYYY-MM-DD");
+              let isSameOrAfter = moment(pubDateFormat).isSameOrAfter(fromDateFormat);
+              let isSameOrBefore = moment(pubDateFormat).isSameOrBefore(toDateFormat);
+              if(isSameOrAfter && isSameOrBefore){
+                countOfOriginalScholar++;
+              }
+
+            }
+            else {
+             
+              let isSameOrAfter = moment(pubDateFormat).isSameOrAfter(fromDateFormat);
+              // let isSameOr = moment('2019-04-25').isSame('2019-04-25');
+              if(isSameOrAfter){
+                countOfOriginalScholar++;
+              }
+              
+            }
+          } else {
+          
+            countOfOriginalScholar++;
+          }
+        }     
+        //this.mockScholarsCitingEachOtherNamesLinks[k].number1 = countOfOriginalScholar;
       // this.mockScholarsCitingEachOtherNamesLinks[k].number2 = countOfCitingScholar;
     }
     
@@ -756,15 +841,20 @@ ngOnChanges(changes: SimpleChanges) {
           }
         }
         // }
-        debugger;
+      
     for(let i = 0; i < this.scholarCitationCount.length; i++){
+    debugger;
+    if(linksObj[i].number1 > 0 && linksObj[i].number2 > 0 )
     this.mockScholarsCitingEachOtherNamesLinks[i]= linksObj[i];
     // this.mockScholarsCitingEachOtherNamesLinks[i].number2 = this.scholarCitationCount[i].number2;
     // this.mockScholarsCitingEachOtherNamesLinks.push({ scholar_name1: newObj[i].scholar_name1, scholar_name2: newObj[i].scholar_name2, value: 1 });
         // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholar_name1, "group": 1})
         // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholar_name2, "group": 1})
   }
-  debugger;
+ 
+
+  if(toDate.length > 0 || fromDate.length > 0){
+  }
 
 }
 

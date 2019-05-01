@@ -6,20 +6,20 @@
 
 
     <mat-form-field>
-        <input matInput [matDatepicker]="picker1" placeholder="From Date (Optional)">
+        <input #fromInput matInput [matDatepicker]="picker1" placeholder="From Date (Optional)">
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field>
-          <input matInput [matDatepicker]="picker2" placeholder="To Date (Optional)">
+          <input #toInput matInput [matDatepicker]="picker2" placeholder="To Date (Optional)">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <div class="button-row">
             <button (click) = "addScholar(scholarInput.value)" mat-stroked-button>Add</button>
             <button (click) = "deleteScholar(scholarInput.value)" mat-stroked-button>Delete</button>
-            <button  (click) = "submitResults()" mat-stroked-button>Submit</button>
+            <button  (click) = "submitResults(fromInput.value, toInput.value)" mat-stroked-button>Submit</button>
             <button  (click) = "apiResults()" mat-stroked-button>API</button>
              <ul><li *ngFor="let scholar of scholars">{{scholar.full_name + ":" + scholar.id}}</li></ul>
              <ul><li *ngFor="let scholarInput of scholarsInput">{{scholarInput}}</li></ul>
