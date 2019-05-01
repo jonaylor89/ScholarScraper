@@ -177,6 +177,8 @@ ngOnChanges(changes: SimpleChanges) {
   apiResults(){
     this.data = true;
     // debugger;
+    this.mockScholarsCitingEachOtherNamesLinks = []; //their actual names scholar: , citedby: 
+    this.mockScholarsCitingEachOtherNamesNodes = [];
     this.realScholarsCitingEachOtherNamesLinks = []; //their actual names scholar: , citedby: 
     this.realScholarsCitingEachOtherNamesNodes = []; 
     this.scholarCitationCount = [];
@@ -416,6 +418,8 @@ ngOnChanges(changes: SimpleChanges) {
     let toDate = toDateInput;
     toDate = toDate.replace(/\//g, '-');
   
+    this.realScholarsCitingEachOtherNamesLinks = []; //their actual names scholar: , citedby: 
+    this.realScholarsCitingEachOtherNamesNodes = [];
     this.data = true;
   
 
@@ -846,14 +850,6 @@ ngOnChanges(changes: SimpleChanges) {
     debugger;
     if(linksObj[i].number1 > 0 && linksObj[i].number2 > 0 )
     this.mockScholarsCitingEachOtherNamesLinks[i]= linksObj[i];
-    // this.mockScholarsCitingEachOtherNamesLinks[i].number2 = this.scholarCitationCount[i].number2;
-    // this.mockScholarsCitingEachOtherNamesLinks.push({ scholar_name1: newObj[i].scholar_name1, scholar_name2: newObj[i].scholar_name2, value: 1 });
-        // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholar_name1, "group": 1})
-        // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholar_name2, "group": 1})
-  }
- 
-
-  if(toDate.length > 0 || fromDate.length > 0){
   }
 
 }
