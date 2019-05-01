@@ -54,6 +54,7 @@ def update_citations(pub_id: str, cites: List) -> None:
                 new_info = parse_article(cite)
             except Exception as e:
                 logger.error(f"article parsing error: {e}")
+                traceback.print_exc()
                 continue
 
             # Grab old value for that publication
@@ -76,12 +77,42 @@ def update_citations(pub_id: str, cites: List) -> None:
                     new_info["date"],
                     "scraper",
                 )
-                publication_cites = PublicationCites(pub_id, str(new_info["id"]), "scraper")
-
                 session.add(publication)
-                session.commit() # Commiting so I don't get integrety errors
 
+                session.commit() # Commiting so I don't get integrity errors
+
+                publication_cites = PublicationCites(pub_id, str(new_info["id"]), "scraper")
                 session.add(publication_cites)
+
+                session.commit() # Commit to prevent integrity errors
+
+                # Searching for an author returns a generator expression so
+                # we make the assumption that the first search result is the correct one
+                author = next(search_author(new_info["author"])).fill()
+                author_info = parse_researcher(author)
+
+                # Filter the scholars that are meant to be parsed.
+                # Generally scholars that are added by the web app are
+                # meant to be parsed while scholars added through citations
+                # aren't set to be parsed
+                authors = (
+                    ScholarSchema(many=True)
+                    .dump(session.query(Scholar).filter(author_info["id"]))
+                    .data
+                )
+
+                if authors: 
+                    # Check if author is already in the database and if they aren't create a new entry
+                    # The enw entry will not have a parse flag
+                    scholar = Scholar(author_info["id"], author_info["full_name"], False, "citation")
+                    session.add(publication_cites)
+
+                    session.commit() # Commit to prevent integrity errors
+
+                # Create entry for author citing publication
+                publication_author = PublicationAuthor(new_info["id"], author_info["id"], "citation")
+                session.add(publication_author)
+
             else:
                 # Citation has been seen before
                 # Because citaiton count changes so frequently,
@@ -138,6 +169,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
                 new_info = parse_article(article.fill())
             except Exception as e:
                 logger.error(f"article parsing error: {e}")
+                traceback.print_exc()
                 continue
 
             logger.debug("opening session")
@@ -261,7 +293,7 @@ def update_researchers() -> None:
                 old_info = {**old_info, **(total_citations)}
 
             # Searching for an author returns a generator expression so
-            # we make the assumtion that the first search result is the correct one
+            # we make the assumption that the first search result is the correct one
             author = next(search_author(old_info["full_name"])).fill()
             new_info = parse_researcher(author)
 
