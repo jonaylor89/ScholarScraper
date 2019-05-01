@@ -136,6 +136,7 @@ def _search_scholar_soup(soup):
             url = soup.find(class_="gs_ico gs_ico_nav_next").parent["href"]
             soup = _get_soup(_HOST + url)
         else:
+            print(soup)
             break
 
 
