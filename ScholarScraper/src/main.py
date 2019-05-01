@@ -35,7 +35,7 @@ logging.basicConfig(
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 
-def update_citations(pub_id: str, cites: List) -> None:
+def update_citations(pub_id: str, cites) -> None:
     """
     Add citations to the Publication-Cites tables
     """
@@ -133,8 +133,10 @@ def update_citations(pub_id: str, cites: List) -> None:
 
         session.commit()
 
-        logger.debug("closing dession")
+        logger.debug("closing session")
         session.close()
+
+    logger.info("end parsing of citations")
 
 
 def parse_article(pub) -> Dict:
@@ -226,7 +228,9 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
         session.close()
 
         # Update the citations for article
-        update_citations(article.id_scholarcitedby, list(article.get_citedby()))
+        update_citations(article.id_scholarcitedby, article.get_citedby())
+
+    logger.info("end parsing of articles")
 
 
 def parse_researcher(author) -> Dict:
@@ -344,6 +348,8 @@ def update_researchers() -> None:
             logger.error(f"issue parsing researcher '{old_info['full_name']}': {e}")
             traceback.print_exc()
             continue
+
+    logger.info("end parsing of researchers")
 
 
 def main():
