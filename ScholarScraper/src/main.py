@@ -3,6 +3,7 @@
 import time
 import logging
 import traceback
+import schedule
 from random import shuffle, randint
 from time import sleep
 from datetime import datetime
@@ -369,9 +370,7 @@ def update_researchers() -> None:
 
     logger.info("end parsing of researchers")
 
-
-def main():
-
+def execute_srape():
     logger.info("begin scrape")
     n0 = time.time()
 
@@ -380,6 +379,22 @@ def main():
 
     n_delta = time.time() - n0
     logger.info(f"end scrape (time elapsed = {n_delta})")
+        
+
+def main():
+    # Every day at 12pm, there is a scrape
+    schedule.every().day.at("12:00").do(execute_scrape) 
+
+    # Loop so that the scheduling task 
+    # keeps on running all time. 
+    while True: 
+  
+        # Checks whether scheduled task  
+        # is pending to run or not 
+        schedule.run_pending() 
+        time.sleep(1) 
+
+        
 
 
 if __name__ == "__main__":
