@@ -103,11 +103,13 @@ def _handle_captcha(url):
 def _get_page(pagerequest):
     """Return the data for a page on scholar.google.com"""
     # Note that we include a sleep to avoid overloading the scholar server
-    time.sleep(5 + random.uniform(0, 5))
+    time.sleep(5 + random.uniform(0, 10))
     resp = _SESSION.get(pagerequest, headers=_HEADERS, cookies=_COOKIES, timeout=5)
     if resp.status_code == 200:
         return resp.text
     if resp.status_code == 503:
+        sleep(60) # Hibernate for a minute for the captcha 
+
         # Inelegant way of dealing with the G captcha
         raise Exception("Error: {0} {1}".format(resp.status_code, resp.reason))
         # TODO: Need to fix captcha handling
@@ -117,6 +119,8 @@ def _get_page(pagerequest):
         # resp = _handle_captcha(captcha_url)
         # return _get_page(re.findall(r'https:\/\/(?:.*?)(\/.*)', resp)[0])
     else:
+        sleep(60) # Hibernate for a minute for the captcha
+
         raise Exception("Error: {0} {1}".format(resp.status_code, resp.reason))
 
 

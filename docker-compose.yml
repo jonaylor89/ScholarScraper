@@ -11,6 +11,17 @@ services:
   frontend:
     build:
       context: ./ScholarScraperFE
+    depends_on:
+      - api
     ports:
       - "4200:4200"
 
+  scraper:
+    build:
+      context: ./ScholarScraper 
+    deploy:
+      restart_policy:
+        condition: any
+        delay: 1d
+        max_attempts: 3
+        window: 120s

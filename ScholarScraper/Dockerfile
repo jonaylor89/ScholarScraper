@@ -13,6 +13,5 @@ RUN set -ex && pipenv install --deploy --system
 
 COPY . .
 
-EXPOSE 8000
-
 # Command to execute scraper
+CMD ["python", "src/main.py"]

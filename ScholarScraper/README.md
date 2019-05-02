@@ -13,4 +13,8 @@ Python with BeautifulSoup4 scrapping google scholar
 
 -------------------------------------
 
+# Deployment
+
+We're in docker!!!
+
 
