@@ -3,7 +3,8 @@
 import time
 import logging
 import traceback
-from random import shuffle
+from random import shuffle, randint
+from time import sleep
 from datetime import datetime
 from typing import List, Dict
 from sqlalchemy.exc import IntegrityError
@@ -126,15 +127,18 @@ def update_citations(pub_id: str, cites) -> None:
                         {"cites": new_info["citation_count"]}
                     )
 
+            
+            session.commit()
+            logger.debug("closing session")
+            session.close()
+
+            # Sleep to prevent detection
+            sleep(randint(1, 3))
+
         except Exception as e:
             logger.error(f"error parsing citation: '{e}''")
             traceback.print_exc()
             continue
-
-        session.commit()
-
-        logger.debug("closing session")
-        session.close()
 
     logger.info("end parsing of citations")
 
@@ -226,6 +230,9 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
         
         logger.debug("closing session")
         session.close()
+
+        # Give it some time to not get detected
+        sleep(randint(1, 3))
 
         # TODO: Ideally citations should only be updated for new articles and articles with 
         #       changes in their citation count be for debugging I still updated citations for every articles.
@@ -352,7 +359,8 @@ def update_researchers() -> None:
             logger.debug("closing session")
             session.close()
 
-            
+            # Give it some time to not get detected
+            sleep(randint(1, 3)) 
 
         except Exception as e:
             logger.error(f"issue parsing researcher '{old_info['full_name']}': {e}")
