@@ -7,6 +7,8 @@ services:
       context: ./ScholarScraperBE
     ports:
       - "8000:8000"
+    env_file:
+      - db.env
 
   frontend:
     build:
@@ -25,3 +27,6 @@ services:
         delay: 1d
         max_attempts: 3
         window: 120s
+    env_file:
+      - db.env
+

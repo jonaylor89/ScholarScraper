@@ -107,3 +107,6 @@ Pipfile.lock
 # Text editor
 .vscode/
 .idea/
+
+# Environment files
+*.env
