@@ -370,7 +370,7 @@ def update_researchers() -> None:
 
     logger.info("end parsing of researchers")
 
-def execute_srape():
+def execute_scrape():
     logger.info("begin scrape")
     n0 = time.time()
 
