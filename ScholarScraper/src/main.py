@@ -215,7 +215,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
                 else:
                     # Update the citation count
                     session.query(Publication).filter(Publication.id == new_info["id"]).update(
-                        {"cites": new_info["citation_count"]}
+                        {"citation_count": new_info["citation_count"]}
                     )
         except Exception as e:
             logger.error(f"error parsing article: '{article.bib['title']}': {e}")
@@ -227,7 +227,11 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
         logger.debug("closing session")
         session.close()
 
-        # Update the citations for article
+        # TODO: Ideally citations should only be updated for new articles and articles with 
+        #       changes in their citation count be for debugging I still updated citations for every articles.
+        #       After debugging and finalizing this code then it will be moved for efficiency.
+
+        # Update citations for the article 
         update_citations(article.id_scholarcitedby, article.get_citedby())
 
     logger.info("end parsing of articles")
@@ -315,6 +319,10 @@ def update_researchers() -> None:
 
                     # session.add(scholar)
                     session.add(total_cite)
+
+                    # Update the publications for every author
+                    update_articles(author.id, list(author.publications))
+
                 except IntegrityError as e:
                     logger.error(f"Database error: {e}")
             else:
@@ -331,6 +339,12 @@ def update_researchers() -> None:
 
                     session.add(total_cite)
 
+                    # Get the author back
+                    author = next(search_author(old_info["full_name"])).fill()
+
+                    # Update the publications for every author
+                    update_articles(author.id, list(author.publications))
+
             # Commit new changes to the database
             session.commit()
 
@@ -338,11 +352,7 @@ def update_researchers() -> None:
             logger.debug("closing session")
             session.close()
 
-            # Get the author back
-            author = next(search_author(old_info["full_name"])).fill()
-
-            # Update the publications for every author
-            update_articles(author.id, list(author.publications))
+            
 
         except Exception as e:
             logger.error(f"issue parsing researcher '{old_info['full_name']}': {e}")
