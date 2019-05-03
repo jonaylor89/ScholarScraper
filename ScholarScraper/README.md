@@ -17,4 +17,7 @@ Python with BeautifulSoup4 scrapping google scholar
 
 We're in docker!!!
 
+# State Diagram
+
+![State Diagram][Scraper State Diagram 2.0.png]
 
