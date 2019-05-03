@@ -103,7 +103,7 @@ def update_citations(pub_id: str, cites) -> None:
                     .data
                 )
 
-                if authors: 
+                if not authors: 
                     # Check if author is already in the database and if they aren't create a new entry
                     # The new entry will not have a parse flag
                     scholar = Scholar(author_info["id"], author_info["full_name"], False, "citation")
