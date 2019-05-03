@@ -13,6 +13,7 @@ arrow = "*"
 beautifulsoup4 = "*"
 bibtexparser = "*"
 requests = {extras = ["security"],version = "*"}
+schedule = "*"
 
 [requires]
 python_version = "3.7"

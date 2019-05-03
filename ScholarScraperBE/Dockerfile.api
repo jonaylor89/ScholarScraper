@@ -13,5 +13,7 @@ RUN set -ex && pipenv install --deploy --system
 
 COPY . .
 
-# Command to execute scraper
-CMD ["python", "src/main.py"]
+# I'll start the server later
+CMD [ "gunicorn", "-b0.0.0.0:$PORT", "src.main:app" ]
+
+

@@ -5,9 +5,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, Column, DateTime
 
 # These will change depending on the database
-db_url = "128.172.188.107:3306"
-db_name = "google"
-db_user = "john-rasha"
+db_url = os.getenv("DB_HOST")
+db_name = os.getenv("DB_NAME")
+db_user = os.getenv("DB_USER")
 db_pass = os.getenv("DB_PASSWORD")
 
 # This will change depending on the database we have

@@ -7,10 +7,23 @@ services:
       context: ./ScholarScraperBE
     ports:
       - "8000:8000"
-
-  frontend:
+    env_file:
+      - db.env
+    # restart: unless-stopped
+   
+  web:
     build:
       context: ./ScholarScraperFE
+    depends_on:
+      - api
     ports:
       - "4200:4200"
+    # restart: unless-stopped
+
+  scraper:
+    build:
+      context: ./ScholarScraper 
+    env_file:
+      - db.env
+    # restart: unless-stopped
 

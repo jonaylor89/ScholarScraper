@@ -3,7 +3,9 @@
 import time
 import logging
 import traceback
-from random import shuffle
+import schedule
+from random import shuffle, randint
+from time import sleep
 from datetime import datetime
 from typing import List, Dict
 from sqlalchemy.exc import IntegrityError
@@ -97,15 +99,15 @@ def update_citations(pub_id: str, cites) -> None:
                 # aren't set to be parsed
                 authors = (
                     ScholarSchema(many=True)
-                    .dump(session.query(Scholar).filter(author_info["id"]))
+                    .dump(session.query(Scholar).filter(Scholar.id == author_info["id"]))
                     .data
                 )
 
-                if authors: 
+                if not authors: 
                     # Check if author is already in the database and if they aren't create a new entry
-                    # The enw entry will not have a parse flag
+                    # The new entry will not have a parse flag
                     scholar = Scholar(author_info["id"], author_info["full_name"], False, "citation")
-                    session.add(publication_cites)
+                    session.add(scholar)
 
                     session.commit() # Commit to prevent integrity errors
 
@@ -126,15 +128,18 @@ def update_citations(pub_id: str, cites) -> None:
                         {"cites": new_info["citation_count"]}
                     )
 
+            
+            session.commit()
+            logger.debug("closing session")
+            session.close()
+
+            # Sleep to prevent detection
+            sleep(randint(1, 10))
+
         except Exception as e:
             logger.error(f"error parsing citation: '{e}''")
             traceback.print_exc()
             continue
-
-        session.commit()
-
-        logger.debug("closing session")
-        session.close()
 
     logger.info("end parsing of citations")
 
@@ -215,7 +220,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
                 else:
                     # Update the citation count
                     session.query(Publication).filter(Publication.id == new_info["id"]).update(
-                        {"cites": new_info["citation_count"]}
+                        {"citation_count": new_info["citation_count"]}
                     )
         except Exception as e:
             logger.error(f"error parsing article: '{article.bib['title']}': {e}")
@@ -227,7 +232,14 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
         logger.debug("closing session")
         session.close()
 
-        # Update the citations for article
+        # Give it some time to not get detected
+        sleep(randint(1, 10))
+
+        # TODO: Ideally citations should only be updated for new articles and articles with 
+        #       changes in their citation count be for debugging I still updated citations for every articles.
+        #       After debugging and finalizing this code then it will be moved for efficiency.
+
+        # Update citations for the article 
         update_citations(article.id_scholarcitedby, article.get_citedby())
 
     logger.info("end parsing of articles")
@@ -315,6 +327,10 @@ def update_researchers() -> None:
 
                     # session.add(scholar)
                     session.add(total_cite)
+
+                    # Update the publications for every author
+                    update_articles(author.id, list(author.publications))
+
                 except IntegrityError as e:
                     logger.error(f"Database error: {e}")
             else:
@@ -331,6 +347,12 @@ def update_researchers() -> None:
 
                     session.add(total_cite)
 
+                    # Get the author back
+                    author = next(search_author(old_info["full_name"])).fill()
+
+                    # Update the publications for every author
+                    update_articles(author.id, list(author.publications))
+
             # Commit new changes to the database
             session.commit()
 
@@ -338,11 +360,8 @@ def update_researchers() -> None:
             logger.debug("closing session")
             session.close()
 
-            # Get the author back
-            author = next(search_author(old_info["full_name"])).fill()
-
-            # Update the publications for every author
-            update_articles(author.id, list(author.publications))
+            # Give it some time to not get detected
+            sleep(randint(1, 3)) 
 
         except Exception as e:
             logger.error(f"issue parsing researcher '{old_info['full_name']}': {e}")
@@ -351,9 +370,7 @@ def update_researchers() -> None:
 
     logger.info("end parsing of researchers")
 
-
-def main():
-
+def execute_scrape():
     logger.info("begin scrape")
     n0 = time.time()
 
@@ -362,6 +379,22 @@ def main():
 
     n_delta = time.time() - n0
     logger.info(f"end scrape (time elapsed = {n_delta})")
+        
+
+def main():
+    # Every day at 12pm, there is a scrape
+    schedule.every().day.at("12:00").do(execute_scrape) 
+
+    # Loop so that the scheduling task 
+    # keeps on running all time. 
+    while True: 
+  
+        # Checks whether scheduled task  
+        # is pending to run or not 
+        schedule.run_pending() 
+        time.sleep(1) 
+
+        
 
 
 if __name__ == "__main__":

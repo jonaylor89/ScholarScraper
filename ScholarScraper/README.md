@@ -13,4 +13,11 @@ Python with BeautifulSoup4 scrapping google scholar
 
 -------------------------------------
 
+# Deployment
+
+We're in docker!!!
+
+# State Diagram
+
+![State Diagram](ScraperStateDiagram2.0.png)
 
