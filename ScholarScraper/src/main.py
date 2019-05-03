@@ -134,7 +134,7 @@ def update_citations(pub_id: str, cites) -> None:
             session.close()
 
             # Sleep to prevent detection
-            sleep(randint(1, 3))
+            sleep(randint(1, 10))
 
         except Exception as e:
             logger.error(f"error parsing citation: '{e}''")
@@ -233,7 +233,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
         session.close()
 
         # Give it some time to not get detected
-        sleep(randint(1, 3))
+        sleep(randint(1, 10))
 
         # TODO: Ideally citations should only be updated for new articles and articles with 
         #       changes in their citation count be for debugging I still updated citations for every articles.
