@@ -99,15 +99,15 @@ def update_citations(pub_id: str, cites) -> None:
                 # aren't set to be parsed
                 authors = (
                     ScholarSchema(many=True)
-                    .dump(session.query(Scholar).filter(author_info["id"]))
+                    .dump(session.query(Scholar).filter(Scholar.id == author_info["id"]))
                     .data
                 )
 
                 if authors: 
                     # Check if author is already in the database and if they aren't create a new entry
-                    # The enw entry will not have a parse flag
+                    # The new entry will not have a parse flag
                     scholar = Scholar(author_info["id"], author_info["full_name"], False, "citation")
-                    session.add(publication_cites)
+                    session.add(scholar)
 
                     session.commit() # Commit to prevent integrity errors
 
