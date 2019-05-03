@@ -15,35 +15,43 @@ import './polyfills';
 import { Observable } from 'rxjs';
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatNativeDateModule} from '@angular/material';
+
 import {BrowserModule} from '@angular/platform-browser';
+
+
+// import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+// import {MatNativeDateModule} from '@angular/material';
+
+// import {DemoMaterialModule} from './material-module';
+
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DemoMaterialModule} from './material-module';
 
-import {FormFieldOverviewExample} from './app/form-field-overview-example';
+import {FormFieldOverviewExampleModule} from './app/form-field-overview-example.module'
+// import {FormFieldOverviewExample} from './app/form-field-overview-example';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
     HttpClientModule,
-    DemoMaterialModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
+    // FormsModule,
+    // DemoMaterialModule,
+    // MatNativeDateModule,
+    // ReactiveFormsModule,
+    FormFieldOverviewExampleModule
+    // FormFieldOverviewExample
   ],
-  entryComponents: [FormFieldOverviewExample],
-  declarations: [FormFieldOverviewExample],
-  bootstrap: [FormFieldOverviewExample],
+  // entryComponents: [FormFieldOverviewExample],
+  // declarations: [FormFieldOverviewExample],
+  // bootstrap: [FormFieldOverviewExample],
   providers: []
 })
 export class AppModule {
   data: Observable<any>;
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic().bootstrapModule(FormFieldOverviewExampleModule);
 
 
 /**  Copyright 2019 Google Inc. All Rights Reserved.

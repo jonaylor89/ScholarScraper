@@ -1,9 +1,8 @@
 import { Component,ElementRef, OnInit,ViewEncapsulation, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ApiService } from './api.service';
-import { Breakpoints } from '@angular/cdk/layout';
 import * as d3 from 'd3';
 import * as moment from 'moment';
-import { debugOutputAstAsTypeScript } from '@angular/compiler';
+
 
 //TODO
 //Show count
@@ -25,6 +24,7 @@ interface Graph {
   nodes: Node[];
   links: Link[];
 }
+
 
 /** @title Simple form field */
 @Component({
@@ -135,19 +135,6 @@ ngOnChanges(changes: SimpleChanges) {
 
 
   addScholar(newScholar: string) {
-    // if (newScholar) {
-    //   this.scholarsInput.push(newScholar);
-    //   console.log(this.scholars.toString);
-    // }
-    // this.scholars.forEach(element => {
-    //   console.log(newScholar+ " is equal to " + element.full_name)
-
-    //   if(newScholar == element.full_name){
-    //     alert(newScholar+ " is equal to " + element.full_name);
-    //     //use element.id and look into publication-cites to find all the scholars that have cited them
-    //     //then check with the authors that cited element.id and see if element.id has cited
-    //   }
-    // }); //uncomment once you use an api
     this.mockStackOfOriginalAuthorsPublication = []; //maybe turn into an object that contains scholarID and publication id, publicationID
     this.mockStackOfPublicationsThatHaveCitedOriginalAuthorsPublication = []; //publications that cited the original scholars publication, publicationID
     this.mockScholarsCitingEachOther = []; //scholarID1 : scholarID2
@@ -596,84 +583,6 @@ ngOnChanges(changes: SimpleChanges) {
         }
       }
 
-
-      // debugger;
-      //logic for when user enters another name, and that name of the previous scholar includes that new name under
-      //mock scholars citing each other, then don't repeat it, this should also be where we keep count of which scholar is citing who
-      // let newObj = []
-      // if (this.mockScholarsCitingEachOther.length > 0) { //unecessary delete later
-      //   for (let i = 0; i < this.mockScholars.length; i++) {
-      //     for (let j = 0; j < this.mockScholarsCitingEachOther.length; j++) {
-
-      //       if (this.mockScholars[i].id == this.mockScholarsCitingEachOther[j].scholarID2) {
-
-      //         newObj.push({ full_name: this.scholarsInput[m], scholarID2: this.mockScholars[i].full_name })
-      //         // if(this.mockScholarsCitingEachOtherNames.length > 0 ){
-      //         //   if(this.mockScholars[i].full_name != this.mockScholarsCitingEachOtherNames[j].full_name
-      //         //     && newScholar != this.mockScholarsCitingEachOtherNames[j].scholarID2) {
-      //         //   this.mockScholarsCitingEachOtherNames.push(newObj);
-      //         // }
-      //         // }
-
-      //       }
-
-      //     }
-      //   }
-      // }
-      // //now loop through all the new obj found and make sure that we are not adding repeated information
-      // // debugger;
-      // //just loop through citingEachOthersName if newObj[i] == it then increment i and start citing each others name at 0
-      // // debugger;
-      // if (this.mockScholarsCitingEachOtherNamesLinks.length > 0) {
-       
-      //   for (let i = 0; i < newObj.length; i++) {
-      //     for (let j = 0; j < this.mockScholarsCitingEachOtherNamesLinks.length; j++) {
-
-
-      //       if ((newObj[i].full_name == this.mockScholarsCitingEachOtherNamesLinks[j].scholarID2
-      //         && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNamesLinks[j].full_name)) {
-      //         newObj.splice(i, 1);
-      //         i = 0;
-      //       }
-      //       else
-      //       if (newObj[i].full_name == this.mockScholarsCitingEachOtherNamesLinks[j].full_name
-      //         && newObj[i].scholarID2 == this.mockScholarsCitingEachOtherNamesLinks[j].scholarID2) {
-      //         newObj.splice(i, 1);
-      //         i = 0;
-      //       }
-      //     }
-
-      //   }
-      //   for (let i = 0; i < newObj.length; i++) {
-      //     this.mockScholarsCitingEachOtherNamesLinks.push(newObj[i]);
-      //     // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].full_name, "group": 1})
-      //     // this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholarID2, "group": 1})
-      //   }
-      // }
-      // else {
-      //   // debugger;
-      //   for (let i = 0; i < newObj.length; i++) {
-      //     this.mockScholarsCitingEachOtherNamesLinks.push({ full_name: newObj[i].full_name, scholarID2: newObj[i].scholarID2, value: 1 });
-      //     this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].full_name, "group": 1})
-      //     this.mockScholarsCitingEachOtherNamesNodes.push({"id": newObj[i].scholarID2, "group": 1})
-      //   }
-
-      // }
-
-      //To get the count look at 
-      //mockScholarsCitingEachOther
-      //mockPublicationAuthor
-      //mockPublicationCites
-      // do a let find = arr.some
-      // if true then store it
-      //first check if scholarID is matching scholarID 1, then check if scholar ID2 is matching scholar ID 
-
-      //make these lists empty for when looping to the next this.mockScholarsCitingEachOther
-
-      // for()
-      // this.combinedNodesAndLinks.push({"nodes": this.mockScholarsCitingEachOtherNamesNodes,"links": this.mockScholarsCitingEachOtherNamesLinks});
-      // debugger;
-      
   }
  
   for (let i = 0; i < this.mockScholarsCitingEachOther.length; i++) {
