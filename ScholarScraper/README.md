@@ -19,5 +19,5 @@ We're in docker!!!
 
 # State Diagram
 
-![State Diagram][Scraper State Diagram 2.0.png]
+![State Diagram](ScraperStateDiagram2.0.png)
 
