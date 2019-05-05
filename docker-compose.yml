@@ -9,7 +9,7 @@ services:
       - "8000:8000"
     env_file:
       - db.env
-    # restart: unless-stopped
+    restart: unless-stopped
    
   web:
     build:
@@ -18,12 +18,12 @@ services:
       - api
     ports:
       - "4200:4200"
-    # restart: unless-stopped
+    restart: unless-stopped
 
   scraper:
     build:
       context: ./ScholarScraper 
     env_file:
       - db.env
-    # restart: unless-stopped
+    restart: unless-stopped
 
