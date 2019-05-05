@@ -28,4 +28,3 @@ class PublicationSchema(Schema):
     title = fields.Str()
     citation_count = fields.Number()
     date = fields.Str()
-

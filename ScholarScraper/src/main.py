@@ -31,7 +31,7 @@ logging.basicConfig(
     filemode="w",  # TODO: Change to `a` for production
     format="%(asctime)s %(name)s %(levelname)s %(message)s",
     datefmt="%H:%M:%S",
-    level=logging.INFO,  
+    level=logging.INFO,
 )
 
 logging.getLogger("urllib3").setLevel(logging.WARNING)
@@ -81,12 +81,14 @@ def update_citations(pub_id: str, cites) -> None:
                 )
                 session.add(publication)
 
-                session.commit() # Commiting so I don't get integrity errors
+                session.commit()  # Commiting so I don't get integrity errors
 
-                publication_cites = PublicationCites(pub_id, str(new_info["id"]), "scraper")
+                publication_cites = PublicationCites(
+                    pub_id, str(new_info["id"]), "scraper"
+                )
                 session.add(publication_cites)
 
-                session.commit() # Commit to prevent integrity errors
+                session.commit()  # Commit to prevent integrity errors
 
                 # Searching for an author returns a generator expression so
                 # we make the assumption that the first search result is the correct one
@@ -99,20 +101,26 @@ def update_citations(pub_id: str, cites) -> None:
                 # aren't set to be parsed
                 authors = (
                     ScholarSchema(many=True)
-                    .dump(session.query(Scholar).filter(Scholar.id == author_info["id"]))
+                    .dump(
+                        session.query(Scholar).filter(Scholar.id == author_info["id"])
+                    )
                     .data
                 )
 
-                if not authors: 
+                if not authors:
                     # Check if author is already in the database and if they aren't create a new entry
                     # The new entry will not have a parse flag
-                    scholar = Scholar(author_info["id"], author_info["full_name"], False, "citation")
+                    scholar = Scholar(
+                        author_info["id"], author_info["full_name"], False, "citation"
+                    )
                     session.add(scholar)
 
-                    session.commit() # Commit to prevent integrity errors
+                    session.commit()  # Commit to prevent integrity errors
 
                 # Create entry for author citing publication
-                publication_author = PublicationAuthor(new_info["id"], author_info["id"], "citation")
+                publication_author = PublicationAuthor(
+                    new_info["id"], author_info["id"], "citation"
+                )
                 session.add(publication_author)
 
             else:
@@ -124,11 +132,10 @@ def update_citations(pub_id: str, cites) -> None:
 
                 else:
                     # Update the citation count
-                    session.query(Publication).filter(Publication.id == new_info["id"]).update(
-                        {"cites": new_info["citation_count"]}
-                    )
+                    session.query(Publication).filter(
+                        Publication.id == new_info["id"]
+                    ).update({"cites": new_info["citation_count"]})
 
-            
             session.commit()
             logger.debug("closing session")
             session.close()
@@ -208,7 +215,7 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
                 )
 
                 session.add(publication)
-                session.commit() # Commiting so I don't get integrity errors
+                session.commit()  # Commiting so I don't get integrity errors
 
                 session.add(publication_author)
             else:
@@ -219,27 +226,27 @@ def update_articles(scholar_id: str, new_articles: List) -> None:
 
                 else:
                     # Update the citation count
-                    session.query(Publication).filter(Publication.id == new_info["id"]).update(
-                        {"citation_count": new_info["citation_count"]}
-                    )
+                    session.query(Publication).filter(
+                        Publication.id == new_info["id"]
+                    ).update({"citation_count": new_info["citation_count"]})
         except Exception as e:
             logger.error(f"error parsing article: '{article.bib['title']}': {e}")
             traceback.print_exc()
             continue
 
         session.commit()
-        
+
         logger.debug("closing session")
         session.close()
 
         # Give it some time to not get detected
         sleep(randint(1, 10))
 
-        # TODO: Ideally citations should only be updated for new articles and articles with 
+        # TODO: Ideally citations should only be updated for new articles and articles with
         #       changes in their citation count be for debugging I still updated citations for every articles.
         #       After debugging and finalizing this code then it will be moved for efficiency.
 
-        # Update citations for the article 
+        # Update citations for the article
         update_citations(article.id_scholarcitedby, article.get_citedby())
 
     logger.info("end parsing of articles")
@@ -361,7 +368,7 @@ def update_researchers() -> None:
             session.close()
 
             # Give it some time to not get detected
-            sleep(randint(1, 3)) 
+            sleep(randint(1, 3))
 
         except Exception as e:
             logger.error(f"issue parsing researcher '{old_info['full_name']}': {e}")
@@ -369,6 +376,7 @@ def update_researchers() -> None:
             continue
 
     logger.info("end parsing of researchers")
+
 
 def execute_scrape():
     logger.info("begin scrape")
@@ -379,22 +387,20 @@ def execute_scrape():
 
     n_delta = time.time() - n0
     logger.info(f"end scrape (time elapsed = {n_delta})")
-        
+
 
 def main():
     # Every day at 12pm, there is a scrape
-    schedule.every().day.at("12:00").do(execute_scrape) 
+    schedule.every().day.at("12:00").do(execute_scrape)
 
-    # Loop so that the scheduling task 
-    # keeps on running all time. 
-    while True: 
-  
-        # Checks whether scheduled task  
-        # is pending to run or not 
-        schedule.run_pending() 
-        time.sleep(1) 
+    # Loop so that the scheduling task
+    # keeps on running all time.
+    while True:
 
-        
+        # Checks whether scheduled task
+        # is pending to run or not
+        schedule.run_pending()
+        time.sleep(1)
 
 
 if __name__ == "__main__":
