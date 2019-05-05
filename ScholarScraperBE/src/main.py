@@ -25,16 +25,11 @@ CORS(app)
 Base.metadata.create_all(engine)
 
 
-@app.route("/")
-def hello():
-    """
-    Hello message mostly used for development error checking
-    """
-    return render_template("index.html")
-
-
 @app.route("/scholar")
 def get_scholars():
+    """
+    Serve all scholars in db
+    """
 
     # fetching from the database
     session = Session()
@@ -53,7 +48,7 @@ def get_scholars():
 @app.route("/scholar", methods=["POST"])
 def scholar():
     """
-    Parse people
+    Add scholar to the db
     """
     # mount scholar object
     posted_exam = ScholarSchema().load(request.get_json())
@@ -74,6 +69,9 @@ def scholar():
 
 @app.route("/publication")
 def get_publications():
+    """
+    Serve all publications in the db
+    """
 
     # fetching from the database
     session = Session()
@@ -91,6 +89,9 @@ def get_publications():
 
 @app.route("/publication-author")
 def get_publication_author():
+    """
+    Serve all publications with their associated author in the db
+    """
 
     # fetching from the database
     session = Session()
@@ -108,6 +109,9 @@ def get_publication_author():
 
 @app.route("/publication-cites")
 def get_publication_cites():
+    """
+    Serve all publication and the publications that cite them in the db
+    """
 
     # fetching from the database
     session = Session()
@@ -125,6 +129,9 @@ def get_publication_cites():
 
 @app.route("/total-citation")
 def get_total_citations():
+    """
+    Serve the total citation count for every scholar in the db
+    """
 
     # fetching from the database
     session = Session()
